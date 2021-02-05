@@ -11,14 +11,14 @@ class Database
 
 	public function __construct()
 	{
-		try {
-			$this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
-		} catch (Exception $e) {
-			die("Erreur SQL : " . $e->getMessage());
-		}
+		// try {
+		// 	$this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
+		// } catch (Exception $e) {
+		// 	die("Erreur SQL : " . $e->getMessage());
+		// }
 
-		$classExploded = explode("\\", get_called_class());
-		$this->table = strtolower(DBPREFIXE . end($classExploded)); //jclm_User
+		// $classExploded = explode("\\", get_called_class());
+		// $this->table = strtolower(DBPREFIXE . end($classExploded)); //jclm_User
 	}
 
 

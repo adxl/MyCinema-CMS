@@ -1,7 +1,7 @@
 /:
-  controller: Main
+  controller: MainController
   action: default
 
 /404:
-  controller: Main
+  controller: MainController
   action: page404
