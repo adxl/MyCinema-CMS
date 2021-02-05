@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Template de back</title>
 	<meta name="description" content="description de la page de back">
+	<link rel="stylesheet" href="../dist/main_back.css">
 </head>
+
 <body>
 	<header>
 		<h1>Template de back</h1>
@@ -14,4 +17,5 @@
 	<?php include $this->view ?>
 
 </body>
+
 </html>

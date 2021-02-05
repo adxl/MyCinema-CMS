@@ -1,2 +1,5 @@
 .env
 db_data/
+
+www/Views/dist
+www/Views/webpack/node_modules

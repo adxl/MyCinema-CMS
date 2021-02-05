@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Template de front</title>
 	<meta name="description" content="description de la page de front">
+	<link rel="stylesheet" href="../dist/main_front.css">
 </head>
+
 <body>
 	<header>
 		<h1>Template de front</h1>
@@ -16,4 +19,5 @@
 
 
 </body>
+
 </html>
