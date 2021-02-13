@@ -1,0 +1,26 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: $secondary-font;
+    background-color: $light-grey;
+}
+
+h1,
+h2 {
+    font-family: $primary-font;
+}
+
+h1 {
+    font-size: rem(24);
+}
+
+h2 {
+    font-size: rem(16);
+}
+
+p {
+    line-height: 1.4em;
+}

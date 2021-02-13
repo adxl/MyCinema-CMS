@@ -4,9 +4,10 @@
 <head>
 	<base href="Views/dist/">
 	<meta charset="UTF-8">
-	<title>Template de back</title>
 	<meta name="description" content="description de la page de back">
-	<link rel="stylesheet" href="main_back.css">
+	<title>Template de back</title>
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="back.css">
 	<script src="main.js"></script>
 </head>
 
