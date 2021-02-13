@@ -2,10 +2,12 @@
 <html lang="fr">
 
 <head>
+	<base href="Views/dist/">
 	<meta charset="UTF-8">
 	<title>Template de front</title>
 	<meta name="description" content="description de la page de front">
-	<link rel="stylesheet" href="../dist/main_front.css">
+	<link rel="stylesheet" href="main_front.css">
+	<script src="main.js"></script>
 </head>
 
 <body>

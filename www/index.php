@@ -18,7 +18,6 @@ new ConstantManager();
 $slug = mb_strtolower($_SERVER["REQUEST_URI"]);
 
 //Instance de la classe router (dossier CORE) avec en paramètre la slug
-echo $slug;
 $route = new Router($slug);
 //On récupère le controller et l'action correspond au slug
 $c = $route->getController();

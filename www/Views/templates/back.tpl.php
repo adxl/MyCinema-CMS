@@ -2,10 +2,12 @@
 <html lang="fr">
 
 <head>
+	<base href="Views/dist/">
 	<meta charset="UTF-8">
 	<title>Template de back</title>
 	<meta name="description" content="description de la page de back">
-	<link rel="stylesheet" href="../dist/main_back.css">
+	<link rel="stylesheet" href="main_back.css">
+	<script src="main.js"></script>
 </head>
 
 <body>
