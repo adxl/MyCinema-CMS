@@ -1,4 +1,18 @@
+/* partials */
+
 @import 'partials/fonts';
 @import 'partials/variables';
-@import 'partials/common';
 @import 'partials/functions';
+@import 'partials/common';
+@import 'partials/spacing';
+@import 'partials/sizing';
+@import 'partials/layout';
+@import 'partials/flex';
+@import 'partials/grids';
+@import 'partials/text';
+@import 'partials/borders';
+@import 'partials/background';
+
+/* components */
+
+@import 'components/buttons';

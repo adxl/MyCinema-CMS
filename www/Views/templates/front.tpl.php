@@ -6,7 +6,6 @@
 	<meta charset="UTF-8">
 	<meta name="description" content="description de la page de front">
 	<title>Template de front</title>
-	<link rel="stylesheet" href="main.css">
 	<link rel="stylesheet" href="front.css">
 	<script src="main.js"></script>
 </head>

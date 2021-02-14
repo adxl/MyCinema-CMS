@@ -1,0 +1,52 @@
+// basic flex
+.flex {
+    display: flex;
+}
+
+.flex-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-column-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+// horizontal alignement
+.flex-between {
+    justify-content: space-between;
+}
+.flex-around {
+    justify-content: space-around;
+}
+.flex-center {
+    justify-content: center;
+}
+.flex-left {
+    justify-content: flex-start;
+}
+.flex-right {
+    justify-content: flex-end;
+}
+
+// vertical alignement
+.flex-top {
+    align-items: flex-start;
+}
+.flex-middle {
+    align-items: center;
+}
+.flex-bottom {
+    align-items: flex-end;
+}
+
+// flex behaviour
+.flex-auto {
+    flex: auto;
+}

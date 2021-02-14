@@ -1,0 +1,11 @@
+// .w-25 ; .w-50 ; .w-75 ; .w-100
+// .h-25 ; .h-50 ; .h-75 ; .h-100
+@for $i from 1 through 4 {
+  $value: $i * 25;
+  .w-#{$value} {
+    width: $value * 1%;
+  }
+  .h-#{$value} {
+    height: $value * 1%;
+  }
+}

@@ -1,0 +1,90 @@
+$default-space: 1rem;
+
+$small: $default-space;
+$medium: $default-space * 1.5;
+$large: $default-space * 3;
+
+// padding global
+.p-s {
+  padding: $small;
+}
+.p-m {
+  padding: $medium;
+}
+.p-l {
+  padding: $large;
+}
+
+// padding horizontal
+.px-s {
+  padding-left: $small;
+  padding-right: $small;
+}
+.px-m {
+  padding-left: $medium;
+  padding-right: $medium;
+}
+.px-l {
+  padding-left: $large;
+  padding-right: $large;
+}
+
+// padding vertial
+.py-s {
+  padding-top: $small;
+  padding-bottom: $small;
+}
+.py-m {
+  padding-top: $medium;
+  padding-bottom: $medium;
+}
+.py-l {
+  padding-top: $large;
+  padding-bottom: $large;
+}
+
+// margin global
+.m-s {
+  margin: $small;
+}
+.m-m {
+  margin: $medium;
+}
+.m-l {
+  margin: $large;
+}
+
+// margin horizontal
+.mx-s {
+  margin-left: $small;
+  margin-right: $small;
+}
+.mx-m {
+  margin-left: $medium;
+  margin-right: $medium;
+}
+.mx-l {
+  margin-left: $large;
+  margin-right: $large;
+}
+
+// margin vertial
+.my-s {
+  margin-top: $small;
+  margin-bottom: $small;
+}
+.my-m {
+  margin-top: $medium;
+  margin-bottom: $medium;
+}
+.my-l {
+  margin-top: $large;
+  margin-bottom: $large;
+}
+// no padding et no margin
+.p-0 {
+  padding: 0;
+}
+.m-0 {
+  margin: 0;
+}

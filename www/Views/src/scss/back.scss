@@ -1,0 +1,27 @@
+@import "main.scss";
+
+main {
+  max-height: calc(100% - 70px);
+}
+
+header {
+  height: 70px;
+}
+
+#sidebar {
+  width: 200px;
+
+  a {
+    color: $white;
+    display: flex;
+    align-items: center;
+
+    span {
+      padding: 0 0.5em;
+    }
+  }
+
+  li {
+    padding: 1em 0;
+  }
+}
