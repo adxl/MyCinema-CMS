@@ -1,5 +1,9 @@
 .env
 db_data/
 
-www/Views/dist
+www/Views/dist/*.js
+www/Views/dist/*.css
+www/Views/dist/*.json
+
+
 www/Views/webpack/node_modules

@@ -20,7 +20,7 @@
 				<p class="m-0">Yves S.</p>
 			</div>
 			<div class="flex flex-middle p-s">
-				<img src="" alt=" " class="avatar">
+				<img src="icons/black-user.svg" alt=" " class="avatar">
 			</div>
 		</div>
 	</header>
@@ -29,32 +29,32 @@
 		<section id="sidebar" class="bg-dark">
 			<ul>
 				<li><a href="#">
-						<img src="" class="icon" alt=" ">
+						<img src="icons/white-home.svg" class="icon" alt=" ">
 						<span>Dashboard</span>
 					</a>
 				</li>
 				<li><a href="#">
-						<img src="" class="icon" alt=" ">
+						<img src="icons/white-calendar.svg" class="icon" alt=" ">
 						<span>Events</span>
 					</a>
 				</li>
 				<li><a href="#">
-						<img src="" class="icon" alt=" ">
+						<img src="icons/white-comment.svg" class="icon" alt=" ">
 						<span>Comments</span>
 					</a>
 				</li>
 				<li><a href="#">
-						<img src="" class="icon" alt=" ">
+						<img src="icons/white-building.svg" class="icon" alt=" ">
 						<span>Rooms</span>
 					</a>
 				</li>
 				<li><a href="#">
-						<img src="" class="icon" alt=" ">
+						<img src="icons/white-user.svg" class="icon" alt=" ">
 						<span>Users</span>
 					</a>
 				</li>
 				<li><a href="#">
-						<img src="" class="icon" alt=" ">
+						<img src="icons/white-settings.svg" class="icon" alt=" ">
 						<span>Settings</span>
 					</a>
 				</li>
