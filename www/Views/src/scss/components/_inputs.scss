@@ -1,39 +1,36 @@
 .field {
-    display: inline-grid;
-    vertical-align: top;
-    align-items: center;
+    display: flex;
     position: relative;
     margin: 5px;
-    
+
     span {
-    padding: 10px;
-    flex-shrink: 1;
-    border: 1px solid #E3E3E3;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-    background-color: #EDEDED;
-    color: #7E7E7E;
-  }
-    &::after,
+        padding: 10px;
+        border: 1px solid #e3e3e3;
+        min-width: fit-content;
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+        background-color: #ededed;
+        color: #7e7e7e;
+    }
+    &.flexible::after,
     input {
-      width: auto;
-      min-width: 1em;
-      grid-area: 1 / 2;
-      padding: 10px;
-      border: 1px solid #E3E3E3;
-      border-left: transparent;
-      border-top-right-radius: 6px;
-      border-bottom-right-radius: 6px;
-      outline: none;  
+        width: 100%;
+        min-width: 1em;
+        padding: 10px;
+        border: 1px solid #e3e3e3;
+        border-left: transparent;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+        outline: none;
     }
-    
+
     &::after {
-      content: attr(data-value) ' ';
-      visibility: hidden;
-      white-space: pre-wrap;
+        content: attr(data-value) ' ';
+        visibility: hidden;
+        white-space: pre-wrap;
     }
-    
+
     &:focus-within {
-      outline: none;
-     }
-  }
+        outline: none;
+    }
+}

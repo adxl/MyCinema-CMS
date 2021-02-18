@@ -1,28 +1,43 @@
 .button {
-    padding: 1em 2em;
+    padding: 0 1em;
+    margin: 5px 10px;
+    min-height: 30px;
     display: inline-block;
-    color: $white;
+    color: $text-gray;
     background-color: $gray;
     text-decoration: none;
     transition: background-color 0.3s;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+
     @media screen and (max-width: 760px) {
         font-size: rem(12);
     }
-    &:hover {
-        background-color: lighten($gray, 10%);
-    }
 
-    &--alert {
-        background-color: $red;
-        &:hover {
-            background-color: lighten($red, 10%);
-        }
+    &:hover {
+        background-color: darken($gray, 10%);
     }
 
     &--success {
         background-color: $green;
+        color: $white;
         &:hover {
             background-color: lighten($green, 10%);
         }
     }
+
+    &--danger {
+        background-color: $red;
+        color: $white;
+        &:hover {
+            background-color: lighten($red, 10%);
+        }
+    }
+}
+
+.link {
+    color: $text-gray;
+    text-decoration: underline;
 }
