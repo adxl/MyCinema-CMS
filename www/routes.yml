@@ -2,6 +2,14 @@
   controller: MainController
   action: default
 
+/events/new:
+  controller: EventsController
+  action: createEvent
+
+/users:
+  controller: UsersController
+  action: showUsers
+
 /404:
   controller: MainController
   action: page404

@@ -1,12 +1,21 @@
 @import "main.scss";
 
-main {
-  max-height: calc(100% - 70px);
+body {
+  background-color: $lighter-gray;
 }
 
 header {
   height: 70px;
 }
+
+main {
+  max-height: calc(100% - 70px);
+}
+
+#view {
+  padding: 20px;
+}
+
 
 #sidebar {
   width: 200px;

@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <head>
-	<base href="Views/dist/">
+	<base href="/Views/dist/">
 	<meta charset="UTF-8">
 	<meta name="description" content="description de la page de back">
 	<title>Template de back</title>
@@ -11,7 +11,7 @@
 </head>
 
 <body class="flex-column">
-	<header class="flex flex-between flex-middle bg-light">
+	<header class="flex flex-between flex-middle bg-soft-white">
 		<div class="p-m">
 			<img src="" alt=" " class="logo">
 		</div>
@@ -60,8 +60,8 @@
 				</li>
 			</ul>
 		</section>
-		<section class="flex-auto scroll-y">
-			<!-- <?php include $this->view ?> -->
+		<section id="view" class="flex-auto scroll-y">
+			<?php include $this->view ?>
 		</section>
 	</main>
 </body>

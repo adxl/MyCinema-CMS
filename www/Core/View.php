@@ -28,8 +28,8 @@ class View
 
 	public function setView($view)
 	{
-		if (file_exists("Views/" . $view . ".view.php")) {
-			$this->view = "Views/" . $view . ".view.php";
+		if (file_exists("Views/views/" . $view . ".view.php")) {
+			$this->view = "Views/views/" . $view . ".view.php";
 		} else {
 			die("La vue n'existe pas");
 		}
