@@ -1,6 +1,7 @@
 .env
+www/.env
 db_data/
-
+.idea
 www/Views/dist/*.js
 www/Views/dist/*.css
 www/Views/dist/*.json
