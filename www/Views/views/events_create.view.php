@@ -9,6 +9,45 @@
                             <span>Movie name</span>
                             <input type="text">
                         </label>
+                        <!-- session -->
+                        <div class="flex">
+                            <label class="field">
+                                <span>Date</span>
+                                <input type="date">
+                            </label>
+                            <label class="field">
+                                <span>Start</span>
+                                <input type="time">
+                            </label>
+                            <label class="field">
+                                <span>End</span>
+                                <input type="time">
+                            </label>
+                            <label class="field">
+                                <span>Room</span>
+                                <input type="text">
+                            </label>
+                        </div>
+                        <!-- session -->
+                        <div class="flex">
+                            <label class="field">
+                                <span>Date</span>
+                                <input type="date">
+                            </label>
+                            <label class="field">
+                                <span>Start</span>
+                                <input type="time">
+                            </label>
+                            <label class="field">
+                                <span>End</span>
+                                <input type="time">
+                            </label>
+                            <label class="field">
+                                <span>Room</span>
+                                <input type="text">
+                            </label>
+                        </div>
+                        <!-- session -->
                         <div class="flex">
                             <label class="field">
                                 <span>Date</span>
@@ -37,6 +76,12 @@
                                 <input type="text">
                             </label>
                             <button class="button">Add</button>
+                            <!-- tags -->
+                            <div class="flex flex-middle">
+                                <div class="tag">
+                                    <span>Denis Villeneuve</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex">
                             <label class="field">
@@ -44,6 +89,15 @@
                                 <input type="text">
                             </label>
                             <button class="button">Add</button>
+                            <!-- tags -->
+                            <div class="flex flex-middle">
+                                <div class="tag">
+                                    <span>Ryan Gosling</span>
+                                </div>
+                                <div class="tag">
+                                    <span>Harrison Ford</span>
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <label class="field field-area">
@@ -57,6 +111,17 @@
                                 <input type="text">
                             </label>
                             <button class="button">Add</button>
+                            <div class="flex flex-middle">
+                                <div class="tag">
+                                    <span>Action</span>
+                                </div>
+                                <div class="tag">
+                                    <span>Drama</span>
+                                </div>
+                                <div class="tag">
+                                    <span>Mystery</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
