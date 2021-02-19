@@ -1,5 +1,16 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 @for $i from 1 through 12 {
     .col-#{$i} {
-        width: ((100 / 12) * $i) * 1%;
+        flex-basis: (100 / (12 / $i)) * 1%;
     }
 }
