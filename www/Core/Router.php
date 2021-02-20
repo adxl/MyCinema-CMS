@@ -2,7 +2,8 @@
 
 namespace App\Core;
 
-class Router{
+class Router
+{
 
 	private $slug;
 	private $action;
@@ -17,11 +18,12 @@ class Router{
 		- Vérifie si le slug existe dans nos routes -> SINON appel la methode exception4040
 		- call setController et setAction
 	*/
-	public function __construct($slug){
+	public function __construct($slug)
+	{
 		$this->slug = $slug;
 		$this->loadYaml();
 
-		if(empty($this->listOfRoutes[$this->slug])) $this->exception404();
+		if (empty($this->listOfRoutes[$this->slug])) $this->exception404();
 
 		/*
 			$this->listOfRoutes
@@ -41,10 +43,11 @@ class Router{
 			- Si il n'y a pas de controller ou pas d'action -> die()
 			- Sinon on alimente un nouveau tableau qui aura pour clé le controller et l'action
 	*/
-	public function loadYaml(){
+	public function loadYaml()
+	{
 		$this->listOfRoutes = yaml_parse_file($this->routePath);
-		foreach ($this->listOfRoutes as $slug=>$route) {
-			if(empty($route["controller"]) || empty($route["action"]))
+		foreach ($this->listOfRoutes as $slug => $route) {
+			if (empty($route["controller"]) || empty($route["action"]))
 				die("Parse YAML ERROR");
 			$this->listOfSlugs[$route["controller"]][$route["action"]] = $slug;
 		}
@@ -52,30 +55,35 @@ class Router{
 
 
 
-	public function getSlug($controller="Main", $action="default"){
+	public function getSlug($controller = "Main", $action = "default")
+	{
 		return $this->listOfSlugs[$controller][$action];
 	}
 
 	//ucfirst = fonction upper case first : majuscule la première lettre
-	public function setController($controller){
+	public function setController($controller)
+	{
 		$this->controller = ucfirst($controller);
 	}
 
-	public function setAction($action){
-		$this->action = $action."Action";
+	public function setAction($action)
+	{
+		$this->action = $action . "Action";
 	}
 
 
-	public function getController(){
+	public function getController()
+	{
 		return $this->controller;
 	}
 
-	public function getAction(){
+	public function getAction()
+	{
 		return $this->action;
 	}
 
-	public function exception404(){
+	public function exception404()
+	{
 		die("Erreur 404");
 	}
-
 }

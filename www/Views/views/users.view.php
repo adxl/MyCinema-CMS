@@ -1,5 +1,11 @@
-<div class="card w-100 ">
-    <input type="text" id="rechercheUsers" name="rechercheUsers" placeholder="Recherche utilisateurs">
+<div class="flex my-s mt-0">
+    <img src="/Views/dist/icons/black-calendar.svg" alt="icon">
+    <h1 class="mx-s"><?= $title; ?></h1>
+</div>
+
+<div class="card w-100 searchbar">
+    <img src="icons/gray-zoom.svg" alt="">
+    <input type="text" name="rechercheUsers" placeholder="Recherche utilisateurs">
 </div>
 
 <div class="card w-100 my-s">
@@ -7,13 +13,13 @@
     <table id="tabUsers">
         <thead>
             <tr>
-                <td>#</td>
-                <td>Nom</td>
-                <td>Prénom</td>
-                <td>Informations</td>
-                <td>Informations</td>
-                <td>Informations</td>
-                <td>Action</td>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Informations</th>
+                <th>Informations</th>
+                <th>Informations</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -25,7 +31,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -37,7 +43,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -49,7 +55,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -61,7 +67,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -73,7 +79,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -85,7 +91,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -97,7 +103,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -109,7 +115,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
 
@@ -121,7 +127,7 @@
                 <td>Données</td>
                 <td>Données</td>
                 <td>
-                    <a href="#"><img src="../dist/icons/blue-eye.svg"></a>
+                    <a href="#"><img src="/Views/dist/icons/blue-eye.svg"></a>
                 </td>
             </tr>
         </tbody>

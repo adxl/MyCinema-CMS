@@ -11,7 +11,7 @@
 
 @for $i from 1 through 12 {
     .col-#{$i} {
-        flex-basis: calc(100 / (12 / #{$i}) * 1% - 20px);
-        margin: 0 10px;
+        flex-basis: calc(100 / (12 / #{$i}) * 1% - #{$grid-gutter});
+        margin: 0 calc(#{$grid-gutter}/ 2);
     }
 }
