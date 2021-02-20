@@ -10,6 +10,10 @@
   controller: UsersController
   action: showUsers
 
+/comments:
+  controller: CommentsController
+  action: showComments
+
 /404:
   controller: MainController
   action: page404
