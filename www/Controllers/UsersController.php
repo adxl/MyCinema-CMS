@@ -10,5 +10,6 @@ class UsersController
     public function showUsersAction()
     {
         $view = new View("users");
+        $view->assign("title", 'Users management');
     }
 }

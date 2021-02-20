@@ -82,3 +82,18 @@
         color: $light-gray;
     }
 }
+
+.searchbar {
+    display: flex;
+    align-items: center;
+    img {
+        width: 18px;
+    }
+    input {
+        outline: none;
+        border: none;
+        border-radius: 8px;
+        margin-left: 10px;
+        font-size: unset;
+    }
+}
