@@ -2,5 +2,15 @@
     background-color: $white;
     border-radius: 5px;
     box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.08);
-    padding: 20px;
+    padding: 20px 50px;
+}
+
+.tag {
+    border-radius: 3px;
+    background-color: $gray;
+    color: $text-gray;
+    text-align: center;
+    height: fit-content;
+    padding: 10px 5px;
+    margin: 0 5px;
 }
