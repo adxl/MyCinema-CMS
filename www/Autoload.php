@@ -10,7 +10,6 @@ class Autoload
 
 		spl_autoload_register(function ($class) {
 
-
 			//App\Core\Router -> App/Core/Router
 			$class = str_replace("\\", "/", $class);
 			//App/Core/Router -> /Core/Router

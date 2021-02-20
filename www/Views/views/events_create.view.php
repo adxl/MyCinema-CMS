@@ -1,5 +1,5 @@
     <div class="flex my-s mt-0">
-        <img src="icons/black-calendar.svg" alt="icon">
+        <img src="/Views/dist/icons/black-calendar.svg" alt="icon">
         <h1 class="mx-s"><?= $title; ?></h1>
     </div>
     <section class="card w-100 ">
