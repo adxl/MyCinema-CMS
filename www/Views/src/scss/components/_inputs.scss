@@ -13,7 +13,8 @@
         color: #7e7e7e;
     }
     &.flexible::after,
-    input {
+    input,
+    select {
         width: 100%;
         min-width: 1em;
         padding: 10px;
@@ -23,6 +24,7 @@
         border-bottom-right-radius: 6px;
         outline: none;
         color: $text-black;
+        background-color: white;
     }
 
     textarea {
@@ -75,7 +77,7 @@
     align-items: center;
     cursor: pointer;
 
-    button {
+    span {
         background-color: transparent;
         border: none;
         font-size: rem(36);

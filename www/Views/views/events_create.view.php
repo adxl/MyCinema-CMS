@@ -4,32 +4,39 @@
     </div>
     <section class="card w-100 ">
         <div class="container">
-            <form action="#">
+            <form action="#" method="POST">
                 <div class="row">
                     <div class="col-9">
                         <div class="flex-column">
                             <h1>General informations</h1>
                             <label class="field">
                                 <span>Movie name</span>
-                                <input type="text">
+                                <input type="text" required>
                             </label>
                             <!-- session -->
                             <div class="flex">
                                 <label class="field">
                                     <span>Date</span>
-                                    <input type="date">
+                                    <input type="date" required>
                                 </label>
                                 <label class="field">
                                     <span>Start</span>
-                                    <input type="time">
+                                    <input type="time" required>
                                 </label>
                                 <label class="field">
                                     <span>End</span>
-                                    <input type="time">
+                                    <input type="time" required>
                                 </label>
                                 <label class="field">
                                     <span>Room</span>
-                                    <input type="text">
+                                    <select name="room" required>
+                                        <option value=""></option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B3">B3</option>
+                                        <option value="C2">C2</option>
+                                    </select>
                                 </label>
                             </div>
                             <!-- session -->
@@ -48,7 +55,14 @@
                                 </label>
                                 <label class="field">
                                     <span>Room</span>
-                                    <input type="text">
+                                    <select name="room">
+                                        <option value=""></option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B3">B3</option>
+                                        <option value="C2">C2</option>
+                                    </select>
                                 </label>
                             </div>
                             <!-- session -->
@@ -67,7 +81,14 @@
                                 </label>
                                 <label class="field">
                                     <span>Room</span>
-                                    <input type="text">
+                                    <select name="room">
+                                        <option value=""></option>
+                                        <option value="A1">A1</option>
+                                        <option value="A2">A2</option>
+                                        <option value="B1">B1</option>
+                                        <option value="B3">B3</option>
+                                        <option value="C2">C2</option>
+                                    </select>
                                 </label>
                             </div>
                             <a href="#" class="link m-s">Add a session</a>
@@ -133,9 +154,16 @@
                         <div class="flex-column flex-top">
                             <h1>Movie Cover</h1>
                             <!-- <img src="icons/image-placeholder.svg" alt="placeholder"> -->
-                            <div class="image-input-portrait">
-                                <button>+</button>
-                            </div>
+
+
+                            <label for="upload">
+                                <div class="image-input-portrait">
+                                    <span>+</span>
+                                </div>
+                            </label>
+                            <input type="file" style="display: none;" id="upload">
+
+
                         </div>
                     </div>
                 </div>
