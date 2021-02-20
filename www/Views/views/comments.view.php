@@ -4,12 +4,12 @@
 </div>
 
 <div class="card w-50">
-    <input type="text" id="rechercheUsers" name="rechercheUsers" placeholder="Recherche utilisateurs">
+    <input type="text" name="rechercheUsers" placeholder="Recherche utilisateurs">
     <button class="button">Rechercher</button>
 </div>
 
 <div class="card w-100 my-s">
-    <table id="tabUsers">
+    <table class="table">
         <thead>
             <tr>
                 <th>Author</th>
@@ -26,8 +26,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
 
@@ -37,8 +37,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
 
@@ -48,8 +48,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
 
@@ -59,8 +59,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
 
@@ -70,8 +70,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
 
@@ -81,8 +81,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <!-- <button><img src="/Views/dist/icons/red-trash.svg"></button> -->
                 </td>
             </tr>
 
@@ -92,8 +92,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
 
@@ -103,8 +103,8 @@
                 <td>Blade runner 2049</td>
                 <td>18-10-2015</td>
                 <td>
-                    <a href="#"><img src="/Views/dist/icons/warning-yellow.svg"></a>
-                    <a href="#"><img src="/Views/dist/icons/red-trash.svg"></a>
+                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
         </tbody>
