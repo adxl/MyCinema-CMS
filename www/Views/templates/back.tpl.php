@@ -38,7 +38,7 @@
 						<span>Events</span>
 					</a>
 				</li>
-				<li><a href="#">
+				<li><a href="/comments">
 						<img src="/Views/dist/icons/white-comment.svg" class="icon" alt=" ">
 						<span>Comments</span>
 					</a>
