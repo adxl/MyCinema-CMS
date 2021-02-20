@@ -4,7 +4,7 @@
 </div>
 
 <div class="card w-100 searchbar">
-    <img src="icons/gray-zoom.svg" alt="">
+    <img src="/Views/dist/icons/gray-zoom.svg" alt="">
     <input type="text" name="rechercheUsers" placeholder="Recherche utilisateurs">
 </div>
 
