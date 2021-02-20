@@ -88,6 +88,10 @@
 .searchbar {
     display: flex;
     align-items: center;
+    background-color: $white;
+    padding-left: 10px;
+    border-radius: 5px;
+
     img {
         width: 18px;
     }
@@ -97,5 +101,6 @@
         border-radius: 8px;
         margin-left: 10px;
         font-size: unset;
+        padding: 5px;
     }
 }
