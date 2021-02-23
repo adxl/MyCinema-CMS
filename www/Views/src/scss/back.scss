@@ -36,31 +36,27 @@ main {
 
 .table {
   width: 100%;
-  border: 1px;
+  border: none;
+  border-spacing: 2px;
+  border-collapse: collapse;
 
   th {
     text-align: left;
-    padding: 5px 10px;
+    padding: 20px;
   }
 
-  tbody,
-  thead {
-    tr {
-      background-color: $lighter-gray;
-    }
-    tr:nth-child(2n) {
-      background-color: $light-gray;
-    }
+  tr {
+    border-bottom: 1px solid $lighter-gray;
+  }
 
-    td {
-      padding: 5px 10px;
-      border: none;
-      button {
-        border: inherit;
-        background-color: transparent;
-        &:first-child {
-          padding-left: 0;
-        }
+  td {
+    padding: 10px 20px;
+    border: none;
+    button {
+      border: inherit;
+      background-color: transparent;
+      &:first-child {
+        padding-left: 0;
       }
     }
   }
