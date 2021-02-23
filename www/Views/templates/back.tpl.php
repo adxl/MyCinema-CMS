@@ -7,7 +7,7 @@
 	<meta name="description" content="description de la page de back">
 	<title>Template de back</title>
 	<link rel="stylesheet" href="/Views/dist/back.css">
-	<script src="main.js"></script>
+	<script src="/Views/dist/main.js"></script>
 </head>
 
 <body class="flex-column">
@@ -15,14 +15,20 @@
 		<div class="p-m">
 			<!-- <img src="" alt="" class="logo"> -->
 		</div>
-		<div class="flex flex-middle mx-m bg-gray rounded h-75 crop">
-			<div class="bg-white rounded p-s">
+		<div id="user-profile-button" class="flex flex-middle mx-m bg-gray rounded h-75 crop">
+			<div class="bg-white p-s">
 				<p class="m-0">Yves S.</p>
 			</div>
 			<div class="flex flex-middle p-s">
 				<img src="/Views/dist/icons/black-user.svg" alt=" " class="avatar">
 			</div>
 		</div>
+        <div id="user-profile-menu" class="card p-0 flex-column crop hidden">
+                <a href="#">Account</a>
+                <a href="#">Reservations</a>
+                <a href="#">Preferences</a>
+                <a href="#">Log out</a>
+        </div>
 	</header>
 
 	<main class="flex flex-auto">

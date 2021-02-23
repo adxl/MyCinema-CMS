@@ -5,11 +5,35 @@ body {
 }
 
 header {
-  height: 70px;
+  height: 60px;
+  box-shadow: 0 2px 1px $gray;
+
+  #user-profile-button {
+    cursor: pointer;
+
+    &:hover div:first-child{
+      background-color: $lighter-gray;
+    }
+  }
+
+  #user-profile-menu {
+    position: absolute;
+    right: 1.5rem;
+    top: 60px;
+
+    a {
+      color: $text-black;
+      padding: 10px 20px;
+
+      &:hover {
+        background: darken($white, 20);
+      }
+    }
+  }
 }
 
 main {
-  max-height: calc(100% - 70px);
+  max-height: calc(100% - 60px);
 }
 
 #view {
