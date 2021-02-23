@@ -3,19 +3,22 @@
     <h1 class="mx-s"><?= $title; ?></h1>
 </div>
 
-<div class="card w-50">
-    <input type="text" name="rechercheUsers" placeholder="Recherche utilisateurs">
+<div class=" w-100 flex flex-right my-m">
+    <div class="searchbar">
+        <img src="/Views/dist/icons/gray-zoom.svg" alt="">
+        <input type="text" name="comment-search" placeholder="Search a comment or user">
+    </div>
     <button class="button">Rechercher</button>
 </div>
 
-<div class="card w-100 my-s">
-    <table class="table">
+<div>
+    <table class="table card">
         <thead>
             <tr>
                 <th>Author</th>
-                <th>Comments</th>
-                <th>Where</th>
-                <th>Send it</th>
+                <th>Comment</th>
+                <th>Event</th>
+                <th>Date</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -82,7 +85,7 @@
                 <td>18-10-2015</td>
                 <td>
                     <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <!-- <button><img src="/Views/dist/icons/red-trash.svg"></button> -->
+                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
                 </td>
             </tr>
 
