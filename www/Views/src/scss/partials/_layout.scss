@@ -2,6 +2,10 @@
   overflow-y: scroll;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .crop {
   overflow: hidden;
 }
