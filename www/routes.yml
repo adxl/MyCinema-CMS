@@ -1,6 +1,6 @@
 /:
-  controller: MainController
-  action: default
+  controller: HomeController
+  action: showDashboard
 
 /events/new:
   controller: EventsController
@@ -13,6 +13,14 @@
 /comments:
   controller: CommentsController
   action: showComments
+
+/rooms:
+  controller: RoomsController
+  action: showRooms
+
+/settings:
+  controller: SettingsController
+  action: showSettings
 
 /404:
   controller: MainController

@@ -13,7 +13,7 @@
 <body class="flex-column">
 	<header class="flex flex-between flex-middle bg-soft-white">
 		<div class="p-m">
-			<img src="" alt=" " class="logo">
+			<!-- <img src="" alt="" class="logo"> -->
 		</div>
 		<div class="flex flex-middle mx-m bg-gray rounded h-75 crop">
 			<div class="bg-white rounded p-s">
@@ -28,7 +28,7 @@
 	<main class="flex flex-auto">
 		<section id="sidebar" class="bg-dark">
 			<ul>
-				<li><a href="#">
+				<li><a href="/">
 						<img src="/Views/dist/icons/white-home.svg" class="icon" alt=" ">
 						<span>Dashboard</span>
 					</a>
@@ -43,7 +43,7 @@
 						<span>Comments</span>
 					</a>
 				</li>
-				<li><a href="#">
+				<li><a href="/rooms">
 						<img src="/Views/dist/icons/white-building.svg" class="icon" alt=" ">
 						<span>Rooms</span>
 					</a>
@@ -53,7 +53,7 @@
 						<span>Users</span>
 					</a>
 				</li>
-				<li><a href="#">
+				<li><a href="/settings">
 						<img src="/Views/dist/icons/white-settings.svg" class="icon" alt=" ">
 						<span>Settings</span>
 					</a>

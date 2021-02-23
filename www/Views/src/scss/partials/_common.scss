@@ -8,6 +8,7 @@ body {
   height: 100%;
   margin: 0;
   font-family: $secondary-font;
+  color: $text-black;
 }
 
 h1,
@@ -51,4 +52,9 @@ img {
   &.avatar {
     border-radius: 50%;
   }
+}
+
+button {
+  cursor: pointer;
+  outline: none;
 }

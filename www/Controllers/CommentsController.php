@@ -10,6 +10,6 @@ class CommentsController
     public function showCommentsAction()
     {
         $view = new View("comments");
-        $view->assign("title", 'Comment management');
+        $view->assign("title", 'Comments management');
     }
 }

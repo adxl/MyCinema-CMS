@@ -84,7 +84,7 @@ $large: $default-space * 3;
 
 // no padding et no margin
 .p-0 {
-  padding: 0;
+  padding: 0 !important;
 }
 .m-0 {
   margin: 0;
