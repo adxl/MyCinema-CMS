@@ -5,3 +5,19 @@
 .text-gray {
     color: $gray;
 }
+
+.text-bold {
+    font-weight: 600;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.text-lighter-gray {
+    color: $lighter-gray;
+}
+
+.text-gray {
+    color: $light-gray;
+}
