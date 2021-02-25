@@ -58,6 +58,26 @@ main {
   }
 }
 
+#filter-link-bar {
+  //padding: 20px;
+
+  a {
+    color: $light-gray;
+    padding: 0 0.5em;
+
+    &:hover {
+      text-decoration: underline;
+      color: $light-gray;
+    }
+  }
+}
+
+.author-card {
+  span {
+    font-size: 12px;
+  }
+}
+
 .table {
   width: 100%;
   border: none;
