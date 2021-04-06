@@ -8,22 +8,21 @@ class User extends Database
 {
 
 	private $id = null;
+
+	// required
 	protected $firstname;
 	protected $lastname;
 	protected $email;
 	protected $pwd;
-	protected $country;
-	protected $role = 0;
-	protected $status = 1;
-	protected $isDeleted = 0;
+	protected $address;
+	protected $city;
+	protected $zipcode;
+	protected $birthdate;
 
-	/*
-		role
-		status
-		createdAt
-		updatedAt
-		isDeleted (hard delete du soft delete) attention au RGPD
-	*/
+	// default
+	private $idStatus;
+	private $idRole;
+	private $isDeleted;
 
 
 	public function __construct()
@@ -31,135 +30,135 @@ class User extends Database
 		parent::__construct();
 	}
 
-	//Parse error: syntax error, unexpected 'return' (T_RETURN) in /var/www/html/Models/User.php on line 41
+	// id
 
-	/**
-	 * @return mixed
-	 */
 	public function getId()
 	{
 		return $this->id;
 	}
-	/**
-	 * @param mixed $id
-	 */
 	public function setId($id): void
 	{
 		$this->id = $id;
-
-		//ON doit peupler (populate) l'objet avec les valeurs de la bdd ...
-
 	}
 
-	/**
-	 * @return mixed
-	 */
+	// firstname
+
 	public function getFirstname()
 	{
 		return $this->firstname;
 	}
-	/**
-	 * @param mixed $firstname
-	 */
 	public function setFirstname($firstname): void
 	{
 		$this->firstname = $firstname;
 	}
 
-	/**
-	 * @return mixed
-	 */
+	// lastname
+
 	public function getLastname()
 	{
 		return $this->lastname;
 	}
-	/**
-	 * @param mixed $lastname
-	 */
 	public function setLastname($lastname): void
 	{
 		$this->lastname = $lastname;
 	}
-	/**
-	 * @return mixed
-	 */
+
+	// email
+
 	public function getEmail()
 	{
 		return $this->email;
 	}
-	/**
-	 * @param mixed $email
-	 */
 	public function setEmail($email): void
 	{
 		$this->email = $email;
 	}
-	/**
-	 * @return mixed
-	 */
+
+	// password
+
 	public function getPwd()
 	{
 		return $this->pwd;
 	}
-	/**
-	 * @param mixed $pwd
-	 */
 	public function setPwd($pwd): void
 	{
 		$this->pwd = $pwd;
 	}
-	/**
-	 * @return mixed
-	 */
-	public function getCountry()
+
+	// address
+
+	public function getAddress()
 	{
-		return $this->country;
+		return $this->address;
 	}
-	/**
-	 * @param mixed $country
-	 */
-	public function setCountry($country): void
+	public function setAddress($address): void
 	{
-		$this->country = $country;
+		$this->address = $address;
 	}
-	/**
-	 * @return int
-	 */
+
+	// city
+
 	public function getRole(): int
 	{
 		return $this->role;
 	}
-	/**
-	 * @param int $role
-	 */
 	public function setRole(int $role): void
 	{
 		$this->role = $role;
 	}
-	/**
-	 * @return int
-	 */
-	public function getStatus(): int
+
+	// zipcode
+
+	public function getZipcode(): int
 	{
-		return $this->status;
+		return $this->zipcode;
 	}
-	/**
-	 * @param int $status
-	 */
-	public function setStatus(int $status): void
+	public function setZipCode(int $zipcode): void
 	{
-		$this->status = $status;
+		$this->zipcode = $zipcode;
 	}
-	/**
-	 * @return int
-	 */
+
+	// birthdate
+
+	public function getBirthdate(): int
+	{
+		return $this->birthdate;
+	}
+	public function setBirthdate(int $birthdate): void
+	{
+		$this->birthdate = $birthdate;
+	}
+
+	// status
+
+	public function getIdStatus(): int
+	{
+		return $this->idStatus;
+	}
+	public function setIdStatus(int $idStatus): void
+	{
+		$this->idStatus = $idStatus;
+	}
+
+	// role
+
+	public function getIdRole(): int
+	{
+		return $this->idRole;
+	}
+	public function setIdRole(int $idRole): void
+	{
+		$this->idRole = $idRole;
+	}
+
+
+	// is deleted ?
+
+
 	public function getIsDeleted(): int
 	{
 		return $this->isDeleted;
 	}
-	/**
-	 * @param int $isDeleted
-	 */
 	public function setIsDeleted(int $isDeleted): void
 	{
 		$this->isDeleted = $isDeleted;
