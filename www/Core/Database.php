@@ -15,8 +15,8 @@ class Database
 			$this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
 			$classExploded = explode("\\", get_called_class());
 			$this->table = strtolower(DBPREFIXE . end($classExploded));
-			$query = $this->pdo->prepare("SELECT * FROM faman_user");
-			$query->execute();
+
+			echo $this->table;
 		} catch (Exception $e) {
 			die("Erreur SQL : " . $e->getMessage());
 		}
@@ -36,12 +36,16 @@ class Database
 			$query = "INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
 			VALUES (:" . implode(',:', array_keys($column)) . ") ";
 
-
 			$stmt = $this->pdo->prepare($query); //1 
-
 
 		} else {
 		}
+
+		echo "<pre>";
+		print_r($column);
+		echo "</pre>";
+
+		echo $query . PHP_EOL;
 
 		$stmt->execute($column);
 	}
