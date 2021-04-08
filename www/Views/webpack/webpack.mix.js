@@ -27,9 +27,9 @@ mix.babel([
 
 // mix.minify('../web/dist/main.js');
 
-// mix.sass('../src/scss/main.scss', '../dist/main.css');
 mix.sass('../src/scss/back.scss', '../dist/back.css');
 mix.sass('../src/scss/front.scss', '../dist/front.css');
+mix.sass('../src/scss/auth.scss', '../dist/auth.css');
 
 module.exports = {
   //...

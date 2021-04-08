@@ -25,3 +25,7 @@
 /404:
   controller: MainController
   action: page404
+
+/login:
+  controller: AuthentificationController
+  action: login
