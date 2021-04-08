@@ -11,7 +11,7 @@ class Room extends Database
 
     protected $label;
     protected $capacity;
-    protected $isHandicapAccess;
+    protected $isHandicapAccess = 0;
 
     private $isAvailable;
 

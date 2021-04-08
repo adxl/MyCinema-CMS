@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Core\Database;
 use App\Core\View;
 
 // use App\Core\FormValidator;
@@ -14,16 +13,21 @@ class RoomsController
 
     public function showRoomsAction()
     {
-        $view = new View("rooms");
-        $view->assign("title", 'Rooms Management');
+        // $view = new View("rooms");
+        // $view->assign("title", 'Rooms Management');
+
+        $room = new RoomModel();
+        $room->findAll(["label", "capacity"]);
+        $room->findById(["label", "capacity"]);
+        $room->findOne(["label" => "Zenith", "capacity" => 200]);
     }
 
     public function createRoom()
     {
         $room = new RoomModel();
 
-        $room->setLabel("La Cigale");
-        $room->setCapacity(1000);
+        $room->setLabel("Bercy");
+        $room->setCapacity(3000);
 
         $room->save();
     }
