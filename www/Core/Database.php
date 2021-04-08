@@ -47,9 +47,12 @@ class Database
 	{
 
 		$where = "";
+		$data = [];
 		foreach ($conditions as $key => $value) {
-			$where .=  $key . "=" . "'" . $value . "'";
+			$where .=  $key . "= :" . $key;
 			$where .= " AND ";
+
+			$data[$key] = $value;
 		}
 
 		$where = trim($where, " AND ");
@@ -57,8 +60,7 @@ class Database
 		$query = "SELECT * FROM " . $this->table . " WHERE " . $where;
 		$stmt = $this->pdo->prepare($query);
 
-
-		$stmt->execute($column);
+		$stmt->execute($data);
 
 		$data = $stmt->fetchAll();
 
@@ -74,8 +76,8 @@ class Database
 
 		if (is_null($this->getId())) {
 
-			$query = "INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
-			VALUES (:" . implode(',:', array_keys($column)) . ") ";
+			$query = "	INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
+						VALUES (:" . implode(',:', array_keys($column)) . ") ";
 
 			$stmt = $this->pdo->prepare($query);
 		} else {

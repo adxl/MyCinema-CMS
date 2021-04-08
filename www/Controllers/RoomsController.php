@@ -17,9 +17,9 @@ class RoomsController
         // $view->assign("title", 'Rooms Management');
 
         $room = new RoomModel();
-        $room->findAll(["label", "capacity"]);
-        $room->findById(["label", "capacity"]);
-        $room->findOne(["label" => "Zenith", "capacity" => 200]);
+//        $room->findAll(["label", "capacity"]);
+//        $room->findById(["label", "capacity"]);
+        $room->findOne(["label" => "Bercy"]);
     }
 
     public function createRoom()
