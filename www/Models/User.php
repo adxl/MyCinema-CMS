@@ -36,95 +36,95 @@ class User extends Database
 	{
 		return $this->id;
 	}
-	public function setId($id): void
+	public function setId(int $id): void
 	{
 		$this->id = $id;
 	}
 
 	// firstname
 
-	public function getFirstname()
+	public function getFirstname(): string
 	{
 		return $this->firstname;
 	}
-	public function setFirstname($firstname): void
+	public function setFirstname(string $firstname): void
 	{
-		$this->firstname = $firstname;
+		$this->firstname = ucfirst($firstname);
 	}
 
 	// lastname
 
-	public function getLastname()
+	public function getLastname(): string
 	{
 		return $this->lastname;
 	}
-	public function setLastname($lastname): void
+	public function setLastname(string $lastname): void
 	{
-		$this->lastname = $lastname;
+		$this->lastname = ucfirst($lastname);
 	}
 
 	// email
 
-	public function getEmail()
+	public function getEmail(): string
 	{
 		return $this->email;
 	}
-	public function setEmail($email): void
+	public function setEmail(string $email): void
 	{
-		$this->email = $email;
+		$this->email = strtolower($email);
 	}
 
 	// password
 
-	public function getPwd()
+	public function getPwd(): string
 	{
 		return $this->pwd;
 	}
-	public function setPwd($pwd): void
+	public function setPwd(string $pwd): void
 	{
 		$this->pwd = $pwd;
 	}
 
 	// address
 
-	public function getAddress()
+	public function getAddress(): string
 	{
 		return $this->address;
 	}
-	public function setAddress($address): void
+	public function setAddress(string $address): void
 	{
 		$this->address = $address;
 	}
 
 	// city
 
-	public function getRole(): int
+	public function geCity(): string
 	{
-		return $this->role;
+		return $this->city;
 	}
-	public function setRole(int $role): void
+	public function setCity(string $city): void
 	{
-		$this->role = $role;
+		$this->city = $city;
 	}
 
 	// zipcode
 
-	public function getZipcode(): int
+	public function getZipcode(): string
 	{
 		return $this->zipcode;
 	}
-	public function setZipCode(int $zipcode): void
+	public function setZipCode(string $zipcode): void
 	{
 		$this->zipcode = $zipcode;
 	}
 
 	// birthdate
 
-	public function getBirthdate(): int
+	public function getBirthdate()
 	{
 		return $this->birthdate;
 	}
-	public function setBirthdate(int $birthdate): void
+	public function setBirthdate($birthdate): void
 	{
 		$this->birthdate = $birthdate;
 	}
@@ -155,11 +155,11 @@ class User extends Database
 	// is deleted ?
 
 
-	public function getIsDeleted(): int
+	public function getIsDeleted(): bool
 	{
 		return $this->isDeleted;
 	}
-	public function setIsDeleted(int $isDeleted): void
+	public function setIsDeleted(bool $isDeleted): void
 	{
 		$this->isDeleted = $isDeleted;
 	}

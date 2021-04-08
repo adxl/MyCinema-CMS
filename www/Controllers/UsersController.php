@@ -15,6 +15,16 @@ class UsersController
         // $view->assign("title", 'Users management');
 
         $user = new UserModel();
+
+        $user->setFirstname("Adel");
+        $user->setLastname("sen");
+        $user->setEmail("adelsen@gmail.com");
+        $user->setPwd("pass");
+        $user->setAddress("5 rue victor schoelscher");
+        $user->setCity("paris");
+        $user->setZipCode("93100");
+        $user->setBirthdate("1999-04-03");
+
         $user->save();
     }
 
@@ -24,15 +34,8 @@ class UsersController
     {
 
         // $user = new UserModel();
-        // die("he");
         /*
-			$user->setFirstname("Yves");
-			$user->setLastname("SKRZYPCZYK");
-			$user->setEmail("y.skrzypczyk@gmail.com");
-			$user->setPwd("Test1234");
-			$user->setCountry("fr");
-
-			$user->save();
+			
 
 
 
