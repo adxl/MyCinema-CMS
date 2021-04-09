@@ -16,6 +16,73 @@ class RoomsController
     {
         $view = new View("rooms");
         $view->assign("title", 'Rooms Management');
+
+        $rooms = [
+            [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ],
+            [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ], [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ], [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ]
+        ];
+
+        $view->assign("rooms", $rooms);
     }
 
     public function createRoom()
@@ -24,6 +91,27 @@ class RoomsController
 
         $room->setLabel("La Cigale");
         $room->setCapacity(1000);
+
+
+        /*
+        
+        
+
+<div class="row">
+    <?php foreach ($rooms as $room) : ?>
+
+        <div class="card col-6 my-s">
+            <p> <?= $room['label']; ?> </p>
+        </div>
+
+    <?php endforeach; ?>
+
+
+
+</div>
+        
+        */
+
 
         $room->save();
     }
