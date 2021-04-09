@@ -38,7 +38,7 @@ class Database
 
 		$stmt->execute();
 
-		$data = $stmt->fetchAll();
+		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
 		return $data;
 	}
@@ -62,7 +62,7 @@ class Database
 
 		$stmt->execute($data);
 
-		$data = $stmt->fetchAll();
+		$data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
 		return $data;
 	}
@@ -78,11 +78,13 @@ class Database
 
 			$query = "	INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
 						VALUES (:" . implode(',:', array_keys($column)) . ") ";
-
-			$stmt = $this->pdo->prepare($query);
 		} else {
+			$query = "UPDATE ". $this->table . " SET " . implode(' = , ', array_keys($column)) . " = ? WHERE id = ?";
+			$column['id'] = $this->getId();
 		}
-
+echo $query;
+		var_dump($column);
+		$stmt = $this->pdo->prepare($query);
 		$stmt->execute($column);
 	}
 }

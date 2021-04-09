@@ -17,17 +17,26 @@ class RoomsController
         // $view->assign("title", 'Rooms Management');
 
         $room = new RoomModel();
-//        $room->findAll(["label", "capacity"]);
+//        $this->createRoom();
+		echo '<pre>';
+//        $selectedRoom = $room->findAll(["label", "capacity"]);
 //        $room->findById(["label", "capacity"]);
-        $room->findOne(["label" => "Bercy"]);
+        $selectedRoom = $room->findOne(["label" => "Bercy"]);
+        print_r($selectedRoom);
+        $room = new RoomModel();
+        $room->setId($selectedRoom['id']);
+        $room->setLabel($selectedRoom['label']);
+        $room->setCapacity($selectedRoom['capacity']);
+
+        $room->save();
     }
 
     public function createRoom()
     {
         $room = new RoomModel();
 
-        $room->setLabel("Bercy");
-        $room->setCapacity(3000);
+        $room->setLabel("Bonneuil");
+        $room->setCapacity(2);
 
         $room->save();
     }
