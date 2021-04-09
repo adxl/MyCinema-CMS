@@ -13,13 +13,80 @@ class RoomsController
 
     public function showRoomsAction()
     {
-        // $view = new View("rooms");
-        // $view->assign("title", 'Rooms Management');
+        $view = new View("rooms");
+        $view->assign("title", 'Rooms Management');
 
-        $room = new RoomModel();
-//        $room->findAll(["label", "capacity"]);
-//        $room->findById(["label", "capacity"]);
-        $room->findOne(["label" => "Bercy"]);
+        // $room = new RoomModel();
+        //  $room->findAll(["label", "capacity"]);
+        //  $room->findById(["label", "capacity"]);
+        // $room->findOne(["label" => "Bercy"]);
+
+        $rooms = [
+            [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ],
+            [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ], [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ], [
+                "label" => "Bercy",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Opéra",
+                "capacity" => 3000
+            ],
+            [
+                "label" => "Créteil",
+                "capacity" => 94000
+            ],
+            [
+                "label" => "Bonneuil",
+                "capacity" => 2
+            ]
+        ];
+
+        $view->assign("rooms", $rooms);
     }
 
     public function createRoom()
