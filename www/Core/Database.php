@@ -43,6 +43,10 @@ class Database
 		return $data;
 	}
 
+	public function findById ($id) {
+		return $this->findOne(['id' => $id]);
+	}
+
 	public function findOne($conditions)
 	{
 
@@ -82,8 +86,6 @@ class Database
 			$query = "UPDATE ". $this->table . " SET " . implode(' = , ', array_keys($column)) . " = ? WHERE id = ?";
 			$column['id'] = $this->getId();
 		}
-echo $query;
-		var_dump($column);
 		$stmt = $this->pdo->prepare($query);
 		$stmt->execute($column);
 	}
