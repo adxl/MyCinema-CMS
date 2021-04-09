@@ -11,7 +11,7 @@ header {
   #user-profile-button {
     cursor: pointer;
 
-    &:hover div:first-child{
+    &:hover div:first-child {
       background-color: $lighter-gray;
     }
   }
@@ -42,6 +42,7 @@ main {
 
 #sidebar {
   width: 200px;
+  flex-shrink: 0;
 
   a {
     color: $white;

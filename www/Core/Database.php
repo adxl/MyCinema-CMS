@@ -38,10 +38,13 @@ class Database
 
 		$stmt->execute();
 
+
 		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
 
 		return $data;
 	}
+
 
 	public function findById ($id) {
 		return $this->findOne(['id' => $id]);
@@ -82,6 +85,9 @@ class Database
 
 			$query = "	INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
 						VALUES (:" . implode(',:', array_keys($column)) . ") ";
+
+      $stmt = $this->pdo->prepare($query);
+
 		} else {
 			$query = "UPDATE ". $this->table . " SET " . implode(' = , ', array_keys($column)) . " = ? WHERE id = ?";
 			$column['id'] = $this->getId();
