@@ -15,8 +15,6 @@ class Database
 			$this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
 			$classExploded = explode("\\", get_called_class());
 			$this->table = strtolower(DBPREFIXE . end($classExploded));
-
-			echo $this->table;
 		} catch (Exception $e) {
 			die("Erreur SQL : " . $e->getMessage());
 		}
@@ -40,9 +38,17 @@ class Database
 
 		$stmt->execute();
 
-		$data = $stmt->fetchAll();
+
+		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
 
 		return $data;
+	}
+
+
+	public function findById($id)
+	{
+		return $this->findOne(['id' => $id]);
 	}
 
 	public function findOne($conditions)
@@ -64,7 +70,7 @@ class Database
 
 		$stmt->execute($data);
 
-		$data = $stmt->fetchAll();
+		$data = $stmt->fetch(\PDO::FETCH_ASSOC);
 
 		return $data;
 	}
@@ -83,8 +89,10 @@ class Database
 
 			$stmt = $this->pdo->prepare($query);
 		} else {
+			$query = "UPDATE " . $this->table . " SET " . implode(' = , ', array_keys($column)) . " = ? WHERE id = ?";
+			$column['id'] = $this->getId();
 		}
-
+		$stmt = $this->pdo->prepare($query);
 		$stmt->execute($column);
 	}
 }
