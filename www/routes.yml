@@ -4,7 +4,7 @@
 
 /events:
   controller: EventsController
-  action: showEvent
+  action: showEvents
 
 /events/new:
   controller: EventsController
@@ -17,6 +17,10 @@
 /comments:
   controller: CommentsController
   action: showComments
+
+/room:
+  controller: RoomsController
+  action: showOneRoom
 
 /rooms:
   controller: RoomsController

@@ -85,6 +85,18 @@ class RoomsController
         $view->assign("rooms", $rooms);
     }
 
+    public function showOneRoomAction($id)
+    {
+        $view = new View('room', 'front');
+
+        $room = new RoomModel();
+
+        $data = $room->findById($id);
+
+        $view->assign("title", "Salle " . $data['label']);
+        $view->assign("data", $data);
+    }
+
     public function createRoom()
     {
         $room = new RoomModel();
