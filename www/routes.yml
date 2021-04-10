@@ -2,9 +2,13 @@
   controller: HomeController
   action: showDashboard
 
+/events:
+  controller: EventsController
+  action: showEvent
+
 /events/new:
   controller: EventsController
-  action: createEvent
+  action: showCreateEvent
 
 /users:
   controller: UsersController

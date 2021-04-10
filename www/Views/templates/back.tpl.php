@@ -24,12 +24,12 @@
 				<img src="/Views/dist/icons/black-user.svg" alt=" " class="avatar">
 			</div>
 		</div>
-        <div id="user-profile-menu" class="card p-0 flex-column crop hidden">
-                <a href="#">Account</a>
-                <a href="#">Reservations</a>
-                <a href="#">Preferences</a>
-                <a href="#">Log out</a>
-        </div>
+		<div id="user-profile-menu" class="card p-0 flex-column crop hidden">
+			<a href="#">Account</a>
+			<a href="#">Reservations</a>
+			<a href="#">Preferences</a>
+			<a href="#">Log out</a>
+		</div>
 	</header>
 
 	<main class="flex flex-auto">
@@ -40,7 +40,7 @@
 						<span>Dashboard</span>
 					</a>
 				</li>
-				<li><a href="/events/new">
+				<li><a href="/events">
 						<img src="/Views/dist/icons/white-calendar.svg" class="icon" alt=" ">
 						<span>Events</span>
 					</a>

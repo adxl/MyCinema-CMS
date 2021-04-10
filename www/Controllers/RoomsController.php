@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\Database;
 use App\Core\View;
 
 // use App\Core\FormValidator;
@@ -15,11 +16,6 @@ class RoomsController
     {
         $view = new View("rooms");
         $view->assign("title", 'Rooms Management');
-
-        // $room = new RoomModel();
-        //  $room->findAll(["label", "capacity"]);
-        //  $room->findById(["label", "capacity"]);
-        // $room->findOne(["label" => "Bercy"]);
 
         $rooms = [
             [
