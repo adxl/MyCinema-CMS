@@ -45,7 +45,6 @@ class Database
 		return $data;
 	}
 
-
 	public function findById($id)
 	{
 		return $this->findOne(['id' => $id]);
