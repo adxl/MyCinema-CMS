@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\Database;
 use App\Core\View;
+use App\Core\Helpers;
 
 // use App\Core\FormValidator;
 use App\Models\Room as RoomModel;
@@ -12,76 +13,27 @@ use App\Models\Room as RoomModel;
 class RoomsController
 {
 
+    public function defaultAction()
+    {
+
+        $id = Helpers::getQueryParam('id');
+
+        if ($id) {
+            $this->showOneRoomAction($id);
+        } else {
+            $this->showRoomsAction();
+        }
+    }
+
+
     public function showRoomsAction()
     {
 
         $view = new View("rooms");
         $view->assign("title", 'Rooms Management');
 
-        $rooms = [
-            [
-                "label" => "Bercy",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Opéra",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Créteil",
-                "capacity" => 94000
-            ],
-            [
-                "label" => "Bonneuil",
-                "capacity" => 2
-            ],
-            [
-                "label" => "Bercy",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Opéra",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Créteil",
-                "capacity" => 94000
-            ],
-            [
-                "label" => "Bonneuil",
-                "capacity" => 2
-            ], [
-                "label" => "Bercy",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Opéra",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Créteil",
-                "capacity" => 94000
-            ],
-            [
-                "label" => "Bonneuil",
-                "capacity" => 2
-            ], [
-                "label" => "Bercy",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Opéra",
-                "capacity" => 3000
-            ],
-            [
-                "label" => "Créteil",
-                "capacity" => 94000
-            ],
-            [
-                "label" => "Bonneuil",
-                "capacity" => 2
-            ]
-        ];
+        $roomModel = new RoomModel();
+        $rooms = $roomModel->findAll();
 
         $view->assign("rooms", $rooms);
     }
@@ -90,12 +42,12 @@ class RoomsController
     {
         $view = new View('room', 'front');
 
-        $room = new RoomModel();
+        $roomModel = new RoomModel();
 
-        $data = $room->findById($id);
+        $room = $roomModel->findById($id);
 
-        $view->assign("title", "Salle " . $data['label']);
-        $view->assign("data", $data);
+        $view->assign("title", "Salle " . $room['label']);
+        $view->assign("room", $room);
     }
 
     public function createRoom()
