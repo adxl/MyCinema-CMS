@@ -21,7 +21,7 @@ class Database
 	}
 
 
-	public function findAll($attributes = ['*'])
+	public function findAll($conditions, $attributes = ['*'])
 	{
 
 		$columns = "";
@@ -32,15 +32,23 @@ class Database
 
 		$columns = trim($columns, ', ');
 
+		$where = "";
+		$data = [];
+		foreach ($conditions as $key => $value) {
+			$where .=  $key . "= :" . $key;
+			$where .= " AND ";
 
-		$query = "SELECT " . $columns . " FROM " . $this->table;
+			$data[$key] = $value;
+		}
+
+		$where = trim($where, " AND ");
+
+		$query = "SELECT " . $columns . " FROM " . $this->table . ($where ? " WHERE " . $where : "");
 		$stmt = $this->pdo->prepare($query);
 
-		$stmt->execute();
-
+		$stmt->execute($data);
 
 		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
 
 		return $data;
 	}

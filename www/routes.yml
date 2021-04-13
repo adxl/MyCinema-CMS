@@ -4,7 +4,7 @@
 
 /events:
   controller: EventsController
-  action: showEvents
+  action: default
 
 /events/new:
   controller: EventsController
