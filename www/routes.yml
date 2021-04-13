@@ -22,6 +22,14 @@
   controller: RoomsController
   action: default
 
+/rooms/new:
+  controller: RoomsController
+  action: showCreateRoom
+
+/rooms/edit:
+  controller: RoomsController
+  action: showEditRoom
+
 /settings:
   controller: SettingsController
   action: showSettings
