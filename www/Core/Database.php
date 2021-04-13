@@ -21,7 +21,7 @@ class Database
 	}
 
 
-	public function findAll($attributes)
+	public function findAll($attributes = ['*'])
 	{
 
 		$columns = "";

@@ -18,13 +18,9 @@
   controller: CommentsController
   action: showComments
 
-/room:
-  controller: RoomsController
-  action: showOneRoom
-
 /rooms:
   controller: RoomsController
-  action: showRooms
+  action: default
 
 /settings:
   controller: SettingsController

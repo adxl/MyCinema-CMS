@@ -20,8 +20,13 @@ class Router
 	*/
 	public function __construct($slug)
 	{
+
 		$this->slug = $slug;
+		$this->cleanSlug();
 		$this->loadYaml();
+
+
+
 
 		if (empty($this->listOfRoutes[$this->slug])) $this->exception404();
 
@@ -33,6 +38,12 @@ class Router
 		*/
 		$this->setController($this->listOfRoutes[$this->slug]["controller"]);
 		$this->setAction($this->listOfRoutes[$this->slug]["action"]);
+	}
+
+	public function cleanSlug()
+	{
+
+		$this->slug = explode("?", $this->slug)[0];
 	}
 
 
