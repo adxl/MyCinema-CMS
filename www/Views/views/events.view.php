@@ -11,37 +11,34 @@
 
 <section>
     <div class="row">
-        <?php foreach ($events as $event) : ?>
-
-            <div class="card row col-4 mb-m p-s">
-                <div class="col-4 m-0">
-                    <img class="w-100 h-100 cover rounded" src="https://fr.web.img6.acsta.net/pictures/19/09/03/12/02/4765874.jpg" alt=" " />
-                </div>
-                <div class="flex-column col-8">
-                    <h1 class="mb-s"> <?= $event['title']; ?> </h1>
-                    <p> Schedulled sessions : <?= $event['sessions']; ?></p>
-
-                    <?php if ($event['next_session']) : ?>
-                        <p class="mb-s"> Next session : <?= $event['next_session']; ?></p>
-                    <?php endif; ?>
-
-                    <?php if ($event['rooms']) : ?>
-                        <p class=""> Planned room(s) :
-
-                            <?php foreach ($event['rooms'] as $room) : ?>
-                                <span><?= $room['label']; ?></span>
-                            <?php endforeach; ?>
-
-                        </p>
-                    <?php endif; ?>
-                    <div class="flex mt-auto">
-                        <p class="bg-lighter p-s mr-s rounded"> Tags </p>
-                        <p class="bg-lighter p-s mr-s rounded"> Tags </p>
-                        <p class="bg-lighter p-s rounded"> Tags </p>
+        <div class="col-2"></div>
+        <div class="row col-10">
+            <?php foreach ($events as $event) : ?>
+                <div class="card row col-4 mb-m p-s">
+                    <div class="col-4 m-0">
+                        <img class="w-100 h-100 cover rounded<?= $event['has_passed'] ? ' faded' : '' ?>" src="https://fr.web.img6.acsta.net/pictures/19/09/03/12/02/4765874.jpg" alt=" " />
+                    </div>
+                    <div class="flex-column col-8">
+                        <h1 class="mb-s"> <?= $event['title']; ?> </h1>
+                        <p> Schedulled sessions : <?= $event['sessions']; ?></p>
+                        <?php if ($event['next_session']) : ?>
+                            <p class="mb-s"> Next session : <?= $event['next_session']; ?></p>
+                        <?php endif; ?>
+                        <?php if ($event['rooms']) : ?>
+                            <p class=""> Planned room(s) :
+                                <?php foreach ($event['rooms'] as $room) : ?>
+                                    <span><?= $room['label']; ?></span>
+                                <?php endforeach; ?>
+                            </p>
+                        <?php endif; ?>
+                        <div class="flex mt-auto">
+                            <p class="bg-lighter p-s mr-s rounded"> Tags </p>
+                            <p class="bg-lighter p-s mr-s rounded"> Tags </p>
+                            <p class="bg-lighter p-s rounded"> Tags </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 </section>

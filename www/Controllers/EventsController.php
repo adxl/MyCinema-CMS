@@ -28,7 +28,7 @@ class EventsController
         $view->assign("title", 'Events management');
 
         $eventModel = new EventModel();
-        $events = $eventModel->findAll([], null);
+        $events = $eventModel->findAll();
 
         foreach ($events as $key => $event) {
             $eventId = $event['id'];
@@ -36,7 +36,9 @@ class EventsController
             $events[$key]['rooms'] = $eventModel->getRooms($eventId);
             $events[$key]['sessions'] = $eventModel->getSessionsCount($eventId);
             $events[$key]['next_session'] = $eventModel->getNextSessionDate($eventId);
+            $events[$key]['has_passed'] = $eventModel->hasPassed($eventId);
         }
+
 
         $view->assign("events", $events);
     }
