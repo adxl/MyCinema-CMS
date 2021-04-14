@@ -21,40 +21,40 @@ class Database
 	}
 
 
-	public function findAll($whereClause, $orderBy, $attributes = ['*'])
+	public function findAll($sqlData = [])
 	{
-
-		$columns = "";
-
-		foreach ($attributes as $value) {
-			$columns .= $value . ", ";
+		if (!isset($sqlData['select'])) {
+			$sqlData['select'] = '*';
 		}
 
-		$columns = trim($columns, ', ');
+		$columns = $sqlData['select'];
 
-		$where = "";
 		$data = [];
-		foreach ($whereClause as $key => $value) {
-			$where .=  $key . "= :" . $key;
-			$where .= " AND ";
+		$where = "";
 
-			$data[$key] = $value;
+		if (array_key_exists('where', $sqlData)) {
+			foreach ($sqlData['where'] as $cond) {
+				$where .=  $cond['column'] . " " . $cond['operator'] . " :" . $cond['column'];
+				$where .= " AND ";
+
+				$data[$cond['column']] = $cond['value'];
+			}
+			$where = trim($where, " AND ");
 		}
 
-		$where = trim($where, " AND ");
 
 		$order = "";
-		if ($orderBy) {
-			$order = " ORDER BY " . $orderBy['column'] . " " . $orderBy['order'];
+		if (array_key_exists('order', $sqlData)) {
+			$order = " ORDER BY " . $sqlData['order']['column'] . " " . $sqlData['order']['order'];
 		}
 
 
 		$query = "SELECT " . $columns . " FROM " . $this->table . ($where ? " WHERE " . $where : "") . $order;
 		$stmt = $this->pdo->prepare($query);
 
-		// echo "<pre>";
-		// echo $query . PHP_EOL;
-		// echo "</pre>";
+		echo "<pre>";
+		echo $query . PHP_EOL;
+		echo "</pre>";
 
 		$stmt->execute($data);
 

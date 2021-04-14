@@ -121,11 +121,33 @@ class Event extends Database
 
     // event est passé 
 
-    public function hasPassed($id)
+    public function hasPassed($id): bool
     {
         $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll(['id_event' => $id], ['column' => 'eventDate', 'order' => 'ASC']);
+        $eventDate = $eventDateModel->findAll([
+        	'select' =>
+				'*, DATEDIFF(eventDate, NOW()) as DELTA',
+        	'where' => [
+				[
+					'column' => 'id_event',
+					'value' => $id,
+					'operator' => '='
+				],
+				[
+					'column' => 'DELTA',
+					'value' => '0',
+					'operator' => '>='
+				]
+			],
+			'order' => [
+				'column' => 'DELTA',
+				'order' => "ASC"
+			]
+		]);
 
-        return $eventDate ? $eventDate[0]['eventDate'] : '';
+        echo "<pre>";
+        print_r($eventDate);
+
+        return !empty($eventDate) ? "true" : "";
     }
 }

@@ -16,7 +16,7 @@
             <?php foreach ($events as $event) : ?>
                 <div class="card row col-4 mb-m p-s">
                     <div class="col-4 m-0">
-                        <img class="w-100 h-100 cover rounded faded" src="https://fr.web.img6.acsta.net/pictures/19/09/03/12/02/4765874.jpg" alt=" " />
+                        <img class="w-100 h-100 cover rounded<?= $event['has_passed'] ? ' faded' : '' ?>" src="https://fr.web.img6.acsta.net/pictures/19/09/03/12/02/4765874.jpg" alt=" " />
                     </div>
                     <div class="flex-column col-8">
                         <h1 class="mb-s"> <?= $event['title']; ?> </h1>
