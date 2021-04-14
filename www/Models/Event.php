@@ -114,7 +114,17 @@ class Event extends Database
     public function getNextSessionDate($id): string
     {
         $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll(['id_event' => $id], ['column' => 'id_event', 'order' => 'ASC']);
+        $eventDate = $eventDateModel->findAll(['id_event' => $id,], ['column' => 'eventDate', 'order' => 'DESC']);
+
+        return $eventDate ? $eventDate[0]['eventDate'] : '';
+    }
+
+    // event est passé 
+
+    public function hasPassed($id)
+    {
+        $eventDateModel = new EventDateModel();
+        $eventDate = $eventDateModel->findAll(['id_event' => $id], ['column' => 'eventDate', 'order' => 'ASC']);
 
         return $eventDate ? $eventDate[0]['eventDate'] : '';
     }

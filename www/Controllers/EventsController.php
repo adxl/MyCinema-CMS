@@ -38,6 +38,7 @@ class EventsController
             $events[$key]['next_session'] = $eventModel->getNextSessionDate($eventId);
         }
 
+
         $view->assign("events", $events);
     }
 
