@@ -19,14 +19,22 @@
                 </div>
                 <div class="flex-column col-8">
                     <h1 class="mb-s"> <?= $event['title']; ?> </h1>
-                    <p> Schedulled sessions : - </p>
-                    <p class="mb-s"> Next session : - </p>
-                    <p class="mb-auto"> Planned room(s) :
-                        <?php foreach ($event['rooms'] as $room) : ?>
-                            <span><?= $room['label']; ?></span>
-                        <?php endforeach; ?>
-                    </p>
-                    <div class="flex">
+                    <p> Schedulled sessions : <?= $event['sessions']; ?></p>
+
+                    <?php if ($event['next_session']) : ?>
+                        <p class="mb-s"> Next session : <?= $event['next_session']; ?></p>
+                    <?php endif; ?>
+
+                    <?php if ($event['rooms']) : ?>
+                        <p class=""> Planned room(s) :
+
+                            <?php foreach ($event['rooms'] as $room) : ?>
+                                <span><?= $room['label']; ?></span>
+                            <?php endforeach; ?>
+
+                        </p>
+                    <?php endif; ?>
+                    <div class="flex mt-auto">
                         <p class="bg-lighter p-s mr-s rounded"> Tags </p>
                         <p class="bg-lighter p-s mr-s rounded"> Tags </p>
                         <p class="bg-lighter p-s rounded"> Tags </p>

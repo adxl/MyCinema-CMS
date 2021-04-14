@@ -84,7 +84,7 @@ class Event extends Database
 
         $rooms = [];
         $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll(['id_event' => $id]);
+        $eventDate = $eventDateModel->findAll(['id_event' => $id], null);
 
         if ($eventDate) {
             $roomModel = new RoomModel();
@@ -97,5 +97,25 @@ class Event extends Database
             }
         }
         return $rooms;
+    }
+
+    // le nombre de séances prévues
+
+    public function getSessionsCount($id): int
+    {
+        $eventDateModel = new EventDateModel();
+        $eventDate = $eventDateModel->findAll(['id_event' => $id], null);
+
+        return $eventDate ? sizeof($eventDate) : 0;
+    }
+
+    // la date la plus proche
+
+    public function getNextSessionDate($id): string
+    {
+        $eventDateModel = new EventDateModel();
+        $eventDate = $eventDateModel->findAll(['id_event' => $id], ['column' => 'id_event', 'order' => 'ASC']);
+
+        return $eventDate ? $eventDate[0]['eventDate'] : '';
     }
 }

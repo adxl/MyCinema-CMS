@@ -21,7 +21,7 @@ class Database
 	}
 
 
-	public function findAll($conditions, $attributes = ['*'])
+	public function findAll($whereClause, $orderBy, $attributes = ['*'])
 	{
 
 		$columns = "";
@@ -34,7 +34,7 @@ class Database
 
 		$where = "";
 		$data = [];
-		foreach ($conditions as $key => $value) {
+		foreach ($whereClause as $key => $value) {
 			$where .=  $key . "= :" . $key;
 			$where .= " AND ";
 
@@ -43,8 +43,18 @@ class Database
 
 		$where = trim($where, " AND ");
 
-		$query = "SELECT " . $columns . " FROM " . $this->table . ($where ? " WHERE " . $where : "");
+		$order = "";
+		if ($orderBy) {
+			$order = " ORDER BY " . $orderBy['column'] . " " . $orderBy['order'];
+		}
+
+
+		$query = "SELECT " . $columns . " FROM " . $this->table . ($where ? " WHERE " . $where : "") . $order;
 		$stmt = $this->pdo->prepare($query);
+
+		// echo "<pre>";
+		// echo $query . PHP_EOL;
+		// echo "</pre>";
 
 		$stmt->execute($data);
 
@@ -58,12 +68,12 @@ class Database
 		return $this->findOne(['id' => $id]);
 	}
 
-	public function findOne($conditions)
+	public function findOne($whereClause)
 	{
 
 		$where = "";
 		$data = [];
-		foreach ($conditions as $key => $value) {
+		foreach ($whereClause as $key => $value) {
 			$where .=  $key . "= :" . $key;
 			$where .= " AND ";
 
