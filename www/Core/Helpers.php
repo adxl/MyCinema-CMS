@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-
 class Helpers
 {
 
@@ -14,5 +13,10 @@ class Helpers
         if (array_key_exists($param, $queryParams))
             return $queryParams[$param];
         return null;
+    }
+
+    public static function today()
+    {
+        return (new \DateTime())->format('Y-m-d H:i:s');
     }
 }
