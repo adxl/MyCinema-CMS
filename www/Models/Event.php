@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Database;
+use App\Core\Helpers;
 use App\Models\Event_type as EventTypeModel;
 use App\Models\Event_date as EventDateModel;
 use App\Models\Room as RoomModel;
@@ -84,7 +85,16 @@ class Event extends Database
 
         $rooms = [];
         $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll(['id_event' => $id], null);
+        $eventDate = $eventDateModel->findAll([
+            'select' => 'id_room',
+            'where' => [
+                [
+                    'column' => 'id_event',
+                    'value' => $id,
+                    'operator' => '='
+                ]
+            ]
+        ]);
 
         if ($eventDate) {
             $roomModel = new RoomModel();
@@ -96,6 +106,8 @@ class Event extends Database
                 }
             }
         }
+
+        $rooms = array_map("unserialize", array_unique(array_map("serialize", $rooms)));
         return $rooms;
     }
 
@@ -104,9 +116,18 @@ class Event extends Database
     public function getSessionsCount($id): int
     {
         $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll(['id_event' => $id], null);
+        $eventDate = $eventDateModel->findAll([
+            'select' => 'COUNT(*) as count',
+            'where' => [
+                [
+                    'column' => 'id_event',
+                    'value' => $id,
+                    'operator' => '='
+                ]
+            ]
+        ]);
 
-        return $eventDate ? sizeof($eventDate) : 0;
+        return $eventDate ? $eventDate[0]['count'] : 0;
     }
 
     // la date la plus proche
@@ -114,7 +135,27 @@ class Event extends Database
     public function getNextSessionDate($id): string
     {
         $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll(['id_event' => $id,], ['column' => 'eventDate', 'order' => 'DESC']);
+
+        $eventDate = $eventDateModel->findAll([
+            'select' => '*',
+            'where' => [
+                [
+                    'column' => 'id_event',
+                    'value' => $id,
+                    'operator' => '='
+                ],
+                [
+                    'column' => 'eventDate',
+                    'value' => Helpers::today(),
+                    'operator' => '>='
+                ]
+            ],
+            'order' => [
+                'column' => 'eventDate',
+                'order' => "DESC"
+            ]
+        ]);
+
 
         return $eventDate ? $eventDate[0]['eventDate'] : '';
     }
@@ -125,29 +166,26 @@ class Event extends Database
     {
         $eventDateModel = new EventDateModel();
         $eventDate = $eventDateModel->findAll([
-        	'select' =>
-				'*, DATEDIFF(eventDate, NOW()) as DELTA',
-        	'where' => [
-				[
-					'column' => 'id_event',
-					'value' => $id,
-					'operator' => '='
-				],
-				[
-					'column' => 'DELTA',
-					'value' => '0',
-					'operator' => '>='
-				]
-			],
-			'order' => [
-				'column' => 'DELTA',
-				'order' => "ASC"
-			]
-		]);
+            'select' => '*',
+            'where' => [
+                [
+                    'column' => 'id_event',
+                    'value' => $id,
+                    'operator' => '='
+                ],
+                [
+                    'column' => 'eventDate',
+                    'value' => Helpers::today(),
+                    'operator' => '>='
+                ]
+            ],
+            'order' => [
+                'column' => 'eventDate',
+                'order' => "ASC"
+            ]
+        ]);
 
-        echo "<pre>";
-        print_r($eventDate);
 
-        return !empty($eventDate) ? "true" : "";
+        return empty($eventDate) ? "true" : "";
     }
 }
