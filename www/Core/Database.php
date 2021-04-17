@@ -15,8 +15,8 @@ class Database
 			$this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
 			$classExploded = explode("\\", get_called_class());
 			$this->table = strtolower(DBPREFIXE . end($classExploded));
-		} catch (Exception $e) {
-			die("Erreur SQL : " . $e->getMessage());
+		} catch (\Exception $e) {
+			die("Error - SQL Error : " . $e->getMessage() . " [View.php]");
 		}
 	}
 

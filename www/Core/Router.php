@@ -59,7 +59,8 @@ class Router
 		$this->listOfRoutes = yaml_parse_file($this->routePath);
 		foreach ($this->listOfRoutes as $slug => $route) {
 			if (empty($route["controller"]) || empty($route["action"]))
-				die("Parse YAML ERROR");
+				die("Error - Parse Error : failed to parse YAML file [Router.php]");
+
 			$this->listOfSlugs[$route["controller"]][$route["action"]] = $slug;
 		}
 	}
@@ -95,6 +96,6 @@ class Router
 
 	public function exception404()
 	{
-		die("Erreur 404");
+		die("Error - Not Found Error : route not found [Router.php]");
 	}
 }

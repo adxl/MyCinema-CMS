@@ -50,11 +50,11 @@ if (file_exists("./Controllers/" . $c . ".php")) {
 			//Appel de la méthode dans l'objet, exemple UserController->addAction();
 			$cObject->$a();
 		} else {
-			die("Error la methode n'existe pas !!!");
+			die("Error - Method Not Found : " . $a . "  does not exist [index.php]");
 		}
 	} else {
-		die("Error la classe n'existe pas!!!");
+		die("Error - Class Not Found : " . $c . "  does not exist [index.php]");
 	}
 } else {
-	die("Error le fichier controller n'existe pas !!!");
+	die("Error - File Not Found : controller file does not exist [index.php]");
 }
