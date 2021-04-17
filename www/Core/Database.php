@@ -96,7 +96,7 @@ class Database
 			$where = preg_replace('/\sAND\s$/', '', $where);
 
 
-			$query = "SELECT * FROM " . $this->table . " WHERE " . $where;
+			$query = "SELECT " . $columns . " FROM " . $this->table . " WHERE " . $where;
 			$stmt = $this->pdo->prepare($query);
 
 			$stmt->execute($whereData);
