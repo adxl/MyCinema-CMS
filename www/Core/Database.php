@@ -29,7 +29,7 @@ class Database
 
 		$columns = $sqlData['select'];
 
-		$data = [];
+		$whereData = [];
 		$where = "";
 
 		if (array_key_exists('where', $sqlData)) {
@@ -37,59 +37,79 @@ class Database
 				$where .=  $cond['column'] . " " . $cond['operator'] . " :" . $cond['column'];
 				$where .= " AND ";
 
-				$data[$cond['column']] = $cond['value'];
+				$whereData[$cond['column']] = $cond['value'];
 			}
-			$where = trim($where, " AND ");
+			$where = preg_replace('/\sAND\s$/', '', $where);
 		}
-
 
 		$order = "";
 		if (array_key_exists('order', $sqlData)) {
 			$order = " ORDER BY " . $sqlData['order']['column'] . " " . $sqlData['order']['order'];
 		}
 
-
 		$query = "SELECT " . $columns . " FROM " . $this->table . ($where ? " WHERE " . $where : "") . $order;
 		$stmt = $this->pdo->prepare($query);
 
-		echo "<pre>";
-		echo $query . PHP_EOL;
-		echo "</pre>";
+		$stmt->execute($whereData);
 
-		$stmt->execute($data);
+		$whereData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
-		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-
-		return $data;
+		return $whereData;
 	}
 
 	public function findById($id)
 	{
-		return $this->findOne(['id' => $id]);
+		$sqlData = [
+			'select' => '*',
+			'where' => [
+				[
+					'column' => 'id',
+					'value' => $id,
+					'operator' => '='
+				]
+			]
+		];
+
+		return $this->findOne($sqlData);
 	}
 
-	public function findOne($whereClause)
+
+	public function findOne($sqlData = [])
 	{
+		if (array_key_exists('where', $sqlData) && sizeof($sqlData['where'])) {
 
-		$where = "";
-		$data = [];
-		foreach ($whereClause as $key => $value) {
-			$where .=  $key . "= :" . $key;
-			$where .= " AND ";
+			if (!isset($sqlData['select'])) {
+				$sqlData['select'] = '*';
+			}
 
-			$data[$key] = $value;
+			$columns = $sqlData['select'];
+
+			$whereData = [];
+			$where = "";
+
+			foreach ($sqlData['where'] as $cond) {
+				$where .=  $cond['column'] . " " . $cond['operator'] . " :" . $cond['column'];
+				$where .= " AND ";
+
+				$whereData[$cond['column']] = $cond['value'];
+			}
+			$where = preg_replace('/\sAND\s$/', '', $where);
+
+
+			$query = "SELECT * FROM " . $this->table . " WHERE " . $where;
+			$stmt = $this->pdo->prepare($query);
+
+			$stmt->execute($whereData);
+
+			$whereData = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+			return $whereData;
 		}
 
-		$where = trim($where, " AND ");
-
-		$query = "SELECT * FROM " . $this->table . " WHERE " . $where;
-		$stmt = $this->pdo->prepare($query);
-
-		$stmt->execute($data);
-
-		$data = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-		return $data;
+		echo "<pre>";
+		print_r($sqlData);
+		echo "</pre>";
+		die("Error - Bad Query : WHERE clause not found [database.php]");
 	}
 
 	public function save()
