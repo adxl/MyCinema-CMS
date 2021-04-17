@@ -15,7 +15,6 @@ class RoomsController
 
     public function defaultAction()
     {
-
         $id = Helpers::getQueryParam('id');
 
         if ($id) {
@@ -28,12 +27,19 @@ class RoomsController
 
     public function showRoomsAction()
     {
-
         $view = new View("rooms");
         $view->assign("title", 'Rooms Management');
 
         $roomModel = new RoomModel();
         $rooms = $roomModel->findAll();
+
+        foreach ($rooms as $key => $room) {
+            $roomId = $room['id'];
+            $rooms[$key]['sessions'] = $roomModel->getSessionsCount($roomId);
+            $rooms[$key]['nextSession'] = $roomModel->getNextSessionDate($roomId);
+            $rooms[$key]['nextMovie'] = $roomModel->getNextEvent($roomId);
+        }
+
 
         $view->assign("rooms", $rooms);
 

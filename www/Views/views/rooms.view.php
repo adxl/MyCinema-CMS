@@ -10,26 +10,33 @@
 </div>
 
 <section>
+
     <div class="row">
-        <?php foreach ($rooms as $room) : ?>
-
-            <a class="card row col-4 mb-m p-s" href="/rooms<?= $isAdmin ? "/edit" : "" ?>?id=<?= $room['id'] ?>">
-                <div class="col-4 m-0">
-                    <img class="w-100 h-100 cover rounded" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
-                </div>
-                <div class="flex-column col-8">
-                    <h1 class="mb-s">
-                        <?= $room['label']; ?>
-                    </h1>
-                    <div class="mb-auto">
-                        <p> Scheduled sessions : <?= null; ?> </p>
-                        <p class="mb-s"> Next session : <?= null; ?> </p>
+        <div class="col-2"></div>
+        <div class="row col-10">
+            <?php foreach ($rooms as $room) : ?>
+                <a class="card row col-4 mb-m p-s" href="/rooms<?= $isAdmin ? "/edit" : "" ?>?id=<?= $room['id'] ?>">
+                    <div class="col-4 m-0">
+                        <img class="w-100 h-100 cover rounded<?= !$room['isAvailable'] ? ' faded' : '' ?>" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
                     </div>
-                    <p> Planned rooms : <?= null; ?> </p>
-                </div>
-            </a>
-
-        <?php endforeach; ?>
+                    <div class="flex-column col-8">
+                        <h1 class="mb-s">
+                            <?= $room['label']; ?>
+                        </h1>
+                        <div class="mb-auto">
+                            <p> Schedulled sessions : <?= $room['sessions']; ?></p>
+                            <?php if ($room['nextSession']) : ?>
+                                <p class="mb-s"> Next session : <?= $room['nextSession']; ?></p>
+                            <?php endif; ?>
+                            <?php if ($room['nextMovie']) : ?>
+                                <p class="mb-s"> Next Movie : <?= $room['nextMovie']; ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </a>
+            <?php endforeach; ?>
+        </div>
 
     </div>
+
 </section>
