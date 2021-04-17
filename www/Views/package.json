@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "node_modules/.bin/webpack --watch --watch-poll --config=node_modules/laravel-mix/setup/webpack.config.js",
     "build": "webpack --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
@@ -17,5 +16,8 @@
     "sass": "^1.23.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.10"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0"
   }
 }

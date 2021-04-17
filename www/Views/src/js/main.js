@@ -1,5 +1,7 @@
-$(document).ready(function () {
-    $("#user-profile-button").click(function () {
+import "/Views/node_modules/jquery/dist/jquery.min.js"
+
+$(function () {
+    $("#user-profile-button").on('click', function () {
         $("#user-profile-menu").toggleClass('hidden');
     })
 })
