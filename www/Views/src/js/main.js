@@ -1,7 +1,7 @@
-import "/Views/node_modules/jquery/dist/jquery.min.js"
+import $ from './jquery';
 
-$(function () {
-    $("#user-profile-button").on('click', function () {
-        $("#user-profile-menu").toggleClass('hidden');
-    })
-})
+$(() => {
+	$('#user-profile-button').on('click', () => {
+		$('#user-profile-menu').toggleClass('hidden');
+	});
+});
