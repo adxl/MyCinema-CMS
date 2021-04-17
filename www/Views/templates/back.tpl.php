@@ -16,9 +16,9 @@
 		<div class="p-m">
 			<!-- <img src="" alt="" class="logo"> -->
 		</div>
-		<div id="user-profile-button" class="flex flex-middle mx-m bg-gray rounded h-75 crop">
-			<div class="bg-white p-s">
-				<p class="m-0">Yves S.</p>
+		<div id="user-profile-button" class="flex flex-middle mr-m bg-gray rounded crop">
+			<div class="flex flex-middle flex-self-stretch bg-white pr-m pl-m">
+				<p>Yves S.</p>
 			</div>
 			<div class="flex flex-middle p-s">
 				<img src="/Views/dist/icons/black-user.svg" alt=" " class="avatar">

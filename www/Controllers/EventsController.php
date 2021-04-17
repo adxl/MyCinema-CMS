@@ -35,8 +35,8 @@ class EventsController
             $events[$key]['type'] = $eventModel->getType($event['id_type']);
             $events[$key]['rooms'] = $eventModel->getRooms($eventId);
             $events[$key]['sessions'] = $eventModel->getSessionsCount($eventId);
-            $events[$key]['next_session'] = $eventModel->getNextSessionDate($eventId);
-            $events[$key]['has_passed'] = $eventModel->hasPassed($eventId);
+            $events[$key]['nextSession'] = $eventModel->getNextSessionDate($eventId);
+            $events[$key]['hasPassed'] = $eventModel->hasPassed($eventId);
         }
 
 

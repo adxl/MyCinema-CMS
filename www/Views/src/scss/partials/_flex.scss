@@ -45,6 +45,9 @@
 .flex-bottom {
     align-items: flex-end;
 }
+.flex-self-stretch {
+    align-self: stretch;
+}
 
 // flex behaviour
 .flex-auto {
