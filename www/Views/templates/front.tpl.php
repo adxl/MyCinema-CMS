@@ -6,8 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="description" content="description de la page de front">
 	<title>Template de front</title>
-	<link rel="stylesheet" href="front.css">
-	<script src="main.js"></script>
+	<link rel="stylesheet" href="/Views/dist/front.css">
+	<script type="module" src="/Views/dist/main.min.js"></script>
 </head>
 
 <body>
