@@ -1,0 +1,22 @@
+$s: 460px;
+$m: 1024px;
+
+// mixin-s est un media query de petit écrans, en mobile first on est pas censé l'utiliser. mais je la laisse au cas ou
+
+@mixin s {
+    @media screen and (max-width: #{$s - 1}) {
+        @content;
+    }
+}
+
+@mixin m {
+    @media screen and (min-width: #{$s}) and (max-width: #{$m - 1}) {
+        @content;
+    }
+}
+
+@mixin l {
+    @media screen and (min-width: #{$m}) {
+        @content;
+    }
+}
