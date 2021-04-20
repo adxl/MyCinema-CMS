@@ -19,7 +19,6 @@ class FormBuilder
 				id='" . ($config["config"]["id"] ?? "") . "'
 				>";
 
-
 		foreach ($config["inputs"] as $name => $configInput) {
 			$html .= "<label for='" . ($configInput["id"] ?? $name) . "'>" . ($configInput["label"] ?? "") . " </label>";
 
@@ -33,10 +32,8 @@ class FormBuilder
 						 ><br>";
 		}
 
-
-
-
 		$html .= "<input type='submit' value=\"" . ($config["config"]["submit"] ?? "Valider") . "\">";
+		$html .= "<a href=" . ($config["config"]["cancel_action"] ?? "/") . "> " . ($config["config"]["cancel"] ?? "Cancel") . " </a>";
 		$html .= "</form>";
 
 

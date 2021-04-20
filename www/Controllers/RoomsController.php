@@ -64,6 +64,12 @@ class RoomsController
     {
         $view = new View("rooms_create");
         $view->assign("title", 'Rooms Management > Create Room');
+
+
+        $room = new RoomModel();
+        $form = $room->formBuilderCreate();
+
+        $view->assign('form', $form);
     }
 
 
@@ -83,13 +89,16 @@ class RoomsController
         $view = new View('404');
     }
 
-    public function createRoom()
+    public function createRoomAction()
     {
-        // $room = new RoomModel();
+        $data = $_POST;
 
-        // $room->setLabel("Bercy");
-        // $room->setCapacity(3000);
+        $room = new RoomModel();
+        $room->setLabel($data['name']);
+        $room->setCapacity($data['capacity']);
 
-        // $room->save();
+        $room->save();
+
+        header("Location: /rooms");
     }
 }
