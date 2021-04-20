@@ -26,9 +26,17 @@
   controller: RoomsController
   action: showCreateRoom
 
+/rooms/create:
+  controller: RoomsController
+  action: CreateRoom
+
 /rooms/edit:
   controller: RoomsController
   action: showEditRoom
+
+/rooms/update:
+  controller: RoomsController
+  action: UpdateRoom
 
 /settings:
   controller: SettingsController

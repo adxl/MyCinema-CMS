@@ -152,4 +152,40 @@ class Room extends Database
 
         return $event ? $event['title'] : '';
     }
+
+
+    public function formBuilderCreate()
+    {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "/rooms/create",
+                "class" => "",
+                "id" => "form_create_room",
+                "submit" => "Confirm",
+                "cancel" => "Cancel",
+                "cancel_action" => "/rooms"
+            ],
+            "inputs" => [
+
+                "name" => [
+                    "type" => "text",
+                    "placeholder" => "",
+                    "label" => "Room name",
+                    "required" => true,
+                    "class" => "",
+                    "minLength" => 2,
+                    "maxLength" => 60,
+                    "error" => "Room name should be between 2 and 60 characters"
+                ],
+
+                "capacity" => [
+                    "type" => "number",
+                    "label" => "Room capacity",
+                    "required" => true,
+                    "class" => "",
+                ]
+            ]
+        ];
+    }
 }
