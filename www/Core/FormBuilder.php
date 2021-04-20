@@ -26,9 +26,12 @@ class FormBuilder
 						type='" . ($configInput["type"] ?? "text") . "'
 						name='" . $name . "'
 						placeholder='" . ($configInput["placeholder"] ?? "") . "'
+						value='" . ($configInput["value"] ?? "") . "'
+						value='" . ($configInput["value"] ?? "") . "'
 						class='" . ($configInput["class"] ?? "") . "'
 						id='" . ($configInput["id"] ?? $name) . "'
 						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
+						" . (!empty($configInput["checked"]) ? "checked='checked'" : "") . "
 						 ><br>";
 		}
 
