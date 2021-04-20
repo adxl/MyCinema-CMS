@@ -83,6 +83,13 @@ class RoomsController
             if ($room) {
                 $view = new View("rooms_edit");
                 $view->assign("title", 'Rooms Management > Edit Room');
+
+                $form = $roomModel->formBuilderUpdate($room);
+                $view->assign('form', $form);
+
+                session_start();
+                $_SESSION['room_id'] = $id;
+
                 return;
             }
         }
@@ -96,6 +103,35 @@ class RoomsController
         $room = new RoomModel();
         $room->setLabel($data['name']);
         $room->setCapacity($data['capacity']);
+
+        $room->save();
+
+        header("Location: /rooms");
+    }
+
+    public function updateRoomAction()
+    {
+        session_start();
+        $id = $_SESSION['room_id'];
+        $data = $_POST;
+
+        $room = new RoomModel();
+
+        $room->setId($id);
+        $room->setLabel($data['label']);
+
+        $room->setCapacity($data['capacity']);
+        if (isset($_POST['isAvailable'])) {
+            $room->setIsAvailable(1);
+        } else {
+            $room->setIsAvailable(0);
+        }
+
+        if (isset($_POST['isHandicapAccess'])) {
+            $room->setIsHandicapAccess(1);
+        } else {
+            $room->setIsHandicapAccess(0);
+        }
 
         $room->save();
 

@@ -126,9 +126,19 @@ class Database
 
 			$stmt = $this->pdo->prepare($query);
 		} else {
-			$query = "UPDATE " . $this->table . " SET " . implode(' = , ', array_keys($column)) . " = ? WHERE id = ?";
+
+			$query = "UPDATE " . $this->table . " SET";
+
+			foreach (array_keys($column) as $key) {
+				$query .= " " . $key . " = :" . $key . ",";
+			}
+
+			$query = trim($query, ',');
+			$query .= " WHERE id = :id";
+
 			$column['id'] = $this->getId();
 		}
+
 		$stmt = $this->pdo->prepare($query);
 		$stmt->execute($column);
 	}

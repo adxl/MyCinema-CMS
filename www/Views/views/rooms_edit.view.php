@@ -6,8 +6,6 @@
 
 <section>
     <div class="row">
-        TODO:
-        formulaire de modification room ici, mais faut d'abord
-        faire le form builder
+        <?php App\Core\FormBuilder::render($form); ?>
     </div>
 </section>
