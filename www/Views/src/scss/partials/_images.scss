@@ -6,3 +6,9 @@
     opacity: 0.3;
     filter: grayscale(100%);
 }
+
+.poster {
+    object-fit: cover;
+    width: 120px;
+    border-radius: 8px;
+}

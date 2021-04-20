@@ -1,3 +1,7 @@
+/* mixins */
+
+@import 'mixins/media';
+
 /* partials */
 
 @import 'partials/fonts';
@@ -19,7 +23,3 @@
 @import 'components/buttons';
 @import 'components/inputs';
 @import 'components/cards';
-
-/* mixins */
-
-@import 'mixins/media';

@@ -13,6 +13,14 @@
     flex-direction: column;
 }
 
+.flex-column-m {
+    @include m {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap !important;
+    }
+}
+
 .flex-column-reverse {
     display: flex;
     flex-direction: column-reverse;
@@ -49,7 +57,11 @@
     align-self: stretch;
 }
 
-// flex behaviour
 .flex-auto {
     flex: auto;
+}
+
+.no-wrap {
+    flex-wrap: nowrap !important;
+    flex-grow: 1;
 }

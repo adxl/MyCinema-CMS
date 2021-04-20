@@ -34,7 +34,7 @@
 	</header>
 
 	<main class="flex flex-auto">
-		<section id="sidebar" class="bg-dark">
+		<section id="sidebar" class="bg-dark hidden-s">
 			<ul>
 				<li><a href="/">
 						<img src="/Views/dist/icons/white-home.svg" class="icon" alt=" ">
