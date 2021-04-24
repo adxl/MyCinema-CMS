@@ -1,5 +1,5 @@
 <div class="flex my-s mt-0">
-    <img src="/Views/dist/icons/black-comment.svg" alt="icon">
+    <i class="fas fa-comments"></i>
     <h1 class="mx-s"><?= $title; ?></h1>
 </div>
 
@@ -15,13 +15,13 @@
             <a href="#">Deleted</a>
         </div>
     </div>
-        <div class="flex">
-            <div class="searchbar">
-                <img src="/Views/dist/icons/gray-zoom.svg" alt="">
-                <input type="text" name="comment-search" placeholder="Search a comment or user">
-            </div>
-            <button class="button">Rechercher</button>
+    <div class="flex">
+        <div class="searchbar">
+            <i class="fas fa-search faded"></i>
+            <input type="text" name="comment-search" placeholder="Search a comment or user">
         </div>
+        <button class="button">Rechercher</button>
+    </div>
 </div>
 
 <div>
@@ -37,173 +37,49 @@
         </thead>
         <tbody>
             <div>
-            <tr>
-                <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-activ" alt=" ">active</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
 
-            <tr>
-            <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-inactiv" alt=" ">Inactive</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
-
-            <tr>
-            <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-activ" alt=" ">active</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
-
-            <tr>
-            <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-inactiv" alt=" ">Inactive</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
-
-            <tr>
-            <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-inactiv" alt=" ">Inactive</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
-
-            <tr>
-            <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-activ" alt=" ">active</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
-
-            <tr>
-            <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-inactiv" alt=" ">Inactiv</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
-
-            <tr>
-            <td class="author-card flex-middle flex-column">
-                    <div class="flex">
-                    <img width="40" src="/Views/dist/icons/black-user.svg" alt=" ">
-                    <span width="40" class="card status-activ" alt=" ">active</span>
-                    </div>
-                    <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                    <div class="flex">
-                        <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                        <span class="mx-s">18-05-2020</span>
-                    </div>
-                </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <button><img src="/Views/dist/icons/warning-yellow.svg"></button>
-                    <button><img src="/Views/dist/icons/red-trash.svg"></button>
-                </td>
-            </tr>
+                <?php for ($i = 0; $i < 3; $i++) : ?>
+                    <tr>
+                        <td class="author-card flex-middle flex-column">
+                            <div class="flex">
+                                <i class="fas fa-user-circle"></i>
+                                <span width="40" class="card status-active" alt=" ">active</span>
+                            </div>
+                            <p class="m-0 text-bold text-underline">Sasha Soushi</p>
+                            <div class="flex">
+                                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
+                                <span class="mx-s">18-05-2020</span>
+                            </div>
+                        </td>
+                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                        <td>Blade runner 2049</td>
+                        <td>18-10-2015</td>
+                        <td>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="author-card flex-middle flex-column">
+                            <div class="flex">
+                                <i class="fas fa-user-circle"></i>
+                                <span width="40" class="card status-inactive" alt=" ">Inactive</span>
+                            </div>
+                            <p class="m-0 text-bold text-underline">Sasha Soushi</p>
+                            <div class="flex">
+                                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
+                                <span class="mx-s">18-05-2020</span>
+                            </div>
+                        </td>
+                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                        <td>Blade runner 2049</td>
+                        <td>18-10-2015</td>
+                        <td>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+                <?php endfor ?>
         </tbody>
     </table>
 </div>

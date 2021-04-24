@@ -1,5 +1,5 @@
 <div class="flex mb-m mt-s">
-    <img src="/Views/dist/icons/black-building.svg" alt="icon">
+    <i class="fas fa-building"></i>
     <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 

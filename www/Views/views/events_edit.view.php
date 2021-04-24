@@ -1,5 +1,5 @@
 <div class="flex mb-m mt-s">
-    <img src="/Views/dist/icons/black-calendar.svg" alt="icon">
+    <i class="fas fa-calendar-alt"></i>
     <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 

@@ -1,5 +1,5 @@
     <div class="flex my-s mt-0">
-        <img src="/Views/dist/icons/black-calendar.svg" alt="icon">
+        <i class="fas fa-calendar-alt"></i>
         <h1 class="mx-s"><?= $title; ?>
         </h1>
     </div>
@@ -160,8 +160,6 @@
                 <div class="col-3 flex-column flex-bottom">
                     <div class="flex-column flex-top">
                         <h1>Movie Cover</h1>
-                        <!-- <img src="icons/image-placeholder.svg" alt="placeholder"> -->
-
                         <label for="upload">
                             <div class="image-input-portrait">
                                 <span>+</span>

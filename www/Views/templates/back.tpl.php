@@ -22,7 +22,7 @@
 				<p>Yves S.</p>
 			</div>
 			<div class="flex flex-middle p-s">
-				<img src="/Views/dist/icons/black-user.svg" alt=" " class="avatar">
+				<i class="fas fa-user"></i>
 			</div>
 		</div>
 		<div id="user-profile-menu" class="card p-0 flex-column crop hidden">
@@ -37,32 +37,32 @@
 		<section id="sidebar" class="bg-dark hidden-s">
 			<ul>
 				<li><a href="/">
-						<img src="/Views/dist/icons/white-home.svg" class="icon" alt=" ">
+						<i class="fas fa-home"></i>
 						<span>Dashboard</span>
 					</a>
 				</li>
 				<li><a href="/events">
-						<img src="/Views/dist/icons/white-calendar.svg" class="icon" alt=" ">
+						<i class="fas fa-calendar-alt"></i>
 						<span>Events</span>
 					</a>
 				</li>
 				<li><a href="/comments">
-						<img src="/Views/dist/icons/white-comment.svg" class="icon" alt=" ">
+						<i class="fas fa-comments"></i>
 						<span>Comments</span>
 					</a>
 				</li>
 				<li><a href="/rooms">
-						<img src="/Views/dist/icons/white-building.svg" class="icon" alt=" ">
+						<i class="fas fa-building"></i>
 						<span>Rooms</span>
 					</a>
 				</li>
 				<li><a href="/users">
-						<img src="/Views/dist/icons/white-user.svg" class="icon" alt=" ">
+						<i class="fas fa-users"></i>
 						<span>Users</span>
 					</a>
 				</li>
 				<li><a href="/settings">
-						<img src="/Views/dist/icons/white-settings.svg" class="icon" alt=" ">
+						<i class="fas fa-cog"></i>
 						<span>Settings</span>
 					</a>
 				</li>
