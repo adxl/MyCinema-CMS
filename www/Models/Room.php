@@ -9,7 +9,6 @@ use App\Models\Event as EventModel;
 
 class Room extends Database
 {
-
     private $id = null;
 
     protected $label;
@@ -206,7 +205,7 @@ class Room extends Database
                     "type" => "text",
                     "placeholder" => "",
                     "label" => "Room name",
-                    "required" => false,
+                    "required" => true,
                     "class" => "",
                     "minLength" => 2,
                     "maxLength" => 60,
@@ -217,9 +216,10 @@ class Room extends Database
                 "capacity" => [
                     "type" => "number",
                     "label" => "Room capacity",
-                    "required" => false,
+                    "required" => true,
                     "class" => "",
-                    "value" => $data['capacity']
+                    "value" => $data['capacity'],
+                    "min" => 0
                 ],
 
                 "isAvailable" => [
