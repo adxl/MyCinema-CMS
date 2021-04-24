@@ -240,10 +240,11 @@ class Event extends Database
                 "name" => [
                     "type" => "text",
                     "placeholder" => "",
-                    "label" => "Movie name",
+                    "label" => "Movie title",
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 60,
+                    "value" => $data['title'],
                     "error" => "Event name should be between 2 and 60 characters"
                 ],
 
@@ -253,8 +254,29 @@ class Event extends Database
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
+                    "value" => $data['synopsis'],
                     "error" => "Event synopsis should be between 10 and 300 characters"
                 ]
+            ]
+        ];
+    }
+
+    public function formBuilderSession($data)
+    {
+        return [
+            "config" => [
+                "action" => "#",
+                "class" => "",
+                "submit" => "Add",
+            ],
+            "inputs" => [
+
+                "name" => [
+                    "type" => "text",
+                    "placeholder" => "???",
+                    "label" => "date",
+                    "required" => true,
+                ],
             ]
         ];
     }
