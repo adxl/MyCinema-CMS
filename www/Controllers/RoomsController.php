@@ -18,7 +18,7 @@ class RoomsController
         $id = Helpers::getQueryParam('id');
 
         if ($id) {
-            $this->showOneRoomAction($id);
+            $this->showEditRoomAction($id);
         } else {
             $this->showRoomsAction();
         }
@@ -44,18 +44,6 @@ class RoomsController
         $view->assign("rooms", $rooms);
     }
 
-    public function showOneRoomAction($id)
-    {
-        $view = new View('room', 'front');
-
-        $roomModel = new RoomModel();
-
-        $room = $roomModel->findById($id);
-
-        $view->assign("title", "Salle " . $room['label']);
-        $view->assign("room", $room);
-    }
-
     public function showCreateRoomAction()
     {
         $view = new View("rooms_create");
@@ -69,9 +57,12 @@ class RoomsController
     }
 
 
-    public function showEditRoomAction()
+    public function showEditRoomAction($id = null)
     {
-        $id = Helpers::getQueryParam('id');
+        if (!$id) {
+            $id = Helpers::getQueryParam('id');
+        }
+
         if ($id) {
             $roomModel = new RoomModel();
             $room = $roomModel->findById($id);
@@ -89,7 +80,7 @@ class RoomsController
                 return;
             }
         }
-        $view = new View('404');
+        $view = new View('404', 'front');
     }
 
     public function createRoomAction()
