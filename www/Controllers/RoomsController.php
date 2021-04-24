@@ -8,11 +8,11 @@ use App\Core\Helpers;
 
 // use App\Core\FormValidator;
 use App\Models\Room as RoomModel;
+
 // use App\Models\Page;
 
 class RoomsController
 {
-
     public function defaultAction()
     {
         $id = Helpers::getQueryParam('id');
@@ -42,10 +42,6 @@ class RoomsController
 
 
         $view->assign("rooms", $rooms);
-
-        //TODO: faut check si user est admin ou pas 
-        $isAdmin = true;
-        $view->assign("isAdmin", $isAdmin);
     }
 
     public function showOneRoomAction($id)
