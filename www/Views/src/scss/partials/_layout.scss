@@ -6,6 +6,24 @@
   display: none !important;
 }
 
+.hidden-s {
+  @include s {
+    display: none !important;
+  }
+}
+
+.hidden-m {
+  @include m {
+    display: none !important;
+  }
+}
+
+.hidden-l {
+  @include l {
+    display: none !important;
+  }
+}
+
 .crop {
   overflow: hidden;
 }
