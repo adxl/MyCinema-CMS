@@ -13,5 +13,6 @@
     .col-#{$i} {
         flex-basis: calc(100 / (12 / #{$i}) * 1% - #{$grid-gutter});
         margin: 0 calc(#{$grid-gutter}/ 2);
+        flex-grow: 1;
     }
 }

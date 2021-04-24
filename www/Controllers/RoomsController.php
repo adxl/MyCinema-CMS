@@ -8,11 +8,11 @@ use App\Core\Helpers;
 
 // use App\Core\FormValidator;
 use App\Models\Room as RoomModel;
+
 // use App\Models\Page;
 
 class RoomsController
 {
-
     public function defaultAction()
     {
         $id = Helpers::getQueryParam('id');
@@ -42,10 +42,6 @@ class RoomsController
 
 
         $view->assign("rooms", $rooms);
-
-        //TODO: faut check si user est admin ou pas 
-        $isAdmin = true;
-        $view->assign("isAdmin", $isAdmin);
     }
 
     public function showOneRoomAction($id)
@@ -64,6 +60,12 @@ class RoomsController
     {
         $view = new View("rooms_create");
         $view->assign("title", 'Rooms Management > Create Room');
+
+
+        $room = new RoomModel();
+        $form = $room->formBuilderCreate();
+
+        $view->assign('form', $form);
     }
 
 
@@ -77,19 +79,58 @@ class RoomsController
             if ($room) {
                 $view = new View("rooms_edit");
                 $view->assign("title", 'Rooms Management > Edit Room');
+
+                $form = $roomModel->formBuilderUpdate($room);
+                $view->assign('form', $form);
+
+                session_start();
+                $_SESSION['room_id'] = $id;
+
                 return;
             }
         }
         $view = new View('404');
     }
 
-    public function createRoom()
+    public function createRoomAction()
     {
-        // $room = new RoomModel();
+        $data = $_POST;
 
-        // $room->setLabel("Bercy");
-        // $room->setCapacity(3000);
+        $room = new RoomModel();
+        $room->setLabel($data['name']);
+        $room->setCapacity($data['capacity']);
 
-        // $room->save();
+        $room->save();
+
+        header("Location: /rooms");
+    }
+
+    public function updateRoomAction()
+    {
+        session_start();
+        $id = $_SESSION['room_id'];
+        $data = $_POST;
+
+        $room = new RoomModel();
+
+        $room->setId($id);
+        $room->setLabel($data['label']);
+
+        $room->setCapacity($data['capacity']);
+        if (isset($_POST['isAvailable'])) {
+            $room->setIsAvailable(1);
+        } else {
+            $room->setIsAvailable(0);
+        }
+
+        if (isset($_POST['isHandicapAccess'])) {
+            $room->setIsHandicapAccess(1);
+        } else {
+            $room->setIsHandicapAccess(0);
+        }
+
+        $room->save();
+
+        header("Location: /rooms");
     }
 }
