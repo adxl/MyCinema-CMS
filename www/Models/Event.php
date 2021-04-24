@@ -10,7 +10,6 @@ use App\Models\Room as RoomModel;
 
 class Event extends Database
 {
-
     private $id = null;
 
     protected $author;
@@ -82,7 +81,6 @@ class Event extends Database
 
     public function getRooms($id): array
     {
-
         $rooms = [];
         $eventDateModel = new EventDateModel();
         $eventDate = $eventDateModel->findAll([
@@ -160,7 +158,7 @@ class Event extends Database
         return $eventDate ? $eventDate[0]['eventDate'] : '';
     }
 
-    // event est passé 
+    // event est passé
 
     public function hasPassed($id): bool
     {
@@ -187,5 +185,77 @@ class Event extends Database
 
 
         return empty($eventDate) ? "true" : "";
+    }
+
+    public function formBuilderCreate()
+    {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "/events/create",
+                "class" => "",
+                "id" => "form_create_event",
+                "submit" => "Confirm",
+                "cancel" => "Cancel",
+                "cancel_action" => "/events"
+            ],
+            "inputs" => [
+
+                "name" => [
+                    "type" => "text",
+                    "placeholder" => "",
+                    "label" => "Movie name",
+                    "required" => true,
+                    "minLength" => 2,
+                    "maxLength" => 60,
+                    "error" => "Event name should be between 2 and 60 characters"
+                ],
+
+                "synopsis" => [
+                    "type" => "textarea",
+                    "label" => "Synopsis",
+                    "required" => true,
+                    "minLength" => 10,
+                    "maxLength" => 300,
+                    "error" => "Event synopsis should be between 10 and 300 characters"
+                ]
+            ]
+        ];
+    }
+
+    public function formBuilderUpdate($data)
+    {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "/events/update",
+                "class" => "",
+                "id" => "form_update_event",
+                "submit" => "Confirm",
+                "cancel" => "Cancel",
+                "cancel_action" => "/events"
+            ],
+            "inputs" => [
+
+                "name" => [
+                    "type" => "text",
+                    "placeholder" => "",
+                    "label" => "Movie name",
+                    "required" => true,
+                    "minLength" => 2,
+                    "maxLength" => 60,
+                    "error" => "Event name should be between 2 and 60 characters"
+                ],
+
+                "synopsis" => [
+                    "type" => "textarea",
+                    "label" => "Synopsis",
+                    "required" => true,
+                    "minLength" => 10,
+                    "maxLength" => 300,
+                    "error" => "Event synopsis should be between 10 and 300 characters"
+                ]
+            ]
+        ];
     }
 }

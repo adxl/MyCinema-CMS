@@ -10,6 +10,18 @@
   controller: EventsController
   action: showCreateEvent
 
+/events/create:
+  controller: EventsController
+  action: CreateEvent
+
+/events/edit:
+  controller: EventsController
+  action: showEditEvent
+
+/events/update:
+  controller: EventsController
+  action: UpdateEvent
+
 /users:
   controller: UsersController
   action: showUsers
