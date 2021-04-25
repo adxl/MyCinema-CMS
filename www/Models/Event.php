@@ -4,9 +4,11 @@ namespace App\Models;
 
 use App\Core\Database;
 use App\Core\Helpers;
+use App\Models\Room as RoomModel;
+use App\Models\Tag as TagModel;
 use App\Models\EventType as EventTypeModel;
 use App\Models\Event_room as EventRoomModel;
-use App\Models\Room as RoomModel;
+use App\Models\Event_tag as EventTagModel;
 
 class Event extends Database
 {
@@ -183,8 +185,36 @@ class Event extends Database
             ]
         ]);
 
+        return empty($eventRoom);
+    }
 
-        return empty($eventRoom) ? "true" : "";
+    public function getTags($id)
+    {
+        $event = $this->findById($id);
+        if ($event) {
+            $eventTagModel = new EventTagModel();
+            $eventTags = $eventTagModel->findAll([
+                'select' => '*',
+                'where' => [
+                    [
+                        'column' => 'id_event',
+                        'value' => $id,
+                        'operator' => '='
+                    ],
+                ],
+            ]);
+
+            $tags = [];
+            $tagModel = new TagModel();
+            foreach ($eventTags as $eventTag) {
+                $tag = $tagModel->findById($eventTag['id_tag']);
+                if ($tag) {
+                    $tags[] = $tag['label'];
+                }
+            }
+
+            return $tags;
+        }
     }
 
     public function formBuilderCreate()

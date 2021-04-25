@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Core\Helpers;
-
 use App\Models\Event as EventModel;
 
 class EventsController
@@ -36,9 +35,8 @@ class EventsController
             $events[$key]['sessions'] = $eventModel->getSessionsCount($eventId);
             $events[$key]['nextSession'] = $eventModel->getNextSessionDate($eventId);
             $events[$key]['hasPassed'] = $eventModel->hasPassed($eventId);
+            $events[$key]['tags'] = $eventModel->getTags($eventId);
         }
-
-
 
         $view->assign("events", $events);
     }

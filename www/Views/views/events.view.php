@@ -32,17 +32,18 @@
                         <p class="mb-s"> Next session : <?= $event['nextSession']; ?>
                         </p>
                     <?php endif; ?>
-                    <?php if ($event['rooms']) : ?>
+                    <?php if ($event['rooms'] && $event['nextSession']) : ?>
                         <p class=""> Planned room(s) :
                             <?php foreach ($event['rooms'] as $room) : ?>
                                 <span><?= $room['label']; ?></span>
                             <?php endforeach; ?>
                         </p>
                     <?php endif; ?>
+
                     <div class="flex mt-auto">
-                        <p class="bg-lighter p-s mr-s rounded"> Tags </p>
-                        <p class="bg-lighter p-s mr-s rounded"> Tags </p>
-                        <p class="bg-lighter p-s rounded"> Tags </p>
+                        <?php foreach ($event['tags'] as $tag) : ?>
+                            <p class="bg-lighter p-s mr-s rounded"> <?= ucfirst($tag); ?> </p>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
