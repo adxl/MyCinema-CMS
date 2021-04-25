@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Core\Database;
 use App\Core\Helpers;
-use App\Models\Event_type as EventTypeModel;
-use App\Models\Event_date as EventDateModel;
+use App\Models\EventType as EventTypeModel;
+use App\Models\Event_room as EventRoomModel;
 use App\Models\Room as RoomModel;
 
 class Event extends Database
@@ -82,8 +82,8 @@ class Event extends Database
     public function getRooms($id): array
     {
         $rooms = [];
-        $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll([
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findAll([
             'select' => 'id_room',
             'where' => [
                 [
@@ -94,10 +94,10 @@ class Event extends Database
             ]
         ]);
 
-        if ($eventDate) {
+        if ($eventRoom) {
             $roomModel = new RoomModel();
-            foreach ($eventDate as $eventDateEntry) {
-                $roomId = $eventDateEntry['id_room'];
+            foreach ($eventRoom as $eventRoomEntry) {
+                $roomId = $eventRoomEntry['id_room'];
                 $room = $roomModel->findById($roomId);
                 if ($room) {
                     array_push($rooms, $room);
@@ -113,8 +113,8 @@ class Event extends Database
 
     public function getSessionsCount($id): int
     {
-        $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll([
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findAll([
             'select' => 'COUNT(*) as count',
             'where' => [
                 [
@@ -125,16 +125,16 @@ class Event extends Database
             ]
         ]);
 
-        return $eventDate ? $eventDate[0]['count'] : 0;
+        return $eventRoom ? $eventRoom[0]['count'] : 0;
     }
 
     // la date la plus proche
 
     public function getNextSessionDate($id): string
     {
-        $eventDateModel = new EventDateModel();
+        $eventRoomModel = new EventRoomModel();
 
-        $eventDate = $eventDateModel->findAll([
+        $eventRoom = $eventRoomModel->findAll([
             'select' => '*',
             'where' => [
                 [
@@ -155,15 +155,15 @@ class Event extends Database
         ]);
 
 
-        return $eventDate ? $eventDate[0]['eventDate'] : '';
+        return $eventRoom ? $eventRoom[0]['eventDate'] : '';
     }
 
     // event est passé
 
     public function hasPassed($id): bool
     {
-        $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll([
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findAll([
             'select' => '*',
             'where' => [
                 [
@@ -184,7 +184,7 @@ class Event extends Database
         ]);
 
 
-        return empty($eventDate) ? "true" : "";
+        return empty($eventRoom) ? "true" : "";
     }
 
     public function formBuilderCreate()

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Database;
 
-class Event_type extends Database
+class EventType extends Database
 {
 
     private $id = null;

@@ -39,6 +39,7 @@ class EventsController
         }
 
 
+
         $view->assign("events", $events);
     }
 
@@ -50,10 +51,10 @@ class EventsController
 
             if ($event) {
                 $view = new View('event', 'front');
-                
+
                 $view->assign("title", $event['title']);
                 $view->assign("event", $event);
-        
+
                 return;
             }
         }

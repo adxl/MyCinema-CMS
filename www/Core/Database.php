@@ -12,9 +12,9 @@ class Database
         try {
             $this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
             $classExploded = explode("\\", get_called_class());
-            $this->table = strtolower(DBPREFIXE . end($classExploded));
+            $this->table = DBPREFIXE . lcfirst(end($classExploded));
         } catch (\Exception $e) {
-            die("Error - SQL Error : " . $e->getMessage() . " [View.php]");
+            die("Error - SQL Error : " . $e->getMessage() . " [Database.php]");
         }
     }
 

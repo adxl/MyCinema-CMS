@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Database;
 use App\Core\Helpers;
-use App\Models\Event_date as EventDateModel;
+use App\Models\Event_Room as EventRoomModel;
 use App\Models\Event as EventModel;
 
 class Room extends Database
@@ -81,8 +81,8 @@ class Room extends Database
 
     public function getSessionsCount($id): int
     {
-        $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll([
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findAll([
             'select' => 'COUNT(*) as count',
             'where' => [
                 [
@@ -93,15 +93,15 @@ class Room extends Database
             ]
         ]);
 
-        return $eventDate ? $eventDate[0]['count'] : 0;
+        return $eventRoom ? $eventRoom[0]['count'] : 0;
     }
 
     // la date la plus proche
 
     public function getNextSessionDate($id): string
     {
-        $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findAll([
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findAll([
             'select' => '*',
             'where' => [
                 [
@@ -122,7 +122,7 @@ class Room extends Database
         ]);
 
 
-        return $eventDate ? $eventDate[0]['eventDate'] : '';
+        return $eventRoom ? $eventRoom[0]['eventDate'] : '';
     }
 
     // le nom du prochain event de la room
@@ -131,8 +131,8 @@ class Room extends Database
     {
         $nextDate = $this->getNextSessionDate($id);
 
-        $eventDateModel = new EventDateModel();
-        $eventDate = $eventDateModel->findOne([
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findOne([
             'select' => 'id_event',
             'where' => [
                 [
@@ -143,7 +143,7 @@ class Room extends Database
             ]
         ]);
 
-        $eventId = $eventDate['id_event'];
+        $eventId = $eventRoom['id_event'];
 
         $eventModel = new EventModel();
         $event = $eventModel->findById($eventId);
