@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Core\Database;
 use App\Core\Helpers;
-use App\Models\Event_Room as EventRoomModel;
+use App\Models\Event_room as EventRoomModel;
 use App\Models\Event as EventModel;
 
 class Room extends Database

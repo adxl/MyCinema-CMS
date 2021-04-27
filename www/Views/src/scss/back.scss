@@ -3,10 +3,10 @@
 body {
   background-color: $lighter-gray;
   @include m {
-    border: solid 3px rgb(255, 166, 0);
+    border: dashed 3px rgb(255, 166, 0);
   }
   @include l {
-    border: solid 3px rgb(8, 160, 0);
+    border: dashed 3px rgb(8, 160, 0);
   }
 }
 
