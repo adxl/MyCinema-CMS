@@ -8,7 +8,6 @@ $(() => {
 		if (!$('#user-profile-menu').hasClass('hidden')){
 			$('body').on('click', function(e){
 				$('#user-profile-menu').toggleClass('hidden');
-				console.log(e);
 				$('body').off('click');
 			})
 		}
