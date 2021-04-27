@@ -21,7 +21,11 @@ class View
 	{
 		if (file_exists("Views/templates/" . $template . ".tpl.php")) {
 			$this->template = "Views/templates/" . $template . ".tpl.php";
-		} else {
+		}
+		elseif($template == false){
+			$this->template = $template;
+		}
+		else {
 			die("Error - Not Found Error : template does not exist [View.php]");
 		}
 	}
@@ -46,6 +50,8 @@ class View
 	{
 		extract($this->data);
 
-		include $this->template;
+		if (!$this->template){
+			include $this->template;
+		}
 	}
 }

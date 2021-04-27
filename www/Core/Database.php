@@ -137,6 +137,6 @@ class Database
         }
 
         $stmt = $this->pdo->prepare($query);
-        // $stmt->execute($column);
+        $stmt->execute($column);
     }
 }
