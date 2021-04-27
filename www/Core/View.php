@@ -50,7 +50,7 @@ class View
 	{
 		extract($this->data);
 
-		if (!$this->template){
+		if ($this->template){
 			include $this->template;
 		}
 	}
