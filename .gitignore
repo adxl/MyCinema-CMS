@@ -1,10 +1,12 @@
 .env
 www/.env
+
 db_data/
 .idea
+
 www/Views/dist/*.js
 www/Views/dist/*.css
 www/Views/dist/*.json
 
-
-www/Views/webpack/node_modules
+www/Views/node_modules
+www/Views/package-lock.json

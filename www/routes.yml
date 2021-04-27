@@ -4,11 +4,23 @@
 
 /events:
   controller: EventsController
-  action: showEvents
+  action: default
 
 /events/new:
   controller: EventsController
   action: showCreateEvent
+
+/events/create:
+  controller: EventsController
+  action: CreateEvent
+
+/events/edit:
+  controller: EventsController
+  action: showEditEvent
+
+/events/update:
+  controller: EventsController
+  action: UpdateEvent
 
 /users:
   controller: UsersController
@@ -21,6 +33,22 @@
 /rooms:
   controller: RoomsController
   action: default
+
+/rooms/new:
+  controller: RoomsController
+  action: showCreateRoom
+
+/rooms/create:
+  controller: RoomsController
+  action: CreateRoom
+
+/rooms/edit:
+  controller: RoomsController
+  action: showEditRoom
+
+/rooms/update:
+  controller: RoomsController
+  action: UpdateRoom
 
 /settings:
   controller: SettingsController

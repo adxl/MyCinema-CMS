@@ -1,30 +1,48 @@
-<div class="flex my-s mt-0">
-    <img src="/Views/dist/icons/black-building.svg" alt="icon">
-    <h1 class="mx-s"><?= $title; ?></h1>
+<div class="flex mb-m mt-s">
+    <i class="fas fa-building"></i>
+    <h1 class="ml-s"><?= $title; ?>
+    </h1>
 </div>
 
+<div class="flex flex-right">
+    <a href="/rooms/new">
+        <button class="button button--success mb-l">+ Create Room</button>
+    </a>
+</div>
 
 <section>
-    <div class="row">
+    <div class="row flex-column-m">
         <?php foreach ($rooms as $room) : ?>
-
-            <div class="card row col-4 my-s p-s">
+            <a class="card row no-wrap col-2 mb-m p-s" href="/rooms/edit?id=<?= $room['id'] ?>">
                 <div class="col-4 m-0">
-                    <img class="w-100 h-100 cover rounded" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
+                    <img class="w-100 h-100 poster<?= !$room['isAvailable'] ? ' faded' : '' ?>" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
                 </div>
                 <div class="flex-column col-8">
-                    <h1 class="my-s mt-0"> <?= $room['label']; ?> </h1>
-                    <div class="mb-auto">
-                        <p> Scheduled sessions : <?= null; ?> </p>
-                        <p class="my-s mt-0"> Next session : <?= null; ?> </p>
+                    <div class="mb-s flex flex-middle flex-between">
+                        <h1>
+                            <?= $room['label']; ?>
+                        </h1>
+                        <?php if ($room['isHandicapAccess']) : ?>
+                            <div class=" flex flex-right">
+                                <i class="fas fa-wheelchair"></i>
+                            </div>
+                        <?php endif; ?>
                     </div>
-                    <p> Planned rooms : <?= null; ?> </p>
+                    <div class="mb-auto">
+                        <p> Capacity : <?= $room['capacity']; ?>
+                        <p> Schedulled sessions : <?= $room['sessions']; ?>
+                        </p>
+                        <?php if ($room['nextSession']) : ?>
+                            <p class="mb-s"> Next session : <?= $room['nextSession']; ?>
+                            </p>
+                        <?php endif; ?>
+                        <?php if ($room['nextMovie']) : ?>
+                            <p class="mb-s"> Next Movie : <?= $room['nextMovie']; ?>
+                            </p>
+                        <?php endif; ?>
+                    </div>
                 </div>
-            </div>
-
+            </a>
         <?php endforeach; ?>
-
-
-
     </div>
 </section>

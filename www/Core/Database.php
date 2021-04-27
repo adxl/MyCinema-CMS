@@ -2,96 +2,141 @@
 
 namespace App\Core;
 
-
 class Database
 {
+    private $pdo;
+    private $table;
 
-	private $pdo;
-	private $table;
+    public function __construct()
+    {
+        try {
+            $this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
+            $classExploded = explode("\\", get_called_class());
+            $this->table = DBPREFIXE . lcfirst(end($classExploded));
+        } catch (\Exception $e) {
+            die("Error - SQL Error : " . $e->getMessage() . " [Database.php]");
+        }
+    }
 
-	public function __construct()
-	{
-		try {
-			$this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
-			$classExploded = explode("\\", get_called_class());
-			$this->table = strtolower(DBPREFIXE . end($classExploded));
-		} catch (Exception $e) {
-			die("Erreur SQL : " . $e->getMessage());
-		}
-	}
+    public function findAll($sqlData = [])
+    {
+        if (!isset($sqlData['select'])) {
+            $sqlData['select'] = '*';
+        }
+
+        $columns = $sqlData['select'];
+
+        $whereData = [];
+        $where = "";
+
+        if (array_key_exists('where', $sqlData)) {
+            foreach ($sqlData['where'] as $cond) {
+                $where .=  $cond['column'] . " " . $cond['operator'] . " :" . $cond['column'];
+                $where .= " AND ";
+
+                $whereData[$cond['column']] = $cond['value'];
+            }
+            $where = preg_replace('/\sAND\s$/', '', $where);
+        }
+
+        $order = "";
+        if (array_key_exists('order', $sqlData)) {
+            $order = " ORDER BY " . $sqlData['order']['column'] . " " . $sqlData['order']['order'];
+        }
+
+        $query = "SELECT " . $columns . " FROM " . $this->table . ($where ? " WHERE " . $where : "") . $order;
+        $stmt = $this->pdo->prepare($query);
+
+        $stmt->execute($whereData);
+
+        $whereData = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        return $whereData;
+    }
+
+    public function findById($id)
+    {
+        $sqlData = [
+            'select' => '*',
+            'where' => [
+                [
+                    'column' => 'id',
+                    'value' => $id,
+                    'operator' => '='
+                ]
+            ]
+        ];
+
+        return $this->findOne($sqlData);
+    }
 
 
-	public function findAll($attributes = ['*'])
-	{
+    public function findOne($sqlData = [])
+    {
+        if (array_key_exists('where', $sqlData) && sizeof($sqlData['where'])) {
+            if (!isset($sqlData['select'])) {
+                $sqlData['select'] = '*';
+            }
 
-		$columns = "";
+            $columns = $sqlData['select'];
 
-		foreach ($attributes as $value) {
-			$columns .= $value . ", ";
-		}
+            $whereData = [];
+            $where = "";
 
-		$columns = trim($columns, ', ');
+            foreach ($sqlData['where'] as $cond) {
+                $where .=  $cond['column'] . " " . $cond['operator'] . " :" . $cond['column'];
+                $where .= " AND ";
 
-
-		$query = "SELECT " . $columns . " FROM " . $this->table;
-		$stmt = $this->pdo->prepare($query);
-
-		$stmt->execute();
-
-
-		$data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $whereData[$cond['column']] = $cond['value'];
+            }
+            $where = preg_replace('/\sAND\s$/', '', $where);
 
 
-		return $data;
-	}
+            $query = "SELECT " . $columns . " FROM " . $this->table . " WHERE " . $where;
+            $stmt = $this->pdo->prepare($query);
 
-	public function findById($id)
-	{
-		return $this->findOne(['id' => $id]);
-	}
+            $stmt->execute($whereData);
 
-	public function findOne($conditions)
-	{
+            $whereData = $stmt->fetch(\PDO::FETCH_ASSOC);
 
-		$where = "";
-		$data = [];
-		foreach ($conditions as $key => $value) {
-			$where .=  $key . "= :" . $key;
-			$where .= " AND ";
+            return $whereData;
+        }
 
-			$data[$key] = $value;
-		}
 
-		$where = trim($where, " AND ");
 
-		$query = "SELECT * FROM " . $this->table . " WHERE " . $where;
-		$stmt = $this->pdo->prepare($query);
 
-		$stmt->execute($data);
+        echo "<pre>";
+        print_r($sqlData);
+        echo "</pre>";
+        die("Error - Bad Query : WHERE clause not found [database.php]");
+    }
 
-		$data = $stmt->fetch(\PDO::FETCH_ASSOC);
+    public function save()
+    {
+        $column = array_diff_key(
+            get_object_vars($this),
+            get_class_vars(get_class())
+        );
 
-		return $data;
-	}
-
-	public function save()
-	{
-		$column = array_diff_key(
-			get_object_vars($this),
-			get_class_vars(get_class())
-		);
-
-		if (is_null($this->getId())) {
-
-			$query = "	INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
+        if (is_null($this->getId())) {
+            $query = "	INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
 						VALUES (:" . implode(',:', array_keys($column)) . ") ";
 
-			$stmt = $this->pdo->prepare($query);
-		} else {
-			$query = "UPDATE " . $this->table . " SET " . implode(' = , ', array_keys($column)) . " = ? WHERE id = ?";
-			$column['id'] = $this->getId();
-		}
-		$stmt = $this->pdo->prepare($query);
-		$stmt->execute($column);
-	}
+            $stmt = $this->pdo->prepare($query);
+        } else {
+            $query = "UPDATE " . $this->table . " SET";
+
+            foreach (array_keys($column) as $key) {
+                $query .= " " . $key . " = :" . $key . ",";
+            }
+
+            $query = trim($query, ',');
+            $query .= " WHERE id = :id";
+
+            $column['id'] = $this->getId();
+        }
+
+        $stmt = $this->pdo->prepare($query);
+        // $stmt->execute($column);
+    }
 }

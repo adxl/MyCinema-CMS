@@ -11,7 +11,7 @@ class ConstantManager
     public function __construct()
     {
         if (!file_exists($this->envFile))
-            die("Le fichier " . $this->envFile . " n'existe pas");
+            die("Error - File Not Found : env file ( " . $this->envFile . " ) does not exist [ConstantManager.php]");
 
         $this->parsingEnv($this->envFile);
 
@@ -19,7 +19,7 @@ class ConstantManager
             $newFile = $this->envFile . "." . $this->data["ENV"];
 
             if (!file_exists($newFile))
-                die("Le fichier " . $newFile . " n'existe pas");
+                die("Error - File Not Found : File ( " . $newFile . " ) does not exist [ConstantManager.php]");
 
             $this->parsingEnv($newFile);
         }
@@ -41,7 +41,7 @@ class ConstantManager
         if (!defined($key)) {
             define($key, $value);
         } else {
-            die("Attention vous avez utilisé une constante reservée à ce framework " . $key);
+            die("Error - Reserved Constant : " . $key . " is a reserved constant name [ConstantManager.php]");
         }
     }
 

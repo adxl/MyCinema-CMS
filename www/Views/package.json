@@ -1,0 +1,26 @@
+{
+  "name": "projet_annuel_3a",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "watch": "npx eslint src/js && node_modules/.bin/webpack --watch --watch-poll --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "build": "npx eslint src/js && webpack --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.23.0",
+    "sass-loader": "^8.0.0",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "laravel-mix": "^5.0.9"
+  }
+}

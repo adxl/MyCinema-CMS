@@ -1,31 +1,52 @@
-<div class="flex my-s mt-0">
-    <img src="/Views/dist/icons/black-calendar.svg" alt="icon">
-    <h1 class="ml-s"><?= $title; ?></h1>
+<div class="flex mb-m mt-s">
+    <i class="fas fa-building"></i>
+    <h1 class="ml-s"><?= $title; ?>
+    </h1>
 </div>
-<div class="flex flex-right">
-    <button class="button button--success">+ Create Event</button>
-</div>
-<section>
-    <div class="row">
-        <?php for ($i = 0; $i < 12; $i++) : ?>
 
-            <div class="card row col-4 mb-m p-s">
-                <div class="col-4 m-0">
-                    <img class="w-100 h-100 cover rounded" src="https://fr.web.img6.acsta.net/pictures/19/09/03/12/02/4765874.jpg" alt=" " />
-                </div>
+<div class="flex flex-right">
+    <a href="/events/new">
+        <button class="button button--success mb-l">+ Create Event</button>
+    </a>
+</div>
+
+<section>
+    <div class="row col-9 flex-column-m">
+        <?php foreach ($events as $event) : ?>
+            <div class="card row no-wrap col-2 mb-m p-s">
+                <a class="col-4 m-0" href="/events/edit?id=<?= $event['id'] ?>">
+                    <img class="w-100 h-100 poster<?= $event['hasPassed'] ? ' faded' : '' ?>" src="https://fr.web.img6.acsta.net/pictures/19/09/03/12/02/4765874.jpg" alt=" " />
+                </a>
                 <div class="flex-column col-8">
-                    <h1 class="mb-s"> Joker </h1>
-                    <p> Schedulled sessions : 02 </p>
-                    <p class="mb-s"> Next session : 005/02/2021 </p>
-                    <p class="mb-auto"> Planned rooms : A2,B1 </p>
-                    <div class="flex">
-                        <p class="bg-lighter p-s mr-s rounded"> Tags </p>
-                        <p class="bg-lighter p-s mr-s rounded"> Tags </p>
-                        <p class="bg-lighter p-s rounded"> Tags </p>
+                    <div class="mb-s flex flex-middle flex-between">
+                        <h1>
+                            <?= $event['title']; ?>
+                        </h1>
+                        <a href="/events?id=<?= $event['id']; ?>">
+                            <i class="fas fa-eye faded"></i>
+                        </a>
+                    </div>
+                    <p> Schedulled sessions : <?= $event['sessions']; ?>
+                    </p>
+                    <?php if ($event['nextSession']) : ?>
+                        <p class="mb-s"> Next session : <?= $event['nextSession']; ?>
+                        </p>
+                    <?php endif; ?>
+                    <?php if ($event['rooms'] && $event['nextSession']) : ?>
+                        <p class=""> Planned room(s) :
+                            <?php foreach ($event['rooms'] as $room) : ?>
+                                <span><?= $room['label']; ?></span>
+                            <?php endforeach; ?>
+                        </p>
+                    <?php endif; ?>
+
+                    <div class="flex mt-auto">
+                        <?php foreach ($event['tags'] as $tag) : ?>
+                            <p class="bg-lighter p-s mr-s rounded"> <?= ucfirst($tag); ?> </p>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </div>
 </section>

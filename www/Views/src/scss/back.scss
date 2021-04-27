@@ -2,6 +2,12 @@
 
 body {
   background-color: $lighter-gray;
+  @include m {
+    border: dashed 3px rgb(255, 166, 0);
+  }
+  @include l {
+    border: dashed 3px rgb(8, 160, 0);
+  }
 }
 
 header {
@@ -19,7 +25,7 @@ header {
   #user-profile-menu {
     position: absolute;
     right: 1.5rem;
-    top: 60px;
+    top: 70px;
 
     a {
       color: $text-black;

@@ -1,3 +1,7 @@
+/* mixins */
+
+@import 'mixins/media';
+
 /* partials */
 
 @import 'partials/fonts';
@@ -12,6 +16,7 @@
 @import 'partials/borders';
 @import 'partials/background';
 @import 'partials/spacing';
+@import 'partials/images';
 
 /* components */
 

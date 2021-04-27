@@ -1,5 +1,7 @@
-$(document).ready(function(){
-    $("#user-profile-button").click(function(){
-        $("#user-profile-menu").toggleClass('hidden');
-    })
-})
+import $ from 'jquery';
+
+$(() => {
+	$('#user-profile-button').on('click', () => {
+		$('#user-profile-menu').toggleClass('hidden');
+	});
+});

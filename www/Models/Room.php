@@ -3,17 +3,18 @@
 namespace App\Models;
 
 use App\Core\Database;
+use App\Core\Helpers;
+use App\Models\Event_room as EventRoomModel;
+use App\Models\Event as EventModel;
 
 class Room extends Database
 {
-
     private $id = null;
 
     protected $label;
     protected $capacity;
     protected $isHandicapAccess = 0;
-
-    private $isAvailable;
+    protected $isAvailable = 1;
 
     public function __construct()
     {
@@ -59,7 +60,7 @@ class Room extends Database
     {
         return $this->isHandicapAccess;
     }
-    public function setIsHandicapAccess(string $isHandicapAccess): void
+    public function setIsHandicapAccess($isHandicapAccess): void
     {
         $this->isHandicapAccess = $isHandicapAccess;
     }
@@ -73,5 +74,171 @@ class Room extends Database
     public function setIsAvailable($isAvailable): void
     {
         $this->isAvailable = $isAvailable;
+    }
+
+
+    // le nombre de séances prévues
+
+    public function getSessionsCount($id): int
+    {
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findAll([
+            'select' => 'COUNT(*) as count',
+            'where' => [
+                [
+                    'column' => 'id_room',
+                    'value' => $id,
+                    'operator' => '='
+                ]
+            ]
+        ]);
+
+        return $eventRoom ? $eventRoom[0]['count'] : 0;
+    }
+
+    // la date la plus proche
+
+    public function getNextSessionDate($id): string
+    {
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findAll([
+            'select' => '*',
+            'where' => [
+                [
+                    'column' => 'id_room',
+                    'value' => $id,
+                    'operator' => '='
+                ],
+                [
+                    'column' => 'eventDate',
+                    'value' => Helpers::today(),
+                    'operator' => '>='
+                ]
+            ],
+            'order' => [
+                'column' => 'eventDate',
+                'order' => "DESC"
+            ]
+        ]);
+
+
+        return $eventRoom ? $eventRoom[0]['eventDate'] : '';
+    }
+
+    // le nom du prochain event de la room
+
+    public function getNextEvent($id): string
+    {
+        $nextDate = $this->getNextSessionDate($id);
+
+        $eventRoomModel = new EventRoomModel();
+        $eventRoom = $eventRoomModel->findOne([
+            'select' => 'id_event',
+            'where' => [
+                [
+                    'column' => 'eventDate',
+                    'value' => $nextDate,
+                    'operator' => '='
+                ]
+            ]
+        ]);
+
+        $eventId = $eventRoom['id_event'];
+
+        $eventModel = new EventModel();
+        $event = $eventModel->findById($eventId);
+
+        return $event ? $event['title'] : '';
+    }
+
+
+    public function formBuilderCreate()
+    {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "/rooms/create",
+                "class" => "",
+                "id" => "form_create_room",
+                "submit" => "Confirm",
+                "cancel" => "Cancel",
+                "cancel_action" => "/rooms"
+            ],
+            "inputs" => [
+
+                "name" => [
+                    "type" => "text",
+                    "placeholder" => "",
+                    "label" => "Room name",
+                    "required" => true,
+                    "class" => "",
+                    "minLength" => 2,
+                    "maxLength" => 60,
+                    "error" => "Room name should be between 2 and 60 characters"
+                ],
+
+                "capacity" => [
+                    "type" => "number",
+                    "label" => "Room capacity",
+                    "required" => true,
+                    "class" => "",
+                ]
+            ]
+        ];
+    }
+
+    public function formBuilderUpdate($data)
+    {
+        return [
+            "config" => [
+                "method" => "POST",
+                "action" => "/rooms/update",
+                "class" => "",
+                "id" => "form_update_room",
+                "submit" => "Confirm",
+                "cancel" => "Cancel",
+                "cancel_action" => "/rooms"
+            ],
+            "inputs" => [
+
+                "label" => [
+                    "type" => "text",
+                    "placeholder" => "",
+                    "label" => "Room name",
+                    "required" => true,
+                    "class" => "",
+                    "minLength" => 2,
+                    "maxLength" => 60,
+                    "error" => "Room name should be between 2 and 60 characters",
+                    "value" => $data['label']
+                ],
+
+                "capacity" => [
+                    "type" => "number",
+                    "label" => "Room capacity",
+                    "required" => true,
+                    "class" => "",
+                    "value" => $data['capacity'],
+                    "min" => 0
+                ],
+
+                "isAvailable" => [
+                    "type" => "checkbox",
+                    "label" => "Available",
+                    "required" => false,
+                    "class" => "",
+                    "checked" => $data['isAvailable']
+                ],
+
+
+                "isHandicapAccess" => [
+                    "type" => "checkbox",
+                    "label" => "Handicap access",
+                    "required" => false,
+                    "class" => "",
+                    "checked" => $data['isHandicapAccess']
+                ]
+            ]
+        ];
     }
 }
