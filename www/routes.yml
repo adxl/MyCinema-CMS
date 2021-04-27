@@ -14,6 +14,10 @@
   controller: EventsController
   action: CreateEvent
 
+/events/addform:
+  controller: EventsController
+  action: AddForm
+
 /events/edit:
   controller: EventsController
   action: showEditEvent
@@ -21,6 +25,8 @@
 /events/update:
   controller: EventsController
   action: UpdateEvent
+  security: Login
+  role: admin
 
 /users:
   controller: UsersController
