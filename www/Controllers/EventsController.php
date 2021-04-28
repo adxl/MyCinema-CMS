@@ -70,6 +70,17 @@ class EventsController
         $view->assign('form', $form);
     }
 
+    public function addFormAction()
+    {
+        $view = new View("events_create", false);
+        $view->assign("title", 'Events management > Create');
+
+        $eventModel = new EventModel();
+        $form = $eventModel->formBuilderCreate();
+
+        $view->assign('form', $form);
+    }
+
     public function showEditEventAction()
     {
         $id = Helpers::getQueryParam('id');

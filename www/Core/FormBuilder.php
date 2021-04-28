@@ -17,10 +17,29 @@ class FormBuilder
 				id='" . ($config["config"]["id"] ?? "") . "'
 				>";
 
-        foreach ($config["inputs"] as $name => $configInput) {
+        foreach ($config["inputs"] as $name => $configInput){
             $html .= "<label for='" . ($configInput["id"] ?? $name) . "'>" . ($configInput["label"] ?? "") . " </label>";
 
-            $html .= "<input 
+            if ($configInput['type'] == 'textarea') {
+            	$html .= "<textarea  
+						type='" . ($configInput["type"] ?? "text") . "'
+						id='" . ($configInput["id"] ?? $name) . "'
+						name='" . $name . "'
+						placeholder='" . ($configInput["placeholder"] ?? "") . "'
+						value='" . ($configInput["value"] ?? "") . "'
+						class='" . ($configInput["class"] ?? "") . "'
+						min='" . ($configInput["min"] ?? null) . "'
+						max='" . ($configInput["max"] ?? null) . "'
+						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
+						" . (!empty($configInput["checked"]) ? "checked='checked'" : "") . "
+						 ></textarea><br>";
+
+			}
+            elseif ($configInput['type'] == 'select'){
+
+			}
+            else {
+				$html .= "<input 
 						type='" . ($configInput["type"] ?? "text") . "'
 						id='" . ($configInput["id"] ?? $name) . "'
 						name='" . $name . "'
@@ -32,6 +51,7 @@ class FormBuilder
 						" . (!empty($configInput["required"]) ? "required='required'" : "") . "
 						" . (!empty($configInput["checked"]) ? "checked='checked'" : "") . "
 						 ><br>";
+			}
         }
 
         $html .= "<input type='submit' value=\"" . ($config["config"]["submit"] ?? "Valider") . "\">";
