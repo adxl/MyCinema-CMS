@@ -11,7 +11,7 @@ class View
 	private $data = [];
 
 
-	public function __construct($view, $template = "back")
+	public function __construct($view, $template = null)
 	{
 		$this->setTemplate($template);
 		$this->setView($view);
@@ -19,13 +19,9 @@ class View
 
 	public function setTemplate($template)
 	{
-		if (file_exists("Views/templates/" . $template . ".tpl.php")) {
+		if ($template && file_exists("Views/templates/" . $template . ".tpl.php")) {
 			$this->template = "Views/templates/" . $template . ".tpl.php";
-		}
-		elseif($template == false){
-			$this->template = $template;
-		}
-		else {
+		} else {
 			die("Error - Not Found Error : template does not exist [View.php]");
 		}
 	}
@@ -50,7 +46,7 @@ class View
 	{
 		extract($this->data);
 
-		if ($this->template){
+		if ($this->template) {
 			include $this->template;
 		}
 	}

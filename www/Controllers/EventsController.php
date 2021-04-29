@@ -22,7 +22,7 @@ class EventsController
 
     public function showEventsAction()
     {
-        $view = new View("events");
+        $view = new View("events", 'back');
         $view->assign("title", 'Events management');
 
         $eventModel = new EventModel();
@@ -61,7 +61,7 @@ class EventsController
 
     public function showCreateEventAction()
     {
-        $view = new View("events_create");
+        $view = new View("events_create", "back");
         $view->assign("title", 'Events management > Create');
 
         $eventModel = new EventModel();
@@ -72,7 +72,7 @@ class EventsController
 
     public function addFormAction()
     {
-        $view = new View("events_create", false);
+        $view = new View("events_create");
         $view->assign("title", 'Events management > Create');
 
         $eventModel = new EventModel();
@@ -90,7 +90,7 @@ class EventsController
             $event = $eventModel->findById($id);
 
             if ($event) {
-                $view = new View("events_edit");
+                $view = new View("events_edit", "back");
                 $view->assign("title", 'Event Management > Edit Event');
 
                 $form = $eventModel->formBuilderUpdate($event);

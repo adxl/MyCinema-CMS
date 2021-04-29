@@ -27,7 +27,7 @@ class RoomsController
 
     public function showRoomsAction()
     {
-        $view = new View("rooms");
+        $view = new View("rooms", 'back');
         $view->assign("title", 'Rooms Management');
 
         $roomModel = new RoomModel();
@@ -46,7 +46,7 @@ class RoomsController
 
     public function showCreateRoomAction()
     {
-        $view = new View("rooms_create");
+        $view = new View("rooms_create", 'back');
         $view->assign("title", 'Rooms Management > Create Room');
 
 
@@ -68,7 +68,7 @@ class RoomsController
             $room = $roomModel->findById($id);
 
             if ($room) {
-                $view = new View("rooms_edit");
+                $view = new View("rooms_edit", 'back');
                 $view->assign("title", 'Rooms Management > Edit Room');
 
                 $form = $roomModel->formBuilderUpdate($room);

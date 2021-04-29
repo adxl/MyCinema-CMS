@@ -9,33 +9,32 @@ use App\Models\Page;
 
 class UsersController
 {
-        public function showUsersAction()
-        {
-                // $view = new View("users");
-                // $view->assign("title", 'Users management');
+    public function showUsersAction()
+    {
+        $view = new View("users", 'back');
+        $view->assign("title", 'Users management');
 
-                $user = new UserModel();
+        $user = new UserModel();
 
-                $user->setFirstname("Adel");
-                $user->setLastname("sen");
-                $user->setEmail("adelsen@gmail.com");
-                $user->setPwd("pass");
-                $user->setAddress("5 rue victor schoelscher");
-                $user->setCity("paris");
-                $user->setZipCode("93100");
-                $user->setBirthdate("1999-04-03");
+        $user->setFirstname("Adel");
+        $user->setLastname("sen");
+        $user->setEmail("adelsen@gmail.com");
+        $user->setPwd("pass");
+        $user->setAddress("5 rue victor schoelscher");
+        $user->setCity("paris");
+        $user->setZipCode("93100");
+        $user->setBirthdate("1999-04-03");
 
-                $user->save();
-        }
+        $user->save();
+    }
 
 
-        //Method : Action
-        public function registerAction()
-        {
+    //Method : Action
+    public function registerAction()
+    {
+        $view = new View("register");
 
-                // $view = new View("register");
-
-                // $form = $user->formBuilderRegister();
+        // $form = $user->formBuilderRegister();
 
                 // if (!empty($_POST)) {
 
@@ -56,5 +55,5 @@ class UsersController
 
                 // $view->assign("form", $form);
                 // $view->assign("formLogin", $user->formBuilderLogin());
-        }
+    }
 }

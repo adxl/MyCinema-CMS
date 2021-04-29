@@ -11,8 +11,7 @@ class MainController
     //Method : Action
     public function defaultAction()
     {
-
-        $pseudo = "Prof"; // Depuis la bdd
+        // $pseudo = "Prof"; // Depuis la bdd
 
 
         // $sql = new Database();
@@ -20,8 +19,8 @@ class MainController
         // echo DBHOST;
 
         //Affiche la vue home intégrée dans le template du front
-        $view = new View("home");
-        $view->assign("pseudo", $pseudo);
+        // $view = new View("home");
+        // $view->assign("pseudo", $pseudo);
     }
 
     //Method : Action
@@ -29,6 +28,6 @@ class MainController
     {
 
         //Affiche la vue 404 intégrée dans le template du front
-        $view = new View("404");
+        // $view = new View("404");
     }
 }
