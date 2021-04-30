@@ -223,7 +223,7 @@ class Event extends Database
             "config" => [
                 "method" => "POST",
                 "action" => "/events/create",
-                "class" => "",
+                "class" => "flex-column",
                 "id" => "form_create_event",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
@@ -241,14 +241,53 @@ class Event extends Database
                     "error" => "Event name should be between 2 and 60 characters"
                 ],
 
+                // ...$this->generateSessionInput(),
+
+                "directedBy" => [
+                    'id' => 'directed-by',
+                    "type" => 'field',
+                    "placeholder" => "",
+                    "label" => "Directed by",
+                    "required" => false,
+                    "minLength" => 2,
+                    "maxLength" => 30,
+                    "error" => "A name should be between 2 and 60 characters",
+                    "button" => 'Add'
+                ],
+
+                "starring" => [
+                    'id' => 'starring',
+                    "type" => 'field',
+                    "placeholder" => "",
+                    "label" => "Starring",
+                    "required" => false,
+                    "minLength" => 2,
+                    "maxLength" => 30,
+                    "error" => "A name should be between 2 and 60 characters",
+                    "button" => 'Add'
+                ],
+
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
+                    'rows' => 8,
                     "error" => "Event synopsis should be between 10 and 300 characters"
-                ]
+                ],
+
+                "tags" => [
+                    'id' => 'tags',
+                    "type" => 'field',
+                    "placeholder" => "",
+                    "label" => "Tags",
+                    "required" => false,
+                    "minLength" => 3,
+                    "maxLength" => 10,
+                    "error" => "A tag should be between 3 and 10 characters",
+                    "button" => 'Add'
+                ],
             ]
         ];
     }
@@ -284,6 +323,8 @@ class Event extends Database
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
+                    'rows' => 10,
+                    'cols' => 30,
                     "value" => $data['synopsis'],
                     "error" => "Event synopsis should be between 10 and 300 characters"
                 ]
@@ -291,22 +332,36 @@ class Event extends Database
         ];
     }
 
-    public function formBuilderSession($data)
+    public function generateSessionInput($data = [])
     {
         return [
-            "config" => [
-                "action" => "#",
-                "class" => "",
-                "submit" => "Add",
+            "date" => [
+                "type" => "date",
+                "placeholder" => "",
+                "label" => "Date",
+                "required" => true,
+                "value" => $data['date'] ?? ""
             ],
-            "inputs" => [
-
-                "name" => [
-                    "type" => "text",
-                    "placeholder" => "???",
-                    "label" => "date",
-                    "required" => true,
-                ],
+            "start-time" => [
+                "type" => "time",
+                "placeholder" => "",
+                "label" => "Start time",
+                "required" => true,
+                "value" => $data['start'] ?? ""
+            ],
+            "end-time" => [
+                "type" => "time",
+                "placeholder" => "",
+                "label" => "End time",
+                "required" => true,
+                "value" => $data['end'] ?? ""
+            ],
+            "room" => [
+                "type" => "select",
+                "placeholder" => "",
+                "label" => "Room",
+                "required" => true,
+                "value" => $data['room'] ?? ""
             ]
         ];
     }
