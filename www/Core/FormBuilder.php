@@ -34,7 +34,14 @@ class FormBuilder
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
 						></textarea>";
 			} elseif ($configInput['type'] == 'select') {
-				//TODO: $html .= "<select..."
+				$html .= "<select 
+							name='" . $name . "' 
+							id='" . ($configInput["id"] ?? $name) . "'>";
+
+				foreach ($configInput['options'] as $option)
+					$html .= "<option value='" . $option . "'>" . $option . "</option>";
+
+				$html .= "</select>";
 			} elseif ($configInput['type'] == 'field') {
 				$html .= "<div>
 							<input 
@@ -57,6 +64,48 @@ class FormBuilder
 								>" . $configInput["button"] . "
 							</button>
 						</div>";
+			} elseif ($configInput['type'] == 'session') {
+				$html .= "<div class='" . $configInput['class']  . " session-inputs' >";
+
+				foreach ($configInput['items'] as $name => $input) {
+
+					$html .= "<label for='" . ($input["id"] ?? $name) . "'>" . ($input["label"] ?? "") . " </label>";
+
+					if ($input["type"] == 'select') {
+						$html .= "<select name='" . $name . "' id='" . ($input["id"] ?? $name) . "'>";
+
+						foreach ($input['options'] as $option)
+							$html .= "<option value='" . $option . "'>" . $option . "</option>";
+
+						$html .= "</select>";
+					} elseif ($input["type"] == 'button') {
+						$html .= "<button 
+									type='button' 
+									id='" . ($input['id'] ?? '') . "' 
+									class='" . $input['class'] . "'> " . $input['value'] . "
+								</button>";
+					} else {
+						$html .= "<input 
+									type='" . $input["type"] . "'
+									id='" . ($input["id"] ?? $name) . "'
+									name='" . $name . "'
+									placeholder='" . ($input["placeholder"] ?? "") . "'
+									value='" . ($input["value"] ?? "") . "'
+									class='" . ($input["class"] ?? "") . "'
+									min='" . ($input["min"] ?? null) . "'
+									max='" . ($input["max"] ?? null) . "'
+									" . (!empty($input["required"]) ? "required" : "") . "
+									" . (!empty($input["checked"]) ? "checked" : "") . "
+						>";
+					}
+				}
+
+				$html .= "</div>";
+			} elseif ($configInput['type'] == 'button') {
+				$html .= "<button 
+							type='button' 
+							id='" . $configInput['id'] . "'> " . $configInput['value'] . "
+						</button>";
 			} else {
 				$html .= "<input 
 							type='" . ($configInput["type"] ?? "text") . "'

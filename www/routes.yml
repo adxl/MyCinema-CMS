@@ -14,10 +14,6 @@
   controller: EventsController
   action: CreateEvent
 
-/events/addform:
-  controller: EventsController
-  action: AddForm
-
 /events/edit:
   controller: EventsController
   action: showEditEvent

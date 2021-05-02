@@ -219,7 +219,7 @@ class Event extends Database
 
     public function formBuilderCreate()
     {
-        return [
+        return  [
             "config" => [
                 "method" => "POST",
                 "action" => "/events/create",
@@ -241,7 +241,54 @@ class Event extends Database
                     "error" => "Event name should be between 2 and 60 characters"
                 ],
 
-                // ...$this->generateSessionInput(),
+                "session" => [
+                    "type" => "session",
+                    "class" => "flex",
+                    "items" => [
+                        "date" => [
+                            "type" => "date",
+                            "placeholder" => "",
+                            "label" => "Date",
+                            "required" => true,
+                            "value" => $data['date'] ?? ""
+                        ],
+                        "start-time" => [
+                            "type" => "time",
+                            "placeholder" => "",
+                            "label" => "Start time",
+                            "required" => true,
+                            "value" => $data['start'] ?? ""
+                        ],
+                        "end-time" => [
+                            "type" => "time",
+                            "placeholder" => "",
+                            "label" => "End time",
+                            "required" => true,
+                            "value" => $data['end'] ?? ""
+                        ],
+                        "room" => [
+                            "type" => "select",
+                            "placeholder" => "",
+                            "label" => "Room",
+                            "required" => true,
+                            "value" => $data['room'] ?? "",
+                            "options" => [
+                                'A1', 'E2', 'C1', 'B1'
+                            ]
+                        ],
+                        "remove-session" => [
+                            "type" => "button",
+                            "value" => "<i class='far fa-calendar-times'></i>",
+                            "class" => "remove-session-btn",
+                        ],
+                    ]
+                ],
+
+                "add-session" => [
+                    "type" => "button",
+                    "value" => "Add session",
+                    "id" => "generate-session-btn",
+                ],
 
                 "directedBy" => [
                     'id' => 'directed-by',
@@ -328,40 +375,6 @@ class Event extends Database
                     "value" => $data['synopsis'],
                     "error" => "Event synopsis should be between 10 and 300 characters"
                 ]
-            ]
-        ];
-    }
-
-    public function generateSessionInput($data = [])
-    {
-        return [
-            "date" => [
-                "type" => "date",
-                "placeholder" => "",
-                "label" => "Date",
-                "required" => true,
-                "value" => $data['date'] ?? ""
-            ],
-            "start-time" => [
-                "type" => "time",
-                "placeholder" => "",
-                "label" => "Start time",
-                "required" => true,
-                "value" => $data['start'] ?? ""
-            ],
-            "end-time" => [
-                "type" => "time",
-                "placeholder" => "",
-                "label" => "End time",
-                "required" => true,
-                "value" => $data['end'] ?? ""
-            ],
-            "room" => [
-                "type" => "select",
-                "placeholder" => "",
-                "label" => "Room",
-                "required" => true,
-                "value" => $data['room'] ?? ""
             ]
         ];
     }

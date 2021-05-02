@@ -1,3 +1,5 @@
+<!-- fichier inutilisé -->
 <div class="row">
-    <?php App\Core\FormBuilder::render($sessionForm); ?>
+    <label for="">Label</label>
+    <input type="text" name="" id="">
 </div>
