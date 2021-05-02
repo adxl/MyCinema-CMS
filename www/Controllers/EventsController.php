@@ -93,4 +93,14 @@ class EventsController
         }
         $view = new View('404', 'front');
     }
+
+    public function createEventAction()
+    {
+        $data = $_POST;
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        die();
+    }
 }

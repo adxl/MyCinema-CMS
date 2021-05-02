@@ -39,7 +39,7 @@ class FormBuilder
 							id='" . ($configInput["id"] ?? $name) . "'>";
 
 				foreach ($configInput['options'] as $option)
-					$html .= "<option value='" . $option . "'>" . $option . "</option>";
+					$html .= "<option value='" . $option['id'] . "'>" . $option['label'] . "</option>";
 
 				$html .= "</select>";
 			} elseif ($configInput['type'] == 'field') {
@@ -74,7 +74,7 @@ class FormBuilder
 						$html .= "<select name='" . $name . "' id='" . ($input["id"] ?? $name) . "'>";
 
 						foreach ($input['options'] as $option)
-							$html .= "<option value='" . $option . "'>" . $option . "</option>";
+							$html .= "<option value='" . $option['id'] . "'>" . $option['label'] . "</option>";
 
 						$html .= "</select>";
 					} elseif ($input["type"] == 'button') {

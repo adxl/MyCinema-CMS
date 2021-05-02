@@ -272,9 +272,7 @@ class Event extends Database
                             "label" => "Room",
                             "required" => true,
                             "value" => $data['room'] ?? "",
-                            "options" => [
-                                'A1', 'E2', 'C1', 'B1'
-                            ]
+                            "options" => RoomModel::getAvailableRooms()
                         ],
                         "remove-session" => [
                             "type" => "button",

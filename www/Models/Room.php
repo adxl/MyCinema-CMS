@@ -152,6 +152,32 @@ class Room extends Database
     }
 
 
+    public static function getAvailableRooms()
+    {
+        $roomModel = new Room();
+        $rooms = $roomModel->findAll([
+            'select' => '*',
+            'where' => [
+                [
+                    'column' => 'isAvailable',
+                    'operator' => '=',
+                    'value' => true
+                ],
+            ],
+        ]);
+
+        $availableRooms = [];
+
+        foreach ($rooms as $room) {
+            $availableRooms[] = [
+                'id' => $room['id'],
+                'label' => $room['label']
+            ];
+        }
+
+        return $availableRooms;
+    }
+
     public function formBuilderCreate()
     {
         return [
