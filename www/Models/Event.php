@@ -351,17 +351,91 @@ class Event extends Database
                 "cancel" => "Cancel",
                 "cancel_action" => "/events"
             ],
+
             "inputs" => [
 
                 "name" => [
                     "type" => "text",
                     "placeholder" => "",
-                    "label" => "Movie title",
+                    "label" => "Movie name",
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => $data['title'],
                     "error" => "Event name should be between 2 and 60 characters"
+                ],
+
+                "session" => [
+                    "type" => "session",
+                    "class" => "flex",
+                    "items" => [
+                        "date" => [
+                            "type" => "date",
+                            "placeholder" => "",
+                            "label" => "Date",
+                            "required" => true,
+                            "value" => $data['date'] ?? ""
+                        ],
+                        "start-time" => [
+                            "type" => "time",
+                            "placeholder" => "",
+                            "label" => "Start time",
+                            "required" => true,
+                            "value" => $data['start'] ?? ""
+                        ],
+                        "end-time" => [
+                            "type" => "time",
+                            "placeholder" => "",
+                            "label" => "End time",
+                            "required" => true,
+                            "value" => $data['end'] ?? ""
+                        ],
+                        "room" => [
+                            "type" => "select",
+                            "placeholder" => "",
+                            "label" => "Room",
+                            "required" => true,
+                            "value" => $data['room'] ?? "",
+                            "options" => [
+                                'A1', 'E2', 'C1', 'B1'
+                            ]
+                        ],
+                        "remove-session" => [
+                            "type" => "button",
+                            "value" => "<i class='far fa-calendar-times'></i>",
+                            "class" => "remove-session-btn",
+                        ],
+                    ]
+                ],
+
+                "add-session" => [
+                    "type" => "button",
+                    "value" => "Add session",
+                    "id" => "generate-session-btn",
+                ],
+
+                "directedBy" => [
+                    'id' => 'directed-by',
+                    "type" => 'field',
+                    "placeholder" => "",
+                    "label" => "Directed by",
+                    "required" => false,
+                    "minLength" => 2,
+                    "maxLength" => 30,
+                    "error" => "A name should be between 2 and 60 characters",
+                    "button" => 'Add'
+                ],
+
+                "starring" => [
+                    'id' => 'starring',
+                    "type" => 'field',
+                    "placeholder" => "",
+                    "label" => "Starring",
+                    "required" => false,
+                    "minLength" => 2,
+                    "maxLength" => 30,
+                    "error" => "A name should be between 2 and 60 characters",
+                    "button" => 'Add'
                 ],
 
                 "synopsis" => [
@@ -370,11 +444,22 @@ class Event extends Database
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
-                    'rows' => 10,
-                    'cols' => 30,
+                    'rows' => 8,
                     "value" => $data['synopsis'],
                     "error" => "Event synopsis should be between 10 and 300 characters"
-                ]
+                ],
+
+                "tags" => [
+                    'id' => 'tags',
+                    "type" => 'field',
+                    "placeholder" => "",
+                    "label" => "Tags",
+                    "required" => false,
+                    "minLength" => 3,
+                    "maxLength" => 10,
+                    "error" => "A tag should be between 3 and 10 characters",
+                    "button" => 'Add'
+                ],
             ]
         ];
     }

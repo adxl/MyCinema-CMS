@@ -43,10 +43,10 @@ class FormBuilder
 
 				$html .= "</select>";
 			} elseif ($configInput['type'] == 'field') {
-				$html .= "<div>
+				$html .= "<div class='flex'>
 							<input 
 								type='text'
-								id='" . ($configInput["id"] ?? $name) . "'
+								id='" . $configInput["id"] . "'
 								name='" . $name . "'
 								placeholder='" . ($configInput["placeholder"] ?? "") . "'
 								value='" . ($configInput["value"] ?? "") . "'
@@ -58,11 +58,10 @@ class FormBuilder
 						 	>" . "
 							<button 
 								type='button'
-								id='" . ($configInput["id"] ?? $name) . "-btn'
+								id='" . $configInput["id"] . "-btn'
 								name='" . $name . "'
-								class='" . ($configInput["class"] ?? "") . "'
-								>" . $configInput["button"] . "
-							</button>
+								class='" . ($configInput["class"] ?? "") . "'>" . $configInput["button"] . "</button>
+							<div id='" . $configInput["id"] . "-values' class='flex'></div>
 						</div>";
 			} elseif ($configInput['type'] == 'session') {
 				$html .= "<div class='" . $configInput['class']  . " session-inputs' >";
