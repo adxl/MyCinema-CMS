@@ -7,15 +7,13 @@ $(() => {
 		$('#user-profile-menu').toggleClass('hidden');
 		event.stopPropagation();
 
-		if (!$('#user-profile-menu').hasClass('hidden')){
+		if (!$('#user-profile-menu').hasClass('hidden')) {
 			$body.on('click', () => {
 				$('#user-profile-menu').toggleClass('hidden');
 				$body.off('click');
-			})
-		}
-		else {
+			});
+		} else {
 			$body.off('click');
 		}
-
 	});
 });

@@ -19,19 +19,25 @@
         <img class="w-100 h-100 cover" src="https://jeromeobiols.com/wordpress/wp-content/uploads/30122016_JOB5054F_Lever_Brenva-1920.jpg">
     </div>
     <div class="w-100 bg-white h-50 flex-column flex-between">
-        <div class="flex-column b">
-            <label>Email</label>
+        <div class="flex-column b p-l">
+            <label class="login">Email</label>
             <input class="login" type="text">
         </div>
-        <div class="flex-column b mb-auto">
-            <label>Password</label>
+        <div class="flex-column b mb-auto p-l">
+            <p>
+                <label class="login">Password</label>
+                <span class="mdp">Mot de passe oublié ?</span>
+            </p>
             <input class="login" type="text">
         </div>
-        <div class="b">
-            <label>Other</label>
+        <div class="b flex-column p-l">
+            <p>
+                <button class="button">MyButton</button>
+                <button class="button">MyButton</button>
+
+            </p>
         </div>
     </div>
-
 </section>
 
 
