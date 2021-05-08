@@ -1,61 +1,79 @@
+# USER ROUTES :
+
 /:
-  controller: HomeController
-  action: showDashboard
+  controller: MainController
+  action: showHomePage
 
 /events:
-  controller: EventsController
-  action: default
-
-/events/new:
-  controller: EventsController
-  action: showCreateEvent
-
-/events/create:
-  controller: EventsController
-  action: CreateEvent
-
-/events/edit:
-  controller: EventsController
-  action: showEditEvent
-
-/events/update:
-  controller: EventsController
-  action: UpdateEvent
-  security: Login
-  role: admin
-
-/users:
-  controller: UsersController
-  action: showUsers
-
-/comments:
-  controller: CommentsController
-  action: showComments
+  controller: MainController
+  action: page404
 
 /rooms:
-  controller: RoomsController
-  action: default
+  controller: MainController
+  action: page404
 
-/rooms/new:
-  controller: RoomsController
-  action: showCreateRoom
-
-/rooms/create:
-  controller: RoomsController
-  action: CreateRoom
-
-/rooms/edit:
-  controller: RoomsController
-  action: showEditRoom
-
-/rooms/update:
-  controller: RoomsController
-  action: UpdateRoom
-
-/settings:
-  controller: SettingsController
-  action: showSettings
+/profile:
+  controller: MainController
+  action: page404
 
 /404:
   controller: MainController
   action: page404
+
+# ADMIN ROUTES :
+
+/admin:
+  controller: HomeController
+  action: showDashboard
+
+/admin/events:
+  controller: EventsController
+  action: default
+
+/admin/events/new:
+  controller: EventsController
+  action: showCreateEvent
+
+/admin/events/create:
+  controller: EventsController
+  action: CreateEvent
+
+/admin/events/edit:
+  controller: EventsController
+  action: showEditEvent
+
+/admin/events/update:
+  controller: EventsController
+  action: UpdateEvent
+
+/admin/users:
+  controller: UsersController
+  action: showUsers
+
+/admin/comments:
+  controller: CommentsController
+  action: showComments
+
+/admin/rooms:
+  controller: RoomsController
+  action: default
+
+/admin/rooms/new:
+  controller: RoomsController
+  action: showCreateRoom
+
+/admin/rooms/create:
+  controller: RoomsController
+  action: CreateRoom
+
+/admin/rooms/edit:
+  controller: RoomsController
+  action: showEditRoom
+
+/admin/rooms/update:
+  controller: RoomsController
+  action: UpdateRoom
+
+/admin/settings:
+  controller: SettingsController
+  action: showSettings

@@ -11,7 +11,7 @@ class UsersController
 {
     public function showUsersAction()
     {
-        $view = new View("users", 'back');
+        $view = new View("b_users", 'back');
         $view->assign("title", 'Users management');
 
         $user = new UserModel();
@@ -32,28 +32,28 @@ class UsersController
     //Method : Action
     public function registerAction()
     {
-        $view = new View("register");
+        $view = new View("_register");
 
         // $form = $user->formBuilderRegister();
 
-                // if (!empty($_POST)) {
+        // if (!empty($_POST)) {
 
-                //     $errors = FormValidator::check($form, $_POST);
+        //     $errors = FormValidator::check($form, $_POST);
 
-                //     if (empty($errors)) {
-                //         $user->setFirstname($_POST["firstname"]);
-                //         $user->setLastname($_POST["lastname"]);
-                //         $user->setEmail($_POST["email"]);
-                //         $user->setPwd($_POST["pwd"]);
-                //         $user->setCountry($_POST["country"]);
+        //     if (empty($errors)) {
+        //         $user->setFirstname($_POST["firstname"]);
+        //         $user->setLastname($_POST["lastname"]);
+        //         $user->setEmail($_POST["email"]);
+        //         $user->setPwd($_POST["pwd"]);
+        //         $user->setCountry($_POST["country"]);
 
-                //         $user->save();
-                //     } else {
-                //         $view->assign("errors", $errors);
-                //     }
-                // }
+        //         $user->save();
+        //     } else {
+        //         $view->assign("errors", $errors);
+        //     }
+        // }
 
-                // $view->assign("form", $form);
-                // $view->assign("formLogin", $user->formBuilderLogin());
+        // $view->assign("form", $form);
+        // $view->assign("formLogin", $user->formBuilderLogin());
     }
 }

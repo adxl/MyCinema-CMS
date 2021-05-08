@@ -36,32 +36,32 @@
 	<main class="flex flex-auto">
 		<section id="sidebar" class="bg-dark hidden-s">
 			<ul>
-				<li><a href="/">
+				<li><a href="/admin">
 						<i class="fas fa-home"></i>
 						<span>Dashboard</span>
 					</a>
 				</li>
-				<li><a href="/events">
+				<li><a href="/admin/events">
 						<i class="fas fa-calendar-alt"></i>
 						<span>Events</span>
 					</a>
 				</li>
-				<li><a href="/comments">
+				<li><a href="/admin/comments">
 						<i class="fas fa-comments"></i>
 						<span>Comments</span>
 					</a>
 				</li>
-				<li><a href="/rooms">
+				<li><a href="/admin/rooms">
 						<i class="fas fa-building"></i>
 						<span>Rooms</span>
 					</a>
 				</li>
-				<li><a href="/users">
+				<li><a href="/admin/users">
 						<i class="fas fa-users"></i>
 						<span>Users</span>
 					</a>
 				</li>
-				<li><a href="/settings">
+				<li><a href="/admin/settings">
 						<i class="fas fa-cog"></i>
 						<span>Settings</span>
 					</a>

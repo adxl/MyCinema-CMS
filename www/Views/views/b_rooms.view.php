@@ -5,7 +5,7 @@
 </div>
 
 <div class="flex flex-right">
-    <a href="/rooms/new">
+    <a href="/admin/rooms/new">
         <button class="button button--success mb-l">+ Create Room</button>
     </a>
 </div>
@@ -13,7 +13,7 @@
 <section>
     <div class="row flex-column-m">
         <?php foreach ($rooms as $room) : ?>
-            <a class="card row no-wrap col-2 mb-m p-s" href="/rooms/edit?id=<?= $room['id'] ?>">
+            <a class="card row no-wrap col-2 mb-m p-s" href="/admin/rooms/edit?id=<?= $room['id'] ?>">
                 <div class="col-4 m-0">
                     <img class="w-100 h-100 poster<?= !$room['isAvailable'] ? ' faded' : '' ?>" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
                 </div>

@@ -8,7 +8,7 @@ class HomeController
 {
     public function showDashboardAction()
     {
-        $view = new View("dashboard", 'back');
+        $view = new View("b_dashboard", 'back');
         $view->assign("title", 'Dashboard');
     }
 }

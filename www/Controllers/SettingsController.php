@@ -8,7 +8,7 @@ class SettingsController
 {
     public function showSettingsAction()
     {
-        $view = new View("settings", 'back');
+        $view = new View("b_settings", 'back');
         $view->assign("title", 'Settings');
     }
 }

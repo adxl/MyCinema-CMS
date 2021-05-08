@@ -284,12 +284,12 @@ class Event extends Database
         return  [
             "config" => [
                 "method" => "POST",
-                "action" => "/events/create",
+                "action" => "/admin/events/create",
                 "class" => "flex-column",
                 "id" => "form_create_event",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
-                "cancel_action" => "/events"
+                "cancel_action" => "/admin/events"
             ],
             "inputs" => [
 
@@ -392,12 +392,12 @@ class Event extends Database
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/events/update",
+                "action" => "/admin/events/update",
                 "class" => "",
                 "id" => "form_update_event",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
-                "cancel_action" => "/events"
+                "cancel_action" => "/admin/events"
             ],
 
             "inputs" => [
