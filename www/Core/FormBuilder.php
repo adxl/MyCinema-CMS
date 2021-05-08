@@ -18,15 +18,15 @@ class FormBuilder
 				>";
 
 		foreach ($config["inputs"] as $name => $configInput) {
-			$html .= "<div class='flex'>
-						<label for='" . ($configInput["id"] ?? $name) . "'>" . ($configInput["label"] ?? "") . " </label>";
+			$html .= "<div class='row'>
+						<label for='" . ($configInput["id"] ?? $name) . "' class='" . ($configInput["class"] ?? '') . "'>
+							<span> " . ($configInput["label"] ?? "") . "</span>";
 
 			if ($configInput['type'] == 'textarea') {
 				$html .= "<textarea  
 							id='" . ($configInput["id"] ?? $name) . "'
 							name='" . $name . "'
 							placeholder='" . ($configInput["placeholder"] ?? "") . "'
-							class='" . ($configInput["class"] ?? "") . "'
 							rows='" . ($configInput["rows"] ?? "") . "'
 							cols='" . ($configInput["cols"] ?? "") . "'
 							" . (!empty($configInput["required"]) ? "required" : "") . "
@@ -42,11 +42,12 @@ class FormBuilder
 
 				$html .= "</select>";
 			} elseif ($configInput['type'] == 'session') {
-				$html .= "<div class='" . $configInput['class']  . " session-inputs' >";
+				$html .= "<div class='row session-inputs' >";
 
 				foreach ($configInput['items'] as $name => $input) {
 
-					$html .= "<label for='" . ($input["id"] ?? $name) . "'>" . ($input["label"] ?? "") . " </label>";
+					$html .= "<label for='" . ($input["id"] ?? $name) . "' class='" . ($input["class"] ?? '') . "'>
+								<span> " . ($input["label"] ?? "") . "</span>";
 
 					if ($input["type"] == 'select') {
 						$html .= "<select name='" . $name . "' id='" . ($input["id"] ?? $name) . "'>";
@@ -54,12 +55,12 @@ class FormBuilder
 						foreach ($input['options'] as $option)
 							$html .= "<option value='" . $option['id'] . "'>" . $option['label'] . "</option>";
 
-						$html .= "</select>";
+						$html .= "</select></label>";
 					} elseif ($input["type"] == 'button') {
-						$html .= "<button 
+						$html .= "</label><button 
 									type='button' 
 									id='" . ($input['id'] ?? '') . "' 
-									class='" . $input['class'] . "'> " . $input['value'] . "
+									class='" . $input['class'] . " button remove-session-btn'> " . $input['value'] . "
 								</button>";
 					} else {
 						$html .= "<input 
@@ -68,12 +69,11 @@ class FormBuilder
 									name='" . $name . "'
 									placeholder='" . ($input["placeholder"] ?? "") . "'
 									value='" . ($input["value"] ?? "") . "'
-									class='" . ($input["class"] ?? "") . "'
 									min='" . ($input["min"] ?? null) . "'
 									max='" . ($input["max"] ?? null) . "'
 									" . (!empty($input["required"]) ? "required" : "") . "
 									" . (!empty($input["checked"]) ? "checked" : "") . "
-						>";
+						></label>";
 					}
 				}
 
@@ -81,7 +81,8 @@ class FormBuilder
 			} elseif ($configInput['type'] == 'button') {
 				$html .= "<button 
 							type='button' 
-							id='" . $configInput['id'] . "'> " . $configInput['value'] . "
+							id='" . $configInput['id'] . "'
+							class='" . $configInput['class'] . "'> " . $configInput['value'] . "
 						</button>";
 			} else {
 				$html .= "<input 
@@ -90,19 +91,18 @@ class FormBuilder
 							name='" . $name . "'
 							placeholder='" . ($configInput["placeholder"] ?? "") . "'
 							value='" . ($configInput["value"] ?? "") . "'
-							class='" . ($configInput["class"] ?? "") . "'
 							min='" . ($configInput["min"] ?? null) . "'
 							max='" . ($configInput["max"] ?? null) . "'
 							" . (!empty($configInput["required"]) ? "required" : "") . "
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
 							>";
 			}
-			$html .= "</div>";
+			$html .= "</label></div>";
 		}
 
 		$html .= "<div class='flex flex-center'>
-					<input type='submit' value=\"" . ($config["config"]["submit"] ?? "Valider") . "\">
-					<a href=" . ($config["config"]["cancel_action"] ?? "/") . "> " . ($config["config"]["cancel"] ?? "Cancel") . " </a>
+					<input type='submit' class='button button--success' value=\"" . ($config["config"]["submit"] ?? "Valider") . "\">
+					<a class='button button--danger' href=" . ($config["config"]["cancel_action"] ?? "/") . "> " . ($config["config"]["cancel"] ?? "Cancel") . " </a>
 				</div>";
 
 		$html .= "</form>";

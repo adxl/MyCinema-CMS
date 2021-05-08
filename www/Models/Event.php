@@ -295,6 +295,7 @@ class Event extends Database
 
                 "name" => [
                     "type" => "text",
+                    'class' => 'field',
                     "placeholder" => "",
                     "label" => "Movie name",
                     "required" => true,
@@ -305,12 +306,13 @@ class Event extends Database
 
                 "session" => [
                     "type" => "session",
-                    "class" => "flex",
+                    "class" => "row",
                     "items" => [
                         "date" => [
                             "type" => "date",
                             "placeholder" => "",
                             "label" => "Date",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['date'] ?? ""
                         ],
@@ -318,6 +320,7 @@ class Event extends Database
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "Start time",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['start'] ?? ""
                         ],
@@ -325,6 +328,7 @@ class Event extends Database
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "End time",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['end'] ?? ""
                         ],
@@ -332,6 +336,7 @@ class Event extends Database
                             "type" => "select",
                             "placeholder" => "",
                             "label" => "Room",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['room'] ?? "",
                             "options" => RoomModel::getAvailableRooms()
@@ -348,12 +353,14 @@ class Event extends Database
                     "type" => "button",
                     "value" => "Add session",
                     "id" => "generate-session-btn",
+                    'class' => 'link'
                 ],
 
                 "directed-by" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
+                    'class' => 'field',
                     "required" => false,
                     // "button" => 'Add'
                 ],
@@ -362,6 +369,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
+                    'class' => 'field',
                     "required" => false,
                     // "button" => 'Add'
                 ],
@@ -369,6 +377,7 @@ class Event extends Database
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
+                    'class' => 'field',
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
@@ -380,6 +389,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
+                    'class' => 'field',
                     "required" => false,
                     // "button" => 'Add'
                 ],
@@ -404,6 +414,7 @@ class Event extends Database
 
                 "name" => [
                     "type" => "text",
+                    'class' => 'field',
                     "placeholder" => "",
                     "label" => "Movie name",
                     "required" => true,
@@ -415,12 +426,13 @@ class Event extends Database
 
                 "session" => [
                     "type" => "session",
-                    "class" => "flex",
+                    "class" => "row",
                     "items" => [
                         "date" => [
                             "type" => "date",
                             "placeholder" => "",
                             "label" => "Date",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['date'] ?? ""
                         ],
@@ -428,6 +440,7 @@ class Event extends Database
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "Start time",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['start'] ?? ""
                         ],
@@ -435,6 +448,7 @@ class Event extends Database
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "End time",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['end'] ?? ""
                         ],
@@ -442,6 +456,7 @@ class Event extends Database
                             "type" => "select",
                             "placeholder" => "",
                             "label" => "Room",
+                            'class' => 'field',
                             "required" => true,
                             "value" => $data['room'] ?? "",
                             "options" => RoomModel::getAvailableRooms()
@@ -458,12 +473,14 @@ class Event extends Database
                     "type" => "button",
                     "value" => "Add session",
                     "id" => "generate-session-btn",
+                    'class' => 'link'
                 ],
 
                 "directed-by" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
+                    'class' => 'field',
                     "required" => false,
                     "value" => $data['directed-by'] ?? "",
                     // "button" => 'Add'
@@ -473,6 +490,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
+                    'class' => 'field',
                     "required" => false,
                     "value" => $data['starring'] ?? "",
                     // "button" => 'Add'
@@ -481,6 +499,7 @@ class Event extends Database
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
+                    'class' => 'field',
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
@@ -493,6 +512,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
+                    'class' => 'field',
                     "required" => false,
                     "value" => $data['tags'] ?? "",
                     // "button" => 'Add'
