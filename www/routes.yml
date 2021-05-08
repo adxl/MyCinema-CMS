@@ -4,6 +4,14 @@
   controller: MainController
   action: showHomePage
 
+/login:
+  controller: AuthenticationController
+  action: login
+
+/register:
+  controller: AuthenticationController
+  action: register
+
 /events:
   controller: MainController
   action: page404
@@ -77,7 +85,3 @@
 /admin/settings:
   controller: SettingsController
   action: showSettings
-
-/login:
-  controller: AuthentificationController
-  action: login

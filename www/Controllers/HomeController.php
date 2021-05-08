@@ -11,6 +11,4 @@ class HomeController
         $view = new View("b_dashboard", 'back');
         $view->assign("title", 'Dashboard');
     }
-
-
 }
