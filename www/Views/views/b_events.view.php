@@ -5,7 +5,7 @@
 </div>
 
 <div class="flex flex-right">
-    <a href="/events/new">
+    <a href="/admin/events/new">
         <button class="button button--success mb-l">+ Create Event</button>
     </a>
 </div>
@@ -14,7 +14,7 @@
     <div class="row col-9 flex-column-m">
         <?php foreach ($events as $event) : ?>
             <div class="card row no-wrap col-2 mb-m p-s">
-                <a class="col-4 m-0" href="/events/edit?id=<?= $event['id'] ?>">
+                <a class="col-4 m-0" href="/admin/events/edit?id=<?= $event['id'] ?>">
                     <img class="w-100 h-100 poster<?= $event['hasPassed'] ? ' faded' : '' ?>" src="https://fr.web.img6.acsta.net/pictures/19/09/03/12/02/4765874.jpg" alt=" " />
                 </a>
                 <div class="flex-column col-8">
@@ -22,7 +22,7 @@
                         <h1>
                             <?= $event['title']; ?>
                         </h1>
-                        <a href="/events?id=<?= $event['id']; ?>">
+                        <a href="/admin/events?id=<?= $event['id']; ?>">
                             <i class="fas fa-eye faded"></i>
                         </a>
                     </div>

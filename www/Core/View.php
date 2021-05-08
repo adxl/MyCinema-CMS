@@ -2,7 +2,6 @@
 
 namespace App\Core;
 
-
 class View
 {
 
@@ -11,7 +10,7 @@ class View
 	private $data = [];
 
 
-	public function __construct($view, $template = "back")
+	public function __construct($view, $template = null)
 	{
 		$this->setTemplate($template);
 		$this->setView($view);
@@ -19,14 +18,12 @@ class View
 
 	public function setTemplate($template)
 	{
-		if (file_exists("Views/templates/" . $template . ".tpl.php")) {
-			$this->template = "Views/templates/" . $template . ".tpl.php";
-		}
-		elseif($template == false){
-			$this->template = $template;
-		}
-		else {
-			die("Error - Not Found Error : template does not exist [View.php]");
+		if ($template) {
+			if (file_exists("Views/templates/" . $template . ".tpl.php")) {
+				$this->template = "Views/templates/" . $template . ".tpl.php";
+			} else {
+				die("Error - Not Found Error : template does not exist [View.php]");
+			}
 		}
 	}
 
@@ -39,7 +36,6 @@ class View
 		}
 	}
 
-	//$view->assign("pseudo", $pseudo);
 	public function assign($key, $value)
 	{
 		$this->data[$key] = $value;
@@ -50,8 +46,10 @@ class View
 	{
 		extract($this->data);
 
-		if ($this->template){
+		if ($this->template) {
 			include $this->template;
+		} else {
+			include $this->view;
 		}
 	}
 }

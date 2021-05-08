@@ -2,7 +2,6 @@
 <html lang="fr">
 
 <head>
-	<base href="Views/dist/">
 	<meta charset="UTF-8">
 	<meta name="description" content="description de la page de front">
 	<title>Template de front</title>

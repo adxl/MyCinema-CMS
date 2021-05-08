@@ -152,17 +152,43 @@ class Room extends Database
     }
 
 
+    public static function getAvailableRooms()
+    {
+        $roomModel = new Room();
+        $rooms = $roomModel->findAll([
+            'select' => '*',
+            'where' => [
+                [
+                    'column' => 'isAvailable',
+                    'operator' => '=',
+                    'value' => true
+                ],
+            ],
+        ]);
+
+        $availableRooms = [];
+
+        foreach ($rooms as $room) {
+            $availableRooms[] = [
+                'id' => $room['id'],
+                'label' => $room['label']
+            ];
+        }
+
+        return $availableRooms;
+    }
+
     public function formBuilderCreate()
     {
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/rooms/create",
+                "action" => "/admin/rooms/create",
                 "class" => "",
                 "id" => "form_create_room",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
-                "cancel_action" => "/rooms"
+                "cancel_action" => "/admin/rooms"
             ],
             "inputs" => [
 
@@ -192,12 +218,12 @@ class Room extends Database
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/rooms/update",
+                "action" => "/admin/rooms/update",
                 "class" => "",
                 "id" => "form_update_room",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
-                "cancel_action" => "/rooms"
+                "cancel_action" => "/admin/rooms"
             ],
             "inputs" => [
 

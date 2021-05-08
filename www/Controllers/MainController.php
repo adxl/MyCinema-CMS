@@ -9,26 +9,15 @@ class MainController
 {
 
     //Method : Action
-    public function defaultAction()
+    public function showHomePageAction()
     {
-
-        $pseudo = "Prof"; // Depuis la bdd
-
-
-        // $sql = new Database();
-
-        // echo DBHOST;
-
-        //Affiche la vue home intégrée dans le template du front
-        $view = new View("home");
-        $view->assign("pseudo", $pseudo);
+        $view = new View("f_home", 'front');
+        $view->assign("pseudo", 'USER');
     }
 
     //Method : Action
     public function page404Action()
     {
-
-        //Affiche la vue 404 intégrée dans le template du front
-        $view = new View("404");
+        $view = new View("f_404", 'front');
     }
 }

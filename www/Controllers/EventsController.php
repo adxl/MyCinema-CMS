@@ -22,7 +22,7 @@ class EventsController
 
     public function showEventsAction()
     {
-        $view = new View("events");
+        $view = new View("b_events", 'back');
         $view->assign("title", 'Events management');
 
         $eventModel = new EventModel();
@@ -48,7 +48,7 @@ class EventsController
             $event = $eventModel->findById($id);
 
             if ($event) {
-                $view = new View('event', 'front');
+                $view = new View('f_event', 'front');
 
                 $view->assign("title", $event['title']);
                 $view->assign("event", $event);
@@ -56,23 +56,12 @@ class EventsController
                 return;
             }
         }
-        $view = new View('404', 'front');
+        $view = new View('f_404', 'front');
     }
 
     public function showCreateEventAction()
     {
-        $view = new View("events_create");
-        $view->assign("title", 'Events management > Create');
-
-        $eventModel = new EventModel();
-        $form = $eventModel->formBuilderCreate();
-
-        $view->assign('form', $form);
-    }
-
-    public function addFormAction()
-    {
-        $view = new View("events_create", false);
+        $view = new View("b_events_create", "back");
         $view->assign("title", 'Events management > Create');
 
         $eventModel = new EventModel();
@@ -89,8 +78,12 @@ class EventsController
             $eventModel = new EventModel();
             $event = $eventModel->findById($id);
 
+            $event['directed-by'] = Helpers::unsplitFields($eventModel->getDirectors($id));
+            $event['starring'] = Helpers::unsplitFields($eventModel->getActors($id));
+            $event['tags'] = Helpers::unsplitFields($eventModel->getTags($id));
+
             if ($event) {
-                $view = new View("events_edit");
+                $view = new View("b_events_edit", "back");
                 $view->assign("title", 'Event Management > Edit Event');
 
                 $form = $eventModel->formBuilderUpdate($event);
@@ -102,6 +95,20 @@ class EventsController
                 return;
             }
         }
-        $view = new View('404', 'front');
+        $view = new View('b_404', 'front');
+    }
+
+    public function createEventAction()
+    {
+        $data = $_POST;
+
+        $data['directed-by'] = Helpers::splitFields($data['directed-by']);
+        $data['starring'] = Helpers::splitFields($data['starring']);
+        $data['tags'] = Helpers::splitFields($data['tags']);
+
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+        die();
     }
 }

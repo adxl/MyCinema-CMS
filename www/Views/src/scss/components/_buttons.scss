@@ -2,7 +2,8 @@
     padding: 0 1em;
     margin: 5px 10px;
     min-height: 30px;
-    display: inline-block;
+    display: flex;
+    align-items: center;
     color: $text-gray;
     background-color: $gray;
     text-decoration: none;
@@ -38,6 +39,9 @@
 }
 
 .link {
+    background-color: transparent;
+    outline: none;
+    border: none;
     color: $text-gray;
     text-decoration: underline;
     width: fit-content;

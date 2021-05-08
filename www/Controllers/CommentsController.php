@@ -6,10 +6,9 @@ use App\Core\View;
 
 class CommentsController
 {
-
     public function showCommentsAction()
     {
-        $view = new View("comments");
+        $view = new View("b_comments", "back");
         $view->assign("title", 'Comments management');
     }
 }
