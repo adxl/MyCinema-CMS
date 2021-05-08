@@ -29,50 +29,50 @@ $(() => {
 	});
 
 	// bouton qui ajoute un réalisateur (directed-by)
-	$('#directed-by-btn').on('click', () => {
-		const directedByField = $('#directed-by');
-		const value = directedByField.val();
+	// $('#directed-by-btn').on('click', () => {
+	// 	const directedByField = $('#directed-by');
+	// 	const value = directedByField.val();
 
-		if (value) {
-			const tag = $("<p class=''></p>").text(value);
-			$(tag).on('click', ({ target }) => {
-				$(target).remove();
-			});
+	// 	if (value) {
+	// 		const tag = $("<p class=''></p>").text(value);
+	// 		$(tag).on('click', ({ target }) => {
+	// 			$(target).remove();
+	// 		});
 
-			$('#directed-by-values').append(tag);
-			directedByField.val('');
-		}
-	});
+	// 		$('#directed-by-values').append(tag);
+	// 		directedByField.val('');
+	// 	}
+	// });
 
 	// bouton qui ajoute un acteur (starring)
-	$('#starring-btn').on('click', () => {
-		const starringField = $('#starring');
-		const value = starringField.val();
+	// $('#starring-btn').on('click', () => {
+	// 	const starringField = $('#starring');
+	// 	const value = starringField.val();
 
-		if (value) {
-			const tag = $("<p class=''></p>").text(value);
-			$(tag).on('click', ({ target }) => {
-				$(target).remove();
-			});
+	// 	if (value) {
+	// 		const tag = $("<p class=''></p>").text(value);
+	// 		$(tag).on('click', ({ target }) => {
+	// 			$(target).remove();
+	// 		});
 
-			$('#starring-values').append(tag);
-			starringField.val('');
-		}
-	});
+	// 		$('#starring-values').append(tag);
+	// 		starringField.val('');
+	// 	}
+	// });
 
 	// bouton qui ajoute un tag (tags)
-	$('#tags-btn').on('click', () => {
-		const tagsField = $('#tags');
-		const value = tagsField.val();
+	// $('#tags-btn').on('click', () => {
+	// 	const tagsField = $('#tags');
+	// 	const value = tagsField.val();
 
-		if (value) {
-			const tag = $("<p class=''></p>").text(value);
-			$(tag).on('click', ({ target }) => {
-				$(target).remove();
-			});
+	// 	if (value) {
+	// 		const tag = $("<p class=''></p>").text(value);
+	// 		$(tag).on('click', ({ target }) => {
+	// 			$(target).remove();
+	// 		});
 
-			$('#tags-values').append(tag);
-			tagsField.val('');
-		}
-	});
+	// 		$('#tags-values').append(tag);
+	// 		tagsField.val('');
+	// 	}
+	// });
 });

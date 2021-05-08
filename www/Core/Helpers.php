@@ -19,4 +19,17 @@ class Helpers
     {
         return (new \DateTime())->format('Y-m-d H:i:s');
     }
+
+    public static function splitFields($fieldsString)
+    {
+        $fields = explode(';', $fieldsString);
+        $result = array_map('trim', $fields);
+        return  array_filter($result);
+    }
+
+    public static function unsplitFields($fieldsArray)
+    {
+        $fields = implode('; ', $fieldsArray);
+        return  $fields;
+    }
 }

@@ -6,9 +6,13 @@ use App\Core\Database;
 use App\Core\Helpers;
 use App\Models\Room as RoomModel;
 use App\Models\Tag as TagModel;
+use App\Models\Actor as ActorModel;
+use App\Models\Director as DirectorModel;
 use App\Models\EventType as EventTypeModel;
 use App\Models\Event_room as EventRoomModel;
 use App\Models\Event_tag as EventTagModel;
+use App\Models\Event_actor as EventActorModel;
+use App\Models\Event_director as EventDirectorModel;
 
 class Event extends Database
 {
@@ -217,6 +221,64 @@ class Event extends Database
         }
     }
 
+    public function getDirectors($id)
+    {
+        $event = $this->findById($id);
+        if ($event) {
+            $eventDirectorModel = new EventDirectorModel();
+            $eventDirectors = $eventDirectorModel->findAll([
+                'select' => '*',
+                'where' => [
+                    [
+                        'column' => 'id_event',
+                        'value' => $id,
+                        'operator' => '='
+                    ],
+                ],
+            ]);
+
+            $directors = [];
+            $directorModel = new DirectorModel();
+            foreach ($eventDirectors as $eventDirector) {
+                $director = $directorModel->findById($eventDirector['id_director']);
+                if ($director) {
+                    $directors[] = $director['name'];
+                }
+            }
+
+            return $directors;
+        }
+    }
+
+    public function getActors($id)
+    {
+        $event = $this->findById($id);
+        if ($event) {
+            $eventActorModel = new EventActorModel();
+            $eventActors = $eventActorModel->findAll([
+                'select' => '*',
+                'where' => [
+                    [
+                        'column' => 'id_event',
+                        'value' => $id,
+                        'operator' => '='
+                    ],
+                ],
+            ]);
+
+            $actors = [];
+            $actorModel = new ActorModel();
+            foreach ($eventActors as $eventActor) {
+                $actor = $actorModel->findById($eventActor['id_actor']);
+                if ($actor) {
+                    $actors[] = $actor['name'];
+                }
+            }
+
+            return $actors;
+        }
+    }
+
     public function formBuilderCreate()
     {
         return  [
@@ -288,28 +350,20 @@ class Event extends Database
                     "id" => "generate-session-btn",
                 ],
 
-                "directedBy" => [
-                    'id' => 'directed-by',
-                    "type" => 'field',
+                "directed-by" => [
+                    "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
                     "required" => false,
-                    "minLength" => 2,
-                    "maxLength" => 30,
-                    "error" => "A name should be between 2 and 60 characters",
-                    "button" => 'Add'
+                    // "button" => 'Add'
                 ],
 
                 "starring" => [
-                    'id' => 'starring',
-                    "type" => 'field',
+                    "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
                     "required" => false,
-                    "minLength" => 2,
-                    "maxLength" => 30,
-                    "error" => "A name should be between 2 and 60 characters",
-                    "button" => 'Add'
+                    // "button" => 'Add'
                 ],
 
                 "synopsis" => [
@@ -323,15 +377,11 @@ class Event extends Database
                 ],
 
                 "tags" => [
-                    'id' => 'tags',
-                    "type" => 'field',
+                    "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
                     "required" => false,
-                    "minLength" => 3,
-                    "maxLength" => 10,
-                    "error" => "A tag should be between 3 and 10 characters",
-                    "button" => 'Add'
+                    // "button" => 'Add'
                 ],
             ]
         ];
@@ -394,9 +444,7 @@ class Event extends Database
                             "label" => "Room",
                             "required" => true,
                             "value" => $data['room'] ?? "",
-                            "options" => [
-                                'A1', 'E2', 'C1', 'B1'
-                            ]
+                            "options" => RoomModel::getAvailableRooms()
                         ],
                         "remove-session" => [
                             "type" => "button",
@@ -412,28 +460,22 @@ class Event extends Database
                     "id" => "generate-session-btn",
                 ],
 
-                "directedBy" => [
-                    'id' => 'directed-by',
-                    "type" => 'field',
+                "directed-by" => [
+                    "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
                     "required" => false,
-                    "minLength" => 2,
-                    "maxLength" => 30,
-                    "error" => "A name should be between 2 and 60 characters",
-                    "button" => 'Add'
+                    "value" => $data['directed-by'] ?? "",
+                    // "button" => 'Add'
                 ],
 
                 "starring" => [
-                    'id' => 'starring',
-                    "type" => 'field',
+                    "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
                     "required" => false,
-                    "minLength" => 2,
-                    "maxLength" => 30,
-                    "error" => "A name should be between 2 and 60 characters",
-                    "button" => 'Add'
+                    "value" => $data['starring'] ?? "",
+                    // "button" => 'Add'
                 ],
 
                 "synopsis" => [
@@ -448,15 +490,12 @@ class Event extends Database
                 ],
 
                 "tags" => [
-                    'id' => 'tags',
-                    "type" => 'field',
+                    "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
                     "required" => false,
-                    "minLength" => 3,
-                    "maxLength" => 10,
-                    "error" => "A tag should be between 3 and 10 characters",
-                    "button" => 'Add'
+                    "value" => $data['tags'] ?? "",
+                    // "button" => 'Add'
                 ],
             ]
         ];

@@ -26,13 +26,12 @@ class FormBuilder
 							id='" . ($configInput["id"] ?? $name) . "'
 							name='" . $name . "'
 							placeholder='" . ($configInput["placeholder"] ?? "") . "'
-							value='" . ($configInput["value"] ?? "") . "'
 							class='" . ($configInput["class"] ?? "") . "'
 							rows='" . ($configInput["rows"] ?? "") . "'
 							cols='" . ($configInput["cols"] ?? "") . "'
 							" . (!empty($configInput["required"]) ? "required" : "") . "
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
-						></textarea>";
+						>" . ($configInput["value"] ?? "") . "</textarea>";
 			} elseif ($configInput['type'] == 'select') {
 				$html .= "<select 
 							name='" . $name . "' 
@@ -42,27 +41,6 @@ class FormBuilder
 					$html .= "<option value='" . $option['id'] . "'>" . $option['label'] . "</option>";
 
 				$html .= "</select>";
-			} elseif ($configInput['type'] == 'field') {
-				$html .= "<div class='flex'>
-							<input 
-								type='text'
-								id='" . $configInput["id"] . "'
-								name='" . $name . "'
-								placeholder='" . ($configInput["placeholder"] ?? "") . "'
-								value='" . ($configInput["value"] ?? "") . "'
-								class='" . ($configInput["class"] ?? "") . "'
-								min='" . ($configInput["min"] ?? null) . "'
-								max='" . ($configInput["max"] ?? null) . "'
-								" . (!empty($configInput["required"]) ? "required" : "") . "
-								" . (!empty($configInput["checked"]) ? "checked" : "") . "
-						 	>" . "
-							<button 
-								type='button'
-								id='" . $configInput["id"] . "-btn'
-								name='" . $name . "'
-								class='" . ($configInput["class"] ?? "") . "'>" . $configInput["button"] . "</button>
-							<div id='" . $configInput["id"] . "-values' class='flex'></div>
-						</div>";
 			} elseif ($configInput['type'] == 'session') {
 				$html .= "<div class='" . $configInput['class']  . " session-inputs' >";
 

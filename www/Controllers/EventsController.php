@@ -78,6 +78,10 @@ class EventsController
             $eventModel = new EventModel();
             $event = $eventModel->findById($id);
 
+            $event['directed-by'] = Helpers::unsplitFields($eventModel->getDirectors($id));
+            $event['starring'] = Helpers::unsplitFields($eventModel->getActors($id));
+            $event['tags'] = Helpers::unsplitFields($eventModel->getTags($id));
+
             if ($event) {
                 $view = new View("events_edit", "back");
                 $view->assign("title", 'Event Management > Edit Event');
@@ -97,6 +101,10 @@ class EventsController
     public function createEventAction()
     {
         $data = $_POST;
+
+        $data['directed-by'] = Helpers::splitFields($data['directed-by']);
+        $data['starring'] = Helpers::splitFields($data['starring']);
+        $data['tags'] = Helpers::splitFields($data['tags']);
 
         echo "<pre>";
         print_r($data);
