@@ -13,11 +13,13 @@ class User extends Database
 	protected $firstname;
 	protected $lastname;
 	protected $email;
-	protected $pwd;
-	protected $address;
-	protected $city;
-	protected $zipcode;
-	protected $birthdate;
+	protected $password;
+
+	// not required
+	private $address;
+	private $city;
+	private $zipcode;
+	private $birthdate;
 
 	// default
 	private $idStatus;
@@ -78,11 +80,11 @@ class User extends Database
 
 	public function getPwd(): string
 	{
-		return $this->pwd;
+		return $this->password;
 	}
 	public function setPwd(string $pwd): void
 	{
-		$this->pwd = $pwd;
+		$this->password = $pwd;
 	}
 
 	// address
@@ -162,5 +164,108 @@ class User extends Database
 	public function setIsDeleted(bool $isDeleted): void
 	{
 		$this->isDeleted = $isDeleted;
+	}
+
+	public function formBuilderLogin()
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/login",
+				"id" => "form_login",
+				"submit" => "Login",
+				"submitClass" => 'w-50'
+			],
+			"inputs" => [
+
+				"email" => [
+					"type" => "email",
+					'class' => 'field w-100',
+					"placeholder" => "example@email.com",
+					"label" => "Email",
+					"required" => true,
+					"error" => "Not a valid email"
+				],
+
+				"password" => [
+					"type" => "password",
+					'class' => 'field w-100',
+					"placeholder" => "********",
+					"label" => "Password",
+					"required" => true,
+				],
+
+				"forgot-password" => [
+					"type" => "button",
+					"value" => "Forgot password ?",
+					'class' => 'link mb-l'
+				],
+			]
+		];
+	}
+
+	public function formBuilderRegister()
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/register",
+				"id" => "form_register",
+				"submit" => "Sign up",
+				"submitClass" => 'w-50'
+			],
+			"inputs" => [
+
+				"first-name" => [
+					"type" => "text",
+					'class' => 'field w-100',
+					"label" => "First name",
+					"required" => true,
+					"minLength" => 2,
+					"maxLength" => 50,
+					"error" => "First name should be between 2 and 50 characters"
+				],
+
+				"last-name" => [
+					"type" => "text",
+					'class' => 'field w-100',
+					"label" => "Last name",
+					"required" => true,
+					"minLength" => 2,
+					"maxLength" => 100,
+					"error" => "Last name should be between 2 and 100 characters"
+				],
+
+				"email" => [
+					"type" => "email",
+					'class' => 'field w-100 mt-l mb-l',
+					"placeholder" => "example@email.com",
+					"label" => "Email",
+					"required" => true,
+					"minLength" => 6,
+					"maxLength" => 320,
+					"error" => "Not a valid email"
+				],
+
+				"pwd" => [
+					"type" => "password",
+					'class' => 'field w-100',
+					"label" => "Password",
+					"required" => true,
+					"minLength" => 8,
+					"maxLength" => 255,
+					"error" => "Password should have at least 8 characters"
+				],
+
+				"pwd-confirm" => [
+					"type" => "password",
+					'class' => 'field w-100 mb-xl',
+					"label" => "Confirm password",
+					"minLength" => 8,
+					"maxLength" => 255,
+					"required" => true,
+				],
+			]
+		];
 	}
 }

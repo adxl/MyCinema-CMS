@@ -81,7 +81,7 @@ class FormBuilder
 			} elseif ($configInput['type'] == 'button') {
 				$html .= "<button 
 							type='button' 
-							id='" . $configInput['id'] . "'
+							id='" . ($configInput["id"] ?? $name) . "'
 							class='" . $configInput['class'] . "'> " . $configInput['value'] . "
 						</button>";
 			} else {
@@ -93,6 +93,7 @@ class FormBuilder
 							value='" . ($configInput["value"] ?? "") . "'
 							min='" . ($configInput["min"] ?? null) . "'
 							max='" . ($configInput["max"] ?? null) . "'
+							autocomplete='off'
 							" . (!empty($configInput["required"]) ? "required" : "") . "
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
 							>";
@@ -100,9 +101,15 @@ class FormBuilder
 			$html .= "</label></div>";
 		}
 
+		$postButton = "<input type='submit' class='button button--success " . ($config["config"]["submitClass"] ?? "") . "' 
+								value=\"" . ($config["config"]["submit"] ?? "Valider") . "\">";
+		$cancelButton = isset($config["config"]["cancel"]) ?
+			"<a class='button button--danger' 
+				href=" . $config["config"]["cancel_action"] . ">" . $config["config"]["cancel"] . " </a>"
+			: "";
+
 		$html .= "<div class='flex flex-center'>
-					<input type='submit' class='button button--success' value=\"" . ($config["config"]["submit"] ?? "Valider") . "\">
-					<a class='button button--danger' href=" . ($config["config"]["cancel_action"] ?? "/") . "> " . ($config["config"]["cancel"] ?? "Cancel") . " </a>
+				" . $postButton . $cancelButton . " 
 				</div>";
 
 		$html .= "</form>";

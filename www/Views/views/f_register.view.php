@@ -1,5 +1,5 @@
 <div class="w-100 bg-white flex-column p-l">
-    <h1 class="text-center mt-m mb-l">Login</h1>
+    <h1 class="text-center mt-m mb-l">Register</h1>
 
     <?php if (isset($errors)) : ?>
         <div>
@@ -14,6 +14,6 @@
     <?php App\Core\FormBuilder::render($form); ?>
     <hr class="w-50">
     <div class="flex flex-center">
-        <p>Don't have an account ? <a href="/register" class="link">Sign up</a></p>
+        <p>Already a member ? <a href="/login" class="link">Sign in</a></p>
     </div>
 </div>
