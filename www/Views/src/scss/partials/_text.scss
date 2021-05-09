@@ -1,29 +1,33 @@
-.text-white {
-    color: $white;
+// TEXT COLORS
+
+.text- {
+    &white {
+        color: $white;
+        margin: 0;
+    }
+    &gray {
+        color: $gray;
+    }
+    &lighter-gray {
+        color: $lighter-gray;
+    }
+    &light-gray {
+        color: $light-gray;
+    }
 }
 
-.text-gray {
-    color: $gray;
-}
+// TEXT MODIFIERS
 
-.text-bold {
-    font-weight: 600;
-}
-
-.text-underline {
-    text-decoration: underline;
-}
-
-.text-lighter-gray {
-    color: $lighter-gray;
-}
-
-.text-light-gray {
-    color: $light-gray;
-}
-
-.text-center {
-    text-align: center;
+.text- {
+    &bold {
+        font-weight: 600;
+    }
+    &underline {
+        text-decoration: underline;
+    }
+    &center {
+        text-align: center;
+    }
 }
 
 .text-alert-error {
