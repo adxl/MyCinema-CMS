@@ -31,7 +31,7 @@ class FormBuilder
 							cols='" . ($configInput["cols"] ?? "") . "'
 							" . (!empty($configInput["required"]) ? "required" : "") . "
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
-						>" . ($configInput["value"] ?? "") . "</textarea>";
+						>" . utf8_encode($configInput["value"] ?? "") . "</textarea>";
 			} elseif ($configInput['type'] == 'select') {
 				$html .= "<select 
 							name='" . $name . "' 
