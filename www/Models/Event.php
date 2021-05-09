@@ -295,8 +295,7 @@ class Event extends Database
 
                 "name" => [
                     "type" => "text",
-                    'class' => 'field',
-                    "placeholder" => "",
+                    'class' => 'field w-50',
                     "label" => "Movie name",
                     "required" => true,
                     "minLength" => 2,
@@ -308,7 +307,7 @@ class Event extends Database
                     "type" => "session",
                     "class" => "row",
                     "items" => [
-                        "date" => [
+                        "date[]" => [
                             "type" => "date",
                             "placeholder" => "",
                             "label" => "Date",
@@ -316,7 +315,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['date'] ?? ""
                         ],
-                        "start-time" => [
+                        "start-time[]" => [
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "Start time",
@@ -324,7 +323,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['start'] ?? ""
                         ],
-                        "end-time" => [
+                        "end-time[]" => [
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "End time",
@@ -332,7 +331,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['end'] ?? ""
                         ],
-                        "room" => [
+                        "room[]" => [
                             "type" => "select",
                             "placeholder" => "",
                             "label" => "Room",
@@ -360,24 +359,22 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "required" => false,
-                    // "button" => 'Add'
                 ],
 
                 "starring" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "required" => false,
-                    // "button" => 'Add'
                 ],
 
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
@@ -389,9 +386,8 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
-                    'class' => 'field',
+                    'class' => 'field w-50 mb-xl',
                     "required" => false,
-                    // "button" => 'Add'
                 ],
             ]
         ];

@@ -50,7 +50,9 @@ class FormBuilder
 								<span> " . ($input["label"] ?? "") . "</span>";
 
 					if ($input["type"] == 'select') {
-						$html .= "<select name='" . $name . "' id='" . ($input["id"] ?? $name) . "'>";
+						$html .= "<select name='" . $name . "' 
+										form='" . ($config["config"]["id"] ?? "") . "'
+										id='" . ($input["id"] ?? $name) . "'>";
 
 						foreach ($input['options'] as $option)
 							$html .= "<option value='" . $option['id'] . "'>" . $option['label'] . "</option>";
@@ -59,6 +61,7 @@ class FormBuilder
 					} elseif ($input["type"] == 'button') {
 						$html .= "</label><button 
 									type='button' 
+									form='" . ($config["config"]["id"] ?? "") . "'
 									id='" . ($input['id'] ?? '') . "' 
 									class='" . $input['class'] . " button remove-session-btn'> " . $input['value'] . "
 								</button>";
@@ -69,8 +72,7 @@ class FormBuilder
 									name='" . $name . "'
 									placeholder='" . ($input["placeholder"] ?? "") . "'
 									value='" . ($input["value"] ?? "") . "'
-									min='" . ($input["min"] ?? null) . "'
-									max='" . ($input["max"] ?? null) . "'
+									form='" . ($config["config"]["id"] ?? "") . "'
 									" . (!empty($input["required"]) ? "required" : "") . "
 									" . (!empty($input["checked"]) ? "checked" : "") . "
 						></label>";
