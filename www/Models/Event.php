@@ -410,7 +410,7 @@ class Event extends Database
 
                 "name" => [
                     "type" => "text",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "placeholder" => "",
                     "label" => "Movie name",
                     "required" => true,
@@ -476,7 +476,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "required" => false,
                     "value" => $data['directed-by'] ?? "",
                     // "button" => 'Add'
@@ -486,7 +486,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "required" => false,
                     "value" => $data['starring'] ?? "",
                     // "button" => 'Add'
@@ -495,7 +495,7 @@ class Event extends Database
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
@@ -508,7 +508,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
-                    'class' => 'field',
+                    'class' => 'field w-50',
                     "required" => false,
                     "value" => $data['tags'] ?? "",
                     // "button" => 'Add'

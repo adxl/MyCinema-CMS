@@ -36,7 +36,9 @@
         border-top-right-radius: 6px;
         border-bottom-right-radius: 6px;
         outline: none;
+        color: $text-black;
         resize: none;
+        font-family: $secondary-font;
     }
 
     &::after {

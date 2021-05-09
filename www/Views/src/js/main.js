@@ -28,6 +28,9 @@ $(() => {
 		newSessionInputs.insertBefore(target.parentElement);
 	});
 
+	// auto-resize textarea
+	// $('textarea').on();
+
 	// bouton qui ajoute un réalisateur (directed-by)
 	// $('#directed-by-btn').on('click', () => {
 	// 	const directedByField = $('#directed-by');
