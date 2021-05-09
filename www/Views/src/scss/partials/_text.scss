@@ -18,10 +18,21 @@
     color: $lighter-gray;
 }
 
-.text-gray {
+.text-lighter {
     color: $light-gray;
 }
 
 .text-center {
     text-align: center;
 }
+
+.text-alert-error {
+    border-radius: 8px;
+    color: $dark-red;
+    background-color: lighten($red, 40%);
+    padding: 10px;
+    margin: 10px;
+    font-size: 11px;
+}
+
+

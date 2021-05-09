@@ -5,7 +5,7 @@
         <div>
             <ul>
                 <?php foreach ($errors as $error) : ?>
-                    <li><?= $error ?></li>
+                    <li class="text-alert-error"><?= $error ?></li>
                 <?php endforeach; ?>
             </ul>
         </div>
