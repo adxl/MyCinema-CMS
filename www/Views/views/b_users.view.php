@@ -30,8 +30,11 @@
                     <td>jonsnow@esgi.fr</td>
                     <td>Administrateur</td>
                     <td>
-                        <a href="#">
-                            <i class="fas fa-eye"></i>
+                        <a href="#" class='flex flex-middle'>
+                            <i class="fas fa-eye mr-s"></i>
+                            <i class="fas fa-unlock"></i>
+                            <i class="fas fa-lock-open"></i>
+                            <i class="fas fa-trash-alt"></i>
                         </a>
                     </td>
                 </tr>
