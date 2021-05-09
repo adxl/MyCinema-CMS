@@ -3,9 +3,9 @@
 
     <?php if (isset($errors)) : ?>
         <div>
-            <ul>
+            <ul class="p-0">
                 <?php foreach ($errors as $error) : ?>
-                    <li class="text-alert-error"><?= $error ?></li>
+                    <i class="fas fa-exclamation-circle"></i> <?= $error ?>
                 <?php endforeach; ?>
             </ul>
         </div>
