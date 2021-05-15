@@ -106,8 +106,8 @@ class AuthenticationController
         if ($emailUsed['count'] > 0) {
             $errors[] = "Email already used";
         } else {
-            $user->setFirstname(htmlspecialchars($_POST["first-name"]));
-            $user->setLastname(htmlspecialchars($_POST["last-name"]));
+            $user->setFirstname(htmlspecialchars($_POST["firstName"]));
+            $user->setLastname(htmlspecialchars($_POST["lastName"]));
             $user->setEmail(htmlspecialchars($_POST["email"]));
             $user->setPwd(password_hash(htmlspecialchars($_POST["pwd"]), PASSWORD_DEFAULT));
         }

@@ -102,7 +102,7 @@ class EventsController
     {
         $data = $_POST;
 
-        $data['directed-by'] = Helpers::splitFields($data['directed-by']);
+        $data['directed-by'] = Helpers::splitFields($data['directedBy']);
         $data['starring'] = Helpers::splitFields($data['starring']);
         $data['tags'] = Helpers::splitFields($data['tags']);
 

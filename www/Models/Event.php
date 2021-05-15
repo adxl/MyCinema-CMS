@@ -315,7 +315,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['date'] ?? ""
                         ],
-                        "start-time[]" => [
+                        "startTime[]" => [
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "Start time",
@@ -323,7 +323,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['start'] ?? ""
                         ],
-                        "end-time[]" => [
+                        "endTime[]" => [
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "End time",
@@ -340,7 +340,7 @@ class Event extends Database
                             "value" => $data['room'] ?? "",
                             "options" => RoomModel::getAvailableRooms()
                         ],
-                        "remove-session" => [
+                        "removeSession" => [
                             "type" => "button",
                             "value" => "<i class='far fa-calendar-times'></i>",
                             "class" => "remove-session-btn",
@@ -348,14 +348,14 @@ class Event extends Database
                     ]
                 ],
 
-                "add-session" => [
+                "addSession" => [
                     "type" => "button",
                     "value" => "Add session",
                     "id" => "generate-session-btn",
                     'class' => 'link'
                 ],
 
-                "directed-by" => [
+                "directedBy" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
@@ -424,7 +424,7 @@ class Event extends Database
                     "type" => "session",
                     "class" => "row",
                     "items" => [
-                        "date" => [
+                        "date[]" => [
                             "type" => "date",
                             "placeholder" => "",
                             "label" => "Date",
@@ -432,7 +432,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['date'] ?? ""
                         ],
-                        "start-time" => [
+                        "startTime[]" => [
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "Start time",
@@ -440,7 +440,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['start'] ?? ""
                         ],
-                        "end-time" => [
+                        "endTime[]" => [
                             "type" => "time",
                             "placeholder" => "",
                             "label" => "End time",
@@ -448,7 +448,7 @@ class Event extends Database
                             "required" => true,
                             "value" => $data['end'] ?? ""
                         ],
-                        "room" => [
+                        "room[]" => [
                             "type" => "select",
                             "placeholder" => "",
                             "label" => "Room",
@@ -457,7 +457,7 @@ class Event extends Database
                             "value" => $data['room'] ?? "",
                             "options" => RoomModel::getAvailableRooms()
                         ],
-                        "remove-session" => [
+                        "removeSession" => [
                             "type" => "button",
                             "value" => "<i class='far fa-calendar-times'></i>",
                             "class" => "remove-session-btn",
@@ -465,21 +465,20 @@ class Event extends Database
                     ]
                 ],
 
-                "add-session" => [
+                "addSession" => [
                     "type" => "button",
                     "value" => "Add session",
                     "id" => "generate-session-btn",
                     'class' => 'link'
                 ],
 
-                "directed-by" => [
+                "directedBy" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
                     'class' => 'field w-50',
                     "required" => false,
-                    "value" => $data['directed-by'] ?? "",
-                    // "button" => 'Add'
+                    "value" => $data['directed-by'] ?? ""
                 ],
 
                 "starring" => [
@@ -488,8 +487,7 @@ class Event extends Database
                     "label" => "Starring",
                     'class' => 'field w-50',
                     "required" => false,
-                    "value" => $data['starring'] ?? "",
-                    // "button" => 'Add'
+                    "value" => $data['starring'] ?? ""
                 ],
 
                 "synopsis" => [
@@ -510,8 +508,7 @@ class Event extends Database
                     "label" => "Tags",
                     'class' => 'field w-50',
                     "required" => false,
-                    "value" => $data['tags'] ?? "",
-                    // "button" => 'Add'
+                    "value" => $data['tags'] ?? ""
                 ],
             ]
         ];

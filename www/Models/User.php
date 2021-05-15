@@ -195,7 +195,7 @@ class User extends Database
 					"required" => true,
 				],
 
-				"forgot-password" => [
+				"forgotPassword" => [
 					"type" => "button",
 					"value" => "Forgot password ?",
 					'class' => 'link mb-l'
@@ -216,7 +216,7 @@ class User extends Database
 			],
 			"inputs" => [
 
-				"first-name" => [
+				"firstName" => [
 					"type" => "text",
 					'class' => 'field w-100',
 					"label" => "First name",
@@ -226,7 +226,7 @@ class User extends Database
 					"error" => "First name should be between 2 and 50 characters"
 				],
 
-				"last-name" => [
+				"lastName" => [
 					"type" => "text",
 					'class' => 'field w-100',
 					"label" => "Last name",
@@ -257,7 +257,7 @@ class User extends Database
 					"error" => "Password should have at least 8 characters"
 				],
 
-				"pwd-confirm" => [
+				"pwdConfirm" => [
 					"type" => "password",
 					'class' => 'field w-100 mb-xl',
 					"label" => "Confirm password",
