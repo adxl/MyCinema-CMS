@@ -2,11 +2,14 @@
 
 namespace App\Core;
 
+use App\Controllers\Security;
+
 class Router
 {
 	private $slug;
 	private $action;
 	private $controller;
+	private $scope;
 	private $routePath = "routes.yml";
 	private $listOfRoutes = [];
 	private $listOfSlugs = [];
@@ -27,14 +30,14 @@ class Router
 			$this->exception404();
 		}
 
-		/*
-            $this->listOfRoutes
-                                ["/liste-des-utilisateurs"]
-                                ["controller"]
-
-        */
 		$this->setController($this->listOfRoutes[$this->slug]["controller"]);
 		$this->setAction($this->listOfRoutes[$this->slug]["action"]);
+		$this->setScope($this->listOfRoutes[$this->slug]["scope"]);
+
+		if (!empty($this->scope)) {
+			$this->checkAuthentication();
+			$this->checkPermission();
+		}
 	}
 
 	public function cleanSlug()
@@ -42,14 +45,41 @@ class Router
 		$this->slug = explode("?", $this->slug)[0];
 	}
 
+	private function checkAuthentication()
+	{
+		session_start();
 
-	/*
-        $this->routePath = "routes.yml";
-        - On transforme le YAML en array que l'on stock dans listOfRoutes
-        - On parcours toutes les routes
-            - Si il n'y a pas de controller ou pas d'action -> die()
-            - Sinon on alimente un nouveau tableau qui aura pour clé le controller et l'action
-    */
+		$session = $_SESSION['authSession'] ?? null;
+
+		if (!$session) {
+			Helpers::redirect('/login');
+		}
+
+		$isAuthenticated = Security::isAuthenticated($session);
+
+		if (!$isAuthenticated) {
+			Helpers::redirect('/login');
+		}
+	}
+
+	private function checkPermission()
+	{
+		session_start();
+
+		$scope = $this->scope;
+		$sessionId = $_SESSION['authSession'] ?? null;
+
+		if (!$sessionId) {
+			$this->exception403();
+		}
+
+		$hasPermission = Security::hasPermission($sessionId, $scope);
+
+		if (!$hasPermission) {
+			$this->exception403();
+		}
+	}
+
 	public function loadYaml()
 	{
 		$this->listOfRoutes = yaml_parse_file($this->routePath);
@@ -62,14 +92,11 @@ class Router
 		}
 	}
 
-
-
 	public function getSlug($controller = "Main", $action = "default")
 	{
 		return $this->listOfSlugs[$controller][$action];
 	}
 
-	//ucfirst = fonction upper case first : majuscule la première lettre
 	public function setController($controller)
 	{
 		$this->controller = ucfirst($controller);
@@ -80,6 +107,10 @@ class Router
 		$this->action = $action . "Action";
 	}
 
+	public function setScope($scope)
+	{
+		$this->scope = $scope;
+	}
 
 	public function getController()
 	{
@@ -91,8 +122,18 @@ class Router
 		return $this->action;
 	}
 
+	public function getScope()
+	{
+		return $this->scope;
+	}
+
 	public function exception404()
 	{
-		die("Error - Not Found Error : route not found [Router.php]");
+		die("Error - Not Found Error : route not found [Router.php]");  // TODO: add views
+	}
+
+	public function exception403()
+	{
+		die("Error - Forbidden Error : you don't have access [Router.php]"); // TODO: add views
 	}
 }

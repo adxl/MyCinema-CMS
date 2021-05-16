@@ -3,85 +3,111 @@
 /:
   controller: MainController
   action: showHomePage
+  scope: ""
 
 /login:
   controller: AuthenticationController
   action: login
+  scope: ""
 
 /register:
   controller: AuthenticationController
   action: register
+  scope: ""
+
+/logout:
+  controller: AuthenticationController
+  action: logout
+  scope: ""
 
 /events:
   controller: MainController
   action: page404
+  scope: ""
 
 /rooms:
   controller: MainController
   action: page404
+  scope: ""
 
 /profile:
   controller: MainController
   action: page404
+  scope: "ADMIN MANAGER USER"
 
 /404:
   controller: MainController
   action: page404
+  scope: ""
 
 # ADMIN ROUTES :
 
 /admin:
   controller: HomeController
   action: showDashboard
+  scope: "ADMIN MANAGER"
 
 /admin/events:
   controller: EventsController
   action: default
+  scope: "ADMIN MANAGER"
 
 /admin/events/new:
   controller: EventsController
   action: showCreateEvent
+  scope: "ADMIN MANAGER"
 
 /admin/events/create:
   controller: EventsController
   action: CreateEvent
+  scope: "ADMIN MANAGER"
 
 /admin/events/edit:
   controller: EventsController
   action: showEditEvent
+  scope: "ADMIN MANAGER"
 
 /admin/events/update:
   controller: EventsController
   action: UpdateEvent
+  scope: "ADMIN MANAGER"
 
 /admin/users:
   controller: UsersController
   action: showUsers
+  scope: "ADMIN"
 
 /admin/comments:
   controller: CommentsController
   action: showComments
+  scope: "ADMIN MANAGER"
 
 /admin/rooms:
   controller: RoomsController
   action: default
+  scope: "ADMIN MANAGER"
 
 /admin/rooms/new:
   controller: RoomsController
   action: showCreateRoom
+  scope: "ADMIN MANAGER"
 
 /admin/rooms/create:
   controller: RoomsController
   action: CreateRoom
+  scope: "ADMIN MANAGER"
 
 /admin/rooms/edit:
   controller: RoomsController
   action: showEditRoom
+  scope: "ADMIN MANAGER"
 
 /admin/rooms/update:
   controller: RoomsController
   action: UpdateRoom
+  scope: "ADMIN MANAGER"
 
 /admin/settings:
   controller: SettingsController
   action: showSettings
+  scope: "ADMIN"

@@ -75,7 +75,7 @@ class RoomsController
                 $view->assign('form', $form);
 
                 session_start();
-                $_SESSION['room_id'] = $id;
+                $_SESSION['edit_room_id'] = $id;
 
                 return;
             }
@@ -93,7 +93,7 @@ class RoomsController
 
         $room->save();
 
-        header("Location: /rooms");
+        Helpers::redirect('/rooms');
     }
 
     public function updateRoomAction()
@@ -122,6 +122,6 @@ class RoomsController
 
         $room->save();
 
-        header("Location: /rooms");
+        Helpers::redirect('/rooms');
     }
 }

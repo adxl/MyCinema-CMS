@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Core\FormValidator;
+use App\Core\Helpers;
 use App\Models\User as UserModel;
 
 class AuthenticationController
@@ -24,6 +25,11 @@ class AuthenticationController
 
                 if ($validation) {
                     echo 'OKK connecté !'; //TODO: user est bon, ajouter session
+                    /*
+                        - créer session en base
+                        - ajouter id session et id user dans un array authSession dans $_SESSION
+                        - redirection vers /
+                    */
                 } else {
                     $view->assign("errors", ["Wrong email or password !"]);
                 }
@@ -113,5 +119,13 @@ class AuthenticationController
         }
 
         return ['user' => $user, 'errors' => $errors];
+    }
+
+    public function logoutAction()
+    {
+        // TODO: destroy authSession et session bdd
+        session_start();
+        unset($_SESSION['authSession']);
+        Helpers::redirect();
     }
 }

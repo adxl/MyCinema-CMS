@@ -90,7 +90,7 @@ class EventsController
                 $view->assign('form', $form);
 
                 session_start();
-                $_SESSION['event_id'] = $id;
+                $_SESSION['edit_event_id'] = $id;
 
                 return;
             }

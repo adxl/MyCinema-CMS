@@ -15,9 +15,14 @@ class Helpers
         return null;
     }
 
-    public static function today()
+    public static function now()
     {
         return (new \DateTime())->format('Y-m-d H:i:s');
+    }
+
+    public static function redirect($location = '/')
+    {
+        header("Location: " . $location);
     }
 
     public static function splitFields($fieldsString)
