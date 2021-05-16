@@ -19,19 +19,17 @@
                 </a>
                 <div class="flex-column col-8">
                     <div class="mb-s flex flex-middle flex-between">
-                        <h1>
+                        <h1 class="no-break">
                             <?= $event['title']; ?>
                         </h1>
-                        <a href="/admin/events?id=<?= $event['id']; ?>">
+                        <a href="/events?id=<?= $event['id']; ?>">
                             <i class="fas fa-eye faded"></i>
                         </a>
                     </div>
-                    <p> Schedulled sessions : <?= $event['sessions']; ?>
+                    <p class="no-break"> Schedulled sessions : <?= $event['sessions']; ?>
                     </p>
-                    <?php if ($event['nextSession']) : ?>
-                        <p class="mb-s"> Next session : <?= $event['nextSession']; ?>
-                        </p>
-                    <?php endif; ?>
+                    <p class="mb-s no-break"> Next session : <?= $event['nextSession'] ?: '-' ?>
+                    </p>
                     <?php if ($event['rooms'] && $event['nextSession']) : ?>
                         <p class=""> Planned room(s) :
                             <?php foreach ($event['rooms'] as $room) : ?>

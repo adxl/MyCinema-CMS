@@ -15,31 +15,25 @@
         <?php foreach ($rooms as $room) : ?>
             <a class="card row no-wrap col-2 mb-m p-s" href="/admin/rooms/edit?id=<?= $room['id'] ?>">
                 <div class="col-4 m-0">
-                    <img class="w-100 h-100 poster<?= !$room['isAvailable'] ? ' faded' : '' ?>" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
+                    <img class="w-100 h-100 poster <?= !$room['isAvailable'] ? 'faded' : '' ?>" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
                 </div>
                 <div class="flex-column col-8">
                     <div class="mb-s flex flex-middle flex-between">
                         <h1>
                             <?= $room['label']; ?>
                         </h1>
-                        <?php if ($room['isHandicapAccess']) : ?>
-                            <div class=" flex flex-right">
-                                <i class="fas fa-wheelchair"></i>
-                            </div>
-                        <?php endif; ?>
+                        <div class=" flex flex-right <?= !$room['isHandicapAccess'] ? 'faded' : '' ?>">
+                            <i class="fas fa-wheelchair"></i>
+                        </div>
                     </div>
                     <div class="mb-auto">
                         <p> Capacity : <?= $room['capacity']; ?>
                         <p> Schedulled sessions : <?= $room['sessions']; ?>
                         </p>
-                        <?php if ($room['nextSession']) : ?>
-                            <p class="mb-s"> Next session : <?= $room['nextSession']; ?>
-                            </p>
-                        <?php endif; ?>
-                        <?php if ($room['nextMovie']) : ?>
-                            <p class="mb-s"> Next Movie : <?= $room['nextMovie']; ?>
-                            </p>
-                        <?php endif; ?>
+                        <p class="mb-s"> Next session : <?= $room['nextSession'] ?: '-' ?>
+                        </p>
+                        <p class="mb-s"> Next Movie : <?= $room['nextMovie'] ?: '-' ?>
+                        </p>
                     </div>
                 </div>
             </a>
