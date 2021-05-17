@@ -158,20 +158,6 @@ class Database
         $query = "DELETE FROM " . $this->table . " WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
 
-        $stmt->execute(['id' => $id]);
-
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-        echo "<pre>";
-        print_r($result);
-        echo "</pre>";
-        die();
-
-        if (!$result) {
-            echo "<pre>";
-            print_r($query);
-            echo "</pre>";
-            die("Error - SQL Error : query failed [database.php]");
-        }
+        $stmt->execute(['id' => $id]) or die(print_r($stmt->errorInfo(), true));
     }
 }
