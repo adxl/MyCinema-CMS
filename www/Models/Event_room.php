@@ -8,56 +8,66 @@ use App\Models\Event as EventModel;
 
 class Event_room extends Database
 {
+    private $id = null;
 
-    protected $event;
-    protected $room;
-    protected $date;
+    protected $eventId;
+    protected $roomId;
+    protected $startTime;
+    protected $endTime;
 
     public function __construct()
     {
         parent::__construct();
     }
 
-    // event
+    // id
 
-    public function getEvent()
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    // event
+    public function getEventId()
     {
         return $this->event;
     }
-    public function setEvent(int $eventId): void
+    public function setEventId($eventId)
     {
-        $eventModel = new EventModel();
-        $event = $eventModel->findById($eventId);
-
-        if ($event) {
-            $this->event = $event;
-        }
+        $this->eventId = $eventId;
     }
 
     // room
-
     public function getRoom()
     {
         return $this->room;
     }
-    public function setRoom(int $roomId): void
+    public function setRoom($roomId)
     {
-        $roomModel = new RoomModel();
-        $room = $roomModel->findById($roomId);
-
-        if ($room) {
-            $this->room = $room;
-        }
+        $this->roomId = $roomId;
     }
 
-    // date
-
-    public function getDate(): string
+    // start
+    public function getStartTime()
     {
-        return $this->date;
+        return $this->startTime;
     }
-    public function setDate(string $date): void
+    public function setStartTime($startTime)
     {
-        $this->date = $date;
+        $this->startTime = $startTime;
+    }
+
+    // end
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
     }
 }

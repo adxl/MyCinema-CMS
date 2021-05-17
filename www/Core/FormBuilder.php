@@ -4,10 +4,6 @@ namespace App\Core;
 
 class FormBuilder
 {
-	public function __construct()
-	{
-	}
-
 	public static function render($config, $show = true)
 	{
 		$html = "<form 
@@ -31,7 +27,7 @@ class FormBuilder
 							cols='" . ($configInput["cols"] ?? "") . "'
 							" . (!empty($configInput["required"]) ? "required" : "") . "
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
-						>" . utf8_encode($configInput["value"] ?? "") . "</textarea>";
+						>" . htmlentities($configInput["value"] ?? "", 0, 'UTF-8') . "</textarea>";
 			} elseif ($configInput['type'] == 'select') {
 				$html .= "<select 
 							name='" . $name . "' 
@@ -42,31 +38,34 @@ class FormBuilder
 
 				$html .= "</select>";
 			} elseif ($configInput['type'] == 'session') {
-				$html .= "<div class='row session-inputs' >";
-
-				foreach ($configInput['items'] as $name => $input) {
-
-					$html .= "<label for='" . ($input["id"] ?? $name) . "' class='" . ($input["class"] ?? '') . "'>
+				$html .= "<div id='session-inputs-container'>";
+				foreach ($configInput['items'] as $item) {
+					$html .= "<div class='flex session-inputs'>";
+					foreach ($item as $name => $input) {
+						$html .= "<label for='" . ($input["id"] ?? $name) . "' class='" . ($input["class"] ?? '') . "'>
 								<span> " . ($input["label"] ?? "") . "</span>";
 
-					if ($input["type"] == 'select') {
-						$html .= "<select name='" . $name . "' 
+						if ($input["type"] == 'select') {
+							$html .= "<select name='" . $name . "' 
 										form='" . ($config["config"]["id"] ?? "") . "'
 										id='" . ($input["id"] ?? $name) . "'>";
 
-						foreach ($input['options'] as $option)
-							$html .= "<option value='" . $option['id'] . "'>" . $option['label'] . "</option>";
+							foreach ($input['options'] as $option) {
+								$html .= "<option value='" . $option['id']
+									. "' " . ($input['value'] === $option['label'] ? 'selected' : '') . " >"
+									. $option['label'] . "</option>";
+							}
 
-						$html .= "</select></label>";
-					} elseif ($input["type"] == 'button') {
-						$html .= "</label><button 
+							$html .= "</select></label>";
+						} elseif ($input["type"] == 'button') {
+							$html .= "</label><button 
 									type='button' 
 									form='" . ($config["config"]["id"] ?? "") . "'
 									id='" . ($input['id'] ?? '') . "' 
 									class='" . $input['class'] . " button remove-session-btn'> " . $input['value'] . "
 								</button>";
-					} else {
-						$html .= "<input 
+						} else {
+							$html .= "<input 
 									type='" . $input["type"] . "'
 									id='" . ($input["id"] ?? $name) . "'
 									name='" . $name . "'
@@ -75,8 +74,11 @@ class FormBuilder
 									form='" . ($config["config"]["id"] ?? "") . "'
 									" . (!empty($input["required"]) ? "required" : "") . "
 									" . (!empty($input["checked"]) ? "checked" : "") . "
+									" . ($input["type"] === 'time' ? "step='any'" : "") . "
 						></label>";
+						}
 					}
+					$html .= "</div>";
 				}
 
 				$html .= "</div>";

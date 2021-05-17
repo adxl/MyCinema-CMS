@@ -40,7 +40,7 @@
 
                     <div class="flex mt-auto">
                         <?php foreach ($event['tags'] as $tag) : ?>
-                            <p class="bg-lighter p-s mr-s rounded"> <?= ucfirst($tag); ?> </p>
+                            <p class="bg-lighter p-s mr-s rounded"> <?= mb_strtoupper($tag); ?> </p>
                         <?php endforeach; ?>
                     </div>
                 </div>

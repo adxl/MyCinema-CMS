@@ -2,14 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Core\Database;
 use App\Core\View;
 use App\Core\Helpers;
 
-// use App\Core\FormValidator;
 use App\Models\Room as RoomModel;
-
-// use App\Models\Page;
 
 class RoomsController
 {
@@ -74,7 +70,6 @@ class RoomsController
                 $form = $roomModel->formBuilderUpdate($room);
                 $view->assign('form', $form);
 
-                session_start();
                 $_SESSION['edit_room_id'] = $id;
 
                 return;
@@ -93,13 +88,12 @@ class RoomsController
 
         $room->save();
 
-        Helpers::redirect('/rooms');
+        Helpers::redirect('/admin/rooms');
     }
 
     public function updateRoomAction()
     {
-        session_start();
-        $id = $_SESSION['room_id'];
+        $id = $_SESSION['edit_room_id'];
         $data = $_POST;
 
         $room = new RoomModel();
@@ -122,6 +116,18 @@ class RoomsController
 
         $room->save();
 
-        Helpers::redirect('/rooms');
+        unset($_SESSION['edit_room_id']);
+
+        Helpers::redirect('/admin/rooms');
+    }
+
+    public function deleteRoomAction()
+    {
+        $id = $_SESSION['edit_room_id'];
+
+        $room = new RoomModel();
+        $room->deleteById($id);
+
+        Helpers::redirect('/admin/rooms');
     }
 }

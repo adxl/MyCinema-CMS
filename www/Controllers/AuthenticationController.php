@@ -139,7 +139,7 @@ class AuthenticationController
             unset($_SESSION['authSession']);
 
             $sessionModel = new SessionModel();
-            $sessionModel->delete($session['id']);
+            $sessionModel->deleteById($session['id']);
         }
 
         Helpers::redirect();

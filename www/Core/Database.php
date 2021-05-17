@@ -95,7 +95,7 @@ class Database
             $query = "SELECT " . $columns . " FROM " . $this->table . " WHERE " . $where;
             $stmt = $this->pdo->prepare($query);
 
-            $stmt->execute($whereData);
+            $this->execute($stmt, $whereData);
 
             $whereData = $stmt->fetch(\PDO::FETCH_ASSOC);
 
@@ -125,14 +125,6 @@ class Database
                 ") VALUES (:" . implode(',:', array_keys($column)) . ") ";
 
             $stmt = $this->pdo->prepare($query);
-
-            echo "<pre>";
-            var_dump($column);
-            echo "</pre>";
-
-            echo "<pre>";
-            echo ($query);
-            echo "</pre>";
         } else {
             $column['id'] = $this->getId();
 
@@ -147,16 +139,62 @@ class Database
         }
 
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute($column) or die(print_r($stmt->errorInfo(), true));
+        $this->execute($stmt, $column);
 
         return $column['id'];
     }
 
-    public function delete($id)
+    public function deleteById($id)
     {
         $query = "DELETE FROM " . $this->table . " WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
 
-        $stmt->execute(['id' => $id]) or die(print_r($stmt->errorInfo(), true));
+        $this->execute($stmt, ['id' => $id]);
+    }
+
+    public function deleteAll($sqlData = [])
+    {
+        if (array_key_exists('where', $sqlData) && sizeof($sqlData['where'])) {
+
+            $whereData = [];
+            $where = "";
+
+            foreach ($sqlData['where'] as $cond) {
+                $where .=  $cond['column'] . " " . $cond['operator'] . " :" . $cond['column'];
+                $where .= " AND ";
+
+                $whereData[$cond['column']] = $cond['value'];
+            }
+            $where = preg_replace('/\sAND\s$/', '', $where);
+
+            $query = "DELETE FROM " . $this->table . " WHERE " . $where;
+            $stmt = $this->pdo->prepare($query);
+
+            $this->execute($stmt, $whereData);
+        }
+
+        echo "<pre>";
+        print_r($sqlData);
+        echo "</pre>";
+        die("Error - Bad Query : WHERE clause not found [database.php]");
+    }
+
+
+    private function execute($stmt, $columns)
+    {
+        $error = false;
+        $stmt->execute($columns) or $error = true;
+
+        if ($error) {
+            echo "<pre>";
+            echo 'DATABASE ERROR : ' . $stmt->errorInfo()[2] . PHP_EOL;
+            echo PHP_EOL;
+            echo 'IN QUERY : ' . $stmt->queryString . PHP_EOL;
+            echo PHP_EOL;
+            echo 'WITH DATA : ' . PHP_EOL;
+            print_r($columns);
+            echo "</pre>";
+            die();
+        }
     }
 }

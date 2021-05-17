@@ -42,4 +42,14 @@ class Helpers
         $fields = implode('; ', $fieldsArray);
         return  $fields;
     }
+
+    public static function extractDate($datetime)
+    {
+        return substr($datetime, 0, 10);
+    }
+
+    public static function extractTime($datetime)
+    {
+        return substr($datetime, 11, 8);
+    }
 }

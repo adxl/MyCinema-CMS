@@ -12,7 +12,6 @@ class Security
     // checks si user est connecté
     public static function isAuthenticated(): bool
     {
-
         session_start();
         $authSession = $_SESSION['authSession'] ?? null;
 
@@ -36,7 +35,6 @@ class Security
     // checks si user a les droits d'accès
     public static function hasPermission($scope): bool
     {
-        session_start();
         $authSession = $_SESSION['authSession'];
 
         $sessionModel = new SessionModel();
@@ -64,8 +62,6 @@ class Security
 
         $sessionId = $session->save();
 
-        session_start();
-
         $authSession = [
             'id' => $sessionId,
             'userId' => $userId
@@ -82,5 +78,16 @@ class Security
         $user = $userModel->findById($sessionUserId);
 
         return $user ?? null;
+    }
+
+    public static function getCurrentUser()
+    {
+        if (!self::isAuthenticated())
+            return null;
+
+        $authSession = $_SESSION['authSession'];
+        $user = self::getSessionUser($authSession);
+
+        return $user;
     }
 }

@@ -4,23 +4,21 @@ namespace App\Models;
 
 use App\Core\Database;
 use App\Core\Helpers;
+
 use App\Models\Room as RoomModel;
-use App\Models\Tag as TagModel;
-use App\Models\Actor as ActorModel;
-use App\Models\Director as DirectorModel;
 use App\Models\EventType as EventTypeModel;
 use App\Models\Event_room as EventRoomModel;
 use App\Models\Event_tag as EventTagModel;
-use App\Models\Event_actor as EventActorModel;
-use App\Models\Event_director as EventDirectorModel;
 
 class Event extends Database
 {
     private $id = null;
 
-    protected $author;
     protected $title;
-    protected $price;
+    protected $synopsis;
+    protected $price = 0.0;
+    protected $actors;
+    protected $directors;
 
     public function __construct()
     {
@@ -33,54 +31,55 @@ class Event extends Database
     {
         return $this->id;
     }
-    public function setId(int $id): void
+    public function setId($id): void
     {
         $this->id = $id;
     }
-
-    // author
-
-    public function getAuthor(): string
-    {
-        return $this->author;
-    }
-    public function setAuthor(string $author): void
-    {
-        $this->label = $author;
-    }
-
-    // title
 
     public function getTitle(): string
     {
         return $this->title;
     }
-    public function setTitle(int $title): void
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
 
-    // price
 
-    public function getPrice(): float
+    public function getPrice()
     {
         return $this->price;
     }
-    public function setPrice(string $price): void
+    public function setPrice(float $price)
     {
         $this->price = $price;
     }
 
-    // type
-
-    public function getType($id): string
+    public function getSynopsis()
     {
-        $eventTypeModel = new EventTypeModel();
-        $eventType = $eventTypeModel->findById($id);
+        return $this->synopsis;
+    }
+    public function setSynopsis($synopsis)
+    {
+        $this->synopsis = $synopsis;
+    }
 
-        if ($eventType) {
-            return $eventType['label'];
-        }
+    public function getActors()
+    {
+        return $this->actors;
+    }
+    public function setActors($actors)
+    {
+        $this->actors = $actors;
+    }
+
+    public function getDirectors()
+    {
+        return $this->directors;
+    }
+    public function setDirectors($directors)
+    {
+        $this->directors = $directors;
     }
 
     // rooms
@@ -90,10 +89,10 @@ class Event extends Database
         $rooms = [];
         $eventRoomModel = new EventRoomModel();
         $eventRoom = $eventRoomModel->findAll([
-            'select' => 'id_room',
+            'select' => 'roomId',
             'where' => [
                 [
-                    'column' => 'id_event',
+                    'column' => 'eventId',
                     'value' => $id,
                     'operator' => '='
                 ]
@@ -103,11 +102,10 @@ class Event extends Database
         if ($eventRoom) {
             $roomModel = new RoomModel();
             foreach ($eventRoom as $eventRoomEntry) {
-                $roomId = $eventRoomEntry['id_room'];
+                $roomId = $eventRoomEntry['roomId'];
                 $room = $roomModel->findById($roomId);
-                if ($room) {
+                if ($room)
                     array_push($rooms, $room);
-                }
             }
         }
 
@@ -115,27 +113,45 @@ class Event extends Database
         return $rooms;
     }
 
-    // le nombre de séances prévues
-
-    public function getSessionsCount($id): int
+    // les séances prévues
+    public function getSessions($id): array
     {
         $eventRoomModel = new EventRoomModel();
-        $eventRoom = $eventRoomModel->findAll([
-            'select' => 'COUNT(*) as count',
+        $sessions = $eventRoomModel->findAll([
+            'select' => 'roomId as room, startTime, endTime',
             'where' => [
                 [
-                    'column' => 'id_event',
+                    'column' => 'eventId',
                     'value' => $id,
                     'operator' => '='
                 ]
             ]
         ]);
 
-        return $eventRoom ? $eventRoom[0]['count'] : 0;
+        $roomModel = new RoomModel();
+
+        foreach ($sessions as $key => $session) {
+            $roomId = $session['room'];
+            $room = $roomModel->findById($roomId);
+
+            if ($room) {
+                $sessions[$key]['room'] = $room['label'];
+                $sessions[$key]['date'] = Helpers::extractDate($session['startTime']);
+                $sessions[$key]['startTime'] = Helpers::extractTime($session['startTime']);
+                $sessions[$key]['endTime'] = Helpers::extractTime($session['endTime']);
+            }
+        }
+
+        return $sessions;
+    }
+
+    // le nombre de séances prévues
+    public function getSessionsCount($id): int
+    {
+        return count($this->getSessions($id));
     }
 
     // la date la plus proche
-
     public function getNextSessionDate($id): string
     {
         $eventRoomModel = new EventRoomModel();
@@ -144,28 +160,26 @@ class Event extends Database
             'select' => '*',
             'where' => [
                 [
-                    'column' => 'id_event',
+                    'column' => 'eventId',
                     'value' => $id,
                     'operator' => '='
                 ],
                 [
-                    'column' => 'eventDate',
-                    'value' => Helpers::today(),
+                    'column' => 'startTime',
+                    'value' => Helpers::now(),
                     'operator' => '>='
                 ]
             ],
             'order' => [
-                'column' => 'eventDate',
+                'column' => 'startTime',
                 'order' => "DESC"
             ]
         ]);
 
-
-        return $eventRoom ? $eventRoom[0]['eventDate'] : '';
+        return $eventRoom ? $eventRoom[0]['startTime'] : '';
     }
 
     // event est passé
-
     public function hasPassed($id): bool
     {
         $eventRoomModel = new EventRoomModel();
@@ -173,18 +187,18 @@ class Event extends Database
             'select' => '*',
             'where' => [
                 [
-                    'column' => 'id_event',
+                    'column' => 'eventId',
                     'value' => $id,
                     'operator' => '='
                 ],
                 [
-                    'column' => 'eventDate',
-                    'value' => Helpers::today(),
+                    'column' => 'startTime',
+                    'value' => Helpers::now(),
                     'operator' => '>='
                 ]
             ],
             'order' => [
-                'column' => 'eventDate',
+                'column' => 'startTime',
                 'order' => "ASC"
             ]
         ]);
@@ -198,10 +212,10 @@ class Event extends Database
         if ($event) {
             $eventTagModel = new EventTagModel();
             $eventTags = $eventTagModel->findAll([
-                'select' => '*',
+                'select' => 'tag',
                 'where' => [
                     [
-                        'column' => 'id_event',
+                        'column' => 'eventId',
                         'value' => $id,
                         'operator' => '='
                     ],
@@ -209,73 +223,10 @@ class Event extends Database
             ]);
 
             $tags = [];
-            $tagModel = new TagModel();
-            foreach ($eventTags as $eventTag) {
-                $tag = $tagModel->findById($eventTag['id_tag']);
-                if ($tag) {
-                    $tags[] = $tag['label'];
-                }
-            }
+            foreach ($eventTags as $eventTag)
+                $tags[] = $eventTag['tag'];
 
             return $tags;
-        }
-    }
-
-    public function getDirectors($id)
-    {
-        $event = $this->findById($id);
-        if ($event) {
-            $eventDirectorModel = new EventDirectorModel();
-            $eventDirectors = $eventDirectorModel->findAll([
-                'select' => '*',
-                'where' => [
-                    [
-                        'column' => 'id_event',
-                        'value' => $id,
-                        'operator' => '='
-                    ],
-                ],
-            ]);
-
-            $directors = [];
-            $directorModel = new DirectorModel();
-            foreach ($eventDirectors as $eventDirector) {
-                $director = $directorModel->findById($eventDirector['id_director']);
-                if ($director) {
-                    $directors[] = $director['name'];
-                }
-            }
-
-            return $directors;
-        }
-    }
-
-    public function getActors($id)
-    {
-        $event = $this->findById($id);
-        if ($event) {
-            $eventActorModel = new EventActorModel();
-            $eventActors = $eventActorModel->findAll([
-                'select' => '*',
-                'where' => [
-                    [
-                        'column' => 'id_event',
-                        'value' => $id,
-                        'operator' => '='
-                    ],
-                ],
-            ]);
-
-            $actors = [];
-            $actorModel = new ActorModel();
-            foreach ($eventActors as $eventActor) {
-                $actor = $actorModel->findById($eventActor['id_actor']);
-                if ($actor) {
-                    $actors[] = $actor['name'];
-                }
-            }
-
-            return $actors;
         }
     }
 
@@ -300,6 +251,7 @@ class Event extends Database
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 60,
+                    "value" => "Alien", // DEBUG:
                     "error" => "Event name should be between 2 and 60 characters"
                 ],
 
@@ -307,67 +259,71 @@ class Event extends Database
                     "type" => "session",
                     "class" => "row",
                     "items" => [
-                        "date[]" => [
-                            "type" => "date",
-                            "placeholder" => "",
-                            "label" => "Date",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['date'] ?? ""
+                        [
+                            "date[]" => [
+                                "type" => "date",
+                                "placeholder" => "",
+                                "label" => "Date",
+                                'class' => 'field',
+                                "required" => true,
+                                "value" => $data['date'] ?? Helpers::extractDate(Helpers::now()) // DEBUG:
+                            ],
+                            "startTime[]" => [
+                                "type" => "time",
+                                "placeholder" => "",
+                                "label" => "Start time",
+                                'class' => 'field',
+                                "required" => true,
+                                "value" => $data['startTime'] ?? Helpers::extractTime(Helpers::now()) // DEBUG:
+                            ],
+                            "endTime[]" => [
+                                "type" => "time",
+                                "placeholder" => "",
+                                "label" => "End time",
+                                'class' => 'field',
+                                "required" => true,
+                                "value" => $data['endTime'] ?? Helpers::extractTime(Helpers::now()) // DEBUG:
+                            ],
+                            "room[]" => [
+                                "type" => "select",
+                                "placeholder" => "",
+                                "label" => "Room",
+                                'class' => 'field',
+                                "required" => true,
+                                "value" => $data['room'] ?? "",
+                                "options" => RoomModel::getAvailableRooms()
+                            ],
+                            "removeSession" => [
+                                "type" => "button",
+                                "value" => "<i class='far fa-calendar-times'></i>",
+                                "class" => "remove-session-btn",
+                            ],
                         ],
-                        "startTime[]" => [
-                            "type" => "time",
-                            "placeholder" => "",
-                            "label" => "Start time",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['start'] ?? ""
-                        ],
-                        "endTime[]" => [
-                            "type" => "time",
-                            "placeholder" => "",
-                            "label" => "End time",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['end'] ?? ""
-                        ],
-                        "room[]" => [
-                            "type" => "select",
-                            "placeholder" => "",
-                            "label" => "Room",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['room'] ?? "",
-                            "options" => RoomModel::getAvailableRooms()
-                        ],
-                        "removeSession" => [
-                            "type" => "button",
-                            "value" => "<i class='far fa-calendar-times'></i>",
-                            "class" => "remove-session-btn",
-                        ],
-                    ]
+                    ],
                 ],
 
                 "addSession" => [
                     "type" => "button",
                     "value" => "Add session",
                     "id" => "generate-session-btn",
-                    'class' => 'link'
+                    'class' => 'link mb-m'
                 ],
 
-                "directedBy" => [
+                "directors" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
                     'class' => 'field w-50',
+                    "value" => "Director 1; Director 2", // DEBUG:
                     "required" => false,
                 ],
 
-                "starring" => [
+                "actors" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
                     'class' => 'field w-50',
+                    "value" => "Actor 1; Actor 2", // DEBUG:
                     "required" => false,
                 ],
 
@@ -379,6 +335,7 @@ class Event extends Database
                     "minLength" => 10,
                     "maxLength" => 300,
                     'rows' => 8,
+                    "value" => "Event synopsis est un textarea description film cinema cms projet annuel trois année école", // DEBUG:
                     "error" => "Event synopsis should be between 10 and 300 characters"
                 ],
 
@@ -387,6 +344,7 @@ class Event extends Database
                     "placeholder" => "",
                     "label" => "Tags",
                     'class' => 'field w-50 mb-xl',
+                    "value" => "ACTION; DRAME", // DEBUG:
                     "required" => false,
                 ],
             ]
@@ -395,6 +353,97 @@ class Event extends Database
 
     public function formBuilderUpdate($data)
     {
+        $sessions = $data['sessions'];
+
+        $availableRooms = RoomModel::getAvailableRooms();
+
+        $items = [];
+        if (empty($sessions)) {
+            $items[] = [
+                "date[]" => [
+                    "type" => "date",
+                    "placeholder" => "",
+                    "label" => "Date",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => null
+                ],
+                "startTime[]" => [
+                    "type" => "time",
+                    "placeholder" => "",
+                    "label" => "Start time",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => null
+                ],
+                "endTime[]" => [
+                    "type" => "time",
+                    "placeholder" => "",
+                    "label" => "End time",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => null
+                ],
+                "room[]" => [
+                    "type" => "select",
+                    "placeholder" => "",
+                    "label" => "Room",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => null,
+                    "options" => $availableRooms
+                ],
+                "removeSession" => [
+                    "type" => "button",
+                    "value" => "<i class='far fa-calendar-times'></i>",
+                    "class" => "remove-session-btn",
+                ]
+            ];
+        }
+
+        foreach ($sessions as $session) {
+            $items[] = [
+                "date[]" => [
+                    "type" => "date",
+                    "placeholder" => "",
+                    "label" => "Date",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => $session['date'] ?? ""
+                ],
+                "startTime[]" => [
+                    "type" => "time",
+                    "placeholder" => "",
+                    "label" => "Start time",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => $session['startTime'] ?? ""
+                ],
+                "endTime[]" => [
+                    "type" => "time",
+                    "placeholder" => "",
+                    "label" => "End time",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => $session['endTime'] ?? ""
+                ],
+                "room[]" => [
+                    "type" => "select",
+                    "placeholder" => "",
+                    "label" => "Room",
+                    'class' => 'field',
+                    "required" => true,
+                    "value" => $session['room'] ?? "",
+                    "options" => $availableRooms
+                ],
+                "removeSession" => [
+                    "type" => "button",
+                    "value" => "<i class='far fa-calendar-times'></i>",
+                    "class" => "remove-session-btn",
+                ]
+            ];
+        }
+
         return [
             "config" => [
                 "method" => "POST",
@@ -423,71 +472,32 @@ class Event extends Database
                 "session" => [
                     "type" => "session",
                     "class" => "row",
-                    "items" => [
-                        "date[]" => [
-                            "type" => "date",
-                            "placeholder" => "",
-                            "label" => "Date",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['date'] ?? ""
-                        ],
-                        "startTime[]" => [
-                            "type" => "time",
-                            "placeholder" => "",
-                            "label" => "Start time",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['start'] ?? ""
-                        ],
-                        "endTime[]" => [
-                            "type" => "time",
-                            "placeholder" => "",
-                            "label" => "End time",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['end'] ?? ""
-                        ],
-                        "room[]" => [
-                            "type" => "select",
-                            "placeholder" => "",
-                            "label" => "Room",
-                            'class' => 'field',
-                            "required" => true,
-                            "value" => $data['room'] ?? "",
-                            "options" => RoomModel::getAvailableRooms()
-                        ],
-                        "removeSession" => [
-                            "type" => "button",
-                            "value" => "<i class='far fa-calendar-times'></i>",
-                            "class" => "remove-session-btn",
-                        ],
-                    ]
+                    "items" => $items
                 ],
 
                 "addSession" => [
                     "type" => "button",
                     "value" => "Add session",
                     "id" => "generate-session-btn",
-                    'class' => 'link'
+                    'class' => 'link mb-m'
                 ],
 
-                "directedBy" => [
+                "directors" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
                     'class' => 'field w-50',
                     "required" => false,
-                    "value" => $data['directed-by'] ?? ""
+                    "value" => $data['directors'] ?? ""
                 ],
 
-                "starring" => [
+                "actors" => [
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
                     'class' => 'field w-50',
                     "required" => false,
-                    "value" => $data['starring'] ?? ""
+                    "value" => $data['actors'] ?? ""
                 ],
 
                 "synopsis" => [

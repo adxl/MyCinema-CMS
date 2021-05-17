@@ -11,7 +11,7 @@ class FormValidator
 
 		if (count($data) != self::getFieldsCount($config['inputs'])) { // Faille XSS 
 			// $errors[] = "An error occured";
-			exit("An error occured"); // TODO: non testé
+			die("An error occured"); // TODO: non testé
 		}
 
 		foreach ($config["inputs"] as $name => $input) {
@@ -32,6 +32,12 @@ class FormValidator
 				}
 			}
 		}
+
+
+		// TODO: validate email 
+
+
+		// TODO: validate password complexity
 
 
 		// validate password confirmation

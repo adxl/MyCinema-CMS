@@ -59,7 +59,7 @@
 
 /admin/events/create:
   controller: EventsController
-  action: CreateEvent
+  action: createEvent
   scope: "ADMIN MANAGER"
 
 /admin/events/edit:
@@ -69,7 +69,12 @@
 
 /admin/events/update:
   controller: EventsController
-  action: UpdateEvent
+  action: updateEvent
+  scope: "ADMIN MANAGER"
+
+/admin/events/delete:
+  controller: EventsController
+  action: deleteEvent
   scope: "ADMIN MANAGER"
 
 /admin/users:
@@ -94,7 +99,7 @@
 
 /admin/rooms/create:
   controller: RoomsController
-  action: CreateRoom
+  action: createRoom
   scope: "ADMIN MANAGER"
 
 /admin/rooms/edit:
@@ -104,7 +109,12 @@
 
 /admin/rooms/update:
   controller: RoomsController
-  action: UpdateRoom
+  action: updateRoom
+  scope: "ADMIN MANAGER"
+
+/admin/rooms/delete:
+  controller: RoomsController
+  action: deleteRoom
   scope: "ADMIN MANAGER"
 
 /admin/settings:

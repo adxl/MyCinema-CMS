@@ -7,15 +7,12 @@ use App\Core\Database;
 class Tag extends Database
 {
     private $id = null;
-
     protected $label;
 
     public function __construct()
     {
         parent::__construct();
     }
-
-    // id
 
     public function getId()
     {
@@ -26,17 +23,12 @@ class Tag extends Database
         $this->id = $id;
     }
 
-
     public function getLabel()
     {
         return $this->label;
     }
-
-
     public function setLabel($label)
     {
         $this->label = $label;
-
-        return $this;
     }
 }

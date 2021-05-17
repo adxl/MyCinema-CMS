@@ -23,9 +23,6 @@ $route = new Router($slug);
 $c = $route->getController();
 $a = $route->getAction();
 
-
-
-
 //vérification que le fichier du controller existe
 if (file_exists("./Controllers/" . $c . ".php")) {
 

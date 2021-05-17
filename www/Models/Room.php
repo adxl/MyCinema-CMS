@@ -86,7 +86,7 @@ class Room extends Database
             'select' => 'COUNT(*) as count',
             'where' => [
                 [
-                    'column' => 'id_room',
+                    'column' => 'roomId',
                     'value' => $id,
                     'operator' => '='
                 ]
@@ -105,24 +105,24 @@ class Room extends Database
             'select' => '*',
             'where' => [
                 [
-                    'column' => 'id_room',
+                    'column' => 'roomId',
                     'value' => $id,
                     'operator' => '='
                 ],
                 [
-                    'column' => 'eventDate',
-                    'value' => Helpers::today(),
+                    'column' => 'startTime',
+                    'value' => Helpers::now(),
                     'operator' => '>='
                 ]
             ],
             'order' => [
-                'column' => 'eventDate',
+                'column' => 'startTime',
                 'order' => "DESC"
             ]
         ]);
 
 
-        return $eventRoom ? $eventRoom[0]['eventDate'] : '';
+        return $eventRoom ? $eventRoom[0]['startTime'] : '';
     }
 
     // le nom du prochain event de la room
@@ -133,17 +133,17 @@ class Room extends Database
 
         $eventRoomModel = new EventRoomModel();
         $eventRoom = $eventRoomModel->findOne([
-            'select' => 'id_event',
+            'select' => 'eventId',
             'where' => [
                 [
-                    'column' => 'eventDate',
+                    'column' => 'startTime',
                     'value' => $nextDate,
                     'operator' => '='
                 ]
             ]
         ]);
 
-        $eventId = $eventRoom['id_event'];
+        $eventId = $eventRoom['eventId'];
 
         $eventModel = new EventModel();
         $event = $eventModel->findById($eventId);

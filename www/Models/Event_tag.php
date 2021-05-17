@@ -8,7 +8,7 @@ class Event_tag extends Database
 {
     private $id = null;
 
-    protected $event;
+    protected $eventId;
     protected $tag;
 
     public function __construct()
@@ -17,7 +17,6 @@ class Event_tag extends Database
     }
 
     // id
-
     public function getId()
     {
         return $this->id;
@@ -27,24 +26,20 @@ class Event_tag extends Database
         $this->id = $id;
     }
 
-
-    public function getEvent()
+    public function getEventId()
     {
-        return $this->event;
+        return $this->eventId;
     }
-
-    public function setEvent($event)
+    public function setEventId($eventId)
     {
-        $this->event = $event;
+        $this->eventId = $eventId;
         return $this;
     }
-
 
     public function getTag()
     {
         return $this->tag;
     }
-
     public function setTag($tag)
     {
         $this->tag = $tag;
