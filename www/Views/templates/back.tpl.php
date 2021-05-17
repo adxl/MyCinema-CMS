@@ -29,7 +29,7 @@
 			<a href="#">Account</a>
 			<a href="#">Reservations</a>
 			<a href="#">Preferences</a>
-			<a href="#">Log out</a>
+			<a href="/logout">Log out</a>
 		</div>
 	</header>
 

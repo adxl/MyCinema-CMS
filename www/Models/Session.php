@@ -10,7 +10,7 @@ class Session extends Database
     private $id = null;
 
     protected $userId;
-    protected $expireAt;
+    private $expireAt;   //TODO: changer en protected pour session à temps fixe
 
     public function __construct()
     {

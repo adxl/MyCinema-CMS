@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Core;
 
 use App\Core\Helpers;
 
@@ -9,12 +9,18 @@ use App\Models\Session as SessionModel;
 
 class Security
 {
-    private static $sessionModel = new SessionModel();
-
-
-    public static function isAuthenticated($authSession): bool
+    // checks si user est connecté
+    public static function isAuthenticated(): bool
     {
-        $session = self::$sessionModel->findById($authSession['id']);
+
+        session_start();
+        $authSession = $_SESSION['authSession'] ?? null;
+
+        if (is_null($authSession))
+            return false;
+
+        $sessionModel = new SessionModel();
+        $session = $sessionModel->findById($authSession['id']);
 
         if (!$session)
             return false;
@@ -27,10 +33,14 @@ class Security
         return !is_null($user);
     }
 
-    public static function hasPermission($authSession, $scope): bool
+    // checks si user a les droits d'accès
+    public static function hasPermission($scope): bool
     {
+        session_start();
+        $authSession = $_SESSION['authSession'];
 
-        $session = self::$sessionModel->findById($authSession['id']);
+        $sessionModel = new SessionModel();
+        $session = $sessionModel->findById($authSession['id']);
 
         if (!$session)
             return false;
@@ -45,6 +55,26 @@ class Security
         return in_array($user["role"], $roles);
     }
 
+    // initialise la session locale
+    public static function initSession($userId)
+    {
+
+        $session = new SessionModel();
+        $session->setUserId($userId);
+
+        $sessionId = $session->save();
+
+        session_start();
+
+        $authSession = [
+            'id' => $sessionId,
+            'userId' => $userId
+        ];
+
+        $_SESSION['authSession'] = $authSession;
+    }
+
+    // récupère user de la session locale
     private static function getSessionUser($session)
     {
         $userModel = new UserModel();

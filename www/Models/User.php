@@ -184,6 +184,7 @@ class User extends Database
 					"placeholder" => "example@email.com",
 					"label" => "Email",
 					"required" => true,
+					"value" => "adel-dev@gg.com",   // DEBUG: login rapide
 					"error" => "Not a valid email"
 				],
 
@@ -192,6 +193,7 @@ class User extends Database
 					'class' => 'field w-100',
 					"placeholder" => "********",
 					"label" => "Password",
+					"value" => "azertyui",  // DEBUG: login rapide
 					"required" => true,
 				],
 

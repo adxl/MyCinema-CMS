@@ -2,7 +2,7 @@
 
 namespace App\Core;
 
-use App\Controllers\Security;
+use App\Core\Security;
 
 class Router
 {
@@ -14,12 +14,7 @@ class Router
 	private $listOfRoutes = [];
 	private $listOfSlugs = [];
 
-	/*
-        - On passe le slug en attribut
-        - Execution de la methode loadYaml
-        - Vérifie si le slug existe dans nos routes -> SINON appel la methode exception4040
-        - call setController et setAction
-    */
+
 	public function __construct($slug)
 	{
 		$this->slug = $slug;
@@ -47,37 +42,16 @@ class Router
 
 	private function checkAuthentication()
 	{
-		session_start();
-
-		$session = $_SESSION['authSession'] ?? null;
-
-		if (!$session) {
+		$isAuthenticated = Security::isAuthenticated();
+		if (!$isAuthenticated)
 			Helpers::redirect('/login');
-		}
-
-		$isAuthenticated = Security::isAuthenticated($session);
-
-		if (!$isAuthenticated) {
-			Helpers::redirect('/login');
-		}
 	}
 
 	private function checkPermission()
 	{
-		session_start();
-
-		$scope = $this->scope;
-		$sessionId = $_SESSION['authSession'] ?? null;
-
-		if (!$sessionId) {
+		$hasPermission = Security::hasPermission($this->scope);
+		if (!$hasPermission)
 			$this->exception403();
-		}
-
-		$hasPermission = Security::hasPermission($sessionId, $scope);
-
-		if (!$hasPermission) {
-			$this->exception403();
-		}
 	}
 
 	public function loadYaml()

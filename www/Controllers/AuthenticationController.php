@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Core\View;
 use App\Core\FormValidator;
 use App\Core\Helpers;
+use App\Core\Security;
+use App\Core\View;
+
 use App\Models\User as UserModel;
 use App\Models\Session as SessionModel;
 
@@ -12,25 +14,26 @@ class AuthenticationController
 {
     public function loginAction()
     {
-        $view = new View("f_login", "auth");
-        $user = new UserModel();
+        $isAuthenticated = Security::isAuthenticated();
+        if ($isAuthenticated) {
+            Helpers::redirect();
+        }
 
-        $form = $user->formBuilderLogin();
+        $view = new View("f_login", "auth");
+        $userModel = new UserModel();
+
+        $form = $userModel->formBuilderLogin();
 
         if (!empty($_POST)) {
 
             $errors = FormValidator::check($form, $_POST);
 
             if (empty($errors)) {
-                $validation = $this->validateLogin();
+                $user = $this->validateLogin();
 
-                if ($validation) {
-                    echo 'OKK connecté !'; //TODO: user est bon, ajouter session
-                    /*
-                        - créer session en base
-                        - ajouter id session et id user dans un array authSession dans $_SESSION
-                        - redirection vers /
-                    */
+                if (!is_null($user)) {
+                    Security::initSession($user['id']);
+                    Helpers::redirect();
                 } else {
                     $view->assign("errors", ["Wrong email or password !"]);
                 }
@@ -59,13 +62,18 @@ class AuthenticationController
 
         if (!empty($user))
             if (password_verify($_POST['password'], $user['password']))
-                return true;
+                return $user;
 
-        return false;
+        return null;
     }
 
     public function registerAction()
     {
+        $isAuthenticated = Security::isAuthenticated();
+        if ($isAuthenticated) {
+            Helpers::redirect();
+        }
+
         $view = new View("f_register", 'auth');
         $userModel = new UserModel();
 
@@ -126,11 +134,13 @@ class AuthenticationController
     {
         session_start();
 
-        $sessionId = $_SESSION['authSession'];
-        unset($_SESSION['authSession']);
+        if (isset($_SESSION['authSession'])) {
+            $session = $_SESSION['authSession'];
+            unset($_SESSION['authSession']);
 
-        $sessionModel = new SessionModel();
-        $sessionModel->delete($sessionId);
+            $sessionModel = new SessionModel();
+            $sessionModel->delete($session['id']);
+        }
 
         Helpers::redirect();
     }

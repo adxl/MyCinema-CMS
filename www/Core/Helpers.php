@@ -20,6 +20,11 @@ class Helpers
         return (new \DateTime())->format('Y-m-d H:i:s');
     }
 
+    public static function uuid()
+    {
+        return str_ireplace('.', '-', uniqid(uniqid('', true) . '-'));
+    }
+
     public static function redirect($location = '/')
     {
         header("Location: " . $location);
