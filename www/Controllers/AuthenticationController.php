@@ -6,6 +6,7 @@ use App\Core\View;
 use App\Core\FormValidator;
 use App\Core\Helpers;
 use App\Models\User as UserModel;
+use App\Models\Session as SessionModel;
 
 class AuthenticationController
 {
@@ -123,9 +124,14 @@ class AuthenticationController
 
     public function logoutAction()
     {
-        // TODO: destroy authSession et session bdd
         session_start();
+
+        $sessionId = $_SESSION['authSession'];
         unset($_SESSION['authSession']);
+
+        $sessionModel = new SessionModel();
+        $sessionModel->delete($sessionId);
+
         Helpers::redirect();
     }
 }
