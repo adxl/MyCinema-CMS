@@ -13,7 +13,7 @@ class Database
             $this->pdo = new \PDO(DBDRIVER . ":host=" . DBHOST . ";dbname=" . DBNAME . ";port=" . DBPORT, DBUSER, DBPWD);
             $classExploded = explode("\\", get_called_class());
             $this->table = DBPREFIXE . lcfirst(end($classExploded));
-        } catch (\Exception $e) {
+        } catch (\PDOException $e) {
             die("Error - SQL Error : " . $e->getMessage() . " [Database.php]");
         }
     }
@@ -119,11 +119,23 @@ class Database
         );
 
         if (is_null($this->getId())) {
-            $query = "	INSERT INTO " . $this->table . "(" . implode(',', array_keys($column)) . ") 
-						VALUES (:" . implode(',:', array_keys($column)) . ") ";
+
+            $column['id'] = Helpers::uuid();
+            $query = "	INSERT INTO " . $this->table . " (" . implode(',', array_keys($column)) .
+                ") VALUES (:" . implode(',:', array_keys($column)) . ") ";
 
             $stmt = $this->pdo->prepare($query);
+
+            echo "<pre>";
+            var_dump($column);
+            echo "</pre>";
+
+            echo "<pre>";
+            echo ($query);
+            echo "</pre>";
         } else {
+            $column['id'] = $this->getId();
+
             $query = "UPDATE " . $this->table . " SET";
 
             foreach (array_keys($column) as $key) {
@@ -132,12 +144,12 @@ class Database
 
             $query = trim($query, ',');
             $query .= " WHERE id = :id";
-
-            $column['id'] = $this->getId();
         }
 
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute($column);
+        $stmt->execute($column) or die(print_r($stmt->errorInfo(), true));
+
+        return $column['id'];
     }
 
     public function delete($id)
@@ -149,6 +161,11 @@ class Database
         $stmt->execute(['id' => $id]);
 
         $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
+        die();
 
         if (!$result) {
             echo "<pre>";
