@@ -98,6 +98,6 @@ class Security
     {
         $user = self::getCurrentUser();
         if (!is_null($user))
-            return ['firstname' => $user['firstname'], 'lastname' => $user['lastname']];
+            return ['firstname' => $user['firstname'], 'lastname' => $user['lastname'], 'role' => $user['role']];
     }
 }

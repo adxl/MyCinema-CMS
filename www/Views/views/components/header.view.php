@@ -1,7 +1,7 @@
 <header class="flex flex-between flex-middle bg-soft-white">
     <div class="p-m">
         <a href="/">
-            <i class="fas fa-home"></i>
+            <p>&lt;LOGO&gt;</p>
         </a>
     </div>
 

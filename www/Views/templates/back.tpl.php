@@ -25,36 +25,48 @@ $user = Security::getCurrentUserShort();
 	<main class="flex flex-auto">
 		<section id="sidebar" class="bg-dark hidden-s">
 			<ul>
-				<li><a href="/bo">
+				<li>
+					<a href="/bo">
 						<i class="fas fa-home"></i>
 						<span>Dashboard</span>
 					</a>
 				</li>
-				<li><a href="/bo/events">
+				<li>
+					<a href="/bo/events">
 						<i class="fas fa-calendar-alt"></i>
 						<span>Events</span>
 					</a>
 				</li>
-				<li><a href="/bo/rooms">
+				<li>
+					<a href="/bo/rooms">
 						<i class="fas fa-building"></i>
 						<span>Rooms</span>
 					</a>
 				</li>
-				<li><a href="/bo/comments">
+				<li>
+					<a href="/bo/comments">
 						<i class="fas fa-comments"></i>
 						<span>Comments</span>
 					</a>
 				</li>
-				<li><a href="/bo/users">
-						<i class="fas fa-users"></i>
-						<span>Users</span>
-					</a>
-				</li>
-				<li><a href="/bo/settings">
-						<i class="fas fa-cog"></i>
-						<span>Settings</span>
-					</a>
-				</li>
+
+				<?php if ($user['role'] === 'ADMIN') : ?>
+
+					<li>
+						<a href="/bo/users">
+							<i class="fas fa-users"></i>
+							<span>Users</span>
+						</a>
+					</li>
+					<li>
+						<a href="/bo/settings">
+							<i class="fas fa-cog"></i>
+							<span>Settings</span>
+						</a>
+					</li>
+
+				<?php endif ?>
+
 			</ul>
 		</section>
 		<section id="view" class="flex-auto scroll-y">

@@ -142,6 +142,6 @@ class AuthenticationController
             $sessionModel->deleteById($session['id']);
         }
 
-        Helpers::redirect();
+        Helpers::redirect('/bo/login');
     }
 }
