@@ -12,7 +12,10 @@ class Security
     // checks si user est connecté
     public static function isAuthenticated(): bool
     {
-        session_start();
+
+        if (!isset($_SESSION))
+            session_start();
+
         $authSession = $_SESSION['authSession'] ?? null;
 
         if (is_null($authSession))
@@ -89,5 +92,12 @@ class Security
         $user = self::getSessionUser($authSession);
 
         return $user;
+    }
+
+    public static function getCurrentUserShort()
+    {
+        $user = self::getCurrentUser();
+        if (!is_null($user))
+            return ['firstname' => $user['firstname'], 'lastname' => $user['lastname']];
     }
 }

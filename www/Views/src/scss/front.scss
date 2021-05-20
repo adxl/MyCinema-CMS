@@ -1,1 +1,29 @@
 @import 'main.scss';
+
+header {
+    height: 60px;
+    box-shadow: 0 2px 1px $gray;
+
+    #user-profile-button {
+        cursor: pointer;
+
+        &:hover div:first-child {
+            background-color: $lighter-gray;
+        }
+    }
+
+    #user-profile-menu {
+        position: absolute;
+        right: 1.5rem;
+        top: 70px;
+
+        a {
+            color: $text-black;
+            padding: 10px 20px;
+
+            &:hover {
+                background: darken($white, 20);
+            }
+        }
+    }
+}

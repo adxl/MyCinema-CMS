@@ -1,1 +1,3 @@
-<h2> <i class="fab fa-apple"></i> Welcome <?= $pseudo; ?></h2>
+<div class="flex-column flex-middle pt-xl">
+    <h1 style="font-size: 8em;">Home</h1>
+</div>
