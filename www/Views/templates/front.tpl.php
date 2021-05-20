@@ -11,15 +11,8 @@
 </head>
 
 <body>
-	<header>
-		<h1>Template de front</h1>
-	</header>
-
 	<!-- afficher la vue -->
 	<?php include $this->view ?>
-
-
-
 </body>
 
 </html>
