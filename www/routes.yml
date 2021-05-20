@@ -1,123 +1,147 @@
 # USER ROUTES :
 
+# Home page du site
 /:
   controller: MainController
   action: showHomePage
   scope: ""
 
-/login:
-  controller: AuthenticationController
-  action: login
-  scope: ""
-
-/register:
-  controller: AuthenticationController
-  action: register
-  scope: ""
-
-/logout:
-  controller: AuthenticationController
-  action: logout
-  scope: ""
-
+# page events
 /events:
   controller: MainController
   action: page404
   scope: ""
 
+# pages salles
 /rooms:
   controller: MainController
   action: page404
   scope: ""
 
-/profile:
-  controller: MainController
-  action: page404
-  scope: "ADMIN MANAGER USER"
-
+# page 404
 /404:
   controller: MainController
   action: page404
   scope: ""
 
-# ADMIN ROUTES :
+#  ADMIN ROUTES :
 
-/admin:
+#  dashboard bak
+/bo:
   controller: HomeController
   action: showDashboard
   scope: "ADMIN MANAGER"
 
-/admin/events:
+#  page events
+/bo/events:
   controller: EventsController
   action: default
   scope: "ADMIN MANAGER"
 
-/admin/events/new:
+# formulaire ajout event
+/bo/events/new:
   controller: EventsController
   action: showCreateEvent
   scope: "ADMIN MANAGER"
 
-/admin/events/create:
+# route POST création event
+/bo/events/create:
   controller: EventsController
   action: createEvent
   scope: "ADMIN MANAGER"
 
-/admin/events/edit:
+# formulaire edition event
+/bo/events/edit:
   controller: EventsController
   action: showEditEvent
   scope: "ADMIN MANAGER"
 
-/admin/events/update:
+# route POST update event
+/bo/events/update:
   controller: EventsController
   action: updateEvent
   scope: "ADMIN MANAGER"
 
-/admin/events/delete:
+# route POST suppression event
+/bo/events/delete:
   controller: EventsController
   action: deleteEvent
   scope: "ADMIN MANAGER"
 
-/admin/users:
+# page affichage des utilisateurs
+/bo/users:
   controller: UsersController
   action: showUsers
   scope: "ADMIN"
 
-/admin/comments:
+# page affichage des commentaires
+/bo/comments:
   controller: CommentsController
   action: showComments
   scope: "ADMIN MANAGER"
 
-/admin/rooms:
+# pages affichage des salles
+/bo/rooms:
   controller: RoomsController
   action: default
   scope: "ADMIN MANAGER"
 
-/admin/rooms/new:
+# formulaire ajout salle
+/bo/rooms/new:
   controller: RoomsController
   action: showCreateRoom
   scope: "ADMIN MANAGER"
 
-/admin/rooms/create:
+# route POST création salle
+/bo/rooms/create:
   controller: RoomsController
   action: createRoom
   scope: "ADMIN MANAGER"
 
-/admin/rooms/edit:
+#f ormulaire edition salle
+/bo/rooms/edit:
   controller: RoomsController
   action: showEditRoom
   scope: "ADMIN MANAGER"
 
-/admin/rooms/update:
+# route POST edition salle
+/bo/rooms/update:
   controller: RoomsController
   action: updateRoom
   scope: "ADMIN MANAGER"
 
-/admin/rooms/delete:
+# route POST suppression salle
+/bo/rooms/delete:
   controller: RoomsController
   action: deleteRoom
   scope: "ADMIN MANAGER"
 
-/admin/settings:
+# page paramètres du site
+/bo/settings:
   controller: SettingsController
   action: showSettings
   scope: "ADMIN"
+
+# page profile utilisateur
+/bo/profile:
+  controller: MainController
+  action: page404
+  scope: "ADMIN MANAGER"
+
+# page login
+/bo/login:
+  controller: AuthenticationController
+  action: login
+  scope: ""
+
+# page inscription employé
+/bo/register:
+  controller: AuthenticationController
+  action: register
+  scope: "ADMIN"
+
+# route déconnexion
+/bo/logout:
+  controller: AuthenticationController
+  action: logout
+  scope: "ADMIN MANAGER"
