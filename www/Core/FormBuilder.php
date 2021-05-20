@@ -90,9 +90,10 @@ class FormBuilder
 						</button>";
 			} else {
 				$html .= "<input 
+							name='" . $name . "'
 							type='" . ($configInput["type"] ?? "text") . "'
 							id='" . ($configInput["id"] ?? $name) . "'
-							name='" . $name . "'
+							form='" . ($configInput["form"] ?? $config['config']['id']) . "'
 							placeholder='" . ($configInput["placeholder"] ?? "") . "'
 							value='" . ($configInput["value"] ?? "") . "'
 							min='" . ($configInput["min"] ?? null) . "'

@@ -36,7 +36,6 @@ class RoomsController
             $rooms[$key]['nextMovie'] = $roomModel->getNextEvent($roomId);
         }
 
-
         $view->assign("rooms", $rooms);
     }
 
@@ -102,6 +101,7 @@ class RoomsController
         $room->setLabel($data['label']);
 
         $room->setCapacity($data['capacity']);
+
         if (isset($_POST['isAvailable'])) {
             $room->setIsAvailable(1);
         } else {
