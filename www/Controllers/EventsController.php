@@ -273,6 +273,20 @@ class EventsController
             $sessionModel->save();
         }
 
+        unset($_SESSION['edit_event_id']);
+
+        Helpers::redirect('/admin/events');
+    }
+
+    public function deleteEventAction()
+    {
+        $id = $_SESSION['edit_event_id'];
+
+        $event = new EventModel();
+        $event->deleteById($id);
+
+        unset($_SESSION['edit_event_id']);
+
         Helpers::redirect('/admin/events');
     }
 }

@@ -128,6 +128,8 @@ class RoomsController
         $room = new RoomModel();
         $room->deleteById($id);
 
+        unset($_SESSION['edit_room_id']);
+
         Helpers::redirect('/admin/rooms');
     }
 }
