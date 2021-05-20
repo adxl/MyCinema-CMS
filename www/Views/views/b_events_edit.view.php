@@ -9,7 +9,7 @@
         <?php App\Core\FormBuilder::render($form); ?>
     </div>
     <div class="flex">
-        <form action="/admin/events/delete" method="post">
+        <form action="/bo/events/delete" method="post">
             <button type="submit"> DELETE </button>
         </form>
     </div>

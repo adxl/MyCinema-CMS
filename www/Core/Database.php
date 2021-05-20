@@ -171,12 +171,12 @@ class Database
             $stmt = $this->pdo->prepare($query);
 
             $this->execute($stmt, $whereData);
+        } else {
+            echo "<pre>";
+            print_r($sqlData);
+            echo "</pre>";
+            die("Error - Bad Query : WHERE clause not found [database.php]");
         }
-
-        echo "<pre>";
-        print_r($sqlData);
-        echo "</pre>";
-        die("Error - Bad Query : WHERE clause not found [database.php]");
     }
 
 

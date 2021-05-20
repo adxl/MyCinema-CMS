@@ -183,12 +183,12 @@ class Room extends Database
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/admin/rooms/create",
+                "action" => "/bo/rooms/create",
                 "class" => "",
                 "id" => "form_create_room",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
-                "cancel_action" => "/admin/rooms"
+                "cancel_action" => "/bo/rooms"
             ],
             "inputs" => [
 
@@ -218,12 +218,12 @@ class Room extends Database
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/admin/rooms/update",
+                "action" => "/bo/rooms/update",
                 "class" => "",
                 "id" => "form_update_room",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
-                "cancel_action" => "/admin/rooms"
+                "cancel_action" => "/bo/rooms"
             ],
             "inputs" => [
 

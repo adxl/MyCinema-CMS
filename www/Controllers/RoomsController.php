@@ -87,7 +87,7 @@ class RoomsController
 
         $room->save();
 
-        Helpers::redirect('/admin/rooms');
+        Helpers::redirect('/bo/rooms');
     }
 
     public function updateRoomAction()
@@ -118,7 +118,7 @@ class RoomsController
 
         unset($_SESSION['edit_room_id']);
 
-        Helpers::redirect('/admin/rooms');
+        Helpers::redirect('/bo/rooms');
     }
 
     public function deleteRoomAction()
@@ -130,6 +130,6 @@ class RoomsController
 
         unset($_SESSION['edit_room_id']);
 
-        Helpers::redirect('/admin/rooms');
+        Helpers::redirect('/bo/rooms');
     }
 }

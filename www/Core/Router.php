@@ -44,14 +44,14 @@ class Router
 	{
 		$isAuthenticated = Security::isAuthenticated();
 		if (!$isAuthenticated)
-			Helpers::redirect('/login');
+			Helpers::redirect('/bo/login');
 	}
 
 	private function checkPermission()
 	{
 		$hasPermission = Security::hasPermission($this->scope);
 		if (!$hasPermission)
-			$this->exception403();
+			$this->exception404();
 	}
 
 	public function loadYaml()
@@ -103,11 +103,6 @@ class Router
 
 	public function exception404()
 	{
-		die("Error - Not Found Error : route not found [Router.php]");  // TODO: add views
-	}
-
-	public function exception403()
-	{
-		die("Error - Forbidden Error : you don't have access [Router.php]"); // TODO: add views
+		Helpers::redirect('/404');
 	}
 }

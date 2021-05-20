@@ -169,7 +169,7 @@ class EventsController
             $sessionModel->save();
         }
 
-        Helpers::redirect('/admin/events');
+        Helpers::redirect('/bo/events');
     }
 
     public function updateEventAction()
@@ -275,7 +275,7 @@ class EventsController
 
         unset($_SESSION['edit_event_id']);
 
-        Helpers::redirect('/admin/events');
+        Helpers::redirect('/bo/events');
     }
 
     public function deleteEventAction()
@@ -287,6 +287,6 @@ class EventsController
 
         unset($_SESSION['edit_event_id']);
 
-        Helpers::redirect('/admin/events');
+        Helpers::redirect('/bo/events');
     }
 }

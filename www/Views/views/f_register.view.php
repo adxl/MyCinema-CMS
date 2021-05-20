@@ -16,6 +16,6 @@
     <?php App\Core\FormBuilder::render($form); ?>
     <hr class="w-50">
     <div class="flex flex-center">
-        <p>Already a member ? <a href="/login" class="link">Sign in</a></p>
+        <p>Already a member ? <a href=/bo/login" class="link">Sign in</a></p>
     </div>
 </div>

@@ -171,7 +171,7 @@ class User extends Database
 		return  [
 			"config" => [
 				"method" => "POST",
-				"action" => "/login",
+				"action" => "/bo/login",
 				"id" => "form_login",
 				"submit" => "Login",
 				"submitClass" => 'w-50'
