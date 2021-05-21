@@ -6,7 +6,6 @@ use App\Core\Database;
 
 class User extends Database
 {
-
 	private $id = null;
 
 	// required
@@ -14,17 +13,11 @@ class User extends Database
 	protected $lastname;
 	protected $email;
 	protected $password;
-
-	// not required
-	private $address;
-	private $city;
-	private $zipcode;
-	private $birthdate;
+	protected $role = 'MANAGER';
 
 	// default
-	private $idStatus;
-	private $idRole;
-	private $isDeleted;
+	private $isActive = 0;
+	private $isDeleted = 0;
 
 
 	public function __construct()
@@ -38,7 +31,7 @@ class User extends Database
 	{
 		return $this->id;
 	}
-	public function setId(int $id): void
+	public function setId($id)
 	{
 		$this->id = $id;
 	}
@@ -87,75 +80,29 @@ class User extends Database
 		$this->password = $pwd;
 	}
 
-	// address
-
-	public function getAddress(): string
-	{
-		return $this->address;
-	}
-	public function setAddress(string $address): void
-	{
-		$this->address = $address;
-	}
-
-	// city
-
-	public function geCity(): string
-	{
-		return $this->city;
-	}
-	public function setCity(string $city): void
-	{
-		$this->city = $city;
-	}
-
-	// zipcode
-
-	public function getZipcode(): string
-	{
-		return $this->zipcode;
-	}
-	public function setZipCode(string $zipcode): void
-	{
-		$this->zipcode = $zipcode;
-	}
-
-	// birthdate
-
-	public function getBirthdate()
-	{
-		return $this->birthdate;
-	}
-	public function setBirthdate($birthdate): void
-	{
-		$this->birthdate = $birthdate;
-	}
-
-	// status
-
-	public function getIdStatus(): int
-	{
-		return $this->idStatus;
-	}
-	public function setIdStatus(int $idStatus): void
-	{
-		$this->idStatus = $idStatus;
-	}
-
 	// role
 
-	public function getIdRole(): int
+	public function getRole(): int
 	{
-		return $this->idRole;
+		return $this->role;
 	}
-	public function setIdRole(int $idRole): void
+	public function setIdRole(int $role): void
 	{
-		$this->idRole = $idRole;
+		$this->role = $role;
 	}
 
+	// is active ?
+
+	public function getIsActive(): bool
+	{
+		return $this->isActive;
+	}
+	public function setIsActive(bool $isActive): void
+	{
+		$this->isActive = $isActive;
+	}
 
 	// is deleted ?
-
 
 	public function getIsDeleted(): bool
 	{
@@ -211,7 +158,7 @@ class User extends Database
 		return  [
 			"config" => [
 				"method" => "POST",
-				"action" => "/register",
+				"action" => "/bo/register",
 				"id" => "form_register",
 				"submit" => "Sign up",
 				"submitClass" => 'w-50'
@@ -256,6 +203,7 @@ class User extends Database
 					"required" => true,
 					"minLength" => 8,
 					"maxLength" => 255,
+					"value" => "password",  // DEBUG: register rapide
 					"error" => "Password should have at least 8 characters"
 				],
 
@@ -265,6 +213,7 @@ class User extends Database
 					"label" => "Confirm password",
 					"minLength" => 8,
 					"maxLength" => 255,
+					"value" => "password",  // DEBUG: register rapide
 					"required" => true,
 				],
 			]

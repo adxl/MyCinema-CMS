@@ -10,8 +10,16 @@ class UsersController
     public function showUsersAction()
     {
         $view = new View("b_users", 'back');
-        $view->assign("title", 'Users management');
+        $view->assign("title", 'Gestion des utilisateurs');
 
-        $user = new UserModel();
+        $userModel = new UserModel();
+        $users = $userModel->findAll();
+
+        foreach ($users as $key => $user) {
+            unset($user['password']);
+            $users[$key] = $user;
+        }
+
+        $view->assign("users", $users);
     }
 }

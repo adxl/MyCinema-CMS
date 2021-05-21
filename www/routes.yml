@@ -134,7 +134,7 @@
   action: login
   scope: ""
 
-# page inscription employé
+# page inscription manager/admin
 /bo/register:
   controller: AuthenticationController
   action: register

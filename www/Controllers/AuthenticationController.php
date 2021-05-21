@@ -69,11 +69,6 @@ class AuthenticationController
 
     public function registerAction()
     {
-        $isAuthenticated = Security::isAuthenticated();
-        if ($isAuthenticated) {
-            Helpers::redirect();
-        }
-
         $view = new View("f_register", 'auth');
         $userModel = new UserModel();
 
@@ -87,7 +82,13 @@ class AuthenticationController
                 $validation = $this->validateRegister();
 
                 if (empty($validation['errors'])) {
-                    $validation['user']->save();
+                    $id = $validation['user']->save();
+                    if ($id) {
+                        Helpers::redirect('/bo/users');
+                    } else {
+                        $errors = ["Un problème est survenu lors de l'inscription"];
+                        $view->assign("errors", $errors);
+                    }
                 } else {
                     $view->assign("errors", $validation['errors']);
                 }
