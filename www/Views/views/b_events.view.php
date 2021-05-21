@@ -1,4 +1,4 @@
-<div class="flex mb-m mt-s">
+<div class="flex flex-middle mb-m mt-s">
     <i class="fas fa-building"></i>
     <h1 class="ml-s"><?= $title; ?>
     </h1>
@@ -6,7 +6,7 @@
 
 <div class="flex flex-right">
     <a href="/bo/events/new">
-        <button class="button button--success mb-l">+ Create Event</button>
+        <button class="button button--success mb-l">Create Event</button>
     </a>
 </div>
 

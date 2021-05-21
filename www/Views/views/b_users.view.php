@@ -1,6 +1,6 @@
-<div class="flex my-s mt-0">
+<div class="flex flex-middle mb-m mt-s">
     <i class="fas fa-users"></i>
-    <h1 class="mx-s"><?= $title; ?></h1>
+    <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 
 
@@ -40,7 +40,7 @@
                     <td>
                         <div class="flex">
                             <a class="mr-m" <?= ($user['isActive'] && $user['id'] !== $self['id']) ? "href='/bo/users/role?id=" . $user['id'] . "'" : "" ?>>
-                                <i class="fas fa-exchange-alt"></i>
+                                <i class="fas fa-exchange-alt text-blue"></i>
                             </a>
 
                             <p><?= $user['role']; ?></p>
@@ -49,13 +49,13 @@
                     <td>
                         <div class="flex flex-middle">
                             <a class="mr-m" style="font-size: 1.5em" href="/bo/users/status?id=<?= $user['id'] ?>&status=<?= (int)!$user['isActive']; ?>">
-                                <i class="fas fa-toggle-<?= (int)$user['isActive'] ? 'on' : 'off' ?>"></i>
+                                <i class="fas fa-toggle-<?= (int)$user['isActive'] ? 'on text-green' : 'off' ?>"></i>
                             </a>
                         </div>
                     </td>
                     <td>
                         <a <?= ($user['id'] !== $self['id']) ? "href='/bo/users/delete?id=" . $user['id'] . "'" : "" ?>>
-                            <i class="fas fa-trash-alt"></i>
+                            <i class="fas fa-trash-alt text-red"></i>
                         </a>
                     </td>
                 </tr>

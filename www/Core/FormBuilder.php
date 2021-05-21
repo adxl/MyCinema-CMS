@@ -88,6 +88,16 @@ class FormBuilder
 							id='" . ($configInput["id"] ?? $name) . "'
 							class='" . $configInput['class'] . "'> " . $configInput['value'] . "
 						</button>";
+			} elseif ($configInput['type'] == 'checkbox') {
+				$html .= "<input 
+							name='" . $name . "'
+							type='checkbox'
+							id='" . ($configInput["id"] ?? $name) . "'
+							form='" . ($configInput["form"] ?? $config['config']['id']) . "'
+							" . (!empty($configInput["required"]) ? "required" : "") . "
+							" . (!empty($configInput["checked"]) ? "checked" : "") . "
+							>";
+				$html .= "<span class='checkmark' ></span>";
 			} else {
 				$html .= "<input 
 							name='" . $name . "'
@@ -109,11 +119,11 @@ class FormBuilder
 		$postButton = "<input type='submit' class='button button--success " . ($config["config"]["submitClass"] ?? "") . "' 
 								value=\"" . ($config["config"]["submit"] ?? "Valider") . "\">";
 		$cancelButton = isset($config["config"]["cancel"]) ?
-			"<a class='button button--danger' 
+			"<a class='button button--danger-soft' 
 				href=" . $config["config"]["cancel_action"] . ">" . $config["config"]["cancel"] . " </a>"
 			: "";
 
-		$html .= "<div class='flex flex-center'>
+		$html .= "<div class='mt-xl flex flex-center'>
 				" . $postButton . $cancelButton . " 
 				</div>";
 

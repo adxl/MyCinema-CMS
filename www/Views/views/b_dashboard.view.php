@@ -1,4 +1,4 @@
-<div class="flex my-s mt-0">
+<div class="flex flex-middle mb-m mt-s">
     <i class="fas fa-home"></i>
-    <h1 class="mx-s"><?= $title; ?></h1>
+    <h1 class="ml-s"><?= $title; ?></h1>
 </div>

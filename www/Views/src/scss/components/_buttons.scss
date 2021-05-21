@@ -30,6 +30,16 @@
         }
     }
 
+    &--danger-soft {
+        background-color: $white;
+        color: $red;
+        border: solid 1px $red;
+        &:hover {
+            color: $white;
+            background-color: lighten($red, 10%);
+        }
+    }
+
     &--danger {
         background-color: $red;
         color: $white;
