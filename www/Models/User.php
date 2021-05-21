@@ -14,10 +14,8 @@ class User extends Database
 	protected $email;
 	protected $password;
 	protected $role = 'MANAGER';
-
-	// default
-	private $isActive = 0;
-	private $isDeleted = 0;
+	protected $isActive = 0;
+	protected $isDeleted = 0;
 
 
 	public function __construct()
@@ -71,11 +69,11 @@ class User extends Database
 
 	// password
 
-	public function getPwd(): string
+	public function getPassword(): string
 	{
 		return $this->password;
 	}
-	public function setPwd(string $pwd): void
+	public function setPassword(string $pwd): void
 	{
 		$this->password = $pwd;
 	}
@@ -86,29 +84,29 @@ class User extends Database
 	{
 		return $this->role;
 	}
-	public function setIdRole(int $role): void
+	public function setRole($role): void
 	{
 		$this->role = $role;
 	}
 
 	// is active ?
 
-	public function getIsActive(): bool
+	public function getIsActive()
 	{
 		return $this->isActive;
 	}
-	public function setIsActive(bool $isActive): void
+	public function setIsActive($isActive): void
 	{
 		$this->isActive = $isActive;
 	}
 
 	// is deleted ?
 
-	public function getIsDeleted(): bool
+	public function getIsDeleted()
 	{
 		return $this->isDeleted;
 	}
-	public function setIsDeleted(bool $isDeleted): void
+	public function setIsDeleted($isDeleted): void
 	{
 		$this->isDeleted = $isDeleted;
 	}

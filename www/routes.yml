@@ -68,12 +68,6 @@
   action: deleteEvent
   scope: "ADMIN MANAGER"
 
-# page affichage des utilisateurs
-/bo/users:
-  controller: UsersController
-  action: showUsers
-  scope: "ADMIN"
-
 # page affichage des commentaires
 /bo/comments:
   controller: CommentsController
@@ -133,6 +127,18 @@
   controller: AuthenticationController
   action: login
   scope: ""
+
+# page affichage des utilisateurs
+/bo/users:
+  controller: UsersController
+  action: showUsers
+  scope: "ADMIN"
+
+# route POST activer/désactiver user
+/bo/users/status:
+  controller: UsersController
+  action: updateStatus
+  scope: "ADMIN"
 
 # page inscription manager/admin
 /bo/register:

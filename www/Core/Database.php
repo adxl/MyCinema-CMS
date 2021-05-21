@@ -70,7 +70,6 @@ class Database
         return $this->findOne($sqlData);
     }
 
-
     public function findOne($sqlData = [])
     {
         if (array_key_exists('where', $sqlData) && sizeof($sqlData['where'])) {
@@ -101,9 +100,6 @@ class Database
 
             return $whereData;
         }
-
-
-
 
         echo "<pre>";
         print_r($sqlData);
@@ -192,9 +188,24 @@ class Database
             echo 'IN QUERY : ' . $stmt->queryString . PHP_EOL;
             echo PHP_EOL;
             echo 'WITH DATA : ' . PHP_EOL;
-            print_r($columns);
+            var_dump($columns);
             echo "</pre>";
             die();
+        }
+    }
+
+
+    public function populate(&$model, $data)
+    {
+        $columns = array_diff_key(
+            get_object_vars($this),
+            get_class_vars(get_class())
+        );
+
+        $model->setId($data['id']);
+        foreach ($columns as $key => $value) {
+            $setter = 'set' . ucfirst($key);
+            $model->$setter($data[$key]);
         }
     }
 }

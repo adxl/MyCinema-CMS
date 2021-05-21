@@ -42,14 +42,17 @@
                         <p> <?= $user['isActive'] ? 'OUI' : 'NON' ?> </p>
                     </td>
                     <td>
-                        <a href="#" class='mr-s'>
-                            <i class="fas fa-<?= $user['isActive'] ? 'lock' : 'unlock' ?>"></i>
-                        </a>
+                        <div class="flex flex-middle">
 
-                        <a href="#" class='mr-s'>
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
+                            <a class="mr-m" href="/bo/users/status?id=<?= $user['id']; ?>&status=<?= (int)!$user['isActive']; ?>" type="submit">
+                                <i class="fas fa-<?= (int)$user['isActive'] ? 'lock' : 'unlock' ?>"></i>
+                            </a>
 
+                            <a href="#">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+
+                        </div>
                     </td>
                 </tr>
             <?php endforeach ?>

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\Helpers;
 use App\Core\View;
 use App\Models\User as UserModel;
 
@@ -21,5 +22,22 @@ class UsersController
         }
 
         $view->assign("users", $users);
+    }
+
+    public function updateStatusAction()
+    {
+        $id = Helpers::getQueryParam('id');
+        $status = Helpers::getQueryParam('status');
+
+        $userModel = new UserModel();
+        $user = $userModel->findById($id);
+
+        $userModel->populate($userModel, $user);
+
+        $userModel->setIsActive($status);
+
+        $userModel->save();
+
+        Helpers::redirect('/bo/users');
     }
 }
