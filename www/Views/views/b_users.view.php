@@ -48,14 +48,13 @@
                     </td>
                     <td>
                         <div class="flex flex-middle">
-                            <a class="mr-m" href="/bo/users/status?id=<?= $user['id'] ?>&status=<?= (int)!$user['isActive']; ?>">
+                            <a class="mr-m" style="font-size: 1.5em" href="/bo/users/status?id=<?= $user['id'] ?>&status=<?= (int)!$user['isActive']; ?>">
                                 <i class="fas fa-toggle-<?= (int)$user['isActive'] ? 'on' : 'off' ?>"></i>
                             </a>
-                            <p><?= $user['isActive'] ? 'OUI' : 'NON'; ?></p>
                         </div>
                     </td>
                     <td>
-                        <a href="/bo/users/delete?id=<?= $user['id'] ?>">
+                        <a <?= ($user['id'] !== $self['id']) ? "href='/bo/users/delete?id=" . $user['id'] . "'" : "" ?>>
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </td>
