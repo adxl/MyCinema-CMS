@@ -9,13 +9,13 @@
 # page events
 /events:
   controller: MainController
-  action: page404
+  action: showEvents
   scope: ""
 
 # pages salles
 /rooms:
   controller: MainController
-  action: page404
+  action: showRooms
   scope: ""
 
 # page 404
@@ -28,7 +28,7 @@
 
 #  dashboard bak
 /bo:
-  controller: HomeController
+  controller: DashboardController
   action: showDashboard
   scope: "ADMIN MANAGER"
 

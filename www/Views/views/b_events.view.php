@@ -23,7 +23,7 @@
                             <?= $event['title']; ?>
                         </h1>
                         <a href="/events?id=<?= $event['id']; ?>">
-                            <i class="fas fa-eye faded"></i>
+                            <i class="fas fa-eye"></i>
                         </a>
                     </div>
                     <p class="no-break"> Schedulled sessions : <?= $event['sessions']; ?>

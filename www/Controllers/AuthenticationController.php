@@ -69,7 +69,7 @@ class AuthenticationController
 
     public function registerAction()
     {
-        $view = new View("f_register", 'auth');
+        $view = new View("b_register", 'auth');
         $userModel = new UserModel();
 
         $form = $userModel->formBuilderRegister();

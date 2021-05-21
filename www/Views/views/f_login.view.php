@@ -12,8 +12,4 @@
     <?php endif; ?>
 
     <?php App\Core\FormBuilder::render($form); ?>
-    <hr class="w-50">
-    <div class="flex flex-center">
-        <p>Don't have an account ? <a href="/register" class="link">Sign up</a></p>
-    </div>
 </div>
