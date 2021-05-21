@@ -55,7 +55,7 @@
                         </div>
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="/bo/users/delete?id=<?= $user['id'] ?>">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </td>

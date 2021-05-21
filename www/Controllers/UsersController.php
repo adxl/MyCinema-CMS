@@ -17,6 +17,10 @@ class UsersController
         $userModel = new UserModel();
         $users = $userModel->findAll();
 
+        $users = array_filter($users, function ($v, $k) {
+            return $v['isDeleted'] == false;
+        }, ARRAY_FILTER_USE_BOTH);
+
         foreach ($users as $key => $user) {
             unset($user['password']);
             $users[$key] = $user;
@@ -57,6 +61,22 @@ class UsersController
         $role = $user['role'] === 'ADMIN' ? 'MANAGER' : 'ADMIN';
 
         $userModel->setRole($role);
+
+        $userModel->save();
+
+        Helpers::redirect('/bo/users');
+    }
+
+    public function deleteUserAction()
+    {
+        $id = Helpers::getQueryParam('id');
+
+        $userModel = new UserModel();
+        $user = $userModel->findById($id);
+
+        $userModel->populate($userModel, $user);
+
+        $userModel->setIsDeleted(1);
 
         $userModel->save();
 

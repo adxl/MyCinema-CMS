@@ -146,6 +146,12 @@
   action: switchRole
   scope: "ADMIN"
 
+# route POST switch role user
+/bo/users/delete:
+  controller: UsersController
+  action: deleteUser
+  scope: "ADMIN"
+
 # page inscription manager/admin
 /bo/register:
   controller: AuthenticationController
