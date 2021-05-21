@@ -140,6 +140,12 @@
   action: updateStatus
   scope: "ADMIN"
 
+# route POST switch role user
+/bo/users/role:
+  controller: UsersController
+  action: switchRole
+  scope: "ADMIN"
+
 # page inscription manager/admin
 /bo/register:
   controller: AuthenticationController

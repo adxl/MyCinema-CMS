@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\Helpers;
+use App\Core\Security;
 use App\Core\View;
 use App\Models\User as UserModel;
 
@@ -21,7 +22,10 @@ class UsersController
             $users[$key] = $user;
         }
 
+        $self = Security::getCurrentUserShort();
+
         $view->assign("users", $users);
+        $view->assign("self", $self);
     }
 
     public function updateStatusAction()
@@ -35,6 +39,24 @@ class UsersController
         $userModel->populate($userModel, $user);
 
         $userModel->setIsActive($status);
+
+        $userModel->save();
+
+        Helpers::redirect('/bo/users');
+    }
+
+    public function switchRoleAction()
+    {
+        $id = Helpers::getQueryParam('id');
+
+        $userModel = new UserModel();
+        $user = $userModel->findById($id);
+
+        $userModel->populate($userModel, $user);
+
+        $role = $user['role'] === 'ADMIN' ? 'MANAGER' : 'ADMIN';
+
+        $userModel->setRole($role);
 
         $userModel->save();
 
