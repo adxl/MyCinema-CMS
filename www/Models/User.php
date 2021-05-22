@@ -256,4 +256,29 @@ class User extends Database
             ]
         ];
     }
+
+    public function formBuiderProfilEmail($email)
+    {
+        return  [
+            "config" => [
+                "method" => "POST",
+                "action" => "/bo/profile/email",
+                "id" => "form_profil_email",
+                "submit" => "Submit",
+                "submitClass" => 'w-50'
+            ],
+            "inputs" => [
+
+                "email" => [
+                    "type" => "email",
+                    'class' => 'field w-100',
+                    "placeholder" => "example@email.com",
+                    "label" => "Email",
+                    "value" => $email,
+                    "required" => true,
+                    "error" => "Not a valid email"
+                ],
+            ]
+        ];
+    }
 }

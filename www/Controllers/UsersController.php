@@ -94,8 +94,13 @@ class UsersController
 
         $view->assign("title", 'Profil '.$user['firstname'] .' '. $user['lastname']);
 
-        $form = $userModel->formBuilderProfilNames($user['firstname'], $user['lastname']);
-        $view->assign('form', $form);
+        $formNames = $userModel->formBuilderProfilNames($user['firstname'], $user['lastname']);
+        $view->assign('formNames', $formNames);
+
+
+        $formEmail = $userModel->formBuiderProfilEmail($user['email']);
+        $view->assign('formEmail', $formEmail);
+
 
         if (isset($_SESSION['flash']))
         {
@@ -162,6 +167,45 @@ class UsersController
 
 
 
+    }
+
+    public function editProfilEmailAction()
+    {
+        $currentUser = Security::getCurrentUser();
+        $id = $currentUser['id'];
+
+
+        $userModel = new UserModel();
+        $user = $userModel->findById($id);
+
+        $userModel->populate($userModel, $user);
+
+        $form = $userModel->formBuiderProfilEmail($user['email']);
+
+        if (!empty($_POST)) {
+
+            $errors = FormValidator::check($form, $_POST);
+
+            if (empty($errors)) {
+
+                $userModel->setEmail(htmlspecialchars($_POST["email"]));
+
+                $id = $userModel->save();
+
+                if ($id) {
+                    $success = ['Vos modifications ont bien été enregistré'];
+                    Helpers::addFlash('success', $success);
+                    Helpers::redirect('/bo/profile');
+                } else {
+                    $errors = ["Un problème est survenu lors de la modification des données'"];
+                    Helpers::addFlash('error', $errors);
+                    Helpers::redirect('/bo/profile');
+                }
+            } else {
+                Helpers::addFlash('error', $errors);
+                Helpers::redirect('/bo/profile');
+            }
+        }
     }
 
 }

@@ -128,6 +128,13 @@
   action: editProfilNames
   scope: "ADMIN MANAGER"
 
+# route POST edit profile email
+/bo/profile/email:
+  controller: UsersController
+  action: editProfilEmail
+  scope: "ADMIN MANAGER"
+
+
 # page login
 /bo/login:
   controller: AuthenticationController
