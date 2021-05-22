@@ -4,6 +4,10 @@ header {
     height: 60px;
     box-shadow: 0 2px 1px $gray;
 
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+
     #user-profile-button {
         cursor: pointer;
 
@@ -16,7 +20,7 @@ header {
         position: absolute;
         right: 1.5rem;
         top: 70px;
-        z-index: 2;
+        z-index: 4;
         background-color: $white;
 
         a {
@@ -28,6 +32,21 @@ header {
             }
         }
     }
+}
+
+nav {
+    z-index: 3;
+    position: fixed;
+    width: 100%;
+    top: 60px;
+    height: 60px;
+    background-color: $white;
+}
+
+main {
+    position: absolute;
+    top: 120px;
+    width: 100%;
 }
 
 #login-form {

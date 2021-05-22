@@ -15,7 +15,6 @@ class Event extends Database
 
     protected $title;
     protected $synopsis;
-    protected $price = 0.0;
     protected $actors;
     protected $directors;
 
@@ -42,16 +41,6 @@ class Event extends Database
     public function setTitle($title): void
     {
         $this->title = $title;
-    }
-
-
-    public function getPrice()
-    {
-        return $this->price;
-    }
-    public function setPrice(float $price)
-    {
-        $this->price = $price;
     }
 
     public function getSynopsis()
@@ -176,6 +165,66 @@ class Event extends Database
         ]);
 
         return $eventRoom ? $eventRoom[0]['startTime'] : '';
+    }
+
+    // evenement le plus proche
+    public function getNextEvent()
+    {
+        $eventRoomModel = new EventRoomModel();
+
+        $nextSession = $eventRoomModel->findOne([
+            'select' => 'eventId, startTime',
+            'where' => [
+                [
+                    'column' => 'startTime',
+                    'value' => Helpers::now(),
+                    'operator' => '>='
+                ]
+            ],
+            'orderBy' => [
+                'column' => 'startTime',
+                'order' => 'ASC'
+            ]
+        ]);
+
+        if ($nextSession) {
+            $event = $this->findById($nextSession['eventId']);
+            $event['tags'] = $this->getTags($event['id']);
+            return $event;
+        }
+    }
+
+    // les evenement à venir
+    public function getIncomingEvents()
+    {
+        $eventRoomModel = new EventRoomModel();
+
+        $nextSessions = $eventRoomModel->findAll([
+            'select' => 'eventId, startTime',
+            'where' => [
+                [
+                    'column' => 'startTime',
+                    'value' => Helpers::now(),
+                    'operator' => '>='
+                ]
+            ],
+            'orderBy' => [
+                'column' => 'startTime',
+                'order' => 'ASC'
+            ]
+        ]);
+
+        $events = [];
+
+        foreach ($nextSessions as $session) {
+            $event = $this->findById($session['eventId']);
+            if ($event) {
+                $event['tags'] = $this->getTags($event['id']);
+                $events[] = $event;
+            }
+        }
+
+        return $events;
     }
 
     // event est passé
