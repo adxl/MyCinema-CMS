@@ -1,5 +1,10 @@
+<div class="flex flex-middle mb-m mt-s">
+    <i class="fas fa-users"></i>
+    <h1 class="ml-s"><?= $title; ?>
+    </h1>
+</div>
+
 <div class="w-100 bg-white flex-column p-l">
-    <h1 class="text-center mt-m mb-l">Ajouter un collaborateur</h1>
 
     <?php if (isset($errors)) : ?>
         <div>

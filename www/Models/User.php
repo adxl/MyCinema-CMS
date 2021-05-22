@@ -158,8 +158,10 @@ class User extends Database
 				"method" => "POST",
 				"action" => "/bo/register",
 				"id" => "form_register",
-				"submit" => "Sign up",
-				"submitClass" => 'w-50'
+				"submit" => "Confirmer",
+				"submitClass" => 'w-25 p-m',
+				'cancel' => 'Annuler',
+				'cancel_action' => '/bo/users'
 			],
 			"inputs" => [
 

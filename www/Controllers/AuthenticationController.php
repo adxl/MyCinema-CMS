@@ -69,7 +69,9 @@ class AuthenticationController
 
     public function registerAction()
     {
-        $view = new View("b_register", 'auth');
+        $view = new View("b_register", 'back');
+        $view->assign("title", 'Gestion des utilisateurs > Ajouter un collaborateur');
+
         $userModel = new UserModel();
 
         $form = $userModel->formBuilderRegister();
