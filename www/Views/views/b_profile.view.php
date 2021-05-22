@@ -35,3 +35,8 @@
 <div class="card m-m">
     <?php App\Core\FormBuilder::render($formEmail); ?>
 </div>
+
+<div class="card m-m">
+    <?php App\Core\FormBuilder::render($formPassword); ?>
+</div>
+

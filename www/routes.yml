@@ -135,6 +135,13 @@
   scope: "ADMIN MANAGER"
 
 
+# route POST edit profile password
+/bo/profile/password:
+  controller: UsersController
+  action: editProfilPassword
+  scope: "ADMIN MANAGER"
+
+
 # page login
 /bo/login:
   controller: AuthenticationController

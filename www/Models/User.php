@@ -281,4 +281,49 @@ class User extends Database
             ]
         ];
     }
+
+    public function formBuilderProfilPassword()
+    {
+        return  [
+            "config" => [
+                "method" => "POST",
+                "action" => "/bo/profile/password",
+                "id" => "form_profil_password",
+                "submit" => "Submit",
+                "submitClass" => 'w-50'
+            ],
+            "inputs" => [
+
+                "actualPwd" => [
+                    "type" => "password",
+                    'class' => 'field w-100',
+                    "label" => "Actual password",
+                    "required" => true,
+                    "minLength" => 8,
+                    "maxLength" => 255,
+                    "error" => "Password should have at least 8 characters"
+                ],
+
+                "pwd" => [
+                    "type" => "password",
+                    'class' => 'field w-100',
+                    "label" => "New password",
+                    "required" => true,
+                    "minLength" => 8,
+                    "maxLength" => 255,
+                    "error" => "Password should have at least 8 characters"
+                ],
+
+                "pwdConfirm" => [
+                    "type" => "password",
+                    'class' => 'field w-100 mb-xl',
+                    "label" => "Confirm new password",
+                    "minLength" => 8,
+                    "maxLength" => 255,
+                    "required" => true,
+                ],
+            ]
+        ];
+
+    }
 }

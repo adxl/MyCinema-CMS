@@ -101,6 +101,8 @@ class UsersController
         $formEmail = $userModel->formBuiderProfilEmail($user['email']);
         $view->assign('formEmail', $formEmail);
 
+        $formPassword = $userModel->formBuilderProfilPassword();
+        $view->assign('formPassword', $formPassword);
 
         if (isset($_SESSION['flash']))
         {
@@ -198,6 +200,53 @@ class UsersController
                     Helpers::redirect('/bo/profile');
                 } else {
                     $errors = ["Un problème est survenu lors de la modification des données'"];
+                    Helpers::addFlash('error', $errors);
+                    Helpers::redirect('/bo/profile');
+                }
+            } else {
+                Helpers::addFlash('error', $errors);
+                Helpers::redirect('/bo/profile');
+            }
+        }
+    }
+
+    public function editProfilPasswordAction()
+    {
+        $currentUser = Security::getCurrentUser();
+        $id = $currentUser['id'];
+
+
+        $userModel = new UserModel();
+        $user = $userModel->findById($id);
+
+        $userModel->populate($userModel, $user);
+
+        $form = $userModel->formBuilderProfilPassword();
+
+
+        if (!empty($_POST)) {
+
+            $errors = FormValidator::check($form, $_POST);
+
+            if (empty($errors)) {
+                if (password_verify($_POST['actualPwd'], $user['password']))
+                {
+                    $userModel->setPassword(password_hash(htmlspecialchars($_POST["pwd"]), PASSWORD_DEFAULT));
+
+                    $id = $userModel->save();
+
+                    if ($id) {
+                        $success = ['Votre mot de passe a bien été enregistré'];
+                        Helpers::addFlash('success', $success);
+                        Helpers::redirect('/bo/profile');
+                    } else {
+                        $errors = ["Un problème est survenu lors de la modification du mot de passe"];
+                        Helpers::addFlash('error', $errors);
+                        Helpers::redirect('/bo/profile');
+                    }
+                }
+                else {
+                    $errors = ["Veuillez renseignez le bon mot de passe actuel"];
                     Helpers::addFlash('error', $errors);
                     Helpers::redirect('/bo/profile');
                 }
