@@ -30,6 +30,12 @@ class Helpers
         header("Location: " . $location);
     }
 
+    public static function addFlash($typeAlert, $message)
+    {
+        $_SESSION['flash'][$typeAlert] = $message;
+
+    }
+
     public static function splitFields($fieldsString)
     {
         $fields = explode(';', $fieldsString);

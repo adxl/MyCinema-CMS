@@ -97,6 +97,24 @@ class UsersController
         $form = $userModel->formBuilderProfilNames($user['firstname'], $user['lastname']);
         $view->assign('form', $form);
 
+        if (isset($_SESSION['flash']))
+        {
+            switch (true)
+            {
+                case array_key_exists('error', $_SESSION['flash']):
+                    $errors = $_SESSION['flash']['error'];
+                    unset($_SESSION['flash']['error']);
+                    $view->assign('errors', $errors);
+                    break;
+                case array_key_exists('success', $_SESSION['flash']):
+                    $success = $_SESSION['flash']['success'];
+                    unset($_SESSION['flash']['success']);
+                    $view->assign('success', $success);
+                    break;
+            }
+
+        }
+
 
 
 
@@ -128,21 +146,16 @@ class UsersController
                 $id = $userModel->save();
 
                 if ($id) {
+                    $success = ['Vos modifications ont bien été enregistré'];
+                    Helpers::addFlash('success', $success);
                     Helpers::redirect('/bo/profile');
                 } else {
-                    $errors = ["Un problème est survenu lors de l'inscription"];
-                    setcookie("errorsForm", $errors);
+                    $errors = ["Un problème est survenu lors de la modification des données'"];
+                    Helpers::addFlash('error', $errors);
                     Helpers::redirect('/bo/profile');
                 }
             } else {
-                $i = 0;
-                foreach ($errors as $error)
-                {
-                    setcookie("errorsForm", $error, time()+3600);
-
-
-                }
-
+                Helpers::addFlash('error', $errors);
                 Helpers::redirect('/bo/profile');
             }
         }

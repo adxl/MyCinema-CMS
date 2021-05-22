@@ -16,6 +16,18 @@
         </div>
     <?php endif; ?>
 
+    <?php if (isset($success)) : ?>
+        <div>
+            <ul class="p-0">
+                <?php foreach ($success as $succes) : ?>
+                    <li class="text-alert-success">
+                        <?= $succes ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
     <?php App\Core\FormBuilder::render($form); ?>
 
 </div>
