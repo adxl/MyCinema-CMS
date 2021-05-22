@@ -32,11 +32,20 @@ class MainController
         $view = new View("f_events", 'front');
 
         $eventModel = new Event();
+
         $events = $eventModel->findAll();
+        shuffle($events);
+        $events = array_slice($events, 0, 10);
+
+        foreach ($events as &$event) {
+            $event['tags'] = $eventModel->getTags($event['id']);
+        }
 
         $nextEvent = $eventModel->getNextEvent();
 
         $incomingEvents = $eventModel->getIncomingEvents();
+        shuffle($incomingEvents);
+        $incomingEvents = array_slice($incomingEvents, 0, 4);
 
         $view->assign('events', $events);
         $view->assign('nextEvent', $nextEvent);

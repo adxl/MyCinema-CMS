@@ -15,7 +15,6 @@ class Event extends Database
 
     protected $title;
     protected $synopsis;
-    protected $price = 0.0;
     protected $actors;
     protected $directors;
 
@@ -42,16 +41,6 @@ class Event extends Database
     public function setTitle($title): void
     {
         $this->title = $title;
-    }
-
-
-    public function getPrice()
-    {
-        return $this->price;
-    }
-    public function setPrice(float $price)
-    {
-        $this->price = $price;
     }
 
     public function getSynopsis()
@@ -200,6 +189,7 @@ class Event extends Database
 
         if ($nextSession) {
             $event = $this->findById($nextSession['eventId']);
+            $event['tags'] = $this->getTags($event['id']);
             return $event;
         }
     }
@@ -228,8 +218,10 @@ class Event extends Database
 
         foreach ($nextSessions as $session) {
             $event = $this->findById($session['eventId']);
-            if ($event)
+            if ($event) {
+                $event['tags'] = $this->getTags($event['id']);
                 $events[] = $event;
+            }
         }
 
         return $events;
