@@ -5,7 +5,44 @@
   .w-#{$value} {
     width: $value * 1%;
   }
+
+  .w-#{$value}-s {
+    @include s {
+      width: $value * 1%;
+    }
+  }
+
+  .w-#{$value}-m {
+    @include m {
+      width: $value * 1%;
+    }
+  }
+
+  .w-#{$value}-l {
+    @include l {
+      width: $value * 1%;
+    }
+  }
+
   .h-#{$value} {
     height: $value * 1%;
+  }
+
+  .h-#{$value}-s {
+    @include s {
+      height: $value * 1%;
+    }
+  }
+
+  .h-#{$value}-m {
+    @include m {
+      height: $value * 1%;
+    }
+  }
+
+  .h-#{$value}-l {
+    @include l {
+      height: $value * 1%;
+    }
   }
 }

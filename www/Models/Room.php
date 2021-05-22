@@ -184,7 +184,7 @@ class Room extends Database
             "config" => [
                 "method" => "POST",
                 "action" => "/bo/rooms/create",
-                "class" => "",
+                "class" => "flex-column",
                 "id" => "form_create_room",
                 "submit" => "Confirm",
                 "cancel" => "Cancel",
@@ -197,7 +197,7 @@ class Room extends Database
                     "placeholder" => "",
                     "label" => "Room name",
                     "required" => true,
-                    "class" => "",
+                    'class' => 'field w-25',
                     "minLength" => 2,
                     "maxLength" => 60,
                     "error" => "Room name should be between 2 and 60 characters"
@@ -207,7 +207,7 @@ class Room extends Database
                     "type" => "number",
                     "label" => "Room capacity",
                     "required" => true,
-                    "class" => "",
+                    'class' => 'field w-25',
                 ]
             ]
         ];
@@ -232,7 +232,7 @@ class Room extends Database
                     "placeholder" => "",
                     "label" => "Room name",
                     "required" => true,
-                    "class" => "",
+                    'class' => 'field w-25',
                     "minLength" => 2,
                     "maxLength" => 60,
                     "error" => "Room name should be between 2 and 60 characters",
@@ -243,7 +243,7 @@ class Room extends Database
                     "type" => "number",
                     "label" => "Room capacity",
                     "required" => true,
-                    "class" => "",
+                    'class' => 'field w-25',
                     "value" => $data['capacity'],
                     "min" => 0
                 ],
@@ -252,7 +252,7 @@ class Room extends Database
                     "type" => "checkbox",
                     "label" => "Available",
                     "required" => false,
-                    "class" => "",
+                    "class" => "checkbox",
                     "checked" => $data['isAvailable']
                 ],
 
@@ -260,7 +260,7 @@ class Room extends Database
                     "type" => "checkbox",
                     "label" => "Handicap access",
                     "required" => false,
-                    "class" => "",
+                    "class" => "checkbox",
                     "checked" => $data['isHandicapAccess']
                 ]
             ]

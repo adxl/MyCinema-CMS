@@ -6,7 +6,6 @@ use App\Core\Database;
 use App\Core\Helpers;
 
 use App\Models\Room as RoomModel;
-use App\Models\EventType as EventTypeModel;
 use App\Models\Event_room as EventRoomModel;
 use App\Models\Event_tag as EventTagModel;
 
@@ -246,7 +245,7 @@ class Event extends Database
 
                 "name" => [
                     "type" => "text",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "label" => "Movie name",
                     "required" => true,
                     "minLength" => 2,
@@ -313,7 +312,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "value" => "Director 1; Director 2", // DEBUG:
                     "required" => false,
                 ],
@@ -322,7 +321,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "value" => "Actor 1; Actor 2", // DEBUG:
                     "required" => false,
                 ],
@@ -330,7 +329,7 @@ class Event extends Database
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
@@ -343,7 +342,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
-                    'class' => 'field w-50 mb-xl',
+                    'class' => 'field w-75 mb-xl',
                     "value" => "ACTION; DRAME", // DEBUG:
                     "required" => false,
                 ],
@@ -459,7 +458,7 @@ class Event extends Database
 
                 "name" => [
                     "type" => "text",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "placeholder" => "",
                     "label" => "Movie name",
                     "required" => true,
@@ -486,7 +485,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Directed by",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "required" => false,
                     "value" => $data['directors'] ?? ""
                 ],
@@ -495,7 +494,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Starring",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "required" => false,
                     "value" => $data['actors'] ?? ""
                 ],
@@ -503,7 +502,7 @@ class Event extends Database
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 300,
@@ -516,7 +515,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
-                    'class' => 'field w-50',
+                    'class' => 'field w-75',
                     "required" => false,
                     "value" => $data['tags'] ?? ""
                 ],

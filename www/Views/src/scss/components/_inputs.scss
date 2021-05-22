@@ -122,3 +122,52 @@
         padding: 5px;
     }
 }
+
+.checkbox {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    margin: 10px 5px;
+    cursor: pointer;
+    user-select: none;
+
+    input {
+        position: absolute;
+        cursor: pointer;
+        opacity: 0;
+        height: 0;
+        width: 0;
+
+        &:checked ~ .checkmark {
+            background-color: $blue;
+
+            &:after {
+                display: block;
+            }
+        }
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 5px;
+
+        &:after {
+            content: '';
+            position: absolute;
+            display: none;
+
+            left: 7px;
+            top: 5px;
+            width: 3px;
+            height: 6px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+    }
+}

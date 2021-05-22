@@ -20,6 +20,10 @@ $user = Security::getCurrentUserShort();
 
 <body class="flex-column">
 
+	<div id="small-screen-error">
+		<p>Merci d'utiliser un ordinateur pour accéder au BackOffice.</p>
+	</div>
+
 	<?php include 'Views/views/components/header.view.php' ?>
 
 	<main class="flex flex-auto">

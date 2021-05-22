@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Core\View;
 
-class HomeController
+class DashboardController
 {
     public function showDashboardAction()
     {

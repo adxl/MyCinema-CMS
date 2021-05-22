@@ -51,7 +51,11 @@ class Router
 	{
 		$hasPermission = Security::hasPermission($this->scope);
 		if (!$hasPermission)
-			$this->exception404();
+			if ($this->slug === '/bo')
+				Helpers::redirect('/bo/login');
+			else {
+				$this->exception404();
+			}
 	}
 
 	public function loadYaml()

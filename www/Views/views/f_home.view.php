@@ -1,3 +1,5 @@
-<div class="flex-column flex-middle pt-xl">
-    <h1 style="font-size: 8em;">Home</h1>
+<div class="text-center">
+    <h1>
+        Home page
+    </h1>
 </div>

@@ -1,16 +1,16 @@
-<div class="flex mb-m mt-s">
+<div class="flex flex-middle mb-m mt-s">
     <i class="fas fa-building"></i>
     <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 
 
-<section>
-    <div class="row">
+<section class="card w-100">
+    <div class="container">
         <?php App\Core\FormBuilder::render($form); ?>
     </div>
-    <div class="flex">
+    <div class="flex flex-right">
         <form action="/bo/rooms/delete" method="post">
-            <button type="submit"> DELETE </button>
+            <button class="button button--danger m-0 p-s" type="submit"><i class="mr-s fas fa-exclamation-triangle"></i> DELETE </button>
         </form>
     </div>
 </section>

@@ -16,6 +16,8 @@ header {
         position: absolute;
         right: 1.5rem;
         top: 70px;
+        z-index: 2;
+        background-color: $white;
 
         a {
             color: $text-black;
@@ -25,5 +27,16 @@ header {
                 background: darken($white, 20);
             }
         }
+    }
+}
+
+#login-form {
+    width: 100%;
+    @include m {
+        width: 50%;
+        min-width: 400px;
+    }
+    @include l {
+        width: 450px;
     }
 }
