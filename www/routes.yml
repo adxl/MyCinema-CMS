@@ -118,8 +118,14 @@
 
 # page profile utilisateur
 /bo/profile:
-  controller: MainController
-  action: page404
+  controller: UsersController
+  action: showProfil
+  scope: "ADMIN MANAGER"
+
+# route POST edit profile names
+/bo/profile/names:
+  controller: UsersController
+  action: editProfilNames
   scope: "ADMIN MANAGER"
 
 # page login

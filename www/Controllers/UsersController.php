@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Core\FormValidator;
 use App\Core\Helpers;
 use App\Core\Security;
 use App\Core\View;
@@ -82,4 +83,72 @@ class UsersController
 
         Helpers::redirect('/bo/users');
     }
+
+    public function showProfilAction()
+    {
+
+        $user = Security::getCurrentUser();
+        $userModel = new UserModel();
+
+        $view = new View("b_profile", 'back');
+
+        $view->assign("title", 'Profil '.$user['firstname'] .' '. $user['lastname']);
+
+        $form = $userModel->formBuilderProfilNames($user['firstname'], $user['lastname']);
+        $view->assign('form', $form);
+
+
+
+
+    }
+
+    public function editProfilNamesAction()
+    {
+        $currentUser = Security::getCurrentUser();
+        $id = $currentUser['id'];
+
+
+        $userModel = new UserModel();
+        $user = $userModel->findById($id);
+
+        $userModel->populate($userModel, $user);
+
+        $form = $userModel->formBuilderProfilNames($user['firstname'], $user['lastname']);
+
+
+        if (!empty($_POST)) {
+
+            $errors = FormValidator::check($form, $_POST);
+
+            if (empty($errors)) {
+
+                $userModel->setFirstname(htmlspecialchars($_POST["firstName"]));
+                $userModel->setLastname(htmlspecialchars($_POST["lastName"]));
+
+                $id = $userModel->save();
+
+                if ($id) {
+                    Helpers::redirect('/bo/profile');
+                } else {
+                    $errors = ["Un problème est survenu lors de l'inscription"];
+                    setcookie("errorsForm", $errors);
+                    Helpers::redirect('/bo/profile');
+                }
+            } else {
+                $i = 0;
+                foreach ($errors as $error)
+                {
+                    setcookie("errorsForm", $error, time()+3600);
+
+
+                }
+
+                Helpers::redirect('/bo/profile');
+            }
+        }
+
+
+
+    }
+
 }

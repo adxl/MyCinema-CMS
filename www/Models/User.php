@@ -217,4 +217,41 @@ class User extends Database
 			]
 		];
 	}
+
+	public function formBuilderProfilNames($firstname, $lastname)
+    {
+        return  [
+            "config" => [
+                "method" => "POST",
+                "action" => "/bo/profile/names",
+                "id" => "form_profil_names",
+                "submit" => "Submit",
+                "submitClass" => 'w-50'
+            ],
+            "inputs" => [
+
+                "firstName" => [
+                    "type" => "text",
+                    'class' => 'field w-100',
+                    "label" => "First name",
+                    "value" => $firstname,
+                    "required" => true,
+                    "minLength" => 2,
+                    "maxLength" => 50,
+                    "error" => "First name should be between 2 and 50 characters"
+                ],
+
+                "lastName" => [
+                    "type" => "text",
+                    'class' => 'field w-100',
+                    "label" => "Last name",
+                    "value" => $lastname,
+                    "required" => true,
+                    "minLength" => 2,
+                    "maxLength" => 100,
+                    "error" => "Last name should be between 2 and 100 characters"
+                ],
+            ]
+        ];
+    }
 }
