@@ -34,7 +34,13 @@ class MainController
         $eventModel = new Event();
         $events = $eventModel->findAll();
 
+        $nextEvent = $eventModel->getNextEvent();
+
+        $incomingEvents = $eventModel->getIncomingEvents();
+
         $view->assign('events', $events);
+        $view->assign('nextEvent', $nextEvent);
+        $view->assign('incomingEvents', $incomingEvents);
     }
 
     public function showOneEventAction($id)

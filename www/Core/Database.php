@@ -72,39 +72,49 @@ class Database
 
     public function findOne($sqlData = [])
     {
-        if (array_key_exists('where', $sqlData) && sizeof($sqlData['where'])) {
-            if (!isset($sqlData['select'])) {
-                $sqlData['select'] = '*';
-            }
+        if (!isset($sqlData['select'])) {
+            $sqlData['select'] = '*';
+        }
 
-            $columns = $sqlData['select'];
+        $columns = $sqlData['select'];
 
-            $whereData = [];
-            $where = "";
+        $stmtData = [];
+        $where = "";
 
+        if (isset($sqlData['where'])) {
             foreach ($sqlData['where'] as $cond) {
                 $where .=  $cond['column'] . " " . $cond['operator'] . " :" . $cond['column'];
                 $where .= " AND ";
 
-                $whereData[$cond['column']] = $cond['value'];
+                $stmtData[$cond['column']] = $cond['value'];
             }
             $where = preg_replace('/\sAND\s$/', '', $where);
-
-
-            $query = "SELECT " . $columns . " FROM " . $this->table . " WHERE " . $where;
-            $stmt = $this->pdo->prepare($query);
-
-            $this->execute($stmt, $whereData);
-
-            $whereData = $stmt->fetch(\PDO::FETCH_ASSOC);
-
-            return $whereData;
         }
 
-        echo "<pre>";
-        print_r($sqlData);
-        echo "</pre>";
-        die("Error - Bad Query : WHERE clause not found [database.php]");
+        $groupBy = "";
+
+        if (isset($sqlData['groupBy'])) {
+            $groupBy =  $sqlData['groupBy'];
+        }
+
+        $orderBy = "";
+
+        if (isset($sqlData['orderBy'])) {
+            $orderBy =  $sqlData['orderBy']['column'] . " " . $sqlData['orderBy']['order'];
+        }
+
+        $query = "SELECT " . $columns . " FROM " . $this->table .
+            (!empty($where) ? " WHERE " . $where : '') .
+            (!empty($groupBy) ? " GROUP BY " . $groupBy : '') .
+            (!empty($orderBy) ? " ORDER BY " . $orderBy : '');
+
+
+        $stmt = $this->pdo->prepare($query);
+
+        $this->execute($stmt, $stmtData);
+
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result;
     }
 
     public function save()

@@ -178,6 +178,63 @@ class Event extends Database
         return $eventRoom ? $eventRoom[0]['startTime'] : '';
     }
 
+    // evenement le plus proche
+    public function getNextEvent()
+    {
+        $eventRoomModel = new EventRoomModel();
+
+        $nextSession = $eventRoomModel->findOne([
+            'select' => 'eventId, startTime',
+            'where' => [
+                [
+                    'column' => 'startTime',
+                    'value' => Helpers::now(),
+                    'operator' => '>='
+                ]
+            ],
+            'orderBy' => [
+                'column' => 'startTime',
+                'order' => 'ASC'
+            ]
+        ]);
+
+        if ($nextSession) {
+            $event = $this->findById($nextSession['eventId']);
+            return $event;
+        }
+    }
+
+    // les evenement à venir
+    public function getIncomingEvents()
+    {
+        $eventRoomModel = new EventRoomModel();
+
+        $nextSessions = $eventRoomModel->findAll([
+            'select' => 'eventId, startTime',
+            'where' => [
+                [
+                    'column' => 'startTime',
+                    'value' => Helpers::now(),
+                    'operator' => '>='
+                ]
+            ],
+            'orderBy' => [
+                'column' => 'startTime',
+                'order' => 'ASC'
+            ]
+        ]);
+
+        $events = [];
+
+        foreach ($nextSessions as $session) {
+            $event = $this->findById($session['eventId']);
+            if ($event)
+                $events[] = $event;
+        }
+
+        return $events;
+    }
+
     // event est passé
     public function hasPassed($id): bool
     {
