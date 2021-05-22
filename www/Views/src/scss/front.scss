@@ -16,6 +16,8 @@ header {
         position: absolute;
         right: 1.5rem;
         top: 70px;
+        z-index: 2;
+        background-color: $white;
 
         a {
             color: $text-black;
