@@ -27,3 +27,14 @@ header {
         }
     }
 }
+
+#login-form {
+    width: 100%;
+    @include m {
+        width: 50%;
+        min-width: 400px;
+    }
+    @include l {
+        width: 450px;
+    }
+}

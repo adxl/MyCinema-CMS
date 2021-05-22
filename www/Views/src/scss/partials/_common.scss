@@ -9,6 +9,16 @@ body {
   margin: 0;
   font-family: $secondary-font;
   color: $text-black;
+
+  // @include s {
+  //   border: dashed 3px rgb(163, 30, 30);
+  // }
+  // @include m {
+  //   border: dashed 3px rgb(255, 166, 0);
+  // }
+  // @include l {
+  //   border: dashed 3px rgb(8, 160, 0);
+  // }
 }
 
 h1,
