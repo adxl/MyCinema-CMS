@@ -116,10 +116,28 @@
   action: showSettings
   scope: "ADMIN"
 
-# page profile utilisateur
-/bo/profile:
-  controller: MainController
-  action: page404
+# page compte utilisateur
+/bo/account:
+  controller: AccountController
+  action: showAccount
+  scope: "ADMIN MANAGER"
+
+# route POST edit account names
+/bo/account/names:
+  controller: AccountController
+  action: editAccountNames
+  scope: "ADMIN MANAGER"
+
+# route POST edit account email
+/bo/account/email:
+  controller: AccountController
+  action: editAccountEmail
+  scope: "ADMIN MANAGER"
+
+# route POST edit account password
+/bo/account/password:
+  controller: AccountController
+  action: editAccountPassword
   scope: "ADMIN MANAGER"
 
 # page login

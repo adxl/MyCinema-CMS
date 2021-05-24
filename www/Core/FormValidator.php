@@ -42,7 +42,7 @@ class FormValidator
 
 		// validate password confirmation
 		$pwd = isset($config["inputs"]['pwd']) ? $data['pwd'] : null;
-		$pwdConfirm = isset($config["inputs"]['pwd-confirm']) ? $data['pwd-confirm'] : null;
+		$pwdConfirm = isset($config["inputs"]['pwdConfirm']) ? $data['pwdConfirm'] : null;
 
 		if (($pwd && $pwdConfirm) && ($pwd !== $pwdConfirm)) {
 			$errors[] = "Passwords don't match";

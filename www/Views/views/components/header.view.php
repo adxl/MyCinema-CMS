@@ -15,7 +15,7 @@
             </div>
         </div>
         <div id="user-profile-menu" class="card p-0 flex-column crop hidden">
-            <a href="#">Compte</a>
+            <a href="/bo/account">Compte</a>
             <a href="/bo">BackOffice</a>
             <a href="/bo/logout">Se déconnecter</a>
         </div>

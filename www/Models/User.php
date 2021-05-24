@@ -219,4 +219,106 @@ class User extends Database
 			]
 		];
 	}
+
+	public function formBuilderAccountNames($data)
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/account/names",
+				"id" => "form_account_names",
+				"submit" => "Submit",
+			],
+			"inputs" => [
+
+				"firstName" => [
+					"type" => "text",
+					'class' => 'field w-25',
+					"label" => "First name",
+					"value" => $data['firstname'],
+					"required" => true,
+					"minLength" => 2,
+					"maxLength" => 50,
+					"error" => "First name should be between 2 and 50 characters"
+				],
+
+				"lastName" => [
+					"type" => "text",
+					'class' => 'field w-25',
+					"label" => "Last name",
+					"value" => $data['lastname'],
+					"required" => true,
+					"minLength" => 2,
+					"maxLength" => 100,
+					"error" => "Last name should be between 2 and 100 characters"
+				],
+			]
+		];
+	}
+
+	public function formBuiderAccountEmail($data)
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/account/email",
+				"id" => "form_account_email",
+				"submit" => "Submit",
+			],
+			"inputs" => [
+				"email" => [
+					"type" => "email",
+					'class' => 'field w-25',
+					"placeholder" => "example@email.com",
+					"label" => "Email",
+					"value" => $data['email'],
+					"required" => true,
+					"error" => "Not a valid email"
+				],
+			]
+		];
+	}
+
+	public function formBuilderAccountPassword()
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/account/password",
+				"id" => "form_account_password",
+				"submit" => "Submit",
+			],
+			"inputs" => [
+
+				"actualPwd" => [
+					"type" => "password",
+					'class' => 'field w-50',
+					"label" => "Actual password",
+					"required" => true,
+					"minLength" => 8,
+					"maxLength" => 255,
+					"error" => "Password should have at least 8 characters"
+				],
+
+				"pwd" => [
+					"type" => "password",
+					'class' => 'field w-50',
+					"label" => "New password",
+					"required" => true,
+					"minLength" => 8,
+					"maxLength" => 255,
+					"error" => "Password should have at least 8 characters"
+				],
+
+				"pwdConfirm" => [
+					"type" => "password",
+					'class' => 'field w-50 mb-xl',
+					"label" => "Confirm new password",
+					"minLength" => 8,
+					"maxLength" => 255,
+					"required" => true,
+				],
+			]
+		];
+	}
 }
