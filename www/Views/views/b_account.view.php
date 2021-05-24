@@ -1,6 +1,6 @@
-<div class="flex mb-m mt-s">
+<div class="flex flex-middle  mb-m mt-s">
     <i class="fas fa-users"></i>
-    <h1 class="mx-s"><?= $title; ?></h1>
+    <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 
 <?php if (isset($errors)) : ?>
@@ -18,11 +18,9 @@
 <?php if (isset($success)) : ?>
     <div>
         <ul class="p-0">
-            <?php foreach ($success as $succes) : ?>
-                <li class="text-alert-success">
-                    <?= $succes ?>
-                </li>
-            <?php endforeach; ?>
+            <li class="text-alert-success">
+                <?= $success[0] ?>
+            </li>
         </ul>
     </div>
 <?php endif; ?>
@@ -39,4 +37,3 @@
 <div class="card m-m">
     <?php App\Core\FormBuilder::render($formPassword); ?>
 </div>
-

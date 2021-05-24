@@ -220,110 +220,105 @@ class User extends Database
 		];
 	}
 
-	public function formBuilderProfilNames($firstname, $lastname)
-    {
-        return  [
-            "config" => [
-                "method" => "POST",
-                "action" => "/bo/profile/names",
-                "id" => "form_profil_names",
-                "submit" => "Submit",
-                "submitClass" => 'w-50'
-            ],
-            "inputs" => [
+	public function formBuilderAccountNames($data)
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/account/names",
+				"id" => "form_account_names",
+				"submit" => "Submit",
+			],
+			"inputs" => [
 
-                "firstName" => [
-                    "type" => "text",
-                    'class' => 'field w-100',
-                    "label" => "First name",
-                    "value" => $firstname,
-                    "required" => true,
-                    "minLength" => 2,
-                    "maxLength" => 50,
-                    "error" => "First name should be between 2 and 50 characters"
-                ],
+				"firstName" => [
+					"type" => "text",
+					'class' => 'field w-25',
+					"label" => "First name",
+					"value" => $data['firstname'],
+					"required" => true,
+					"minLength" => 2,
+					"maxLength" => 50,
+					"error" => "First name should be between 2 and 50 characters"
+				],
 
-                "lastName" => [
-                    "type" => "text",
-                    'class' => 'field w-100',
-                    "label" => "Last name",
-                    "value" => $lastname,
-                    "required" => true,
-                    "minLength" => 2,
-                    "maxLength" => 100,
-                    "error" => "Last name should be between 2 and 100 characters"
-                ],
-            ]
-        ];
-    }
+				"lastName" => [
+					"type" => "text",
+					'class' => 'field w-25',
+					"label" => "Last name",
+					"value" => $data['lastname'],
+					"required" => true,
+					"minLength" => 2,
+					"maxLength" => 100,
+					"error" => "Last name should be between 2 and 100 characters"
+				],
+			]
+		];
+	}
 
-    public function formBuiderProfilEmail($email)
-    {
-        return  [
-            "config" => [
-                "method" => "POST",
-                "action" => "/bo/profile/email",
-                "id" => "form_profil_email",
-                "submit" => "Submit",
-                "submitClass" => 'w-50'
-            ],
-            "inputs" => [
+	public function formBuiderAccountEmail($data)
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/account/email",
+				"id" => "form_account_email",
+				"submit" => "Submit",
+			],
+			"inputs" => [
+				"email" => [
+					"type" => "email",
+					'class' => 'field w-25',
+					"placeholder" => "example@email.com",
+					"label" => "Email",
+					"value" => $data['email'],
+					"required" => true,
+					"error" => "Not a valid email"
+				],
+			]
+		];
+	}
 
-                "email" => [
-                    "type" => "email",
-                    'class' => 'field w-100',
-                    "placeholder" => "example@email.com",
-                    "label" => "Email",
-                    "value" => $email,
-                    "required" => true,
-                    "error" => "Not a valid email"
-                ],
-            ]
-        ];
-    }
+	public function formBuilderAccountPassword()
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/account/password",
+				"id" => "form_account_password",
+				"submit" => "Submit",
+			],
+			"inputs" => [
 
-    public function formBuilderProfilPassword()
-    {
-        return  [
-            "config" => [
-                "method" => "POST",
-                "action" => "/bo/profile/password",
-                "id" => "form_profil_password",
-                "submit" => "Submit",
-                "submitClass" => 'w-50'
-            ],
-            "inputs" => [
+				"actualPwd" => [
+					"type" => "password",
+					'class' => 'field w-50',
+					"label" => "Actual password",
+					"required" => true,
+					"minLength" => 8,
+					"maxLength" => 255,
+					"error" => "Password should have at least 8 characters"
+				],
 
-                "actualPwd" => [
-                    "type" => "password",
-                    'class' => 'field w-100',
-                    "label" => "Actual password",
-                    "required" => true,
-                    "minLength" => 8,
-                    "maxLength" => 255,
-                    "error" => "Password should have at least 8 characters"
-                ],
+				"pwd" => [
+					"type" => "password",
+					'class' => 'field w-50',
+					"label" => "New password",
+					"required" => true,
+					"minLength" => 8,
+					"maxLength" => 255,
+					"error" => "Password should have at least 8 characters"
+				],
 
-                "pwd" => [
-                    "type" => "password",
-                    'class' => 'field w-100',
-                    "label" => "New password",
-                    "required" => true,
-                    "minLength" => 8,
-                    "maxLength" => 255,
-                    "error" => "Password should have at least 8 characters"
-                ],
-
-                "pwdConfirm" => [
-                    "type" => "password",
-                    'class' => 'field w-100 mb-xl',
-                    "label" => "Confirm new password",
-                    "minLength" => 8,
-                    "maxLength" => 255,
-                    "required" => true,
-                ],
-            ]
-        ];
-
-    }
+				"pwdConfirm" => [
+					"type" => "password",
+					'class' => 'field w-50 mb-xl',
+					"label" => "Confirm new password",
+					"minLength" => 8,
+					"maxLength" => 255,
+					"required" => true,
+				],
+			]
+		];
+	}
 }

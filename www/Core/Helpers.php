@@ -30,10 +30,27 @@ class Helpers
         header("Location: " . $location);
     }
 
-    public static function addFlash($typeAlert, $message)
+    public static function storeAlert(array $messages, bool $type = false)
     {
-        $_SESSION['flash'][$typeAlert] = $message;
+        $type = $type ? 'success' : 'errors';
+        $_SESSION['ALERT'][$type] = $messages;
+    }
 
+    public static function getAlert()
+    {
+        if (isset($_SESSION['ALERT'])) {
+            $alert = $_SESSION['ALERT'];
+            if (isset($alert['success']))
+                return ["type" => "success", "messages" => $alert['success']];
+            if (isset($alert['errors']))
+                return ["type" => "errors", "messages" => $alert['errors']];
+        }
+    }
+
+    public static function emptyAlert()
+    {
+        if (isset($_SESSION['ALERT']))
+            unset($_SESSION['ALERT']);
     }
 
     public static function splitFields($fieldsString)

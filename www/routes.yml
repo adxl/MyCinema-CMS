@@ -116,31 +116,29 @@
   action: showSettings
   scope: "ADMIN"
 
-# page profile utilisateur
-/bo/profile:
-  controller: UsersController
-  action: showProfil
+# page compte utilisateur
+/bo/account:
+  controller: AccountController
+  action: showAccount
   scope: "ADMIN MANAGER"
 
-# route POST edit profile names
-/bo/profile/names:
-  controller: UsersController
-  action: editProfilNames
+# route POST edit account names
+/bo/account/names:
+  controller: AccountController
+  action: editAccountNames
   scope: "ADMIN MANAGER"
 
-# route POST edit profile email
-/bo/profile/email:
-  controller: UsersController
-  action: editProfilEmail
+# route POST edit account email
+/bo/account/email:
+  controller: AccountController
+  action: editAccountEmail
   scope: "ADMIN MANAGER"
 
-
-# route POST edit profile password
-/bo/profile/password:
-  controller: UsersController
-  action: editProfilPassword
+# route POST edit account password
+/bo/account/password:
+  controller: AccountController
+  action: editAccountPassword
   scope: "ADMIN MANAGER"
-
 
 # page login
 /bo/login:
