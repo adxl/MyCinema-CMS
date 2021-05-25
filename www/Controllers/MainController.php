@@ -15,8 +15,6 @@ class MainController
     public function showHomePageAction()
     {
         $view = new View("f_home", 'front');
-
-        echo Helpers::generatePassword();
     }
 
     public function showEventsAction()
