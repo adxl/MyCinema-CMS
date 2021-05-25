@@ -26,11 +26,15 @@ class MainController
             "JUSTIN BIERDOU EN CONCERT"
         );
 
-        Mailer::sendEmail($mailObject, function () {
-            echo 'OK';
-        }, function () {
-            echo 'NON';
-        });
+        Mailer::sendEmail(
+            $mailObject,
+            function () {
+                echo 'OK';
+            },
+            function () {
+                echo 'NON';
+            }
+        );
     }
 
     public function showEventsAction()

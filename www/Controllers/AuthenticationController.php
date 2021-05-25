@@ -6,6 +6,7 @@ use App\Core\FormValidator;
 use App\Core\Helpers;
 use App\Core\Security;
 use App\Core\View;
+use App\Core\Mailer;
 
 use App\Models\User as UserModel;
 use App\Models\Session as SessionModel;
@@ -87,6 +88,15 @@ class AuthenticationController
                     $id = $validation['user']->save();
                     if ($id) {
                         Helpers::redirect('/bo/users');
+                        $mailObject = Mailer::init(
+                            ['address' => EMAIL_ADDRESS],
+                            [
+                                ['address' => 'adelsenhadjii@gmail.com'],
+                                ['address' => 'marchand.maxime@outlook.com']
+                            ],
+                            "Votre MDP",
+                            "Votre compte a été créer, veuillez utilser le mot de passe suivant : <br>".$validation['generatedPasswd'];
+                        );
                     } else {
                         $errors = ["Un problème est survenu lors de l'inscription"];
                         $view->assign("errors", $errors);
@@ -124,13 +134,14 @@ class AuthenticationController
         if ($emailUsed['count'] > 0) {
             $errors[] = "Email already used";
         } else {
+            $generatedPasswd = Helpers::generatePassword();
             $user->setFirstname(htmlspecialchars($_POST["firstName"]));
             $user->setLastname(htmlspecialchars($_POST["lastName"]));
             $user->setEmail(htmlspecialchars($_POST["email"]));
-            $user->setPwd(password_hash(htmlspecialchars($_POST["pwd"]), PASSWORD_DEFAULT));
+            $user->setPwd(password_hash(), PASSWORD_DEFAULT);
         }
 
-        return ['user' => $user, 'errors' => $errors];
+        return ['user' => $user, 'errors' => $errors, 'generatedPasswd' => $generatedPasswd];
     }
 
     public function logoutAction()
