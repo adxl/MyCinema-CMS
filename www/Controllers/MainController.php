@@ -7,6 +7,8 @@ use App\Core\Helpers;
 
 use App\Models\Event;
 use App\Models\Room;
+use App\Core\PHPMailer\PHPMailer;
+use App\Core\PHPMailer\SMTP;
 
 class MainController
 {

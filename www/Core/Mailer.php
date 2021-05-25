@@ -1,0 +1,40 @@
+<?php
+namespace App\Core;
+
+class Mailer
+{
+    private static init (array $from, array $to, $subject, $body, $altBody = "")
+    {
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+        $mail->Host = EMAIL_SMTP_HOST;
+        $mail->Port = EMAIL_SMTP_PORT;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->SMTPAuth = true;
+        $mail->Username = EMAIL_ADDRESS;
+        $mail->Password = EMAIL_PASSWD;
+
+        $mail->CharSet    = 'UTF-8';
+        $mail->Encoding   = 'base64';
+
+        $mail->setFrom($from['address'], $from['name'] ?? '');
+
+        foreach ($to as $receiver) {
+            $mail->addAddress($receiver['address'], $receiver['address'] ?? '');
+        }
+
+        $mail->Subject = $subject;
+        $mail->msgHTML($body);
+        $mail->AltBody = $altBody;
+
+        return $mail;
+    }
+
+    public static sendEmail($mailObject, function $onSuccess, function $onError) 
+    {
+        if (!$mailObject->send())
+            $onSuccess();
+        else
+            $onError();        
+    }
+}
