@@ -1,9 +1,12 @@
 <?php
 namespace App\Core;
 
+use App\Core\PHPMailer\PHPMailer;
+use App\Core\PHPMailer\SMTP;
+
 class Mailer
 {
-    private static init (array $from, array $to, $subject, $body, $altBody = "")
+    public static function init(array $from, array $to, $subject, $body, $altBody = "")
     {
         $mail = new PHPMailer();
         $mail->isSMTP();
@@ -30,9 +33,9 @@ class Mailer
         return $mail;
     }
 
-    public static sendEmail($mailObject, function $onSuccess, function $onError) 
+    public static function sendEmail($mailObject, $onSuccess, $onError) 
     {
-        if (!$mailObject->send())
+        if ($mailObject->send())
             $onSuccess();
         else
             $onError();        

@@ -4,11 +4,10 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Core\Helpers;
+use App\Core\Mailer;
 
 use App\Models\Event;
 use App\Models\Room;
-use App\Core\PHPMailer\PHPMailer;
-use App\Core\PHPMailer\SMTP;
 
 class MainController
 {
@@ -16,6 +15,22 @@ class MainController
     public function showHomePageAction()
     {
         $view = new View("f_home", 'front');
+
+        $mailObject = Mailer::init(
+            ['address' => EMAIL_ADDRESS],
+            [
+                ['address' => 'adelsenhadjii@gmail.com'],
+                ['address' => 'marchand.maxime@outlook.com']
+            ],
+            "J'aime le saucisson, t'en veux ?",
+            "JUSTIN BIERDOU EN CONCERT"
+        );
+
+        Mailer::sendEmail($mailObject, function () {
+            echo 'OK';
+        }, function () {
+            echo 'NON';
+        });
     }
 
     public function showEventsAction()
