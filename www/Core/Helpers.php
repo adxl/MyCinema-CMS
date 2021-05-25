@@ -75,4 +75,14 @@ class Helpers
     {
         return substr($datetime, 11, 8);
     }
+
+    public static function generatePassword($length = 8)
+    {
+        $characters = '123456789abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+        $password = '';
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $characters[rand(0, strlen($characters) - 1)];
+        }
+        return $password;
+    }
 }

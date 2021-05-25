@@ -95,7 +95,18 @@ class AuthenticationController
                                 ['address' => 'marchand.maxime@outlook.com']
                             ],
                             "Votre MDP",
-                            "Votre compte a été créer, veuillez utilser le mot de passe suivant : <br>".$validation['generatedPasswd'];
+                            "Votre compte a été créé, veuillez utilser le mot de passe suivant : <br>" . $validation['generatedPasswd'],
+                            "MDP : " . $validation['generatedPasswd']
+                        );
+
+                        Mailer::sendEmail(
+                            $mailObject,
+                            function () {
+                                echo 'Succès';
+                            },
+                            function () {
+                                echo 'ERROR';
+                            }
                         );
                     } else {
                         $errors = ["Un problème est survenu lors de l'inscription"];
@@ -138,7 +149,7 @@ class AuthenticationController
             $user->setFirstname(htmlspecialchars($_POST["firstName"]));
             $user->setLastname(htmlspecialchars($_POST["lastName"]));
             $user->setEmail(htmlspecialchars($_POST["email"]));
-            $user->setPwd(password_hash(), PASSWORD_DEFAULT);
+            $user->setPwd(password_hash($generatedPasswd), PASSWORD_DEFAULT);
         }
 
         return ['user' => $user, 'errors' => $errors, 'generatedPasswd' => $generatedPasswd];

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Core;
 
 use App\Core\PHPMailer\PHPMailer;
@@ -33,11 +34,11 @@ class Mailer
         return $mail;
     }
 
-    public static function sendEmail($mailObject, $onSuccess, $onError) 
+    public static function sendEmail($mailObject, $onSuccess, $onError)
     {
         if ($mailObject->send())
             $onSuccess();
         else
-            $onError();        
+            $onError();
     }
 }

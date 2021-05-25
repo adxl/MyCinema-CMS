@@ -16,25 +16,7 @@ class MainController
     {
         $view = new View("f_home", 'front');
 
-        $mailObject = Mailer::init(
-            ['address' => EMAIL_ADDRESS],
-            [
-                ['address' => 'adelsenhadjii@gmail.com'],
-                ['address' => 'marchand.maxime@outlook.com']
-            ],
-            "J'aime le saucisson, t'en veux ?",
-            "JUSTIN BIERDOU EN CONCERT"
-        );
-
-        Mailer::sendEmail(
-            $mailObject,
-            function () {
-                echo 'OK';
-            },
-            function () {
-                echo 'NON';
-            }
-        );
+        echo Helpers::generatePassword();
     }
 
     public function showEventsAction()
