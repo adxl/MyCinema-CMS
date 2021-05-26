@@ -56,6 +56,13 @@ class User extends Database
 		$this->lastname = ucfirst($lastname);
 	}
 
+	// full name
+
+	public function getFullName(): string
+	{
+		return $this->firstname . " " . $this->lastname;
+	}
+
 	// email
 
 	public function getEmail(): string
@@ -194,28 +201,7 @@ class User extends Database
 					"minLength" => 6,
 					"maxLength" => 320,
 					"error" => "Not a valid email"
-				],
-
-				"pwd" => [
-					"type" => "password",
-					'class' => 'field w-100',
-					"label" => "Password",
-					"required" => true,
-					"minLength" => 8,
-					"maxLength" => 255,
-					"value" => "password",  // DEBUG: register rapide
-					"error" => "Password should have at least 8 characters"
-				],
-
-				"pwdConfirm" => [
-					"type" => "password",
-					'class' => 'field w-100 mb-xl',
-					"label" => "Confirm password",
-					"minLength" => 8,
-					"maxLength" => 255,
-					"value" => "password",  // DEBUG: register rapide
-					"required" => true,
-				],
+				]
 			]
 		];
 	}

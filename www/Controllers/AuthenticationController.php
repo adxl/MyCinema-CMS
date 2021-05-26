@@ -6,6 +6,7 @@ use App\Core\FormValidator;
 use App\Core\Helpers;
 use App\Core\Security;
 use App\Core\View;
+use App\Core\Mailer;
 
 use App\Models\User as UserModel;
 use App\Models\Session as SessionModel;
@@ -86,7 +87,36 @@ class AuthenticationController
                 if (empty($validation['errors'])) {
                     $id = $validation['user']->save();
                     if ($id) {
-                        Helpers::redirect('/bo/users');
+                        $mailObject = Mailer::init(
+                            [
+                                'address' => EMAIL_SOURCE_ADDRESS,
+                                'name' => EMAIL_SOURCE_NAME
+                            ],
+                            [
+                                [
+                                    'address' => $validation['user']->getEmail(),
+                                    'name' => $validation['user']->getFullName()
+                                ]
+                            ],
+                            "Votre mot de passe",
+                            "Votre compte a été créé, veuillez utilser le mot de passe suivant : <br><br>
+                            <b>" . $validation['generatedPasswd'] . "</b><br><br>
+                            Il est vivement conseillé de modifier votre mot de passe lors de votre première connexion.<br>
+                            <small>Accédez à la section 'Compte' dans le menu déroulant en haut à droite</small>",
+                            "MDP : " . $validation['generatedPasswd']
+                        );
+
+                        Mailer::sendEmail(
+                            $mailObject,
+                            function () {
+                                Helpers::redirect('/bo/users');
+                            },
+                            function () use (&$view, &$userModel, &$id) {
+                                $errors = ["L'envoi du mail a échoué. Le compte n'a pas été créé"];
+                                $view->assign("errors", $errors);
+                                $userModel->deleteById($id);
+                            }
+                        );
                     } else {
                         $errors = ["Un problème est survenu lors de l'inscription"];
                         $view->assign("errors", $errors);
@@ -124,13 +154,14 @@ class AuthenticationController
         if ($emailUsed['count'] > 0) {
             $errors[] = "Email already used";
         } else {
+            $generatedPasswd = Helpers::generatePassword();
             $user->setFirstname(htmlspecialchars($_POST["firstName"]));
             $user->setLastname(htmlspecialchars($_POST["lastName"]));
             $user->setEmail(htmlspecialchars($_POST["email"]));
-            $user->setPwd(password_hash(htmlspecialchars($_POST["pwd"]), PASSWORD_DEFAULT));
+            $user->setPassword(password_hash($generatedPasswd, PASSWORD_DEFAULT));
         }
 
-        return ['user' => $user, 'errors' => $errors];
+        return ['user' => $user, 'errors' => $errors, 'generatedPasswd' => $generatedPasswd ?? ''];
     }
 
     public function logoutAction()
