@@ -17,18 +17,14 @@ class UsersController
         $userModel = new UserModel();
         $users = $userModel->findAll();
 
-        $users = array_filter($users, function ($v, $k) {
-            return $v['isDeleted'] == false;
-        }, ARRAY_FILTER_USE_BOTH);
-
         foreach ($users as $key => $user) {
             unset($user['password']);
             $users[$key] = $user;
         }
 
-        $self = Security::getCurrentUserShort();
-
         $view->assign("users", $users);
+
+        $self = Security::getCurrentUserShort();
         $view->assign("self", $self);
     }
 
@@ -74,12 +70,9 @@ class UsersController
         $userModel = new UserModel();
         $user = $userModel->findById($id);
 
-        $userModel->populate($userModel, $user);
-
-        $userModel->setIsDeleted(1);
-
-        $userModel->save();
-
-        Helpers::redirect('/bo/users');
+        if ($user) {
+            $userModel->deleteById($user['id']);
+            Helpers::redirect('/bo/users');
+        }
     }
 }

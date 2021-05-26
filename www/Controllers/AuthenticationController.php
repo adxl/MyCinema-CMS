@@ -34,9 +34,9 @@ class AuthenticationController
 
                 if (!is_null($user)) {
                     Security::initSession($user['id']);
-                    Helpers::redirect();
+                    Helpers::redirect("/bo");
                 } else {
-                    $view->assign("errors", ["Wrong email or password !"]);
+                    $view->assign("errors", ["Identifiants non valides"]);
                 }
             } else {
                 $view->assign("errors", $errors);
@@ -51,7 +51,7 @@ class AuthenticationController
         $userModel = new UserModel();
 
         $user = $userModel->findOne([
-            'select' => 'id, password',
+            'select' => 'id, password, isActive',
             'where' => [
                 [
                     'column' => 'email',
@@ -61,11 +61,11 @@ class AuthenticationController
             ]
         ]);
 
-        if (!empty($user))
-            if (password_verify($_POST['password'], $user['password']))
-                return $user;
+        if (empty($user)) return null;
+        if (!$user['isActive']) return null;
+        if (!password_verify($_POST['password'], $user['password'])) return null;
 
-        return null;
+        return $user;
     }
 
     public function registerAction()

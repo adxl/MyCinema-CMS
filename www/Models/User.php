@@ -15,7 +15,6 @@ class User extends Database
 	protected $password;
 	protected $role = 'MANAGER';
 	protected $isActive = 0;
-	protected $isDeleted = 0;
 
 
 	public function __construct()
@@ -107,16 +106,6 @@ class User extends Database
 		$this->isActive = $isActive;
 	}
 
-	// is deleted ?
-
-	public function getIsDeleted()
-	{
-		return $this->isDeleted;
-	}
-	public function setIsDeleted($isDeleted): void
-	{
-		$this->isDeleted = $isDeleted;
-	}
 
 	public function formBuilderLogin()
 	{

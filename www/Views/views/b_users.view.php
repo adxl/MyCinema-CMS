@@ -33,7 +33,7 @@
         </thead>
         <tbody>
             <?php foreach ($users as  $user) : ?>
-                <tr class="<?= !$user['isActive'] ? 'faded' : '' ?>">
+                <tr class="<?= ($user['id'] === $self['id']) ? 'faded' : '' ?>">
                     <td><?= $user['firstname']; ?></td>
                     <td><?= $user['lastname']; ?></td>
                     <td><?= $user['email']; ?></td>
@@ -48,8 +48,8 @@
                     </td>
                     <td>
                         <div class="flex flex-middle">
-                            <a class="mr-m" style="font-size: 1.5em" href="/bo/users/status?id=<?= $user['id'] ?>&status=<?= (int)!$user['isActive']; ?>">
-                                <i class="fas fa-toggle-<?= (int)$user['isActive'] ? 'on text-green' : 'off' ?>"></i>
+                            <a class="mr-m" style="font-size: 1.5em" <?= ($user['id'] !== $self['id']) ? "href='/bo/users/status?id=" . $user['id'] . "&status=" . (int)!$user['isActive'] . "'" : "" ?>>
+                                <i class="fas fa-toggle-<?= (int)$user['isActive'] ? 'on text-green' : 'off faded' ?>"></i>
                             </a>
                         </div>
                     </td>
