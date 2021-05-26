@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Core\Helpers;
-use App\Core\Mailer;
 
 use App\Models\Event;
 use App\Models\Room;

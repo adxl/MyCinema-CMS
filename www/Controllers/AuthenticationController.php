@@ -87,7 +87,6 @@ class AuthenticationController
                 if (empty($validation['errors'])) {
                     $id = $validation['user']->save();
                     if ($id) {
-                        Helpers::redirect('/bo/users');
                         $mailObject = Mailer::init(
                             ['address' => EMAIL_ADDRESS],
                             [
@@ -102,10 +101,12 @@ class AuthenticationController
                         Mailer::sendEmail(
                             $mailObject,
                             function () {
-                                echo 'Succès';
+                                Helpers::redirect('/bo/users');
                             },
-                            function () {
-                                echo 'ERROR';
+                            function () use (&$view, &$userModel, &$id) {
+                                $errors = ["L'envoi du mail a échoué. Le compte n'a pas été créé"];
+                                $view->assign("errors", $errors);
+                                $userModel->deleteById($id);
                             }
                         );
                     } else {
@@ -149,10 +150,10 @@ class AuthenticationController
             $user->setFirstname(htmlspecialchars($_POST["firstName"]));
             $user->setLastname(htmlspecialchars($_POST["lastName"]));
             $user->setEmail(htmlspecialchars($_POST["email"]));
-            $user->setPwd(password_hash($generatedPasswd), PASSWORD_DEFAULT);
+            $user->setPassword(password_hash($generatedPasswd, PASSWORD_DEFAULT));
         }
 
-        return ['user' => $user, 'errors' => $errors, 'generatedPasswd' => $generatedPasswd];
+        return ['user' => $user, 'errors' => $errors, 'generatedPasswd' => $generatedPasswd ?? ''];
     }
 
     public function logoutAction()
