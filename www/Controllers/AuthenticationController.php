@@ -88,13 +88,21 @@ class AuthenticationController
                     $id = $validation['user']->save();
                     if ($id) {
                         $mailObject = Mailer::init(
-                            ['address' => EMAIL_ADDRESS],
                             [
-                                ['address' => 'adelsenhadjii@gmail.com'],
-                                ['address' => 'marchand.maxime@outlook.com']
+                                'address' => EMAIL_SOURCE_ADDRESS,
+                                'name' => EMAIL_SOURCE_NAME
                             ],
-                            "Votre MDP",
-                            "Votre compte a été créé, veuillez utilser le mot de passe suivant : <br>" . $validation['generatedPasswd'],
+                            [
+                                [
+                                    'address' => $validation['user']->getEmail(),
+                                    'name' => $validation['user']->getFullName()
+                                ]
+                            ],
+                            "Votre mot de passe",
+                            "Votre compte a été créé, veuillez utilser le mot de passe suivant : <br><br>
+                            <b>" . $validation['generatedPasswd'] . "</b><br><br>
+                            Il est vivement conseillé de modifier votre mot de passe lors de votre première connexion.<br>
+                            <small>Accédez à la section 'Compte' dans le menu déroulant en haut à droite</small>",
                             "MDP : " . $validation['generatedPasswd']
                         );
 

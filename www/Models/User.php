@@ -56,6 +56,13 @@ class User extends Database
 		$this->lastname = ucfirst($lastname);
 	}
 
+	// full name
+
+	public function getFullName(): string
+	{
+		return $this->firstname . " " . $this->lastname;
+	}
+
 	// email
 
 	public function getEmail(): string
