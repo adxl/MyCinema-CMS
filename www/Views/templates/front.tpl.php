@@ -23,8 +23,8 @@ $user = Security::getCurrentUserShort();
 
 <body>
 
-	<?php include 'Views/views/components/header.view.php' ?>
 	<?php include 'Views/views/components/f_nav.view.php' ?>
+	<?php include 'Views/views/components/header.view.php' ?>
 
 	<main>
 		<?php include $this->view ?>

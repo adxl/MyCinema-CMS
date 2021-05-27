@@ -7,5 +7,4 @@
             <li><a href="/404">???</a></li>
         </ul>
     </div>
-    <hr class="faded">
 </nav>
