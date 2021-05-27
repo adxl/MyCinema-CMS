@@ -37,15 +37,38 @@ class FormValidator
 		// TODO: validate email 
 
 
-		// TODO: validate password complexity
-
-
-		// validate password confirmation
 		$pwd = isset($config["inputs"]['pwd']) ? $data['pwd'] : null;
 		$pwdConfirm = isset($config["inputs"]['pwdConfirm']) ? $data['pwdConfirm'] : null;
 
-		if (($pwd && $pwdConfirm) && ($pwd !== $pwdConfirm)) {
-			$errors[] = "Passwords don't match";
+		// TODO: validate password complexity
+		# MIN LENGTH 8 - 255
+		# AU MOINS 1 Maj, 1min, 1 chiffre, 1 specialChar
+
+		if (!is_null($pwd)) {
+			if (strlen($pwd) < 8) {
+				$errors[] = "Password too short!";
+			}
+
+			if (!preg_match("#[0-9]+#", $pwd)) {
+				$errors[] = "Le mot de passe doit contenir au moins 1 chiffre";
+			}
+
+			if (!preg_match("#[a-z]+#", $pwd)) {
+				$errors[] = "Le mot de passe doit contenir au moins 1 minuscule";
+			}
+
+			if (!preg_match("#[A-Z]+#", $pwd)) {
+				$errors[] = "Le mot de passe doit contenir au moins 1 majuscule";
+			}
+
+			if (!preg_match("#[\:\.\@\&\#\$\?\!\_\-\/\*\=\+]+#", $pwd)) {
+				$errors[] = "Le mot de passe doit contenir au moins 1 caractère special ($, @, !, ?, ...)";
+			}
+
+			// validate password confirmation
+			if (($pwd && $pwdConfirm) && ($pwd !== $pwdConfirm)) {
+				$errors[] = "Les mots de passe ne correspondent pas";
+			}
 		}
 
 		return $errors;
