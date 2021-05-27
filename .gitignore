@@ -1,8 +1,14 @@
 .env
-www/.env
+.env.dev
+.env.prod
 
-db_data/
+www/.env
+www/.env.dev
+www/.env.prod
+
+
 .idea
+db_data/
 
 www/Views/dist
 
