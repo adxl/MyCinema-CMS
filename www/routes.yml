@@ -24,6 +24,12 @@
   action: page404
   scope: ""
 
+# page 500
+/500:
+  controller: MainController
+  action: page500
+  scope: ""
+
 #  ADMIN ROUTES :
 
 #  dashboard bak

@@ -94,9 +94,13 @@ class MainController
         $view->assign('room', $room);
     }
 
-
     public function page404Action()
     {
         $view = new View("f_404", 'front');
+    }
+
+    public function page500Action()
+    {
+        $view = new View("f_500", 'front');
     }
 }
