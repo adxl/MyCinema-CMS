@@ -266,31 +266,25 @@ class User extends Database
 			"inputs" => [
 
 				"actualPwd" => [
-					"type" => "password",
+					"type" => "text",
 					'class' => 'field w-50',
 					"label" => "Actual password",
 					"required" => true,
-					"minLength" => 8,
-					"maxLength" => 255,
 					"error" => "Password should have at least 8 characters"
 				],
 
 				"pwd" => [
-					"type" => "password",
+					"type" => "text",
 					'class' => 'field w-50',
 					"label" => "New password",
 					"required" => true,
-					"minLength" => 8,
-					"maxLength" => 255,
 					"error" => "Password should have at least 8 characters"
 				],
 
 				"pwdConfirm" => [
-					"type" => "password",
+					"type" => "text",
 					'class' => 'field w-50 mb-xl',
 					"label" => "Confirm new password",
-					"minLength" => 8,
-					"maxLength" => 255,
 					"required" => true,
 				],
 			]
