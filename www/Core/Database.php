@@ -192,14 +192,18 @@ class Database
         $stmt->execute($columns) or $error = true;
 
         if ($error) {
-            echo "<pre>";
-            echo 'DATABASE ERROR : ' . $stmt->errorInfo()[2] . PHP_EOL;
-            echo PHP_EOL;
-            echo 'IN QUERY : ' . $stmt->queryString . PHP_EOL;
-            echo PHP_EOL;
-            echo 'WITH DATA : ' . PHP_EOL;
-            var_dump($columns);
-            echo "</pre>";
+            if (ENV === 'dev') {
+                echo "<pre>";
+                echo 'DATABASE ERROR : ' . $stmt->errorInfo()[2] . PHP_EOL;
+                echo PHP_EOL;
+                echo 'IN QUERY : ' . $stmt->queryString . PHP_EOL;
+                echo PHP_EOL;
+                echo 'WITH DATA : ' . PHP_EOL;
+                var_dump($columns);
+                echo "</pre>";
+            } else {
+                Helpers::redirect('/500');
+            }
             die();
         }
     }

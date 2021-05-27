@@ -24,7 +24,6 @@ class ConstantManager
             $this->parsingEnv($newFile);
         }
 
-
         $this->defineConstants();
     }
 
