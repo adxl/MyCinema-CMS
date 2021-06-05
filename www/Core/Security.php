@@ -62,6 +62,7 @@ class Security
 
         $session = new SessionModel();
         $session->setUserId($userId);
+        $session->setExpireAt(8);
 
         $sessionId = $session->save();
 

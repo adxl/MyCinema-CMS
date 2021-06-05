@@ -15,9 +15,11 @@ class Helpers
         return null;
     }
 
-    public static function now()
+    public static function now($hours = 0)
     {
-        return (new \DateTime())->format('Y-m-d H:i:s');
+        $now = new \DateTime();
+        $now->add(new \DateInterval("PT{$hours}H"));
+        return $now->format('Y-m-d H:i:s');
     }
 
     public static function uuid()

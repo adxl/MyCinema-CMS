@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Database;
+use App\Core\Helpers;
 
 class Session extends Database
 {
@@ -10,7 +11,7 @@ class Session extends Database
     private $id = null;
 
     protected $userId;
-    private $expireAt;   //TODO: changer en protected pour session à temps fixe
+    protected $expireAt;
 
     public function __construct()
     {
@@ -46,10 +47,8 @@ class Session extends Database
         return $this->expireAt;
     }
 
-    public function setExpireAt($expireAt)
+    public function setExpireAt($expiresIn)
     {
-        $this->expireAt = $expireAt;
-
-        return $this;
+        $this->expireAt = Helpers::now($expiresIn);
     }
 }
