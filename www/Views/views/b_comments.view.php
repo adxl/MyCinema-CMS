@@ -6,26 +6,26 @@
 <div class=" w-100 flex flex-between flex-middle my-m">
     <div>
         <div id="filter-link-bar" class="flex">
-            <a href="#">All</a>
+            <a href="/bo/comments">Tous</a>
             <span>|</span>
-            <a href="#">Validated</a>
+            <a href="/bo/comments?status=WAITING">En attente</a>
             <span>|</span>
-            <a href="#">Reported</a>
+            <a href="/bo/comments?status=APPROVED">Approuvés</a>
             <span>|</span>
-            <a href="#">Deleted</a>
+            <a href="/bo/comments?status=DECLINED">Refusés</a>
         </div>
-    </div>
-    <div class="flex">
-        <div class="searchbar">
-            <i class="fas fa-search faded"></i>
-            <input type="text" name="comment-search" placeholder="Search a comment or user">
-        </div>
-        <button class="button">Rechercher</button>
     </div>
 </div>
 
 <div>
-    <table class="table card">
+
+    <pre>
+    <?php
+    print_r($comments)
+    ?>
+    </pre>
+
+    <!-- <table class="table card">
         <thead>
             <tr>
                 <th>Author</th>
@@ -37,8 +37,6 @@
         </thead>
         <tbody>
             <div>
-
-                <?php for ($i = 0; $i < 3; $i++) : ?>
                     <tr>
                         <td class="author-card flex-middle flex-column">
                             <div class="flex">
@@ -79,7 +77,6 @@
                             <i class="fas fa-trash"></i>
                         </td>
                     </tr>
-                <?php endfor ?>
         </tbody>
-    </table>
+    </table> -->
 </div>

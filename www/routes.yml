@@ -12,6 +12,12 @@
   action: showEvents
   scope: ""
 
+# route POST ajout commentaire
+/comments/add:
+  controller: CommentsController
+  action: addComment
+  scope: ""
+
 # pages salles
 /rooms:
   controller: MainController

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\View;
 use App\Core\Helpers;
 
+use App\Models\Comment;
 use App\Models\Event;
 use App\Models\Room;
 
@@ -59,7 +60,28 @@ class MainController
         $eventModel = new Event();
         $event = $eventModel->findById($id);
 
+        $commentModel = new Comment();
+        $commentForm = $commentModel->formBuilderComment($id);
+        $comments = $commentModel->findAll([
+            'where' => [
+                [
+                    'column' => 'eventId',
+                    'operator' => '=',
+                    'value' => $id
+                ],
+                [
+                    'column' => 'status',
+                    'operator' => '=',
+                    'value' => 'APPROVED'
+                ]
+            ]
+        ]);
+
+
+
         $view->assign('event', $event);
+        $view->assign('commentForm', $commentForm);
+        $view->assign('comments', $comments);
     }
 
 
