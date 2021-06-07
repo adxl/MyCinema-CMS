@@ -18,65 +18,66 @@
 </div>
 
 <div>
-
-    <pre>
+  <pre>
     <?php
-    print_r($comments)
+    	print_r($comments)
     ?>
-    </pre>
+  </pre>
 
-    <!-- <table class="table card">
-        <thead>
-            <tr>
-                <th>Author</th>
-                <th>Comment</th>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Actions</th>
+  <table class="table card">
+    <thead>
+      <tr>
+        <th>Author</th>
+        <th>Comment</th>
+        <th>Event</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($comments as $comment ) : ?>
+        <div>
+          <tr class="<?= ($comment['id'] === $self['id']) ? 'faded' : '' ?>">
+            <td class="author-card flex-middle flex-column">
+              <div class="flex">
+                <i class="fas fa-user-circle"></i>
+                <span span width="40" class="card status-active" alt=" ">active</span>
+              </div>
+              <p><?= $comment['name']; ?></p>
+            	<div class="flex">
+                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
+                <span class="mx-s">18-05-2020</span>
+              </div>
+            </td>
+              <td><?= $comment['content']; ?></td>
+              <td><?= $comment['eventId']; ?><</td>
+              <td>18-10-2015</td>
+              <td>
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <i class="fas fa-trash"></i>
+              </td>
+          </tr>
+          <tr>
+            <td class="author-card flex-middle flex-column">
+              <div class="flex">
+                <i class="fas fa-user-circle"></i>
+                <span width="40" class="card status-inactive" alt=" ">Inactive</span>
+              </div>
+              	<p class="m-0 text-bold text-underline">Sasha Soushi</p>
+              <div class="flex">
+                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
+                <span class="mx-s">18-05-2020</span>
+              </div>
+              </td>
+                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
+                <td>Blade runner 2049</td>
+                <td>18-10-2015</td>
+                <td>
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <i class="fas fa-trash"></i>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <div>
-                    <tr>
-                        <td class="author-card flex-middle flex-column">
-                            <div class="flex">
-                                <i class="fas fa-user-circle"></i>
-                                <span width="40" class="card status-active" alt=" ">active</span>
-                            </div>
-                            <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                            <div class="flex">
-                                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                                <span class="mx-s">18-05-2020</span>
-                            </div>
-                        </td>
-                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td>Blade runner 2049</td>
-                        <td>18-10-2015</td>
-                        <td>
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <i class="fas fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="author-card flex-middle flex-column">
-                            <div class="flex">
-                                <i class="fas fa-user-circle"></i>
-                                <span width="40" class="card status-inactive" alt=" ">Inactive</span>
-                            </div>
-                            <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                            <div class="flex">
-                                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                                <span class="mx-s">18-05-2020</span>
-                            </div>
-                        </td>
-                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td>Blade runner 2049</td>
-                        <td>18-10-2015</td>
-                        <td>
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <i class="fas fa-trash"></i>
-                        </td>
-                    </tr>
-        </tbody>
-    </table> -->
+          <?php endforeach ?>
+      </tbody>
+  </table>
 </div>

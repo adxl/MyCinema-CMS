@@ -27,7 +27,9 @@ class CommentsController
                 ]
             ]
         ]);
-
+        foreach($comments as $comment) {
+            $comment['event'] = $eventModel->findById($comment['eventId'])['title'];
+        };
         $view->assign('comments', $comments);
     }
 
