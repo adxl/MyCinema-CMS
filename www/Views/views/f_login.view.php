@@ -6,7 +6,9 @@
             <div>
                 <ul class="p-0">
                     <?php foreach ($errors as $error) : ?>
-                        <i class="fas fa-exclamation-circle"></i> <?= $error ?>
+                        <li class="text-alert-error">
+                            <i class="fas fa-exclamation-circle"></i> <?= $error ?>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
