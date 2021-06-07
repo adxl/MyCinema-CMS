@@ -34,11 +34,16 @@ class Mailer
         return $mail;
     }
 
-    public static function sendEmail($mailObject, $onSuccess, $onError)
+    public static function sendEmail($mailObject, $onSuccess = null, $onError = null)
     {
-        if ($mailObject->send())
-            $onSuccess();
-        else
-            $onError();
+        $sent = $mailObject->send();
+
+        if ($sent) {
+            if ($onSuccess)
+                $onSuccess();
+        } else {
+            if ($onError())
+                $onError();
+        }
     }
 }

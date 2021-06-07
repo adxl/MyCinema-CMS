@@ -125,7 +125,7 @@ class User extends Database
 					"placeholder" => "example@email.com",
 					"label" => "Email",
 					"required" => true,
-					"value" => "adel@sen.com",   // DEBUG: login rapide
+					"value" => "adelsenhadjii@gmail.com",   // DEBUG: login rapide
 				],
 
 				"password" => [
@@ -138,9 +138,34 @@ class User extends Database
 				],
 
 				"forgotPassword" => [
-					"type" => "button",
+					"type" => "link",
 					"value" => "Mot de passe oublié ?",
-					'class' => 'link mb-l'
+					'class' => 'mb-l',
+					'href' => "/bo/recover"
+				],
+			]
+		];
+	}
+
+	public function formBuilderRecoverPassword()
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/recover",
+				"id" => "form_recover",
+				"submit" => "Confirmer",
+				"submitClass" => 'w-50'
+			],
+			"inputs" => [
+
+				"email" => [
+					"type" => "email",
+					'class' => 'field w-100',
+					"placeholder" => "example@email.com",
+					"label" => "Email",
+					"required" => true,
+					"value" => "adel@sen.com",   // DEBUG: 
 				],
 			]
 		];

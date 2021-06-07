@@ -88,6 +88,12 @@ class FormBuilder
 							id='" . ($configInput["id"] ?? $name) . "'
 							class='" . $configInput['class'] . "'> " . $configInput['value'] . "
 						</button>";
+			} elseif ($configInput['type'] == 'link') {
+				$html .= "<a 
+							href='" . $configInput['href'] . "' 
+							id='" . ($configInput["id"] ?? $name) . "'
+							class='link " . $configInput['class'] . "'> " . $configInput['value'] . "
+						</a>";
 			} elseif ($configInput['type'] == 'checkbox') {
 				$html .= "<input 
 							name='" . $name . "'

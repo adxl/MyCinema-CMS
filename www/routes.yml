@@ -152,6 +152,12 @@
   action: login
   scope: ""
 
+# page recover password
+/bo/recover:
+  controller: AuthenticationController
+  action: recoverPassword
+  scope: ""
+
 # page affichage des utilisateurs
 /bo/users:
   controller: UsersController
