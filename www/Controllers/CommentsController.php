@@ -9,6 +9,6 @@ class CommentsController
     public function showCommentsAction()
     {
         $view = new View("b_comments", "back");
-        $view->assign("title", 'Comments management');
+        $view->assign("title", 'Gestion des commentaires');
     }
 }

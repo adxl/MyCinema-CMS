@@ -26,7 +26,7 @@ class EventsController
     public function showEventsAction()
     {
         $view = new View("b_events", 'back');
-        $view->assign("title", 'Events management');
+        $view->assign("title", 'Gestion des évènements');
 
         $eventModel = new EventModel();
         $events = $eventModel->findAll();
@@ -60,11 +60,10 @@ class EventsController
         }
         $view = new View('f_404', 'front');
     }
-
     public function showCreateEventAction()
     {
         $view = new View("b_events_create", "back");
-        $view->assign("title", 'Events management > Create');
+        $view->assign("title", 'Gestion des évènements > Nouvel évènement');
 
         $eventModel = new EventModel();
         $form = $eventModel->formBuilderCreate();
@@ -84,7 +83,7 @@ class EventsController
                 $_SESSION['edit_event_id'] = $id;
 
                 $view = new View("b_events_edit", "back");
-                $view->assign("title", 'Event Management > Edit Event');
+                $view->assign("title", 'Gestion des évènements > Modifier un évènement');
 
                 $event['sessions'] = $eventModel->getSessions($id);
                 $event['tags'] = Helpers::unsplitFields($eventModel->getTags($id));

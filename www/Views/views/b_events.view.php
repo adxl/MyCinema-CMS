@@ -6,7 +6,7 @@
 
 <div class="flex flex-right">
     <a href="/bo/events/new">
-        <button class="button button--success mb-l">Create Event</button>
+        <button class="button button--success mb-l">Créer un évènement</button>
     </a>
 </div>
 
@@ -26,12 +26,12 @@
                             <i class="fas fa-eye"></i>
                         </a>
                     </div>
-                    <p class="no-break"> Schedulled sessions : <?= $event['sessions']; ?>
+                    <p class="no-break"> Séances programées : <?= $event['sessions']; ?>
                     </p>
-                    <p class="mb-s no-break"> Next session : <?= $event['nextSession'] ?: '-' ?>
+                    <p class="mb-s no-break"> Prochaine séance : <?= $event['nextSession'] ?: '-' ?>
                     </p>
                     <?php if ($event['rooms'] && $event['nextSession']) : ?>
-                        <p class=""> Planned room(s) :
+                        <p class=""> Salle(s) prévues :
                             <?php foreach ($event['rooms'] as $room) : ?>
                                 <span><?= $room['label']; ?></span>
                             <?php endforeach; ?>

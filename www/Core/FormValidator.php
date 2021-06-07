@@ -18,7 +18,7 @@ class FormValidator
 
 			// validate required
 			if (isset($input['required']) && empty($data[$name])) {
-				$errors[] = $input['label'] . ' is required';
+				$errors[] = "'" . $input['label'] . "' est obligatiore";
 			}
 
 			// validate length (min et max)
@@ -28,7 +28,7 @@ class FormValidator
 				$maxLengthValid = (strlen($data[$name]) <= $input["maxLength"]);
 
 				if (!$minLengthValid || !$maxLengthValid) {
-					$errors[] = $input['label'] . " length should be between " . $input["minLength"] . " and " . $input["maxLength"] . " characters.";
+					$errors[] = "'" . $input['label'] . "' doit faire entre " . $input["minLength"] . " et " . $input["maxLength"] . " caractères.";
 				}
 			}
 		}
@@ -46,7 +46,7 @@ class FormValidator
 
 		if (!is_null($pwd)) {
 			if (strlen($pwd) < 8) {
-				$errors[] = "Password too short!";
+				$errors[] = "Le mot de passe doit faire au moins 8 caractères!";
 			}
 
 			if (!preg_match("#[0-9]+#", $pwd)) {

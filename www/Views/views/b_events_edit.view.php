@@ -10,7 +10,7 @@
     </div>
     <div class="flex flex-right">
         <form action="/bo/events/delete" method="post">
-            <button class="button button--danger m-0 p-s" type="submit"> <i class="mr-s fas fa-exclamation-triangle"></i> DELETE </button>
+            <button class="button button--danger m-0 p-s" type="submit"> <i class="mr-s fas fa-exclamation-triangle"></i> SUPPRIMER </button>
         </form>
     </div>
 </section>

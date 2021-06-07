@@ -9,6 +9,6 @@ class SettingsController
     public function showSettingsAction()
     {
         $view = new View("b_settings", 'back');
-        $view->assign("title", 'Settings');
+        $view->assign("title", 'Paramètres du CMS');
     }
 }

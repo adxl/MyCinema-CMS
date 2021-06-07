@@ -17,7 +17,7 @@ class AccountController
         $user = Security::getCurrentUser();
 
         $view = new View("b_account", 'back');
-        $view->assign("title", 'Profile de ' . $user['firstname'] . ' ' . $user['lastname']);
+        $view->assign("title", 'Profil de ' . $user['firstname'] . ' ' . $user['lastname']);
 
         $userModel = new UserModel();
 
