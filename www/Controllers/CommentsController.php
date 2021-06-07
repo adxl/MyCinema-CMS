@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Helpers;
 use App\Core\View;
 use App\Models\Comment as CommentModel;
+use App\Models\Comment as EventModel;
 
 class CommentsController
 {
@@ -18,6 +19,8 @@ class CommentsController
 
         $commentModel = new CommentModel();
 
+        $eventModel = new EventModel();
+
         $comments = is_null($status) ? $commentModel->findAll() : $commentModel->findAll([
             'where' => [
                 [
@@ -27,8 +30,8 @@ class CommentsController
                 ]
             ]
         ]);
-        foreach($comments as $comment) {
-            $comment['event'] = $eventModel->findById($comment['eventId'])['title'];
+        foreach ($comments as $key => $comment) {
+            $comments[$key]['event'] = $eventModel->findById($comment['eventId'])['title'];
         };
         $view->assign('comments', $comments);
     }

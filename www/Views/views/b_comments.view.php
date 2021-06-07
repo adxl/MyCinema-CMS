@@ -50,7 +50,7 @@
               </div>
             </td>
               <td><?= $comment['content']; ?></td>
-              <td><?= $comment['eventId']; ?><</td>
+              <td><?= $comment['event']; ?></td>
               <td>18-10-2015</td>
               <td>
                   <i class="fas fa-exclamation-triangle"></i>
