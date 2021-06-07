@@ -11,7 +11,8 @@ class FormValidator
 
 		if (count($data) != self::getFieldsCount($config['inputs'])) { // Faille XSS 
 			// $errors[] = "An error occured";
-			die("An error occured"); // TODO: non testé
+			Helpers::redirect("/500");
+			die();
 		}
 
 		foreach ($config["inputs"] as $name => $input) {
@@ -78,7 +79,7 @@ class FormValidator
 	private static function getFieldsCount($inputs)
 	{
 		$fields = array_filter($inputs, function ($v, $k) {
-			return $v['type'] !== 'button';
+			return $v['type'] !== 'button' && $v['type'] !== 'link';
 		}, ARRAY_FILTER_USE_BOTH);
 
 		return count($fields);
