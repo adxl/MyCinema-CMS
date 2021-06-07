@@ -9,6 +9,6 @@ class DashboardController
     public function showDashboardAction()
     {
         $view = new View("b_dashboard", 'back');
-        $view->assign("title", 'Dashboard');
+        $view->assign("title", 'Tableau de bord');
     }
 }

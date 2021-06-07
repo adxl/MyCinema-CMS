@@ -38,19 +38,19 @@ $user = Security::getCurrentUserShort();
 				<li>
 					<a href="/bo/events">
 						<i class="fas fa-calendar-alt"></i>
-						<span>Events</span>
+						<span>Évènements</span>
 					</a>
 				</li>
 				<li>
 					<a href="/bo/rooms">
 						<i class="fas fa-building"></i>
-						<span>Rooms</span>
+						<span>Salles</span>
 					</a>
 				</li>
 				<li>
 					<a href="/bo/comments">
 						<i class="fas fa-comments"></i>
-						<span>Comments</span>
+						<span>Commentaires</span>
 					</a>
 				</li>
 
@@ -59,13 +59,13 @@ $user = Security::getCurrentUserShort();
 					<li>
 						<a href="/bo/users">
 							<i class="fas fa-users"></i>
-							<span>Users</span>
+							<span>Utilisateurs</span>
 						</a>
 					</li>
 					<li>
 						<a href="/bo/settings">
 							<i class="fas fa-cog"></i>
-							<span>Settings</span>
+							<span>Paramètres</span>
 						</a>
 					</li>
 

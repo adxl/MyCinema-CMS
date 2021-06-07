@@ -186,8 +186,8 @@ class Room extends Database
                 "action" => "/bo/rooms/create",
                 "class" => "flex-column",
                 "id" => "form_create_room",
-                "submit" => "Confirm",
-                "cancel" => "Cancel",
+                "submit" => "Confirmer",
+                "cancel" => "Annuler",
                 "cancel_action" => "/bo/rooms"
             ],
             "inputs" => [
@@ -195,17 +195,16 @@ class Room extends Database
                 "name" => [
                     "type" => "text",
                     "placeholder" => "",
-                    "label" => "Room name",
+                    "label" => "Nom de la salle",
                     "required" => true,
                     'class' => 'field w-25',
                     "minLength" => 2,
                     "maxLength" => 60,
-                    "error" => "Room name should be between 2 and 60 characters"
                 ],
 
                 "capacity" => [
                     "type" => "number",
-                    "label" => "Room capacity",
+                    "label" => "Capacité d'accueil",
                     "required" => true,
                     'class' => 'field w-25',
                 ]
@@ -221,8 +220,8 @@ class Room extends Database
                 "action" => "/bo/rooms/update",
                 "class" => "",
                 "id" => "form_update_room",
-                "submit" => "Confirm",
-                "cancel" => "Cancel",
+                "submit" => "Confirmer",
+                "cancel" => "Annuler",
                 "cancel_action" => "/bo/rooms"
             ],
             "inputs" => [
@@ -230,18 +229,17 @@ class Room extends Database
                 "label" => [
                     "type" => "text",
                     "placeholder" => "",
-                    "label" => "Room name",
+                    "label" => "Nom de la salle",
                     "required" => true,
                     'class' => 'field w-25',
                     "minLength" => 2,
                     "maxLength" => 60,
-                    "error" => "Room name should be between 2 and 60 characters",
                     "value" => $data['label']
                 ],
 
                 "capacity" => [
                     "type" => "number",
-                    "label" => "Room capacity",
+                    "label" => "Capacité d'accueil",
                     "required" => true,
                     'class' => 'field w-25',
                     "value" => $data['capacity'],
@@ -250,7 +248,7 @@ class Room extends Database
 
                 "isAvailable" => [
                     "type" => "checkbox",
-                    "label" => "Available",
+                    "label" => "Disponible ?",
                     "required" => false,
                     "class" => "checkbox",
                     "checked" => $data['isAvailable']
@@ -258,7 +256,7 @@ class Room extends Database
 
                 "isHandicapAccess" => [
                     "type" => "checkbox",
-                    "label" => "Handicap access",
+                    "label" => "Accès Handicapés ?",
                     "required" => false,
                     "class" => "checkbox",
                     "checked" => $data['isHandicapAccess']

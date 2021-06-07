@@ -6,7 +6,7 @@
 
 <div class="flex flex-right">
     <a href="/bo/rooms/new">
-        <button class="button button--success mb-l">+ Create Room</button>
+        <button class="button button--success mb-l">Créer une salle</button>
     </a>
 </div>
 
@@ -27,12 +27,12 @@
                         </div>
                     </div>
                     <div class="mb-auto">
-                        <p> Capacity : <?= $room['capacity']; ?>
-                        <p> Schedulled sessions : <?= $room['sessions']; ?>
+                        <p> Capacité : <?= $room['capacity']; ?>
+                        <p> Séances programées : <?= $room['sessions']; ?>
                         </p>
-                        <p class="mb-s"> Next session : <?= $room['nextSession'] ?: '-' ?>
+                        <p class="mb-s"> Prochaine séance : <?= $room['nextSession'] ?: '-' ?>
                         </p>
-                        <p class="mb-s"> Next Movie : <?= $room['nextMovie'] ?: '-' ?>
+                        <p class="mb-s"> Prochain film : <?= $room['nextMovie'] ?: '-' ?>
                         </p>
                     </div>
                 </div>
