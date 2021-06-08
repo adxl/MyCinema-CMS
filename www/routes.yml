@@ -86,13 +86,13 @@
   action: showComments
   scope: "ADMIN MANAGER"
 
-# page affichage des commentaires
+# Decliner commentaires
 /bo/comments/decline:
   controller: CommentsController
   action: declineComment
   scope: "ADMIN MANAGER"
 
-# page affichage des commentaires
+# Approuver des commentaires
 /bo/comments/approve:
   controller: CommentsController
   action: approveComment
