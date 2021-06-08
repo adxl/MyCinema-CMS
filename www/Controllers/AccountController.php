@@ -87,14 +87,21 @@ class AccountController
 
             if (empty($errors)) {
 
-                $userModel->setEmail(htmlspecialchars($_POST["email"]));
+                $emailVerif = $userModel->verifUniqEmail($_POST["email"]);
 
-                $id = $userModel->save();
+                if ($emailVerif['count'] > 0) {
+                    Helpers::storeAlert(['Email already used']);
+                } else {
+                    $userModel->setEmail(htmlspecialchars($_POST["email"]));
 
-                if ($id)
-                    Helpers::storeAlert(['Vos modifications ont bien été enregistré'], true);
-                else
-                    Helpers::storeAlert(['Un problème est survenu lors de la modification des données']);
+                    $id = $userModel->save();
+
+                    if ($id)
+                        Helpers::storeAlert(['Vos modifications ont bien été enregistré'], true);
+                    else
+                        Helpers::storeAlert(['Un problème est survenu lors de la modification des données']);                }
+
+
             } else
                 Helpers::storeAlert($errors);
 
