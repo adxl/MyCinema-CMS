@@ -15,13 +15,13 @@ class CommentsController
         $view = new View("b_comments", "back");
         $view->assign("title", 'Comments management');
 
-        $status = Helpers::getQueryParam('status');
+        $status = Helpers::getQueryParam('status') ?: 'WAITING';
 
         $commentModel = new CommentModel();
 
         $eventModel = new EventModel();
 
-        $comments = is_null($status) ? $commentModel->findAll() : $commentModel->findAll([
+        $comments = $status === 'ALL' ? $commentModel->findAll() : $commentModel->findAll([
             'where' => [
                 [
                     'column' => 'status',
@@ -56,9 +56,6 @@ class CommentsController
     {
         $id = Helpers::getQueryParam('id');
         $status = Helpers::getQueryParam('status');
-        var_dump($status);
-        die($id);
-        die($status);
 
         $commentModel = new CommentModel();
         $comment = $commentModel->findById($id);
@@ -67,14 +64,15 @@ class CommentsController
 
         $commentModel->setStatus('APPROVED');
 
-        // $commentModel->save();
-        
+        $commentModel->save();
+
         Helpers::redirect('/bo/comments?status=' . $status);
     }
 
     public function declineCommentAction()
     {
         $id = Helpers::getQueryParam('id');
+        $status = Helpers::getQueryParam('status');
 
         $commentModel = new CommentModel();
         $comment = $commentModel->findById($id);
