@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Core\Helpers;
 use App\Core\View;
 use App\Models\Comment as CommentModel;
-use App\Models\Comment as EventModel;
+use App\Models\Event as EventModel;
 
 class CommentsController
 {
