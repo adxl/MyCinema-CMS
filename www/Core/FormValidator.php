@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Core\Database;
+
 class FormValidator
 {
 
@@ -10,7 +12,6 @@ class FormValidator
 		$errors = [];
 
 		if (count($data) != self::getFieldsCount($config['inputs'])) { // Faille XSS 
-			// $errors[] = "An error occured";
 			Helpers::redirect("/500");
 			die();
 		}
@@ -34,26 +35,18 @@ class FormValidator
 			}
 		}
 
-
-		// TODO: validate email 
-
-        if (isset($config["inputs"]['email'])) {
-            $filterEmail = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
-            if(!$filterEmail) {
-                $errors[] = "Wrong format email";
-            }
-        }
-
-
-
+		// validate email pattern 
+		if (isset($config["inputs"]['email'])) {
+			$filterEmail = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
+			if (!$filterEmail) {
+				$errors[] = "Email non-valide";
+			}
+		}
 
 		$pwd = isset($config["inputs"]['pwd']) ? $data['pwd'] : null;
 		$pwdConfirm = isset($config["inputs"]['pwdConfirm']) ? $data['pwdConfirm'] : null;
 
-		// TODO: validate password complexity
-		# MIN LENGTH 8 - 255
-		# AU MOINS 1 Maj, 1min, 1 chiffre, 1 specialChar
-
+		// validate password strength
 		if (!is_null($pwd)) {
 			if (strlen($pwd) < 8) {
 				$errors[] = "Le mot de passe doit faire au moins 8 caractères!";
@@ -84,8 +77,53 @@ class FormValidator
 		return $errors;
 	}
 
+	public static function checkDatabaseSettings($config, $data)
+	{
+		$errors = [];
 
-	private static function getFieldsCount($inputs)
+		// validate required
+		foreach ($config["inputs"] as $name => $input) {
+			if (empty($data[$name])) {
+				$errors[] = "'" . $input['label'] . "' est obligatiore";
+			}
+		}
+
+		if (empty($errors)) {
+
+			// validate database connection
+			$host = $data["db-host"];
+			$driver = $data["db-driver"];
+			$port = $data["db-port"];
+			$name = $data["db-name"];
+			$user = $data["db-user"];
+			$password = $data["db-password"];
+
+			try {
+				$pdo = new \PDO($driver . ":host=" . $host . ";dbname=" . $name . ";port=" . $port, $user, $password);
+			} catch (\PDOException $e) {
+				$errors[] = "Echec de connexion à la base de données";
+				return $errors;
+			}
+		}
+
+		return $errors;
+	}
+
+	public static function checkMailingSettings($config, $data)
+	{
+		$errors = [];
+
+		// validate required
+		foreach ($config["inputs"] as $name => $input) {
+			if (empty($data[$name])) {
+				$errors[] = "'" . $input['label'] . "' est obligatiore";
+			}
+		}
+
+		return $errors;
+	}
+
+	private static function getFieldsCount($inputs) // anti-XSS
 	{
 		$fields = array_filter($inputs, function ($v, $k) {
 			return $v['type'] !== 'button' && $v['type'] !== 'link';

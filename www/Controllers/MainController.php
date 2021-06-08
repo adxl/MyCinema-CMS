@@ -8,13 +8,14 @@ use App\Core\Helpers;
 use App\Models\Comment;
 use App\Models\Event;
 use App\Models\Room;
+use App\Models\Settings;
 
 class MainController
 {
 
     public function showHomePageAction()
     {
-        $view = new View("f_home", 'front');
+        // $view = new View("f_home", 'front');
     }
 
     public function showEventsAction()

@@ -48,17 +48,17 @@
     background-color: lighten($red, 50%);
     padding: 10px;
     margin: 10px;
-    font-size: 11px;
+    font-size: 11pt;
     line-height: 1.2rem;
 }
 
 .text-alert-success {
     border-radius: 8px;
-    color: $dark-green;
-    background-color: lighten($green, 50%);
+    color: $white;
+    background-color: $dark-green;
     padding: 10px;
     margin: 10px;
-    font-size: 11px;
+    font-size: 11pt;
     line-height: 1.2rem;
 }
 
