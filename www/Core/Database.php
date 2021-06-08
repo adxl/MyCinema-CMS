@@ -2,6 +2,8 @@
 
 namespace App\Core;
 
+use App\Models\User as UserModel;
+
 class Database
 {
     private $pdo;
@@ -68,6 +70,27 @@ class Database
         ];
 
         return $this->findOne($sqlData);
+    }
+
+    public function verifUniqEmail($email)
+    {
+        $user = new UserModel();
+
+
+        $emailUsed = $user->findOne(
+            [
+                'select' => 'COUNT(*) as count',
+                'where' => [
+                    [
+                        'column' => 'email',
+                        'operator' => '=',
+                        'value' => $_POST["email"]
+                    ],
+                ]
+            ]
+        );
+
+        return !($emailUsed['count'] > 0);
     }
 
     public function findOne($sqlData = [])
