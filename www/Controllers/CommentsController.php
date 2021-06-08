@@ -64,7 +64,7 @@ class CommentsController
 
         $commentModel->save();
 
-        Helpers::redirect('/bo/comments' . $id);
+        Helpers::redirect('/bo/comments');
     }
 
     public function declineCommentAction()
@@ -80,6 +80,6 @@ class CommentsController
 
         $commentModel->save();
 
-        Helpers::redirect('/bo/comments' . $id);
+        Helpers::redirect('/bo/comments');
     }
 }
