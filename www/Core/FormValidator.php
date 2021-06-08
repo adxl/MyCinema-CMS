@@ -37,11 +37,11 @@ class FormValidator
 
 		// TODO: validate email 
 
-        $email = isset($config["inputs"]['email']) ? $data['email'] : null;
-		$filterEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
-
-		if(!$filterEmail) {
-            $errors[] = "Wrong format email";
+        if (isset($config["inputs"]['email'])) {
+            $filterEmail = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
+            if(!$filterEmail) {
+                $errors[] = "Wrong format email";
+            }
         }
 
 
