@@ -90,12 +90,7 @@ class Database
             ]
         );
 
-        if ($emailUsed['count'] > 0) {
-            return false;
-        }
-        else {
-            return true;
-        }
+        return !($emailUsed['count'] > 0);
     }
 
     public function findOne($sqlData = [])
