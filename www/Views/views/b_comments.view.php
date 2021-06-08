@@ -40,43 +40,22 @@
           <tr class="<?= ($comment['id'] === $self['id']) ? 'faded' : '' ?>">
             <td class="author-card flex-middle flex-column">
               <div class="flex">
-                <i class="fas fa-user-circle"></i>
                 <span span width="40" class="card status-active" alt=" ">active</span>
               </div>
               <p><?= $comment['name']; ?></p>
-            	<div class="flex">
-                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                <span class="mx-s">18-05-2020</span>
-              </div>
             </td>
               <td><?= $comment['content']; ?></td>
               <td><?= $comment['event']; ?></td>
-              <td>18-10-2015</td>
+              <td><?= $comment['date']; ?></td>
               <td>
-                  <i class="fas fa-exclamation-triangle"></i>
-                  <i class="fas fa-trash"></i>
+                <a href="/bo/comments/decline?id=<?=$comment['id']?>">
+                  <i class="fas fa-times"></i>
+                </a>
+                <a href="/bo/comments/approve?id=<?=$comment['id']?>">
+                  <i class="fas fa-check-square"></i>
+                </a>
               </td>
           </tr>
-          <tr>
-            <td class="author-card flex-middle flex-column">
-              <div class="flex">
-                <i class="fas fa-user-circle"></i>
-                <span width="40" class="card status-inactive" alt=" ">Inactive</span>
-              </div>
-              	<p class="m-0 text-bold text-underline">Sasha Soushi</p>
-              <div class="flex">
-                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                <span class="mx-s">18-05-2020</span>
-              </div>
-              </td>
-                <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                <td>Blade runner 2049</td>
-                <td>18-10-2015</td>
-                <td>
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <i class="fas fa-trash"></i>
-                </td>
-            </tr>
           <?php endforeach ?>
       </tbody>
   </table>
