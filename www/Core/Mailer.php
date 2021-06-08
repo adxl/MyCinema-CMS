@@ -15,8 +15,8 @@ class Mailer
         $mail->Port = EMAIL_SMTP_PORT;
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->SMTPAuth = true;
-        $mail->Username = EMAIL_ADDRESS;
-        $mail->Password = EMAIL_PASSWD;
+        $mail->Username = EMAIL_SMTP_ADMIN;
+        $mail->Password = EMAIL_SMTP_PASSWORD;
 
         $mail->CharSet    = 'UTF-8';
         $mail->Encoding   = 'base64';

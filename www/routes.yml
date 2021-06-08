@@ -140,6 +140,18 @@
   action: showSettings
   scope: "ADMIN"
 
+# page paramètres du site
+/bo/settings/database:
+  controller: SettingsController
+  action: saveDatabaseSettings
+  scope: "ADMIN"
+
+# page paramètres du site
+/bo/settings/mailing:
+  controller: SettingsController
+  action: saveMailingSettings
+  scope: "ADMIN"
+
 # page compte utilisateur
 /bo/account:
   controller: AccountController
