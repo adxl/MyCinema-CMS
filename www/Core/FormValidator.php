@@ -37,6 +37,15 @@ class FormValidator
 
 		// TODO: validate email 
 
+        if (isset($config["inputs"]['email'])) {
+            $filterEmail = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
+            if(!$filterEmail) {
+                $errors[] = "Wrong format email";
+            }
+        }
+
+
+
 
 		$pwd = isset($config["inputs"]['pwd']) ? $data['pwd'] : null;
 		$pwdConfirm = isset($config["inputs"]['pwdConfirm']) ? $data['pwdConfirm'] : null;
