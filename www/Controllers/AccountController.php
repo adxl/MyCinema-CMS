@@ -89,9 +89,7 @@ class AccountController
 
                 $emailVerif = $userModel->verifUniqEmail($_POST["email"]);
 
-                if ($emailVerif['count'] > 0) {
-                    Helpers::storeAlert(['Email already used']);
-                } else {
+                if ($emailVerif) {
                     $userModel->setEmail(htmlspecialchars($_POST["email"]));
 
                     $id = $userModel->save();
@@ -99,7 +97,10 @@ class AccountController
                     if ($id)
                         Helpers::storeAlert(['Vos modifications ont bien été enregistré'], true);
                     else
-                        Helpers::storeAlert(['Un problème est survenu lors de la modification des données']);                }
+                        Helpers::storeAlert(['Un problème est survenu lors de la modification des données']);
+                } else {
+                    Helpers::storeAlert(['Email already used']);
+                }
 
 
             } else
