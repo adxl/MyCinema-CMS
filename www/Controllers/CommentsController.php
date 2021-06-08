@@ -34,6 +34,7 @@ class CommentsController
             $comments[$key]['event'] = $eventModel->findById($comment['eventId'])['title'];
         };
         $view->assign('comments', $comments);
+        $view->assign('status', $status);
     }
 
     public function addCommentAction()
@@ -54,6 +55,10 @@ class CommentsController
     public function approveCommentAction()
     {
         $id = Helpers::getQueryParam('id');
+        $status = Helpers::getQueryParam('status');
+        var_dump($status);
+        die($id);
+        die($status);
 
         $commentModel = new CommentModel();
         $comment = $commentModel->findById($id);
@@ -62,9 +67,9 @@ class CommentsController
 
         $commentModel->setStatus('APPROVED');
 
-        $commentModel->save();
-
-        Helpers::redirect('/bo/comments');
+        // $commentModel->save();
+        
+        Helpers::redirect('/bo/comments?status=' . $status);
     }
 
     public function declineCommentAction()
@@ -80,6 +85,6 @@ class CommentsController
 
         $commentModel->save();
 
-        Helpers::redirect('/bo/comments');
+        Helpers::redirect('/bo/comments?status=' . $status);
     }
 }

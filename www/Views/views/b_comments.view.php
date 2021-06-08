@@ -48,12 +48,21 @@
               <td><?= $comment['event']; ?></td>
               <td><?= $comment['date']; ?></td>
               <td>
-                <a href="/bo/comments/decline?id=<?=$comment['id']?>">
-                  <i class="fas fa-times"></i>
+              <div class="flex">
+                <?php if ($comment['status'] == 'APPROVED' || $comment['status'] == 'WAITING' ) : ?>
+                  <a class="flex flex-middle mr-m" href="/bo/comments/decline?id=<?= $comment['id'] ?>&status=<?php $status ?>">
+                    <i class="mr-s  fas fa-times"></i>
+                    <p>Refuser</p>
+                  </a>
                 </a>
-                <a href="/bo/comments/approve?id=<?=$comment['id']?>">
-                  <i class="fas fa-check-square"></i>
-                </a>
+                <?php endif; ?>
+                <?php if ($comment['status'] == 'DECLINED'|| $comment['status'] == 'WAITING' ) : ?>
+                  <a class="flex flex-middle mr-m" href="/bo/comments/approve?id=<?= $comment['id'] ?>&status=<?php $status ?>">
+                    <i class="mr-s fas fa-check-square"></i>
+                    <p>Approuver</p>
+                  </a>
+                <?php endif; ?>
+              </div>
               </td>
           </tr>
           <?php endforeach ?>

@@ -92,7 +92,7 @@
   action: declineComment
   scope: "ADMIN MANAGER"
 
-# Approuver des commentaires
+# Approuver commentaires
 /bo/comments/approve:
   controller: CommentsController
   action: approveComment
