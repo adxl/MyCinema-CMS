@@ -60,13 +60,19 @@
             </td>
             <td>
               <div class="flex">
-                <?php if ($comment['status'] == 'DECLINED' || $comment['status'] == 'WAITING') : ?>
+                <?php if ($comment['status'] !== 'WAITING') : ?>
+                  <a class="flex flex-middle mr-m" href="/bo/comments/suspend?id=<?= $comment['id'] ?>&status=<?= $status ?>">
+                    <i style="font-size: 1.25em" class="fas fa-clock mr-s text-yellow"></i>
+                    <p>Suspendre</p>
+                  </a>
+                <?php endif; ?>
+                <?php if ($comment['status'] !== 'APPROVE') : ?>
                   <a class="flex flex-middle mr-m" href="/bo/comments/approve?id=<?= $comment['id'] ?>&status=<?= $status ?>">
                     <i style="font-size: 1.25em" class="fas fa-check-square mr-s text-green"></i>
                     <p>Approuver</p>
                   </a>
                 <?php endif; ?>
-                <?php if ($comment['status'] == 'APPROVED' || $comment['status'] == 'WAITING') : ?>
+                <?php if ($comment['status'] !== 'DECLINED') : ?>
                   <a class="flex flex-middle mr-m" href="/bo/comments/decline?id=<?= $comment['id'] ?>&status=<?= $status ?>">
                     <i style="font-size: 1.25em" class="fas fa-ban mr-s text-red"></i>
                     <p>Refuser</p>

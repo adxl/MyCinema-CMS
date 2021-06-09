@@ -69,6 +69,23 @@ class CommentsController
         Helpers::redirect('/bo/comments?status=' . $status);
     }
 
+    public function suspendCommentAction()
+    {
+        $id = Helpers::getQueryParam('id');
+        $status = Helpers::getQueryParam('status');
+
+        $commentModel = new CommentModel();
+        $comment = $commentModel->findById($id);
+
+        $commentModel->populate($commentModel, $comment);
+
+        $commentModel->setStatus('WAITING');
+
+        $commentModel->save();
+
+        Helpers::redirect('/bo/comments?status=' . $status);
+    }
+
     public function declineCommentAction()
     {
         $id = Helpers::getQueryParam('id');
