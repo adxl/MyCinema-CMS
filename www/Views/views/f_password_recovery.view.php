@@ -1,6 +1,6 @@
 <div class="flex flex-center flex-middle bg-lighter h-100">
     <div id="login-form" class=" card flex-column p-l rounded h-100-s">
-        <h1 class="text-center mt-m mb-l">Connexion au BackOffice</h1>
+        <h1 class="text-center mt-m mb-l">Récupération de mot de passe</h1>
 
         <?php if (isset($errors)) : ?>
             <div>
@@ -14,10 +14,15 @@
             </div>
         <?php endif; ?>
 
-        <?php App\Core\FormBuilder::render($form); ?>
-
         <div class="flex flex-center">
-            <a class="link mt-l" href="/">Retour à l'accueil</a>
+            <?= $success ?? "" ?>
+        </div>
+
+        <?php isset($form) && App\Core\FormBuilder::render($form) ?>
+
+        <div class="flex-column flex-center flex-middle">
+            <a class="link mt-l" href="/bo/login">Retour à la page de connexion</a>
+            <a class="link mt-s" href="/">Retour à l'accueil</a>
         </div>
 
     </div>

@@ -164,6 +164,77 @@ class AuthenticationController
         return ['user' => $user, 'errors' => $errors, 'generatedPasswd' => $generatedPasswd ?? ''];
     }
 
+    public function recoverPasswordAction()
+    {
+        $isAuthenticated = Security::isAuthenticated();
+        if ($isAuthenticated) {
+            Helpers::redirect();
+        }
+
+        $view = new View("f_password_recovery", "auth");
+        $userModel = new UserModel();
+
+        $form = $userModel->formBuilderRecoverPassword();
+
+        if (!empty($_POST)) {
+
+            $errors = FormValidator::check($form, $_POST);
+
+            if (empty($errors)) {
+                $view->assign('success', "Veuillez vérifier votre boîte mail");
+                $this->handlePasswordRecovery($_POST["email"]);
+                return;
+            } else {
+                $view->assign("errors", $errors);
+            }
+        }
+
+        $view->assign('form', $form);
+    }
+
+    private function handlePasswordRecovery($email)
+    {
+        $userModel = new UserModel();
+        $user = $userModel->findOne(
+            [
+                'where' => [
+                    [
+                        'column' => 'email',
+                        'operator' => '=',
+                        'value' => $email
+                    ],
+                ]
+            ]
+        );
+
+        if ($user) {
+            $newPassword = Helpers::generatePassword();
+            $userModel->populate($userModel, $user);
+            $userModel->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
+
+            $userModel->save();
+
+            $mailObject = Mailer::init(
+                [
+                    'address' => EMAIL_SOURCE_ADDRESS,
+                    'name' => EMAIL_SOURCE_NAME
+                ],
+                [
+                    [
+                        'address' => $userModel->getEmail(),
+                        'name' => $userModel->getFullName()
+                    ]
+                ],
+                "Votre nouveau mot de passe",
+                "Vous avez demandé le changement de votre mot de passe, veuillez utilser le votre nouveau mot de passe : <br><br>
+                <b>" . $newPassword . "</b><br><br>",
+                "Mot de passe : " . $newPassword
+            );
+
+            Mailer::sendEmail($mailObject);
+        }
+    }
+
     public function logoutAction()
     {
         session_start();

@@ -286,8 +286,8 @@ class Event extends Database
                 "action" => "/bo/events/create",
                 "class" => "flex-column",
                 "id" => "form_create_event",
-                "submit" => "Confirm",
-                "cancel" => "Cancel",
+                "submit" => "Confirmer",
+                "cancel" => "Annuler",
                 "cancel_action" => "/bo/events"
             ],
             "inputs" => [
@@ -295,12 +295,11 @@ class Event extends Database
                 "name" => [
                     "type" => "text",
                     'class' => 'field w-75',
-                    "label" => "Movie name",
+                    "label" => "Titre du film",
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => "Alien", // DEBUG:
-                    "error" => "Event name should be between 2 and 60 characters"
                 ],
 
                 "session" => [
@@ -319,7 +318,7 @@ class Event extends Database
                             "startTime[]" => [
                                 "type" => "time",
                                 "placeholder" => "",
-                                "label" => "Start time",
+                                "label" => "Début",
                                 'class' => 'field',
                                 "required" => true,
                                 "value" => $data['startTime'] ?? Helpers::extractTime(Helpers::now()) // DEBUG:
@@ -327,7 +326,7 @@ class Event extends Database
                             "endTime[]" => [
                                 "type" => "time",
                                 "placeholder" => "",
-                                "label" => "End time",
+                                "label" => "Fin",
                                 'class' => 'field',
                                 "required" => true,
                                 "value" => $data['endTime'] ?? Helpers::extractTime(Helpers::now()) // DEBUG:
@@ -335,7 +334,7 @@ class Event extends Database
                             "room[]" => [
                                 "type" => "select",
                                 "placeholder" => "",
-                                "label" => "Room",
+                                "label" => "Salle",
                                 'class' => 'field',
                                 "required" => true,
                                 "value" => $data['room'] ?? "",
@@ -352,7 +351,7 @@ class Event extends Database
 
                 "addSession" => [
                     "type" => "button",
-                    "value" => "Add session",
+                    "value" => "Ajouter une séance",
                     "id" => "generate-session-btn",
                     'class' => 'link mb-m'
                 ],
@@ -360,7 +359,7 @@ class Event extends Database
                 "directors" => [
                     "type" => 'text',
                     "placeholder" => "",
-                    "label" => "Directed by",
+                    "label" => "Réalisateurs",
                     'class' => 'field w-75',
                     "value" => "Director 1; Director 2", // DEBUG:
                     "required" => false,
@@ -369,7 +368,7 @@ class Event extends Database
                 "actors" => [
                     "type" => 'text',
                     "placeholder" => "",
-                    "label" => "Starring",
+                    "label" => "Acteurs",
                     'class' => 'field w-75',
                     "value" => "Actor 1; Actor 2", // DEBUG:
                     "required" => false,
@@ -384,7 +383,6 @@ class Event extends Database
                     "maxLength" => 300,
                     'rows' => 8,
                     "value" => "Event synopsis est un textarea description film cinema cms projet annuel trois année école", // DEBUG:
-                    "error" => "Event synopsis should be between 10 and 300 characters"
                 ],
 
                 "tags" => [
@@ -419,7 +417,7 @@ class Event extends Database
                 "startTime[]" => [
                     "type" => "time",
                     "placeholder" => "",
-                    "label" => "Start time",
+                    "label" => "Début",
                     'class' => 'field',
                     "required" => true,
                     "value" => null
@@ -427,7 +425,7 @@ class Event extends Database
                 "endTime[]" => [
                     "type" => "time",
                     "placeholder" => "",
-                    "label" => "End time",
+                    "label" => "Fin",
                     'class' => 'field',
                     "required" => true,
                     "value" => null
@@ -435,7 +433,7 @@ class Event extends Database
                 "room[]" => [
                     "type" => "select",
                     "placeholder" => "",
-                    "label" => "Room",
+                    "label" => "Salle",
                     'class' => 'field',
                     "required" => true,
                     "value" => null,
@@ -462,7 +460,7 @@ class Event extends Database
                 "startTime[]" => [
                     "type" => "time",
                     "placeholder" => "",
-                    "label" => "Start time",
+                    "label" => "Début",
                     'class' => 'field',
                     "required" => true,
                     "value" => $session['startTime'] ?? ""
@@ -470,7 +468,7 @@ class Event extends Database
                 "endTime[]" => [
                     "type" => "time",
                     "placeholder" => "",
-                    "label" => "End time",
+                    "label" => "Fin",
                     'class' => 'field',
                     "required" => true,
                     "value" => $session['endTime'] ?? ""
@@ -478,7 +476,7 @@ class Event extends Database
                 "room[]" => [
                     "type" => "select",
                     "placeholder" => "",
-                    "label" => "Room",
+                    "label" => "Salle",
                     'class' => 'field',
                     "required" => true,
                     "value" => $session['room'] ?? "",
@@ -498,8 +496,8 @@ class Event extends Database
                 "action" => "/bo/events/update",
                 "class" => "",
                 "id" => "form_update_event",
-                "submit" => "Confirm",
-                "cancel" => "Cancel",
+                "submit" => "Confirmer",
+                "cancel" => "Annuler",
                 "cancel_action" => "/bo/events"
             ],
 
@@ -509,12 +507,11 @@ class Event extends Database
                     "type" => "text",
                     'class' => 'field w-75',
                     "placeholder" => "",
-                    "label" => "Movie name",
+                    "label" => "Titre du film",
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => $data['title'],
-                    "error" => "Event name should be between 2 and 60 characters"
                 ],
 
                 "session" => [
@@ -525,7 +522,7 @@ class Event extends Database
 
                 "addSession" => [
                     "type" => "button",
-                    "value" => "Add session",
+                    "value" => "Ajouter une séance",
                     "id" => "generate-session-btn",
                     'class' => 'link mb-m'
                 ],
@@ -533,7 +530,7 @@ class Event extends Database
                 "directors" => [
                     "type" => 'text',
                     "placeholder" => "",
-                    "label" => "Directed by",
+                    "label" => "Réalisateurs",
                     'class' => 'field w-75',
                     "required" => false,
                     "value" => $data['directors'] ?? ""
@@ -542,7 +539,7 @@ class Event extends Database
                 "actors" => [
                     "type" => 'text',
                     "placeholder" => "",
-                    "label" => "Starring",
+                    "label" => "Acteurs",
                     'class' => 'field w-75',
                     "required" => false,
                     "value" => $data['actors'] ?? ""
@@ -557,7 +554,6 @@ class Event extends Database
                     "maxLength" => 300,
                     'rows' => 8,
                     "value" => $data['synopsis'],
-                    "error" => "Event synopsis should be between 10 and 300 characters"
                 ],
 
                 "tags" => [

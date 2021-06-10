@@ -11,14 +11,15 @@ class FormValidator
 
 		if (count($data) != self::getFieldsCount($config['inputs'])) { // Faille XSS 
 			// $errors[] = "An error occured";
-			die("An error occured"); // TODO: non testé
+			Helpers::redirect("/500");
+			die();
 		}
 
 		foreach ($config["inputs"] as $name => $input) {
 
 			// validate required
 			if (isset($input['required']) && empty($data[$name])) {
-				$errors[] = $input['label'] . ' is required';
+				$errors[] = "'" . $input['label'] . "' est obligatiore";
 			}
 
 			// validate length (min et max)
@@ -28,13 +29,22 @@ class FormValidator
 				$maxLengthValid = (strlen($data[$name]) <= $input["maxLength"]);
 
 				if (!$minLengthValid || !$maxLengthValid) {
-					$errors[] = $input['label'] . " length should be between " . $input["minLength"] . " and " . $input["maxLength"] . " characters.";
+					$errors[] = "'" . $input['label'] . "' doit faire entre " . $input["minLength"] . " et " . $input["maxLength"] . " caractères.";
 				}
 			}
 		}
 
 
 		// TODO: validate email 
+
+        if (isset($config["inputs"]['email'])) {
+            $filterEmail = filter_var($data['email'], FILTER_VALIDATE_EMAIL);
+            if(!$filterEmail) {
+                $errors[] = "Wrong format email";
+            }
+        }
+
+
 
 
 		$pwd = isset($config["inputs"]['pwd']) ? $data['pwd'] : null;
@@ -46,7 +56,7 @@ class FormValidator
 
 		if (!is_null($pwd)) {
 			if (strlen($pwd) < 8) {
-				$errors[] = "Password too short!";
+				$errors[] = "Le mot de passe doit faire au moins 8 caractères!";
 			}
 
 			if (!preg_match("#[0-9]+#", $pwd)) {
@@ -78,7 +88,7 @@ class FormValidator
 	private static function getFieldsCount($inputs)
 	{
 		$fields = array_filter($inputs, function ($v, $k) {
-			return $v['type'] !== 'button';
+			return $v['type'] !== 'button' && $v['type'] !== 'link';
 		}, ARRAY_FILTER_USE_BOTH);
 
 		return count($fields);

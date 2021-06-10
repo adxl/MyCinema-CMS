@@ -114,7 +114,7 @@ class User extends Database
 				"method" => "POST",
 				"action" => "/bo/login",
 				"id" => "form_login",
-				"submit" => "Login",
+				"submit" => "Connexion",
 				"submitClass" => 'w-50'
 			],
 			"inputs" => [
@@ -133,15 +133,40 @@ class User extends Database
 					"type" => "password",
 					'class' => 'field w-100',
 					"placeholder" => "********",
-					"label" => "Password",
+					"label" => "Mot de passe",
 					"value" => "password",  // DEBUG: login rapide
 					"required" => true,
 				],
 
 				"forgotPassword" => [
-					"type" => "button",
-					"value" => "Forgot password ?",
-					'class' => 'link mb-l'
+					"type" => "link",
+					"value" => "Mot de passe oublié ?",
+					'class' => 'mb-l',
+					'href' => "/bo/recover"
+				],
+			]
+		];
+	}
+
+	public function formBuilderRecoverPassword()
+	{
+		return  [
+			"config" => [
+				"method" => "POST",
+				"action" => "/bo/recover",
+				"id" => "form_recover",
+				"submit" => "Confirmer",
+				"submitClass" => 'w-50'
+			],
+			"inputs" => [
+
+				"email" => [
+					"type" => "email",
+					'class' => 'field w-100',
+					"placeholder" => "example@email.com",
+					"label" => "Email",
+					"required" => true,
+					"value" => "adel@sen.com",   // DEBUG: 
 				],
 			]
 		];
@@ -164,21 +189,19 @@ class User extends Database
 				"firstName" => [
 					"type" => "text",
 					'class' => 'field w-100',
-					"label" => "First name",
+					"label" => "Prénom",
 					"required" => true,
 					"minLength" => 2,
 					"maxLength" => 50,
-					"error" => "First name should be between 2 and 50 characters"
 				],
 
 				"lastName" => [
 					"type" => "text",
 					'class' => 'field w-100',
-					"label" => "Last name",
+					"label" => "Nom",
 					"required" => true,
 					"minLength" => 2,
 					"maxLength" => 100,
-					"error" => "Last name should be between 2 and 100 characters"
 				],
 
 				"email" => [
@@ -189,7 +212,6 @@ class User extends Database
 					"required" => true,
 					"minLength" => 6,
 					"maxLength" => 320,
-					"error" => "Not a valid email"
 				]
 			]
 		];
@@ -202,30 +224,28 @@ class User extends Database
 				"method" => "POST",
 				"action" => "/bo/account/names",
 				"id" => "form_account_names",
-				"submit" => "Submit",
+				"submit" => "Enregistrer",
 			],
 			"inputs" => [
 
 				"firstName" => [
 					"type" => "text",
 					'class' => 'field w-25',
-					"label" => "First name",
+					"label" => "Prénom",
 					"value" => $data['firstname'],
 					"required" => true,
 					"minLength" => 2,
 					"maxLength" => 50,
-					"error" => "First name should be between 2 and 50 characters"
 				],
 
 				"lastName" => [
 					"type" => "text",
 					'class' => 'field w-25',
-					"label" => "Last name",
+					"label" => "Nom",
 					"value" => $data['lastname'],
 					"required" => true,
 					"minLength" => 2,
 					"maxLength" => 100,
-					"error" => "Last name should be between 2 and 100 characters"
 				],
 			]
 		];
@@ -238,7 +258,7 @@ class User extends Database
 				"method" => "POST",
 				"action" => "/bo/account/email",
 				"id" => "form_account_email",
-				"submit" => "Submit",
+				"submit" => "Enregistrer",
 			],
 			"inputs" => [
 				"email" => [
@@ -248,7 +268,6 @@ class User extends Database
 					"label" => "Email",
 					"value" => $data['email'],
 					"required" => true,
-					"error" => "Not a valid email"
 				],
 			]
 		];
@@ -261,30 +280,28 @@ class User extends Database
 				"method" => "POST",
 				"action" => "/bo/account/password",
 				"id" => "form_account_password",
-				"submit" => "Submit",
+				"submit" => "Enregistrer",
 			],
 			"inputs" => [
 
 				"actualPwd" => [
 					"type" => "text",
 					'class' => 'field w-50',
-					"label" => "Actual password",
+					"label" => "Mot de passe actuel",
 					"required" => true,
-					"error" => "Password should have at least 8 characters"
 				],
 
 				"pwd" => [
 					"type" => "text",
 					'class' => 'field w-50',
-					"label" => "New password",
+					"label" => "Nouveau mot de passe",
 					"required" => true,
-					"error" => "Password should have at least 8 characters"
 				],
 
 				"pwdConfirm" => [
 					"type" => "text",
 					'class' => 'field w-50 mb-xl',
-					"label" => "Confirm new password",
+					"label" => "Confirmer le nouveau mot de passe",
 					"required" => true,
 				],
 			]
