@@ -12,6 +12,12 @@
   action: showEvents
   scope: ""
 
+# route POST ajout commentaire
+/comments/add:
+  controller: CommentsController
+  action: addComment
+  scope: ""
+
 # pages salles
 /rooms:
   controller: MainController
@@ -78,6 +84,18 @@
 /bo/comments:
   controller: CommentsController
   action: showComments
+  scope: "ADMIN MANAGER"
+
+# Decliner commentaires
+/bo/comments/decline:
+  controller: CommentsController
+  action: declineComment
+  scope: "ADMIN MANAGER"
+
+# Approuver commentaires
+/bo/comments/approve:
+  controller: CommentsController
+  action: approveComment
   scope: "ADMIN MANAGER"
 
 # pages affichage des salles

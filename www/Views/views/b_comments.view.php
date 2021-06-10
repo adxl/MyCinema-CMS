@@ -1,85 +1,84 @@
 <div class="flex flex-middle mb-m mt-s">
-    <i class="fas fa-comments"></i>
-    <h1 class="ml-s"><?= $title; ?></h1>
+  <i class="fas fa-comments"></i>
+  <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 
-<div class=" w-100 flex flex-between flex-middle my-m">
-    <div>
-        <div id="filter-link-bar" class="flex">
-            <a href="#">All</a>
-            <span>|</span>
-            <a href="#">Validated</a>
-            <span>|</span>
-            <a href="#">Reported</a>
-            <span>|</span>
-            <a href="#">Deleted</a>
-        </div>
+<div class=" w-100 flex flex-between flex-middle mt-xl mb-m">
+  <div>
+    <div id="filter-link-bar" class="flex">
+      <a href="/bo/comments?status=ALL" class="<?= $status === 'ALL' ? "active" : "" ?>">Tous</a>
+      <span>|</span>
+      <a href="/bo/comments?status=WAITING" class="<?= $status === 'WAITING' ? "active" : "" ?>">En attente</a>
+      <span>|</span>
+      <a href="/bo/comments?status=APPROVED" class="<?= $status === 'APPROVED' ? "active" : "" ?>">Approuvés</a>
+      <span>|</span>
+      <a href="/bo/comments?status=DECLINED" class="<?= $status === 'DECLINED' ? "active" : "" ?>">Refusés</a>
     </div>
-    <div class="flex">
-        <div class="searchbar">
-            <i class="fas fa-search faded"></i>
-            <input type="text" name="comment-search" placeholder="Search a comment or user">
-        </div>
-        <button class="button">Rechercher</button>
-    </div>
+  </div>
 </div>
 
 <div>
-    <table class="table card">
-        <thead>
-            <tr>
-                <th>Author</th>
-                <th>Comment</th>
-                <th>Event</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <div>
-
-                <?php for ($i = 0; $i < 3; $i++) : ?>
-                    <tr>
-                        <td class="author-card flex-middle flex-column">
-                            <div class="flex">
-                                <i class="fas fa-user-circle"></i>
-                                <span width="40" class="card status-active" alt=" ">active</span>
-                            </div>
-                            <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                            <div class="flex">
-                                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                                <span class="mx-s">18-05-2020</span>
-                            </div>
-                        </td>
-                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td>Blade runner 2049</td>
-                        <td>18-10-2015</td>
-                        <td>
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <i class="fas fa-trash"></i>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="author-card flex-middle flex-column">
-                            <div class="flex">
-                                <i class="fas fa-user-circle"></i>
-                                <span width="40" class="card status-inactive" alt=" ">Inactive</span>
-                            </div>
-                            <p class="m-0 text-bold text-underline">Sasha Soushi</p>
-                            <div class="flex">
-                                <i class="fas fa-xs text-light-gray fa-user-plus"></i>
-                                <span class="mx-s">18-05-2020</span>
-                            </div>
-                        </td>
-                        <td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</td>
-                        <td>Blade runner 2049</td>
-                        <td>18-10-2015</td>
-                        <td>
-                            <i class="fas fa-exclamation-triangle"></i>
-                            <i class="fas fa-trash"></i>
-                        </td>
-                    </tr>
-                <?php endfor ?>
-        </tbody>
-    </table>
+  <table class="table card">
+    <thead>
+      <tr>
+        <th>Auteur</th>
+        <th>Commentaire</th>
+        <th>Évènement</th>
+        <th>Date</th>
+        <th>État</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($comments as $comment) : ?>
+        <tr>
+          <td><?= $comment['name']; ?></td>
+          <td><?= $comment['content']; ?></td>
+          <td>
+            <a href="/events?id=<?= $comment['eventId']; ?>" target="_blank">
+              <span><?= $comment['event']; ?></span>
+              <i class="fas fa-external-link-alt faded"></i>
+            </a>
+          </td>
+          <td><?= $comment['date']; ?></td>
+          <td>
+            <?php switch ($comment['status']) {
+              case 'APPROVED':
+                $tag = 'Approuvé';
+                break;
+              case 'DECLINED':
+                $tag = 'Refusé';
+                break;
+              case 'WAITING':
+                $tag = 'En attente';
+                break;
+            } ?>
+            <?= $tag; ?>
+          </td>
+          <td>
+            <div class="flex">
+              <?php if ($comment['status'] !== 'APPROVED') : ?>
+                <a class="col-6 flex flex-middle" href="/bo/comments/approve?id=<?= $comment['id'] ?>&status=<?= $status ?>">
+                  <i style="font-size: 1.25em" class="fas fa-check-square mr-s text-green"></i>
+                  <p>Approuver</p>
+                </a>
+              <?php endif; ?>
+              <?php if ($comment['status'] !== 'DECLINED') : ?>
+                <a class="col-6 flex flex-middle" href="/bo/comments/decline?id=<?= $comment['id'] ?>&status=<?= $status ?>">
+                  <i style="font-size: 1.25em" class="fas fa-ban mr-s text-red"></i>
+                  <p>Refuser</p>
+                </a>
+              <?php endif; ?>
+              <?php if ($comment['status'] !== 'WAITING') : ?>
+                <a class="col-6 flex flex-middle" href="/bo/comments/suspend?id=<?= $comment['id'] ?>&status=<?= $status ?>">
+                  <i style="font-size: 1.25em" class="fas fa-clock mr-s text-yellow"></i>
+                  <p>Suspendre</p>
+                </a>
+              <?php endif; ?>
+            </div>
+          </td>
+        </tr>
+      <?php endforeach ?>
+    </tbody>
+  </table>
 </div>

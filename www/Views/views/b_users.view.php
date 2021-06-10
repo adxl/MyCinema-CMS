@@ -3,8 +3,6 @@
     <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 
-
-
 <div class="flex flex-right mb-m">
     <a href="/bo/register">
         <button class="button button--success">Ajouter un collaborateur</button>
