@@ -223,3 +223,21 @@
   controller: AuthenticationController
   action: logout
   scope: "ADMIN MANAGER"
+
+# page des outils
+/bo/tools:
+  controller: ToolsController
+  action: showTools
+  scope: "ADMIN"
+
+# sitemap
+/sitemap.xml:
+  controller: ToolsController
+  action: generateSitemap
+  scope: ""
+
+# sitemap
+/sitemap:
+  controller: ToolsController
+  action: generateSitemap
+  scope: ""

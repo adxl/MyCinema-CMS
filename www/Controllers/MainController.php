@@ -8,7 +8,6 @@ use App\Core\Helpers;
 use App\Models\Comment;
 use App\Models\Event;
 use App\Models\Room;
-use App\Models\Settings;
 
 class MainController
 {

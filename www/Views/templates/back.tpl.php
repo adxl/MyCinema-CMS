@@ -62,6 +62,12 @@ $user = Security::getCurrentUserShort();
 							<span>Utilisateurs</span>
 						</a>
 					</li>
+					<li class="mt-l">
+						<a href="/bo/tools">
+							<i class="fas fa-tools"></i>
+							<span>Utilitaires</span>
+						</a>
+					</li>
 					<li>
 						<a href="/bo/settings">
 							<i class="fas fa-cog"></i>

@@ -1,16 +1,10 @@
-.env
-.env.dev
-.env.prod
-
-www/.env
-www/.env.dev
-www/.env.prod
-
+www/.env*
 
 .idea
 db_data/
 
 www/Views/dist
-
 www/Views/node_modules
 www/Views/package-lock.json
+
+sitemap.xml
