@@ -4,7 +4,7 @@ namespace App\Core;
 
 class EnvironmentManager
 {
-    public static function getEnvData($envFile = '.env')
+    public static function getEnvData($envFile)
     {
         $file = fopen($envFile, "r");
         $regex = "/([^=]*)=([^#]*)/";
@@ -23,7 +23,7 @@ class EnvironmentManager
         return $data;
     }
 
-    private static function writeEnvData($data, $envFile = '.env')
+    private static function writeEnvData($data, $envFile)
     {
         $dataString = "";
         foreach ($data as $key => $value) {
@@ -33,14 +33,19 @@ class EnvironmentManager
         file_put_contents($envFile, $dataString);
     }
 
+    public static function updateGeneralEnv($data)
+    {
+        $data['DB_ENV'] = DB_ENV;
+        EnvironmentManager::writeEnvData($data, ".env");
+    }
+
     public static function updateDatabaseEnv($data)
     {
-        EnvironmentManager::writeEnvData($data, ".env." . ENV);
+        EnvironmentManager::writeEnvData($data, ".env.db" . DB_ENV);
     }
 
     public static function updateMailingEnv($data)
     {
-        $data['ENV'] = ENV;
-        EnvironmentManager::writeEnvData($data);
+        EnvironmentManager::writeEnvData($data, ".env.smtp");
     }
 }
