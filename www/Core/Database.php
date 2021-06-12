@@ -215,7 +215,7 @@ class Database
         $stmt->execute($columns) or $error = true;
 
         if ($error) {
-            if (ENV === 'dev') {
+            if (DB_ENV === 'dev') {
                 echo "<pre>";
                 echo 'DATABASE ERROR : ' . $stmt->errorInfo()[2] . PHP_EOL;
                 echo PHP_EOL;
@@ -244,5 +244,23 @@ class Database
             $setter = 'set' . ucfirst($key);
             $model->$setter($data[$key]);
         }
+    }
+
+    public static function health($access)
+    {
+        $host = $access["db-host"];
+        $driver = $access["db-driver"];
+        $port = $access["db-port"];
+        $name = $access["db-name"];
+        $user = $access["db-user"];
+        $password = $access["db-password"];
+
+        try {
+            new \PDO($driver . ":host=" . $host . ";dbname=" . $name . ";port=" . $port, $user, $password);
+        } catch (\PDOException $e) {
+            return false;
+        }
+
+        return true;
     }
 }

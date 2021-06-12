@@ -16,21 +16,51 @@ class SettingsController
         $view = new View("b_settings", 'back');
         $view->assign("title", 'Paramètres du CMS');
 
+        $tab = Helpers::getQueryParam('tab') ?? 'general';
+
         $settings = new Settings();
-        $databaseSettings = $settings->formBuilderDatabase();
-        $mailingSettings = $settings->formBuilderMailing();
+        switch ($tab) {
+            case 'general':
+                $form = $settings->formBuilderGeneral();
+                break;
+            case 'database':
+                $form = $settings->formBuilderDatabase();
+                break;
+            case 'mailing':
+                $form = $settings->formBuilderMailing();
+                break;
+            default:
+                Helpers::redirect('500');
+                die();
+        }
 
-        $view->assign('formDatabase', $databaseSettings);
-        $view->assign('formMailing', $mailingSettings);
+        $view->assign('form', $form);
 
-
-        if (isset($_SESSION["SETTINGS_ALERT"])) {
-            $alert = Helpers::getAlert();
-            $view->assign($_SESSION["SETTINGS_ALERT"] . "_" . $alert["type"], $alert['messages']);
+        $alert = Helpers::getAlert();
+        if ($alert) {
+            $view->assign($alert["type"], $alert['messages']);
         }
 
         Helpers::emptyAlert();
-        unset($_SESSION['SETTINGS_ALERT']);
+    }
+
+    public function saveGeneralSettingsAction()
+    {
+        $data = $_POST;
+
+        $settings = new Settings();
+        $formConfig = $settings->formBuilderGeneral();
+
+        $errors = FormValidator::check($formConfig, $data);
+
+        if (!empty($errors)) {
+            Helpers::storeAlert($errors);
+        } else {
+            EnvironmentManager::updateGeneralEnv($data);
+            Helpers::storeAlert(["Modifications enregistrées avec succès"], true);
+        }
+
+        Helpers::redirect("/bo/settings?tab=general");
     }
 
     public function saveDatabaseSettingsAction()
@@ -49,8 +79,7 @@ class SettingsController
             Helpers::storeAlert(["Modifications enregistrées avec succès"], true);
         }
 
-        $_SESSION['SETTINGS_ALERT'] = 'db';
-        Helpers::redirect("/bo/settings");
+        Helpers::redirect("/bo/settings?tab=database");
     }
 
     public function saveMailingSettingsAction()
@@ -60,7 +89,7 @@ class SettingsController
         $settings = new Settings();
         $formConfig = $settings->formBuilderMailing();
 
-        $errors = FormValidator::checkMailingSettings($formConfig, $data);
+        $errors = FormValidator::check($formConfig, $data);
 
         if (!empty($errors)) {
             Helpers::storeAlert($errors);
@@ -69,7 +98,6 @@ class SettingsController
             Helpers::storeAlert(["Modifications enregistrées avec succès"], true);
         }
 
-        $_SESSION['SETTINGS_ALERT'] = 'smtp';
-        Helpers::redirect("/bo/settings");
+        Helpers::redirect("/bo/settings?tab=mailing");
     }
 }

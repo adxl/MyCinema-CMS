@@ -3,57 +3,41 @@
     <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 
-<div class="mt-l flex">
-    <div class="col-6">
-        <h1 class="mb-s">Paramètres de la base de données</h1>
-        <?php if (isset($db_errors)) : ?>
-            <div>
-                <ul class="p-0">
-                    <?php foreach ($db_errors as $error) : ?>
-                        <li class="text-alert-error">
-                            <i class="fas fa-exclamation-circle"></i> <?= $error ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
-        <?php if (isset($db_success)) : ?>
-            <div>
-                <ul class="p-0">
-                    <li class="text-alert-success">
-                        <?= $db_success[0] ?>
-                    </li>
-                </ul>
-            </div>
-        <?php endif; ?>
-        <div>
-            <?php App\Core\FormBuilder::render($formDatabase); ?>
+<div class="mt-l">
+
+    <div class='flex card'>
+        <div class="col-2 mt-m">
+            <ul class="p-0">
+                <li class="mb-m"><a href="/bo/settings?tab=general">Général</a></li>
+                <li class="mb-m"><a href="/bo/settings?tab=database">Base de données</a></li>
+                <li><a href="/bo/settings?tab=mailing">Mailing</a></li>
+            </ul>
         </div>
-    </div>
-    <div class="col-6">
-        <h1 class="mb-s">Paramètres de mailing</h1>
-        <?php if (isset($smtp_errors)) : ?>
-            <div>
-                <ul class="p-0">
-                    <?php foreach ($smtp_errors as $error) : ?>
-                        <li class="text-alert-error">
-                            <i class="fas fa-exclamation-circle"></i> <?= $error ?>
+        <div class="col-10 mt-l">
+            <?php if (isset($errors)) : ?>
+                <div>
+                    <ul class="p-0">
+                        <?php foreach ($errors as $error) : ?>
+                            <li class="text-alert-error">
+                                <i class="fas fa-exclamation-circle"></i> <?= $error ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($success)) : ?>
+                <div>
+                    <ul class="p-0">
+                        <li class="text-alert-success">
+                            <?= $success[0] ?>
                         </li>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
-        <?php if (isset($smtp_success)) : ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <div>
-                <ul class="p-0">
-                    <li class="text-alert-success">
-                        <?= $smtp_success[0] ?>
-                    </li>
-                </ul>
+                <?php App\Core\FormBuilder::render($form); ?>
             </div>
-        <?php endif; ?>
-        <div>
-            <?php App\Core\FormBuilder::render($formMailing); ?>
         </div>
     </div>
 </div>

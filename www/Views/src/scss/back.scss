@@ -3,6 +3,10 @@
 body {
   background-color: $lighter-gray;
 
+  #cms-logo {
+    font-family: $logo-font;
+  }
+
   header,
   main {
     @include s {

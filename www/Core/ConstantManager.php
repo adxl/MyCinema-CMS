@@ -6,23 +6,26 @@ class ConstantManager
 {
 
     private $envFile = ".env";
+    private $smtpFile = ".env.smtp";
     private $data = [];
 
     public function __construct()
     {
+        // parse default env
         if (!file_exists($this->envFile))
-            die("Error - File Not Found : env file ( " . $this->envFile . " ) does not exist [ConstantManager.php]");
-
+            die("Erreur d'environnement ENV-E001: Installation corrompue");
         $this->parsingEnv($this->envFile);
 
-        if (!empty($this->data["ENV"])) {
-            $newFile = $this->envFile . "." . $this->data["ENV"];
+        // parse smtp env
+        if (!file_exists($this->smtpFile))
+            die("Erreur d'environnement ENV-S001: Installation corrompue");
+        $this->parsingEnv($this->smtpFile);
 
-            if (!file_exists($newFile))
-                die("Error - File Not Found : File ( " . $newFile . " ) does not exist [ConstantManager.php]");
-
-            $this->parsingEnv($newFile);
-        }
+        // parse database env
+        $databaseEnvFile = $this->envFile . ".db." . ($this->data["DB_ENV"] ?? "dev");
+        if (!file_exists($databaseEnvFile))
+            die("Erreur d'environnement ENV-D001: Installation corrompue");
+        $this->parsingEnv($databaseEnvFile);
 
         $this->defineConstants();
     }

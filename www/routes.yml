@@ -140,13 +140,19 @@
   action: showSettings
   scope: "ADMIN"
 
-# page paramètres du site
+# route paramètres généraux
+/bo/settings/general:
+  controller: SettingsController
+  action: saveGeneralSettings
+  scope: "ADMIN"
+
+# route paramètres bdd
 /bo/settings/database:
   controller: SettingsController
   action: saveDatabaseSettings
   scope: "ADMIN"
 
-# page paramètres du site
+# route paramètres smtp
 /bo/settings/mailing:
   controller: SettingsController
   action: saveMailingSettings

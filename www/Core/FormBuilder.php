@@ -118,6 +118,12 @@ class FormBuilder
 							" . (!empty($configInput["required"]) ? "required" : "") . "
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
 							>";
+				if (isset($configInput['hint'])) {
+					$html .= "<div class='flex flex-middle'>
+								<i class='fas fa-info-circle faded ml-m mr-m'></i>
+								<p class='faded no-break'>" . $configInput['hint'] . "</p>
+								</div>";
+				}
 			}
 			$html .= "</label></div>";
 		}

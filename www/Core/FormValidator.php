@@ -88,36 +88,9 @@ class FormValidator
 			}
 		}
 
-		if (empty($errors)) {
-
-			// validate database connection
-			$host = $data["db-host"];
-			$driver = $data["db-driver"];
-			$port = $data["db-port"];
-			$name = $data["db-name"];
-			$user = $data["db-user"];
-			$password = $data["db-password"];
-
-			try {
-				$pdo = new \PDO($driver . ":host=" . $host . ";dbname=" . $name . ";port=" . $port, $user, $password);
-			} catch (\PDOException $e) {
-				$errors[] = "Echec de connexion à la base de données";
-				return $errors;
-			}
-		}
-
-		return $errors;
-	}
-
-	public static function checkMailingSettings($config, $data)
-	{
-		$errors = [];
-
-		// validate required
-		foreach ($config["inputs"] as $name => $input) {
-			if (empty($data[$name])) {
-				$errors[] = "'" . $input['label'] . "' est obligatiore";
-			}
+		// validate database connection			
+		if (empty($errors) && !Database::health($data)) {
+			return ["Echec de connexion à la base de données"];
 		}
 
 		return $errors;
