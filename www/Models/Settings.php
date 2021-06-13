@@ -17,7 +17,7 @@ class Settings
             ],
 
             "inputs" => [
-                "website-name" => [
+                "WEBSITE_NAME" => [
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Nom du site",
@@ -41,48 +41,28 @@ class Settings
             ],
 
             "inputs" => [
-                "db-host" => [
+                "DB-HOST" => [
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Serveur",
                     "hint" => "Votre serveur de base de données (defaut: localhost)",
                     "value" => DB_HOST,
                 ],
-                "db-driver" => [
-                    "type" => "text",
-                    'class' => 'field w-100',
-                    "label" => "Pilote",
-                    "hint" => "Driver de base de données (defaut: mysql)",
-                    "value" => DB_DRIVER,
-                ],
-                "db-port" => [
-                    "type" => "text",
-                    'class' => 'field w-100 mb-l',
-                    "label" => "Port",
-                    "value" => DB_PORT,
-                ],
-                "db-name" => [
+                "DB-NAME" => [
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Nom",
                     "hint" => "Nom de la base de données",
                     "value" => DB_NAME,
                 ],
-                "db-prefixe" => [
-                    "type" => "text",
-                    'class' => 'field w-100 mb-l',
-                    "label" => "Préfixe",
-                    "hint" => "Préfixe de sécurité des tables",
-                    "value" => DB_PREFIXE,
-                ],
-                "db-user" => [
+                "DB_USER" => [
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Utilisateur",
                     "hint" => "Nom d'utilisateur de la base de données",
                     "value" => DB_USER,
                 ],
-                "db-password" => [
+                "DB_PASSWORD" => [
                     "type" => "password",
                     'class' => 'field w-100',
                     "label" => "Mot de passe",
@@ -105,51 +85,19 @@ class Settings
             ],
 
             "inputs" => [
-                "email-source-name" => [
+                "EMAIL_SOURCE_NAME" => [
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Nom",
                     "hint" => "Le nom affiché au destinataire du mail",
                     "value" => EMAIL_SOURCE_NAME,
                 ],
-                "email-source-address" => [
+                "EMAIL_SOURCE_ADDRESS" => [
                     "type" => "text",
                     'class' => 'field w-100 mb-l',
                     "label" => "Adresse",
-                    "required" => true,
                     "hint" => "L'adresse email affichée au destinataire du mail",
                     "value" => EMAIL_SOURCE_ADDRESS,
-                ],
-                "email-smtp-host" => [
-                    "type" => "text",
-                    'class' => 'field w-100',
-                    "label" => "Serveur SMTP",
-                    "required" => true,
-                    "hint" => "Votre serveur SMTP",
-                    "value" => EMAIL_SMTP_HOST,
-                ],
-                "email-smtp-admin" => [
-                    "type" => "text",
-                    'class' => 'field w-100',
-                    "label" => "Adresse SMTP",
-                    "required" => true,
-                    "hint" => "Adresse email de l'admin SMTP",
-                    "value" => EMAIL_SMTP_ADMIN,
-                ],
-                "email-smtp-password" => [
-                    "type" => "password",
-                    'class' => 'field w-100',
-                    "label" => "Mot de passe SMTP",
-                    "required" => true,
-                    "hint" => "Mot de passe de l'admin SMTP",
-                    "value" => EMAIL_SMTP_PASSWORD,
-                ],
-                "email-smtp-port" => [
-                    "type" => "text",
-                    'class' => 'field w-100 mb-l',
-                    "label" => "Port SMTP",
-                    "required" => true,
-                    "value" => EMAIL_SMTP_PORT,
                 ],
             ],
         ];

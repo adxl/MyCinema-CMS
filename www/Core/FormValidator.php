@@ -89,8 +89,28 @@ class FormValidator
 		}
 
 		// validate database connection			
-		if (empty($errors) && !Database::health($data)) {
+		if (empty($errors) && !Database::testConnection($data)) {
 			return ["Echec de connexion à la base de données"];
+		}
+
+		return $errors;
+	}
+
+	public static function checkMailingSettings($config, $data)
+	{
+		$errors = [];
+
+		// validate required
+		foreach ($config["inputs"] as $name => $input) {
+			if (empty($data[$name])) {
+				$errors[] = "'" . $input['label'] . "' est obligatiore";
+			}
+		}
+
+		// validate email pattern 
+		$filterEmail = filter_var($data['EMAIL_SOURCE_ADDRESS'], FILTER_VALIDATE_EMAIL);
+		if (!$filterEmail) {
+			$errors[] = "Le format de l'email n'est pas valide";
 		}
 
 		return $errors;
@@ -103,5 +123,54 @@ class FormValidator
 		}, ARRAY_FILTER_USE_BOTH);
 
 		return count($fields);
+	}
+
+	public static function checkWizard($config, $data)
+	{
+		$errors = [];
+
+		// validate required
+		foreach ($config["inputs"] as $name => $input) {
+			if (empty($data[$name])) {
+				$errors[] = "'" . $input['label'] . "' est obligatiore";
+			}
+		}
+
+		// validate emails patterns
+		if (!empty($data['EMAIL_SOURCE_ADDRESS']) && !filter_var($data['EMAIL_SOURCE_ADDRESS'], FILTER_VALIDATE_EMAIL)) {
+			$errors[] = "Le format de l'email SMTP n'est pas valide";
+		}
+		if (!empty($data['WEBSITE_ADMIN']) && !filter_var($data['WEBSITE_ADMIN'], FILTER_VALIDATE_EMAIL)) {
+			$errors[] = "Le format de l'email admin n'est pas valide";
+		}
+
+		// validate admin password
+		if (strlen($data["WEBSITE_PASSWORD"]) < 8)
+			$errors[] = "Le mot de passe doit faire au moins 8 caractères!";
+		if (!preg_match("#[0-9]+#", $data["WEBSITE_PASSWORD"]))
+			$errors[] = "Le mot de passe doit contenir au moins 1 chiffre";
+		if (!preg_match("#[a-z]+#", $data["WEBSITE_PASSWORD"]))
+			$errors[] = "Le mot de passe doit contenir au moins 1 minuscule";
+		if (!preg_match("#[A-Z]+#", $data["WEBSITE_PASSWORD"]))
+			$errors[] = "Le mot de passe doit contenir au moins 1 majuscule";
+		if (!preg_match("#[\:\.\@\&\#\$\?\!\_\-\/\*\=\+]+#", $data["WEBSITE_PASSWORD"]))
+			$errors[] = "Le mot de passe doit contenir au moins 1 caractère special ($, @, !, ?, ...)";
+
+		// validate database connection			
+		$databaseData = [
+			'DB_HOST' => $data['DB_HOST'],
+			'DB_DRIVER' => "mysql",
+			'DB_PORT' => 3306,
+			'DB_NAME' => $data['DB_NAME'],
+			'DB_PREFIXE' => "faman_",
+			'DB_USER' => $data['DB_USER'],
+			'DB_PASSWORD' => $data['DB_PASSWORD']
+		];
+
+		if (!Database::testConnection($databaseData)) {
+			$errors[] = "Echec de connexion à la base de données";
+		}
+
+		return $errors;
 	}
 }

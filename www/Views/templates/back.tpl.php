@@ -70,25 +70,19 @@ $user = Security::getCurrentUserShort();
 						<span>Salles</span>
 					</a>
 				</li>
-				<li>
+				<li class="mb-l">
 					<a href="/bo/comments">
 						<i class="fas fa-comments"></i>
 						<span>Commentaires</span>
 					</a>
 				</li>
 
-				<?php if ($user['role'] === 'ADMIN') : ?>
 
+				<?php if ($user['role'] === 'ADMIN') : ?>
 					<li>
 						<a href="/bo/users">
 							<i class="fas fa-users"></i>
 							<span>Utilisateurs</span>
-						</a>
-					</li>
-					<li class="mt-l">
-						<a href="/bo/tools">
-							<i class="fas fa-tools"></i>
-							<span>Utilitaires</span>
 						</a>
 					</li>
 					<li>
@@ -97,8 +91,14 @@ $user = Security::getCurrentUserShort();
 							<span>Paramètres</span>
 						</a>
 					</li>
-
 				<?php endif ?>
+
+				<li>
+					<a href="/bo/tools">
+						<i class="fas fa-tools"></i>
+						<span>Utilitaires</span>
+					</a>
+				</li>
 
 			</ul>
 		</section>

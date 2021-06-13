@@ -23,12 +23,11 @@ class EnvironmentManager
         return $data;
     }
 
-    private static function writeEnvData($data, $envFile)
+    public static function writeEnvData($data, $envFile)
     {
         $dataString = "";
         foreach ($data as $key => $value) {
-            $envKey = strtoupper(str_replace("-", "_", $key));
-            $dataString .= $envKey . "=" . $value . PHP_EOL;
+            $dataString .= $key . "=" . $value . PHP_EOL;
         }
         file_put_contents($envFile, $dataString);
     }
@@ -41,11 +40,18 @@ class EnvironmentManager
 
     public static function updateDatabaseEnv($data)
     {
+        $data['DB_DRIVER'] = DB_DRIVER;
+        $data['DB_PORT'] = DB_PORT;
+        $data['DB_PREFIXE'] = DB_PREFIXE;
         EnvironmentManager::writeEnvData($data, ".env.db" . DB_ENV);
     }
 
     public static function updateMailingEnv($data)
     {
+        $data['EMAIL_SMTP_HOST'] = EMAIL_SMTP_HOST;
+        $data['EMAIL_SMTP_ADMIN'] = EMAIL_SMTP_ADMIN;
+        $data['EMAIL_SMTP_PASSWORD'] = EMAIL_SMTP_PASSWORD;
+        $data['EMAIL_SMTP_PORT'] = EMAIL_SMTP_PORT;
         EnvironmentManager::writeEnvData($data, ".env.smtp");
     }
 }

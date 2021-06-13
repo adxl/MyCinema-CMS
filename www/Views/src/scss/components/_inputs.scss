@@ -27,6 +27,10 @@
         background-color: white;
     }
 
+    input::placeholder {
+        color: lighten($text-black, 50%);
+    }
+
     textarea {
         width: 100%;
         min-width: 1em;
