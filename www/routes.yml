@@ -234,7 +234,7 @@
 /bo/tools:
   controller: ToolsController
   action: showTools
-  scope: "ADMIN"
+  scope: "ADMIN MANAGER"
 
 # sitemap
 /sitemap.xml:
@@ -247,3 +247,9 @@
   controller: ToolsController
   action: generateSitemap
   scope: ""
+
+# sitemap
+/bo/tools/dbcheck:
+  controller: ToolsController
+  action: testDatabaseConnection
+  scope: "ADMIN MANAGER"

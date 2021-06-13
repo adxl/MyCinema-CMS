@@ -2,6 +2,7 @@
 
 namespace App\Core;
 
+use App\Models\Migrations;
 use App\Models\User as UserModel;
 
 class Database
@@ -16,7 +17,97 @@ class Database
             $classExploded = explode("\\", get_called_class());
             $this->table = DB_PREFIXE . lcfirst(end($classExploded));
         } catch (\PDOException $e) {
-            die("Error - SQL Error : " . $e->getMessage() . " [Database.php]");
+            die("Erreur d'environnement ENV-D002: Installation corrompue");
+        }
+    }
+
+    public function migrate()
+    {
+        $columns = Migrations::columns();
+        $indexes = Migrations::indexes();
+        $constraints = Migrations::constraints();
+
+        $this->purge();
+
+        foreach ($columns as $column) {
+            $this->createTable($column);
+        }
+
+        foreach ($indexes as $index) {
+            $this->alterTable($index);
+        }
+
+        foreach ($constraints as $constraint) {
+            $this->alterTable($constraint);
+        }
+
+        $wizardCredentials = $_SESSION["WIZARD_ADMIN_CREDENTIALS"];
+        unset($_SESSION["WIZARD_ADMIN_CREDENTIALS"]);
+
+        $admin = new UserModel();
+        $admin->setFirstname(htmlspecialchars("Admin"));
+        $admin->setLastname(htmlspecialchars("MyCinema"));
+        $admin->setEmail(htmlspecialchars($wizardCredentials["email"]));
+        $admin->setPassword(password_hash($wizardCredentials['password'], PASSWORD_DEFAULT));
+        $admin->setRole("ADMIN");
+        $admin->setIsActive(true);
+        $id = $admin->save();
+
+        if (!$id) {
+            $this->purge();
+            unlink(".env");
+            die("Une erreur s'est produite durant les migrations");
+        }
+
+        return $id;
+    }
+
+    private function purge()
+    {
+        $tables = ["comment", "event", "event_room", "event_tag", "room", "session", "tag", "user"];
+        try {
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->pdo->exec("SET FOREIGN_KEY_CHECKS = 0;");
+            foreach ($tables as $table) {
+                $this->pdo->exec("DROP TABLE IF EXISTS " . DB_PREFIXE . $table . ";");
+            }
+            $this->pdo->exec("SET FOREIGN_KEY_CHECKS = 1;");
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+            unlink(".env");
+            die("purge");
+        }
+    }
+
+    private function createTable($sql)
+    {
+        $stmt = "CREATE TABLE IF NOT EXISTS " .  DB_PREFIXE . $sql["table"] . " ( " . $sql["columns"] . " )";
+
+        try {
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->pdo->exec($stmt);
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+            unlink(".env");
+            die("create");
+        }
+    }
+
+    private function alterTable($sql)
+    {
+        $stmt = "ALTER TABLE " .  DB_PREFIXE . $sql["table"] . " " . $sql["columns"] . ";";
+
+        try {
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->pdo->exec($stmt);
+        } catch (\PDOException $e) {
+            echo "<pre>";
+            echo $stmt . PHP_EOL;
+            echo "Error in alter table " . $sql["table"] . PHP_EOL;
+            echo $e->getMessage();
+            echo "</pre>";
+            unlink(".env");
+            die("alter");
         }
     }
 
@@ -246,21 +337,18 @@ class Database
         }
     }
 
-    public static function health($access)
+    public static function testConnection($access = [])
     {
-        $host = $access["db-host"];
-        $driver = $access["db-driver"];
-        $port = $access["db-port"];
-        $name = $access["db-name"];
-        $user = $access["db-user"];
-        $password = $access["db-password"];
+        // DB_HOST, DB_DRIVER, DB_PORT, DB_NAME, DB_PREFIXE, DB_USER, DB_PASSWORD
+        extract($access);
+
+        $dbstring = ($DB_DRIVER ?? DB_DRIVER) . ":host=" . ($DB_HOST ?? DB_HOST) . ";dbname=" . ($DB_NAME ?? DB_NAME) . ";port=" . ($DB_PORT ?? DB_PORT);
 
         try {
-            new \PDO($driver . ":host=" . $host . ";dbname=" . $name . ";port=" . $port, $user, $password);
+            new \PDO($dbstring, $DB_USER ?? DB_USER, $DB_PASSWORD ?? DB_PASSWORD);
         } catch (\PDOException $e) {
             return false;
         }
-
         return true;
     }
 }

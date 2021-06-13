@@ -34,7 +34,6 @@
                     </ul>
                 </div>
             <?php endif; ?>
-
             <div>
                 <?php App\Core\FormBuilder::render($form); ?>
             </div>

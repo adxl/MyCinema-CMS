@@ -30,7 +30,7 @@ class SettingsController
                 $form = $settings->formBuilderMailing();
                 break;
             default:
-                Helpers::redirect('500');
+                Helpers::redirect('/500');
                 die();
         }
 
@@ -89,7 +89,7 @@ class SettingsController
         $settings = new Settings();
         $formConfig = $settings->formBuilderMailing();
 
-        $errors = FormValidator::check($formConfig, $data);
+        $errors = FormValidator::checkMailingSettings($formConfig, $data);
 
         if (!empty($errors)) {
             Helpers::storeAlert($errors);

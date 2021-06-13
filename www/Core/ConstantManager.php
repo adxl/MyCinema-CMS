@@ -13,18 +13,18 @@ class ConstantManager
     {
         // parse default env
         if (!file_exists($this->envFile))
-            die("Erreur d'environnement ENV-E001: Installation corrompue");
+            die("Erreur ENV-E001: Installation corrompue");
         $this->parsingEnv($this->envFile);
 
         // parse smtp env
         if (!file_exists($this->smtpFile))
-            die("Erreur d'environnement ENV-S001: Installation corrompue");
+            die("Erreur ENV-S001: Installation corrompue");
         $this->parsingEnv($this->smtpFile);
 
         // parse database env
         $databaseEnvFile = $this->envFile . ".db." . ($this->data["DB_ENV"] ?? "dev");
         if (!file_exists($databaseEnvFile))
-            die("Erreur d'environnement ENV-D001: Installation corrompue");
+            die("Erreur ENV-D001: Installation corrompue");
         $this->parsingEnv($databaseEnvFile);
 
         $this->defineConstants();

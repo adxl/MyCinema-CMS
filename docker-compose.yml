@@ -21,10 +21,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: pa_db
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: mycinema_db
+      MYSQL_USER: mc_root
+      MYSQL_PASSWORD: mc_password
+      MYSQL_ROOT_PASSWORD: mc_root_password
     volumes:
       - ./db_data:/var/lib/mysql
     restart: always
