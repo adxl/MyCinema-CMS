@@ -103,7 +103,9 @@ $user = Security::getCurrentUserShort();
 			</ul>
 		</section>
 		<section id="view" class="flex-auto scroll-y">
-			<?php include $this->view ?>
+			<div class="container">
+				<?php include $this->view ?>
+			</div>
 		</section>
 	</main>
 </body>

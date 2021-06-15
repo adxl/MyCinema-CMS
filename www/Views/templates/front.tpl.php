@@ -48,7 +48,9 @@ $user = Security::getCurrentUserShort();
 	</header>
 
 	<main>
-		<?php include $this->view ?>
+		<div class="container">
+			<?php include $this->view ?>
+		</div>
 	</main>
 
 	<?php include 'Views/views/components/f_footer.view.php' ?>
