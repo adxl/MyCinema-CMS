@@ -36,31 +36,29 @@
     </div>
 </section>
 
-<section class="mt-l mb-l">
-    <!-- Liste des commentaires -->
-    <div>
-        <table class="event-details-comments-table card">
-            <thead>
-                <tr>
-                    <th>Auteur</th>
-                    <th>Commentaire</th>
-                    <th>Date</th>
-                </tr>
-
-            </thead>
-            <tbody>
-                <?php foreach ($comments as $comment) : ?>
+<?php if ($comments) : ?>
+    <section class="mt-l mb-l">
+        <!-- Liste des commentaires -->
+        <div>
+            <table class="event-details-comments-table card">
+                <thead>
                     <tr>
-                        <td><?= $comment['name']; ?></td>
-                        <td><?= $comment['content']; ?></td>
-                        <td><?= $comment['date']; ?></td>
+                        <th>Auteur</th>
+                        <th>Commentaire</th>
+                        <th>Date</th>
                     </tr>
-                <?php endforeach ?>
 
-            </tbody>
-        </table>
-        <!--        <pre> --><?php //$comments ? print_r($comments) : null
-                                ?>
-        <!-- </pre>-->
-    </div>
-</section>
+                </thead>
+                <tbody>
+                    <?php foreach ($comments as $comment) : ?>
+                        <tr>
+                            <td><?= $comment['name']; ?></td>
+                            <td><?= $comment['content']; ?></td>
+                            <td><?= $comment['date']; ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+<?php endif; ?>
