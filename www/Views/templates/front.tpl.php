@@ -52,6 +52,7 @@ $user = Security::getCurrentUserShort();
 
 	<main>
 		<?php include $this->view ?>
+		<?php include 'Views/views/components/f_footer.view.php' ?>
 	</main>
 
 </body>
