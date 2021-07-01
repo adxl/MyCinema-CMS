@@ -1,22 +1,30 @@
 <!-- PROCHAIN EVENT -->
-<section id="next-event-section">
-    <h1 class="text-center">PROCHAINEMENT</h1>
-    <div class="row">
-        <div class="flex flex-center rounded col-6 h-100">
-            <div class="h-100 p-l">
-                <img class="h-100 w-100 cover rounded" src="https://farm5.staticflickr.com/4432/37156603705_88d8f43f1b_o.jpg" alt="poster">
+<section class="bg-dark text-white">
+    <h1 class="text-center text-white mt-l mb-m">À L'AFFICHE</h1>
+    <div class="p-l">
+        <img id="events-main-cover" class="w-100 cover rounded" src="https://images.affiches-et-posters.com//albums/3/4535/poster-film-inception-2350.jpg" alt="poster">
+    </div>
+    <div class="flex">
+        <div class="flex flex-center rounded col-6">
+            <div class="p-l">
+                <img class="h-100 w-100 cover rounded" src="https://images.affiches-et-posters.com//albums/3/4535/poster-film-inception-2350.jpg" alt="poster">
             </div>
         </div>
-        <div class="flex-column p-m col-6">
-            <h1><?= $nextEvent['title']; ?></h1>
-            <p>Synopsis : </p>
+        <div class="flex-column p-l col-6">
+            <h1 class="text-white mb-m"><?= $nextEvent['title']; ?></h1>
+            <p class="mb-s text-underline">Synopsis : </p>
             <p class="mb-l"><?= $nextEvent['synopsis']; ?></p>
-
-            <p class="mb-s">Par : <?= $nextEvent['directors']; ?></p>
-            <p>Avec : <?= $nextEvent['actors']; ?></p>
+            <div class="flex">
+                <p class="mb-s text-underline">Par </p>
+                <p> : <?= $nextEvent['directors']; ?></p>
+            </div>
+            <div class="flex">
+                <p class="text-underline">Avec </p>
+                <p> : <?= $nextEvent['actors']; ?></p>
+            </div>
             <div class="flex mt-auto mb-m">
                 <?php foreach ($nextEvent['tags'] as $tag) : ?>
-                    <p class="bg-lighter p-s mr-s rounded"> <?= mb_strtoupper($tag); ?> </p>
+                    <p class="bg-dark-gray p-s mr-s rounded"> <?= mb_strtoupper($tag); ?> </p>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -26,7 +34,7 @@
 
 <!-- EVENTS A VENIR -->
 <section id="incoming-events-section">
-    <h1>Prochainement : </h1>
+    <h1 class="mt-l mb-m">Prochainement : </h1>
     <div class="row">
         <?php foreach ($incomingEvents as $event) : ?>
             <div class="flex-column col-3">
@@ -46,7 +54,7 @@
 
 <!-- TOUS LES EVENTS -->
 <section id="all-events-section">
-    <h1>Tous les évènements : </h1>
+    <h1 class="mt-l mb-m">Tous les évènements : </h1>
     <div class="row">
         <?php foreach ($events as $event) : ?>
             <div class="flex-column col-3">
