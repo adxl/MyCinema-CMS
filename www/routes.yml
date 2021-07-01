@@ -12,11 +12,6 @@
   action: showEvents
   scope: ""
 
-/event:
-  controller: MainController
-  action: showEvents
-  scope: ""
-
 # route POST ajout commentaire
 /comments/add:
   controller: CommentsController
