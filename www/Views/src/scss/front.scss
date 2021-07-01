@@ -1,4 +1,4 @@
-@import 'main.scss';
+@import "main.scss";
 
 header {
     #cms-logo {
@@ -60,5 +60,74 @@ main {
     }
     @include l {
         width: 450px;
+    }
+}
+
+#rooms-front {
+    height: 50vh;
+    div {
+        position: relative;
+        p {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            margin: 0;
+            background-color: #4444449d;
+            border-radius: 8px;
+        }
+        img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+    }
+}
+
+.image-card {
+    transition: transform 0.1s;
+    z-index: 1;
+    > div {
+        height: 30vh;
+        img {
+            height: 100%;
+            object-fit: cover;
+            &:hover {
+                box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.94);
+            }
+        }
+    }
+    .title {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        padding: 5px 10px;
+        color: white;
+        background-color: #4444449d;
+        border-radius: 8px;
+        display: none;
+    }
+    .handicap {
+        position: absolute;
+        bottom: 15px;
+        right: 5px;
+        padding: 5px 10px;
+        color: white;
+        background-color: #4444449d;
+        border-radius: 8px;
+        display: none;
+    }
+    &:hover {
+        transform: scale(1.4);
+        transition: transform 0.2s;
+        z-index: 2;
+        .title {
+            display: block;
+            transform: scale(0.8);
+        }
+        .handicap {
+            display: block;
+            transform: scale(0.8);
+        }
     }
 }

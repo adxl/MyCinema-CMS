@@ -78,7 +78,7 @@ class InstallWizard
                 ],
 
                 "WEBSITE_PASSWORD" => [
-                    "type" => "text",
+                    "type" => "password",
                     'class' => 'field w-100 mb-xl',
                     "label" => "Mot de passe du site",
                     "hint" => "Choisissez un mot de passe pour le super-admin",
