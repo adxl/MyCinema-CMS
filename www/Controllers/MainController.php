@@ -60,6 +60,8 @@ class MainController
         $eventModel = new Event();
         $event = $eventModel->findById($id);
 
+        $event['tags'] = $eventModel->getTags($event['id']);
+
         $commentModel = new Comment();
         $commentForm = $commentModel->formBuilderComment($id);
         $comments = $commentModel->findAll([

@@ -76,6 +76,34 @@ section {
     height: 25vh;
 }
 
+.event-details-comments-table {
+    width: 100%;
+    border: none;
+    border-spacing: 2px;
+    border-collapse: collapse;
+
+    th {
+        text-align: left;
+        padding: 20px;
+    }
+
+    tr {
+        border-bottom: 1px solid $lighter-gray;
+    }
+
+    td {
+        padding: 10px 20px;
+        border: none;
+        button {
+            border: inherit;
+            background-color: transparent;
+            &:first-child {
+                padding-left: 0;
+            }
+        }
+    }
+}
+
 //rooms
 
 #rooms-front {

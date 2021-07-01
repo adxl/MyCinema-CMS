@@ -58,7 +58,9 @@
     <div class="row">
         <?php foreach ($events as $event) : ?>
             <div class="flex-column col-3">
-                <img class="w-100 rounded" src="https://ae01.alicdn.com/kf/HTB1RHpBIXXXXXbLXFXXq6xXFXXXz/Free-shipping-HD-wallpaper-poster-Captain-America-Civil-War-movie-poster-Smith-24x36inch.jpg_Q90.jpg_.webp" alt="poster">
+                <a href="/event?id=<?= $event['id']; ?>" target="_blank">
+                    <img class="w-100 rounded" src="https://ae01.alicdn.com/kf/HTB1RHpBIXXXXXbLXFXXq6xXFXXXz/Free-shipping-HD-wallpaper-poster-Captain-America-Civil-War-movie-poster-Smith-24x36inch.jpg_Q90.jpg_.webp" alt="poster">
+                </a>
                 <p><?= $event['title']; ?></p>
                 <p><?= $event['directors']; ?></p>
                 <div class="flex mt-auto">
