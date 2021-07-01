@@ -15,13 +15,10 @@ $user = Security::getCurrentUserShort();
 	<title>Template de front</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 	<link rel="stylesheet" href="/Views/dist/front.css">
-
-	<link rel="stylesheet" href="/Views/dist/themes/default.css">
-
 	<script type="module" src="/Views/dist/main.min.js"></script>
 </head>
 
-<body>
+<body class="flex-column">
 
 	<?php include 'Views/views/components/f_nav.view.php' ?>
 
@@ -52,8 +49,9 @@ $user = Security::getCurrentUserShort();
 
 	<main>
 		<?php include $this->view ?>
-		<?php include 'Views/views/components/f_footer.view.php' ?>
 	</main>
+
+	<?php include 'Views/views/components/f_footer.view.php' ?>
 
 </body>
 

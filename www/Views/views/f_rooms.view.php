@@ -18,7 +18,7 @@
 
 <!-- TOUTES LES SALLES -->
 <section id="all-events-section">
-    <h1>Toutes les salles : </h1>
+    <h1 class="mt-l mb-m">Toutes les salles : </h1>
     <div class="row">
         <?php foreach ($rooms as $room) : ?>
             <div class="image-card col-4 pb-m">
