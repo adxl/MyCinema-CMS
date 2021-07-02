@@ -82,7 +82,7 @@ class InstallWizard
                     'class' => 'field w-100 mb-xl',
                     "label" => "Mot de passe du site",
                     "hint" => "Choisissez un mot de passe pour le super-admin",
-                    "value" => "password"
+                    "value" => "Password9$"
                 ],
 
                 "DB_HOST" => [

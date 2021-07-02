@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <section class="h-100">
+    <section id="login-section" class="h-100 w-100">
         <?php include $this->view ?>
     </section>
 </body>

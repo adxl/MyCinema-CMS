@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <section class="h-100">
+    <section class="h-100 w-100">
         <?php include $view ?>
     </section>
 </body>

@@ -1,7 +1,7 @@
 <section class="flex-center">
     <?php if (empty($rooms)) : ?>
         <div class="flex flex-middle flex-center">
-            <h1>Aucune salle trouvé</h1>
+            <h1 class="mt-l mb-m">Aucune salle trouvé</h1>
             <?= die() ?>
         </div>
     <?php endif ?>

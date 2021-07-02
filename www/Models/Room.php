@@ -143,7 +143,7 @@ class Room extends Database
             ]
         ]);
 
-        $eventId = $eventRoom['eventId'];
+        $eventId = $eventRoom['eventId'] ?? '';
 
         $eventModel = new EventModel();
         $event = $eventModel->findById($eventId);

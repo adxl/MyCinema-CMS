@@ -9,13 +9,7 @@
     </a>
 </div>
 
-<div class=" w-100 flex flex-right mb-m">
-    <div class="searchbar">
-        <i class="fas fa-search faded"></i>
-        <input type="text" name="user-search">
-    </div>
-    <button class="button">Rechercher</button>
-</div>
+
 
 <div>
     <table class="table card">
