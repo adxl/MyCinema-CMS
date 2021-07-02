@@ -1,5 +1,5 @@
-<section id="next-event-section">
-    <h1 class="text-center"><?= $event['title']; ?></h1>
+<section class="bg-dark text-white mt-l">
+    <h1 class="text-center text-white mt-l"><?= $event['title']; ?></h1>
 
     <div class="row">
         <div class="flex flex-center rounded col-6 h-100">
@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="flex-column p-m col-6">
-            <p>Synopsis : </p>
+            <p class="mb-s text-underline">Synopsis : </p>
             <p class="mb-l"><?= $event['synopsis']; ?></p>
 
             <p class="mb-s">Par : <?= $event['directors']; ?></p>
@@ -29,36 +29,28 @@
 <section class="mt-l">
     <!-- input ajout commentaire -->
     <div class="row card w-100">
-        <h1 class="text-center">Ajouter un commentaire : </h1>
-        <div class="flex flex-center w-100">
+        <h1 class="mb-l">Ajouter un commentaire : </h1>
+        <div class="flex flex-left mt-l w-100">
             <?php App\Core\FormBuilder::render($commentForm); ?>
         </div>
     </div>
 </section>
 
 <?php if ($comments) : ?>
-    <section class="mt-l mb-l">
+    <section class="mt-l">
+        <h1 class="mb-s">Commentaires :</h1>
         <!-- Liste des commentaires -->
+        <?php foreach ($comments as $comment) : ?>
+            <div class="card">
+                <p>
+                    <span class="mb-s text-bold"><?= $comment['name']; ?></span>
+                    <span class="mb-s text-comment"><?= $comment['date']; ?></span>
+                </p>
+                <p><?= $comment['content']; ?></p>
+            </div>
+        <?php endforeach ?>
         <div>
-            <table class="event-details-comments-table card">
-                <thead>
-                    <tr>
-                        <th>Auteur</th>
-                        <th>Commentaire</th>
-                        <th>Date</th>
-                    </tr>
 
-                </thead>
-                <tbody>
-                    <?php foreach ($comments as $comment) : ?>
-                        <tr>
-                            <td><?= $comment['name']; ?></td>
-                            <td><?= $comment['content']; ?></td>
-                            <td><?= $comment['date']; ?></td>
-                        </tr>
-                    <?php endforeach ?>
-                </tbody>
-            </table>
         </div>
     </section>
 <?php endif; ?>
