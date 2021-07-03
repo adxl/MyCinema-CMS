@@ -104,28 +104,16 @@
   action: default
   scope: "ADMIN MANAGER"
 
-# formulaire ajout salle
+# ajout salle
 /bo/rooms/new:
-  controller: RoomsController
-  action: showCreateRoom
-  scope: "ADMIN MANAGER"
-
-# route POST création salle
-/bo/rooms/create:
   controller: RoomsController
   action: createRoom
   scope: "ADMIN MANAGER"
 
-#f ormulaire edition salle
+# edition salle
 /bo/rooms/edit:
   controller: RoomsController
-  action: showEditRoom
-  scope: "ADMIN MANAGER"
-
-# route POST edition salle
-/bo/rooms/update:
-  controller: RoomsController
-  action: updateRoom
+  action: editRoom
   scope: "ADMIN MANAGER"
 
 # route POST suppression salle

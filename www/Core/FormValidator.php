@@ -11,9 +11,19 @@ class FormValidator
 	{
 		$errors = [];
 
-		if (count($data) != self::getFieldsCount($config['inputs'])) { // Faille XSS 
-			Helpers::redirect("/500");
+		$fields_count = self::getFieldsCount($config['inputs']);
+		if ($config['config']["enctype"] === 'multipart/form-data') {
+			$fields_count--;
+		}
+
+		if (count($data) != $fields_count) { // Faille XSS 
+			echo "<pre>";
+			echo 'XSS ERROR :' . PHP_EOL;
+			var_dump($data);
+			var_dump($fields_count);
+			echo "</pre>";
 			die();
+			Helpers::redirect("/500");
 		}
 
 		foreach ($config["inputs"] as $name => $input) {

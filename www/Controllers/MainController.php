@@ -98,6 +98,12 @@ class MainController
         $roomModel = new Room();
         $rooms = $roomModel->findAll();
 
+        $cover_room_key = array_rand($rooms);
+        $cover_room = $rooms[$cover_room_key];
+
+        unset($rooms[$cover_room_key]);
+
+        $view->assign('cover_room', $cover_room);
         $view->assign('rooms', $rooms);
     }
 

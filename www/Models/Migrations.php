@@ -183,6 +183,7 @@ class Migrations
                 id varchar(37) COLLATE utf8_unicode_ci NOT NULL,
                 label varchar(100) COLLATE utf8_unicode_ci NOT NULL,
                 capacity int(11) NOT NULL,
+                media varchar(137) NOT NULL,
                 isHandicapAccess tinyint(1) NOT NULL DEFAULT '0',
                 isAvailable tinyint(1) NOT NULL DEFAULT '1',
                 createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

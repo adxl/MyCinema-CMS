@@ -13,9 +13,9 @@
 <section>
     <div class="row flex-column-m">
         <?php foreach ($rooms as $room) : ?>
-            <a class="card row no-wrap col-2 mb-m p-s" href="/bo/rooms/edit?id=<?= $room['id'] ?>">
-                <div class="col-4 m-0">
-                    <img class="w-100 h-100 poster <?= !$room['isAvailable'] ? 'faded' : '' ?>" src="https://images.rtl.fr/rtl/www/1196574-une-salle-de-cinema-illustration.jpg" alt="image" />
+            <a class="flex-column card col-3 mb-m p-s" href="/bo/rooms/edit?id=<?= $room['id'] ?>">
+                <div class="m-0">
+                    <img class="card-image <?= !$room['isAvailable'] ? 'faded' : '' ?>" src="<?= $room['media']; ?>" alt="image" />
                 </div>
                 <div class="flex-column col-8">
                     <div class="mb-s flex flex-middle flex-between">

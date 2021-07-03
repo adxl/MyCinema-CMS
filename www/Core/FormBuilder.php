@@ -8,7 +8,8 @@ class FormBuilder
 	{
 		$html = "<form 
 				method='" . ($config["config"]["method"] ?? "GET") . "' 
-				action='" . ($config["config"]["action"] ?? "") . "'
+				action='" . ($config["config"]["action"] ?? "") . "' 
+				" . (!empty($config["config"]["enctype"]) ? "enctype='multipart/form-data'" : "") . "
 				class='" . ($config["config"]["class"] ?? "") . "'
 				id='" . ($config["config"]["id"] ?? "") . "'
 				>";
@@ -104,6 +105,16 @@ class FormBuilder
 							" . (!empty($configInput["checked"]) ? "checked" : "") . "
 							>";
 				$html .= "<span class='checkmark' ></span>";
+			} elseif ($configInput['type'] == 'media') {
+				$html .= "<div class='flex-column flex-center'>";
+				$html .= "<input 
+							name='" . $name . "'
+							type='file'
+							accept='image/png, image/jpg, image/jpeg'
+							id='" . ($configInput["id"] ?? $name) . "'
+							>";
+				$html .= "<img src='" . ($configInput["value"] ?? "") . "' />";
+				$html .= "</div>";
 			} else {
 				$html .= "<input 
 							name='" . $name . "'
