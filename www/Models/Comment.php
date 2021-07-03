@@ -100,7 +100,6 @@ class Comment extends Database
                     "label" => "Commentaire",
                     "minLength" => "20",
                     "maxLength" => "200",
-                    'rows' => 8,
                     "required" => true,
                 ],
             ]
