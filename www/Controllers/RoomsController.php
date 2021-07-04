@@ -70,8 +70,6 @@ class RoomsController
                 $file_type = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                 $media = "/Views/images/room_" .  Helpers::slugify($room->getLabel()) . '.' . $file_type;
 
-
-
                 if (!getimagesize($file["tmp_name"])) {
                     $view->assign("errors", ["L'image est invalide"]);
                     exit;
@@ -100,7 +98,6 @@ class RoomsController
 
         $view->assign('form', $form);
     }
-
 
     public function editRoomAction($id = null)
     {
@@ -173,7 +170,7 @@ class RoomsController
                 }
 
                 $view->assign('form', $form);
-                $view->assign('room_id', $room['id']);
+                $view->assign('room_id', $id);
                 return;
             }
         }

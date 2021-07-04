@@ -13,3 +13,23 @@
     height: 20vh;
     border-radius: 8px;
 }
+
+.movie-card {
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    transition: transform 200ms;
+
+    &:hover {
+        transition: transform 200ms;
+        transform: scale(1.02);
+    }
+
+    a {
+        width: 100%;
+        background: rgb(2, 0, 36);
+        background: linear-gradient(90deg, rgba(2, 0, 36, 0) 0%, rgba(21, 21, 21, 1) 90%);
+        color: $white;
+    }
+}

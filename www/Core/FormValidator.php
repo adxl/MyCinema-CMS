@@ -19,7 +19,11 @@ class FormValidator
 		if (count($data) != $fields_count) { // Faille XSS 
 			echo "<pre>";
 			echo 'XSS ERROR :' . PHP_EOL;
+			var_dump(array_keys($data));
 			var_dump($data);
+			echo '---:' . PHP_EOL;
+			var_dump(array_keys($config['inputs']));
+			echo '---:' . PHP_EOL;
 			var_dump($fields_count);
 			echo "</pre>";
 			die();
@@ -81,6 +85,53 @@ class FormValidator
 			// validate password confirmation
 			if (($pwd && $pwdConfirm) && ($pwd !== $pwdConfirm)) {
 				$errors[] = "Les mots de passe ne correspondent pas";
+			}
+		}
+
+		return $errors;
+	}
+
+	public static function checkEventForm($config, $data)
+	{
+		$errors = [];
+
+		if (count($data) != 9) {
+			return ["Les données de l'évènement sont invalides"];
+		}
+
+		if (
+			!isset($data['date'])
+			|| !isset($data['startTime'])
+			|| !isset($data['endTime'])
+			|| !isset($data['room'])
+		) {
+			return ["Les données de la séance ne sont pas correctes"];
+		}
+
+		if (
+			(count($data['startTime']) != count($data['date']))
+			|| (count($data['endTime']) != count($data['date']))
+			|| (count($data['room']) != count($data['date']))
+		) {
+			return ["Les données de la séance ne sont pas correctes"];
+		}
+
+		foreach ($config["inputs"] as $name => $input) {
+
+			// validate required
+			if (isset($input['required']) && empty($data[$name])) {
+				$errors[] = "'" . $input['label'] . "' est obligatiore";
+			}
+
+			// validate length (min et max)
+			if (isset($input["minLength"]) && isset($input["maxLength"])) {
+
+				$minLengthValid = (strlen($data[$name]) >= $input["minLength"]);
+				$maxLengthValid = (strlen($data[$name]) <= $input["maxLength"]);
+
+				if (!$minLengthValid || !$maxLengthValid) {
+					$errors[] = "'" . $input['label'] . "' doit faire entre " . $input["minLength"] . " et " . $input["maxLength"] . " caractères.";
+				}
 			}
 		}
 

@@ -50,31 +50,19 @@
   action: default
   scope: "ADMIN MANAGER"
 
-# formulaire ajout event
+# ajout event
 /bo/events/new:
-  controller: EventsController
-  action: showCreateEvent
-  scope: "ADMIN MANAGER"
-
-# route POST création event
-/bo/events/create:
   controller: EventsController
   action: createEvent
   scope: "ADMIN MANAGER"
 
-# formulaire edition event
+# edition event
 /bo/events/edit:
   controller: EventsController
-  action: showEditEvent
+  action: editEvent
   scope: "ADMIN MANAGER"
 
-# route POST update event
-/bo/events/update:
-  controller: EventsController
-  action: updateEvent
-  scope: "ADMIN MANAGER"
-
-# route POST suppression event
+# suppression event
 /bo/events/delete:
   controller: EventsController
   action: deleteEvent
@@ -116,7 +104,7 @@
   action: editRoom
   scope: "ADMIN MANAGER"
 
-# route POST suppression salle
+# suppression salle
 /bo/rooms/delete:
   controller: RoomsController
   action: deleteRoom

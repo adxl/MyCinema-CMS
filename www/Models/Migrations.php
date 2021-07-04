@@ -91,6 +91,7 @@ class Migrations
                 id varchar(37) COLLATE utf8_unicode_ci NOT NULL,
                 title varchar(100) COLLATE utf8_unicode_ci NOT NULL,
                 synopsis varchar(2000) COLLATE utf8_unicode_ci DEFAULT NULL,
+                media varchar(137) NOT NULL,
                 directors varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
                 actors varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
                 createdAt timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
