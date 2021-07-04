@@ -13,6 +13,7 @@ class Room extends Database
 
     protected $label;
     protected $capacity;
+    protected $media;
     protected $isHandicapAccess = 0;
     protected $isAvailable = 1;
 
@@ -52,6 +53,17 @@ class Room extends Database
     public function setCapacity(int $capacity): void
     {
         $this->capacity = $capacity;
+    }
+
+    // media 
+
+    public function getMedia(): string
+    {
+        return $this->media;
+    }
+    public function setMedia(string $media): void
+    {
+        $this->media = $media;
     }
 
     // isHandicapAccess
@@ -183,7 +195,8 @@ class Room extends Database
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/bo/rooms/create",
+                "action" => "/bo/rooms/new",
+                "enctype" => 'multipart/form-data',
                 "class" => "flex-column",
                 "id" => "form_create_room",
                 "submit" => "Confirmer",
@@ -192,12 +205,12 @@ class Room extends Database
             ],
             "inputs" => [
 
-                "name" => [
+                "label" => [
                     "type" => "text",
                     "placeholder" => "",
                     "label" => "Nom de la salle",
                     "required" => true,
-                    'class' => 'field w-25',
+                    'class' => 'field w-75',
                     "minLength" => 2,
                     "maxLength" => 60,
                 ],
@@ -206,7 +219,13 @@ class Room extends Database
                     "type" => "number",
                     "label" => "Capacité d'accueil",
                     "required" => true,
-                    'class' => 'field w-25',
+                    'class' => 'field w-50 mb-xl',
+                ],
+
+                "media" => [
+                    "type" => "media",
+                    "label" => "Photo de la salle",
+                    'class' => 'field media',
                 ]
             ]
         ];
@@ -217,7 +236,8 @@ class Room extends Database
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/bo/rooms/update",
+                "action" => "/bo/rooms/edit?id=" . $data['id'],
+                "enctype" => 'multipart/form-data',
                 "class" => "",
                 "id" => "form_update_room",
                 "submit" => "Confirmer",
@@ -231,7 +251,7 @@ class Room extends Database
                     "placeholder" => "",
                     "label" => "Nom de la salle",
                     "required" => true,
-                    'class' => 'field w-25',
+                    'class' => 'field w-75',
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => $data['label']
@@ -241,15 +261,21 @@ class Room extends Database
                     "type" => "number",
                     "label" => "Capacité d'accueil",
                     "required" => true,
-                    'class' => 'field w-25',
+                    'class' => 'field w-50',
                     "value" => $data['capacity'],
                     "min" => 0
+                ],
+
+                "media" => [
+                    "type" => "media",
+                    "label" => "Photo de la salle",
+                    'class' => 'field media',
+                    'value' => $data['media'],
                 ],
 
                 "isAvailable" => [
                     "type" => "checkbox",
                     "label" => "Disponible ?",
-                    "required" => false,
                     "class" => "checkbox",
                     "checked" => $data['isAvailable']
                 ],
@@ -257,10 +283,9 @@ class Room extends Database
                 "isHandicapAccess" => [
                     "type" => "checkbox",
                     "label" => "Accès Handicapés ?",
-                    "required" => false,
                     "class" => "checkbox",
                     "checked" => $data['isHandicapAccess']
-                ]
+                ],
             ]
         ];
     }

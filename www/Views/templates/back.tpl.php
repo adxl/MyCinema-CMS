@@ -50,7 +50,7 @@ $user = Security::getCurrentUserShort();
 	</header>
 
 	<main class="flex flex-auto">
-		<section id="sidebar" class="bg-dark hidden-s">
+		<section id="sidebar" class="bg-dark-gray hidden-s">
 			<ul>
 				<li>
 					<a href="/bo">

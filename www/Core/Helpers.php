@@ -27,6 +27,11 @@ class Helpers
         return str_ireplace('.', '-', uniqid(uniqid('', true) . '-'));
     }
 
+    public static function slugify($str)
+    {
+        return strtolower(str_ireplace([' ', '-', ',', '\'', '/'], '_', $str));
+    }
+
     public static function redirect($location = '/')
     {
         header("Location: " . $location);

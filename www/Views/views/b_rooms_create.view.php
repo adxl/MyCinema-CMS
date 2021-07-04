@@ -4,8 +4,20 @@
 </div>
 
 
-<section class="card w-100">
-    <div class="container">
+
+<section class="flex flex-center">
+    <div class="card w-50">
+        <?php if (isset($errors)) : ?>
+            <div>
+                <ul class="p-0">
+                    <?php foreach ($errors as $error) : ?>
+                        <li class="text-alert-error">
+                            <i class="fas fa-exclamation-circle"></i> <?= $error ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
         <?php App\Core\FormBuilder::render($form); ?>
     </div>
 </section>

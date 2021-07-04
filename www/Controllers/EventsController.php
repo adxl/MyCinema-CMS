@@ -2,8 +2,9 @@
 
 namespace App\Controllers;
 
-use App\Core\View;
+use App\Core\FormValidator;
 use App\Core\Helpers;
+use App\Core\View;
 use App\Models\Event as EventModel;
 use App\Models\Event_room;
 use App\Models\Tag as TagModel;
@@ -21,7 +22,6 @@ class EventsController
             $this->showEventsAction();
         }
     }
-
 
     public function showEventsAction()
     {
@@ -60,7 +60,7 @@ class EventsController
         }
         $view = new View('f_404', 'front');
     }
-    public function showCreateEventAction()
+    public function createEventAction()
     {
         $view = new View("b_events_create", "back");
         $view->assign("title", 'Gestion des évènements > Nouvel évènement');
@@ -69,9 +69,115 @@ class EventsController
         $form = $eventModel->formBuilderCreate();
 
         $view->assign('form', $form);
+
+        if (!empty($_POST)) {
+
+            $errors = FormValidator::checkEventForm($form, $_POST);
+
+            if (empty($errors)) {
+
+                $data = $_POST;
+                $file = $_FILES['media'];
+
+                // create base event
+                $eventModel->setTitle($data['name']);
+                $eventModel->setSynopsis($data['synopsis']);
+                $eventModel->setActors($data['actors']);
+                $eventModel->setDirectors($data['directors']);
+
+                if (empty($_FILES['media']['name'])) {
+                    $view->assign("errors", ["Vous n'avez pas ajouté d'image du film"]);
+                    exit;
+                }
+
+                if ($_FILES['media']['size'] === 0) {
+                    $view->assign("errors", ["La photo ne doit pas dépasser 2M"]);
+                    exit;
+                }
+
+                $file_type = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                $media = "/Views/images/event_" .  Helpers::slugify($eventModel->getTitle()) . '.' . $file_type;
+
+                if (!getimagesize($file["tmp_name"])) {
+                    $view->assign("errors", ["L'image est invalide"]);
+                    exit;
+                }
+
+                $allowed_types = ['jpg', 'jpeg', 'png'];
+                if (!in_array($file_type, $allowed_types)) {
+                    $view->assign("errors", ["Le format de l'image est invalide"]);
+                    exit;
+                }
+
+
+                if (!move_uploaded_file($file["tmp_name"], '/var/www/html' . $media)) {
+                    $view->assign("errors", ["La photo n'a pas pu être ajoutée"]);
+                    exit;
+                }
+
+                $eventModel->setMedia($media);
+
+                $eventId = $eventModel->save();
+
+                // insert tags
+                $tags = Helpers::splitFields($data['tags']);
+                foreach ($tags as $tag) {
+                    $tagModel = new TagModel();
+                    $tagExists = $tagModel->findOne(
+                        [
+                            'select' => 'label',
+                            'where' => [
+                                [
+                                    'column' => 'label',
+                                    'operator' => '=',
+                                    'value' => mb_strtoupper($tag)
+                                ],
+                            ]
+                        ]
+                    );
+
+                    if (!$tagExists) {
+                        $tagModel->setLabel(mb_strtoupper($tag));
+                        $tagModel->save();
+                    }
+                }
+
+                // jointure event - tag
+                $eventTag = new EventTagModel();
+                $eventTag->setEventId($eventId);
+
+                foreach ($tags as $tag) {
+                    $eventTag->setTag(mb_strtoupper($tag));
+                    $eventTag->save();
+                }
+
+                // insert sessions
+                $sessionsCount = count($data['date']);
+                for ($i = 0; $i < $sessionsCount; $i++) {
+                    $sessionModel = new Event_room();
+                    $session = [
+                        'eventId' => $eventId,
+                        'startTime' => $data['date'][$i] . " " . $data['startTime'][$i],
+                        'endTime' => $data['date'][$i] . " " . $data['endTime'][$i],
+                        'room' => $data['room'][$i]
+                    ];
+
+                    $sessionModel->setEventId($session['eventId']);
+                    $sessionModel->setStartTime($session['startTime']);
+                    $sessionModel->setEndTime($session['endTime']);
+                    $sessionModel->setRoom($session['room']);
+
+                    $sessionModel->save();
+                }
+
+                Helpers::redirect('/bo/events');
+            } else {
+                $view->assign("errors", $errors);
+            }
+        }
     }
 
-    public function showEditEventAction()
+    public function editEventAction()
     {
         $id = Helpers::getQueryParam('id');
 
@@ -80,7 +186,6 @@ class EventsController
             $event = $eventModel->findById($id);
 
             if ($event) {
-                $_SESSION['edit_event_id'] = $id;
 
                 $view = new View("b_events_edit", "back");
                 $view->assign("title", 'Gestion des évènements > Modifier un évènement');
@@ -90,201 +195,151 @@ class EventsController
 
                 $form = $eventModel->formBuilderUpdate($event);
                 $view->assign('form', $form);
+                $view->assign('event_id', $id);
 
+                if (!empty($_POST)) {
+
+                    $errors = FormValidator::checkEventForm($form, $_POST);
+
+                    if (empty($errors)) {
+
+                        $data = $_POST;
+                        $file = $_FILES['media'];
+
+                        $eventModel->setId($id);
+                        $eventModel->setTitle($data['name']);
+                        $eventModel->setMedia($event['media']);
+                        $eventModel->setSynopsis($data['synopsis']);
+                        $eventModel->setActors($data['actors']);
+                        $eventModel->setDirectors($data['directors']);
+
+
+                        if (!empty($file['name'])) {
+
+                            if (empty($_FILES['media']['name'])) {
+                                $view->assign("errors", ["Vous n'avez pas ajouté d'image du film"]);
+                                exit;
+                            }
+
+                            if ($_FILES['media']['size'] === 0) {
+                                $view->assign("errors", ["La photo ne doit pas dépasser 2M"]);
+                                exit;
+                            }
+
+                            $file_type = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                            $media = "/Views/images/event_" .  Helpers::slugify($eventModel->getTitle()) . '.' . $file_type;
+
+                            if (!getimagesize($file["tmp_name"])) {
+                                $view->assign("errors", ["L'image est invalide"]);
+                                exit;
+                            }
+
+                            $allowed_types = ['jpg', 'jpeg', 'png'];
+                            if (!in_array($file_type, $allowed_types)) {
+                                $view->assign("errors", ["Le format de l'image est invalide"]);
+                                exit;
+                            }
+
+                            if (!move_uploaded_file($file["tmp_name"], '/var/www/html' . $media)) {
+                                $view->assign("errors", ["La photo n'a pas pu être ajoutée"]);
+                                exit;
+                            }
+
+                            $eventModel->setMedia($media);
+                        }
+
+                        $eventModel->save();
+
+                        // insert tag if not exists
+                        $tags = Helpers::splitFields($data['tags']);
+                        foreach ($tags as $tag) {
+                            $tagModel = new TagModel();
+                            $tagExists = $tagModel->findOne(
+                                [
+                                    'select' => 'label',
+                                    'where' => [
+                                        [
+                                            'column' => 'label',
+                                            'operator' => '=',
+                                            'value' => mb_strtoupper($tag)
+                                        ],
+                                    ]
+                                ]
+                            );
+
+                            if (!$tagExists) {
+                                $tagModel->setLabel(mb_strtoupper($tag));
+                                $tagModel->save();
+                            }
+                        }
+
+
+                        // jointure event - tag
+                        $eventTag = new EventTagModel();
+
+                        $eventTag->deleteAll([
+                            'where' => [
+                                [
+                                    'column' => 'eventId',
+                                    'operator' => '=',
+                                    'value' => $id
+                                ],
+                            ]
+                        ]);
+
+                        $eventTag->setEventId($id);
+
+                        foreach ($tags as $tag) {
+                            $eventTag->setTag(mb_strtoupper($tag));
+                            $eventTag->save();
+                        }
+
+                        // insert sessions
+                        $sessionModel = new Event_room();
+                        $sessionModel->deleteAll([
+                            'where' => [
+                                [
+                                    'column' => 'eventId',
+                                    'operator' => '=',
+                                    'value' => $id
+                                ],
+                            ]
+                        ]);
+
+                        $sessionsCount = count($data['date']);
+                        for ($i = 0; $i < $sessionsCount; $i++) {
+                            $session = [
+                                'eventId' => $id,
+                                'startTime' => $data['date'][$i] . " " . $data['startTime'][$i],
+                                'endTime' => $data['date'][$i] . " " . $data['endTime'][$i],
+                                'room' => $data['room'][$i]
+                            ];
+
+                            $sessionModel->setEventId($session['eventId']);
+                            $sessionModel->setStartTime($session['startTime']);
+                            $sessionModel->setEndTime($session['endTime']);
+                            $sessionModel->setRoom($session['room']);
+
+                            $sessionModel->save();
+                        }
+
+                        Helpers::redirect('/bo/events');
+                    } else {
+                        $view->assign("errors", $errors);
+                    }
+                }
                 return;
             }
         }
         $view = new View('b_404', 'front');
     }
 
-    public function createEventAction()
-    {
-        $data = $_POST;
-
-        /**
-         *  créer event x
-         *  créer tags if not exist x
-         *  joiture event - tag x
-         *  joiture event - room x
-         */
-
-        // insert event
-        $event = new EventModel();
-        $event->setTitle($data['name']);
-        $event->setSynopsis($data['synopsis']);
-        $event->setActors($data['actors']);
-        $event->setDirectors($data['directors']);
-
-        $eventId = $event->save();
-
-        // insert tag
-        $tags = Helpers::splitFields($data['tags']);
-        foreach ($tags as $tag) {
-            $tagModel = new TagModel();
-            $tagExists = $tagModel->findOne(
-                [
-                    'select' => 'label',
-                    'where' => [
-                        [
-                            'column' => 'label',
-                            'operator' => '=',
-                            'value' => mb_strtoupper($tag)
-                        ],
-                    ]
-                ]
-            );
-
-            if (!$tagExists) {
-                $tagModel->setLabel(mb_strtoupper($tag));
-                $tagModel->save();
-            }
-        }
-
-        // jointure event - tag
-        $eventTag = new EventTagModel();
-        $eventTag->setEventId($eventId);
-
-        foreach ($tags as $tag) {
-            $eventTag->setTag(mb_strtoupper($tag));
-            $eventTag->save();
-        }
-
-        // insert sessions
-        $sessionsCount = count($data['date']);
-        for ($i = 0; $i < $sessionsCount; $i++) {
-            $sessionModel = new Event_room();
-            $session = [
-                'eventId' => $eventId,
-                'startTime' => $data['date'][$i] . " " . $data['startTime'][$i],
-                'endTime' => $data['date'][$i] . " " . $data['endTime'][$i],
-                'room' => $data['room'][$i]
-            ];
-
-            $sessionModel->setEventId($session['eventId']);
-            $sessionModel->setStartTime($session['startTime']);
-            $sessionModel->setEndTime($session['endTime']);
-            $sessionModel->setRoom($session['room']);
-
-            $sessionModel->save();
-        }
-
-        Helpers::redirect('/bo/events');
-    }
-
-    public function updateEventAction()
-    {
-        $eventId = $_SESSION['edit_event_id'];
-        $data = $_POST;
-
-        /**
-         *  update event 
-         *  créer tags if not exists
-         *  joiture event - tag if not exists
-         *  joiture event - room if not exists
-         */
-
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-
-        // update event
-        $event = new EventModel();
-        $event->setId($eventId);
-        $event->setTitle($data['name']);
-        $event->setSynopsis($data['synopsis']);
-        $event->setActors($data['actors']);
-        $event->setDirectors($data['directors']);
-
-        $event->save();
-
-
-        // insert tag if not exists
-        $tags = Helpers::splitFields($data['tags']);
-        foreach ($tags as $tag) {
-            $tagModel = new TagModel();
-            $tagExists = $tagModel->findOne(
-                [
-                    'select' => 'label',
-                    'where' => [
-                        [
-                            'column' => 'label',
-                            'operator' => '=',
-                            'value' => mb_strtoupper($tag)
-                        ],
-                    ]
-                ]
-            );
-
-            if (!$tagExists) {
-                $tagModel->setLabel(mb_strtoupper($tag));
-                $tagModel->save();
-            }
-        }
-
-
-        // jointure event - tag
-        $eventTag = new EventTagModel();
-
-        $eventTag->deleteAll([
-            'where' => [
-                [
-                    'column' => 'eventId',
-                    'operator' => '=',
-                    'value' => $eventId
-                ],
-            ]
-        ]);
-
-        $eventTag->setEventId($eventId);
-
-        foreach ($tags as $tag) {
-            $eventTag->setTag(mb_strtoupper($tag));
-            $eventTag->save();
-        }
-
-        // insert sessions
-        $sessionModel = new Event_room();
-
-        $sessionModel->deleteAll([
-            'where' => [
-                [
-                    'column' => 'eventId',
-                    'operator' => '=',
-                    'value' => $eventId
-                ],
-            ]
-        ]);
-
-        $sessionsCount = count($data['date']);
-        for ($i = 0; $i < $sessionsCount; $i++) {
-            $session = [
-                'eventId' => $eventId,
-                'startTime' => $data['date'][$i] . " " . $data['startTime'][$i],
-                'endTime' => $data['date'][$i] . " " . $data['endTime'][$i],
-                'room' => $data['room'][$i]
-            ];
-
-            $sessionModel->setEventId($session['eventId']);
-            $sessionModel->setStartTime($session['startTime']);
-            $sessionModel->setEndTime($session['endTime']);
-            $sessionModel->setRoom($session['room']);
-
-            $sessionModel->save();
-        }
-
-        unset($_SESSION['edit_event_id']);
-
-        Helpers::redirect('/bo/events');
-    }
-
     public function deleteEventAction()
     {
-        $id = $_SESSION['edit_event_id'];
+        $id = Helpers::getQueryParam('id');
 
         $event = new EventModel();
         $event->deleteById($id);
-
-        unset($_SESSION['edit_event_id']);
 
         Helpers::redirect('/bo/events');
     }

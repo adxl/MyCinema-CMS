@@ -15,6 +15,7 @@ class Event extends Database
 
     protected $title;
     protected $synopsis;
+    protected $media;
     protected $actors;
     protected $directors;
 
@@ -50,6 +51,15 @@ class Event extends Database
     public function setSynopsis($synopsis)
     {
         $this->synopsis = $synopsis;
+    }
+
+    public function getMedia()
+    {
+        return $this->media;
+    }
+    public function setMedia($media)
+    {
+        $this->media = $media;
     }
 
     public function getActors()
@@ -283,7 +293,8 @@ class Event extends Database
         return  [
             "config" => [
                 "method" => "POST",
-                "action" => "/bo/events/create",
+                "action" => "/bo/events/new",
+                "enctype" => 'multipart/form-data',
                 "class" => "flex-column",
                 "id" => "form_create_event",
                 "submit" => "Confirmer",
@@ -300,6 +311,12 @@ class Event extends Database
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => "Alien", // DEBUG:
+                ],
+
+                "media" => [
+                    "type" => "media",
+                    "label" => "Photo du film",
+                    'class' => 'field media w-25',
                 ],
 
                 "session" => [
@@ -493,7 +510,8 @@ class Event extends Database
         return [
             "config" => [
                 "method" => "POST",
-                "action" => "/bo/events/update",
+                "action" => "/bo/events/edit?id=" . $data['id'],
+                "enctype" => 'multipart/form-data',
                 "class" => "",
                 "id" => "form_update_event",
                 "submit" => "Confirmer",
@@ -512,6 +530,13 @@ class Event extends Database
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => $data['title'],
+                ],
+
+                "media" => [
+                    "type" => "media",
+                    "label" => "Photo du film",
+                    'class' => 'field media w-25',
+                    'value' => $data['media']
                 ],
 
                 "session" => [
