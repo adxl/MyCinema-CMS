@@ -39,9 +39,9 @@ class FormBuilder
 
 				$html .= "</select>";
 			} elseif ($configInput['type'] == 'session') {
-				$html .= "<div id='session-inputs-container'>";
+				$html .= "<div id='session-inputs-container' class='w-100 w-75@m w-100@l'>";
 				foreach ($configInput['items'] as $item) {
-					$html .= "<div class='flex session-inputs'>";
+					$html .= "<div class='flex-column flex-row@l session-inputs'>";
 					foreach ($item as $name => $input) {
 						$html .= "<label for='" . ($input["id"] ?? $name) . "' class='" . ($input["class"] ?? '') . "'>
 								<span> " . ($input["label"] ?? "") . "</span>";
@@ -65,6 +65,7 @@ class FormBuilder
 									id='" . ($input['id'] ?? '') . "' 
 									class='" . $input['class'] . " button remove-session-btn'> " . $input['value'] . "
 								</button>";
+							$html .= "<hr class='w-100 hidden@l faded'>";
 						} else {
 							$html .= "<input 
 									type='" . $input["type"] . "'
@@ -113,7 +114,7 @@ class FormBuilder
 							accept='image/png, image/jpg, image/jpeg'
 							id='" . ($configInput["id"] ?? $name) . "'
 							>";
-				$html .= "<img src='" . ($configInput["value"] ?? "") . "' />";
+				$html .= "<img src='" . ($configInput["value"] ?? "") . "' style='max-width: 180px' />";
 				$html .= "</div>";
 			} else {
 				$html .= "<input 
@@ -131,8 +132,8 @@ class FormBuilder
 							>";
 				if (isset($configInput['hint'])) {
 					$html .= "<div class='flex flex-middle'>
-								<i class='fas fa-info-circle faded ml-m mr-m'></i>
-								<p class='faded no-break'>" . $configInput['hint'] . "</p>
+									<i class='visible@l fas fa-info-circle faded ml-m mr-m'></i>
+									<p class='visible@l faded no-break'>" . $configInput['hint'] . "</p>
 								</div>";
 				}
 			}

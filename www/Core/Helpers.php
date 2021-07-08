@@ -81,7 +81,33 @@ class Helpers
 
     public static function extractTime($datetime)
     {
-        return substr($datetime, 11, 8);
+        return substr($datetime, 11, 5);
+    }
+
+    public static function formatDate($date)
+    {
+        $dateArray = explode('-', $date);
+
+        $day = $dateArray[2];
+        $month = $dateArray[1];
+        $year = $dateArray[0];
+
+        $months = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Decembre'];
+
+        return "$day " . $months[$month - 1] . " $year";
+    }
+
+    public static function formatTime($time)
+    {
+        return str_replace(':', ' h ', $time);
+    }
+
+    public static function toDate($dateString)
+    {
+        $date = Helpers::formatDate(Helpers::extractDate($dateString));
+        $time = Helpers::formatTime(Helpers::extractTime($dateString));
+
+        return "$date - $time";
     }
 
     public static function generatePassword($length = 8)

@@ -11,7 +11,7 @@
 
 
 
-<div>
+<div class="scroll-x">
     <table class="table card">
         <thead>
             <tr>
@@ -19,7 +19,7 @@
                 <th>Prénom</th>
                 <th>Email</th>
                 <th>Role</th>
-                <th>Actif ?</th>
+                <th>Actif</th>
                 <th>Actions</th>
             </tr>
         </thead>

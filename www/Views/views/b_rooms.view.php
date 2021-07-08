@@ -11,32 +11,29 @@
 </div>
 
 <section>
-    <div class="row flex-column-m">
+    <div class="row">
         <?php foreach ($rooms as $room) : ?>
-            <a class="flex-column card col-3 mb-m p-s" href="/bo/rooms/edit?id=<?= $room['id'] ?>">
-                <div class="m-0">
-                    <img class="card-image <?= !$room['isAvailable'] ? 'faded' : '' ?>" src="<?= $room['media']; ?>" alt="image" />
-                </div>
-                <div class="flex-column col-8">
-                    <div class="mb-s flex flex-middle flex-between">
-                        <h1>
+            <div class="flex card room-card col-12 col-12@m col-6@l col-4@xl mb-m p-0<?= !$room['isAvailable'] ? ' faded' : '' ?>" style="<?= "background-image: url(" . $room['media'] . ");" ?>">
+                <a class="flex-column flex-top flex-right p-m pt-s pb-s" href="/bo/rooms/edit?id=<?= $room['id'] ?>">
+                    <div class="flex flex-between flex-middle mb-s">
+                        <h1 class="no-break text-white m-0">
                             <?= $room['label']; ?>
                         </h1>
-                        <div class=" flex flex-right <?= !$room['isHandicapAccess'] ? 'faded' : '' ?>">
-                            <i class="fas fa-wheelchair"></i>
-                        </div>
+                        <?php if ($room['isHandicapAccess']) : ?>
+                            &nbsp;(<i class="fas fa-wheelchair"></i>)
+                        <?php endif ?>
                     </div>
-                    <div class="mb-auto">
-                        <p> Capacité : <?= $room['capacity']; ?>
-                        <p> Séances programées : <?= $room['sessions']; ?>
-                        </p>
-                        <p class="mb-s"> Prochaine séance : <?= $room['nextSession'] ?: '-' ?>
-                        </p>
-                        <p class="mb-s"> Prochain film : <?= $room['nextMovie'] ?: '-' ?>
-                        </p>
-                    </div>
-                </div>
-            </a>
+
+                    <p> Capacité : <?= $room['capacity']; ?>
+                    </p>
+                    <p> Séances programées : <?= $room['sessions']; ?>
+                    </p>
+                    <p class="mb-s"> Prochaine séance : <br> <?= $room['nextSession'] ?: '-' ?>
+                    </p>
+                    <p class="mb-s"> Prochain film : <?= $room['nextMovie'] ?: '-' ?>
+                    </p>
+                </a>
+            </div>
         <?php endforeach; ?>
     </div>
 </section>

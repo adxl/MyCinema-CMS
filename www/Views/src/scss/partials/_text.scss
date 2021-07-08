@@ -37,16 +37,24 @@
     &underline {
         text-decoration: underline;
     }
+    &capitalize {
+        text-transform: capitalize;
+    }
     &center {
         text-align: center;
     }
     &small {
         font-size: 10px;
     }
-}
-
-.text-comment {
-    font-size: 12px;
+    &normal {
+        font-size: 16px;
+    }
+    &medium {
+        font-size: 28px;
+    }
+    &large {
+        font-size: 56px;
+    }
 }
 
 .text-alert-error {

@@ -4,13 +4,27 @@
 </div>
 
 <div class="mt-l">
-
-    <div class='flex card'>
+    <div class='flex-column flex-row@m card p-s'>
         <div class="col-2 mt-m">
-            <ul class="p-0">
-                <li class="mb-m"><a href="/bo/settings?tab=general">Général</a></li>
-                <li class="mb-m"><a href="/bo/settings?tab=database">Base de données</a></li>
-                <li><a href="/bo/settings?tab=mailing">Mailing</a></li>
+            <ul class="flex flex-column@m p-0 mb-0">
+                <li class="p-m mb-m <?= $tab == 'general' ? 'menu-selected' : '' ?>">
+                    <a class="flex flex-center flex-left@m" href="/bo/settings?tab=general">
+                        <i class='fas fa-cogs'></i>
+                        <span class="ml-m visible@m">Site</span>
+                    </a>
+                </li>
+                <li class="p-m mb-m <?= $tab == 'database' ? 'menu-selected' : '' ?>">
+                    <a class="flex flex-center flex-left@m" href="/bo/settings?tab=database">
+                        <i class='fas fa-database'></i>
+                        <span class="ml-m visible@m">Base de données</span>
+                    </a>
+                </li>
+                <li class="p-m mb-m <?= $tab == 'mailing' ? 'menu-selected' : '' ?>">
+                    <a class="flex flex-center flex-left@m" href="/bo/settings?tab=mailing">
+                        <i class='fas fa-at'></i>
+                        <span class="ml-m visible@m">Mailing</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="col-10 mt-l">

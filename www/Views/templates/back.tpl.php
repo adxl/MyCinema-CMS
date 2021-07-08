@@ -12,17 +12,13 @@ $user = Security::getCurrentUserShort();
 	<meta charset="UTF-8">
 	<meta name="description" content="description de la page de back">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>BackOffice</title>
+	<title>MyCinema BackOffice</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 	<link rel="stylesheet" href="/Views/dist/back.css">
 	<script type="module" src="/Views/dist/main.min.js"></script>
 </head>
 
 <body class="flex-column">
-
-	<div id="small-screen-error">
-		<p>Merci d'utiliser un ordinateur pour accéder au BackOffice.</p>
-	</div>
 
 	<header class="flex flex-between flex-middle bg-soft-white">
 		<div class="p-m">
@@ -33,7 +29,7 @@ $user = Security::getCurrentUserShort();
 
 		<?php if (!empty($user)) : ?>
 			<div id="user-profile-button" class="flex flex-middle mr-m bg-gray rounded crop">
-				<div class="flex flex-middle flex-self-stretch bg-white pr-m pl-m">
+				<div class="flex flex-middle flex-self-stretch bg-white pr-m pl-m visible@m">
 					<p><?= $user['firstname'] . " " . mb_strtoupper($user['lastname'][0]) . '.'; ?></p>
 				</div>
 				<div class="flex flex-middle p-s">
@@ -46,12 +42,11 @@ $user = Security::getCurrentUserShort();
 				<a href="/bo/logout">Se déconnecter</a>
 			</div>
 		<?php endif ?>
-
 	</header>
 
 	<main class="flex flex-auto">
-		<section id="sidebar" class="bg-dark-gray hidden-s">
-			<ul>
+		<section id="sidebar" class="bg-dark-gray">
+			<ul class='p-0'>
 				<li>
 					<a href="/bo">
 						<i class="fas fa-home"></i>
@@ -92,13 +87,6 @@ $user = Security::getCurrentUserShort();
 						</a>
 					</li>
 				<?php endif ?>
-
-				<li>
-					<a href="/bo/tools">
-						<i class="fas fa-tools"></i>
-						<span>Utilitaires</span>
-					</a>
-				</li>
 
 			</ul>
 		</section>

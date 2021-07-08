@@ -37,7 +37,13 @@ class Router
 
 	public function cleanSlug()
 	{
-		$this->slug = explode("?", $this->slug)[0];
+		$slug =  explode("?", $this->slug)[0];
+
+		if (substr($slug, -1) == '/') {
+			$slug = rtrim($slug, '/');
+		}
+
+		$this->slug = $slug ?: '/';
 	}
 
 	private function checkAuthentication()

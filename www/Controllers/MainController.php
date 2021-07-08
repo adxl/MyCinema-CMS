@@ -34,13 +34,32 @@ class MainController
 
         $eventModel = new Event();
 
-
-
         $nextEvent = $eventModel->getNextEvent();
+        if ($nextEvent) {
+            $nextEvent['actors'] = str_replace(';', ',', $nextEvent['actors']);
+        }
 
-        $incomingEvents = $eventModel->getIncomingEvents();
+        // get incoming events
+        $allIncomingEvents = $eventModel->getIncomingEvents();
+
+        // remove duplicates
+        $incomingEventsIds = [$nextEvent['id']];
+        $incomingEvents = [];
+        foreach ($allIncomingEvents as $event) {
+            $id = $event['id'];
+            if (!in_array($id, $incomingEventsIds)) {
+                $incomingEventsIds[] = $id;
+                $incomingEvents[] = $event;
+            }
+        }
+
         shuffle($incomingEvents);
-        $incomingEvents = array_slice($incomingEvents, 0, 5);
+        $incomingEvents = array_slice($incomingEvents, 0, 8);
+
+        foreach ($incomingEvents as $key => $event) {
+            $eventId = $event['id'];
+            $incomingEvents[$key]['nextSession'] = $eventModel->getNextSessionDate($eventId);
+        }
 
         $view->assign('nextEvent', $nextEvent);
         $view->assign('incomingEvents', $incomingEvents);
@@ -54,6 +73,26 @@ class MainController
         $event = $eventModel->findById($id);
 
         $event['tags'] = $eventModel->getTags($event['id']);
+
+        $allSessions = $eventModel->getSessions($id);
+        $eventSessions = ['total' => count($allSessions), 'items' => []];
+
+        foreach ($allSessions as $session) {
+            $sessionDate = $session['date'];
+            $startTime = $session['startTime'];
+
+            $roomId = $session['roomId'];
+            $room = $session['room'];
+
+            if (isset($eventSessions['items'][$sessionDate])) {
+                $eventSessions['items'][$sessionDate][] = ['startTime' => $startTime, 'room' => ['id' => $roomId, 'name' => $room]];
+                continue;
+            }
+
+            $eventSessions['items'][$sessionDate] = [['startTime' => $startTime, 'room' => ['id' => $roomId, 'name' => $room]]];
+        }
+
+        $event['sessions'] = $eventSessions;
 
         $commentModel = new Comment();
         $commentForm = $commentModel->formBuilderComment($id);

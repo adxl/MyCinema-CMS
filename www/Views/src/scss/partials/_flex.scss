@@ -3,6 +3,20 @@
     display: flex;
 }
 
+.flex-row\@m {
+    @include from-m {
+        display: flex;
+        flex-direction: row !important;
+    }
+}
+
+.flex-row\@l {
+    @include from-l {
+        display: flex;
+        flex-direction: row !important;
+    }
+}
+
 .flex-reverse {
     display: flex;
     flex-direction: row-reverse;
@@ -13,10 +27,10 @@
     flex-direction: column;
 }
 
-.flex-column-m {
-    @include m {
+.flex-column\@m {
+    @include from-m {
         display: flex;
-        flex-direction: column;
+        flex-direction: column !important;
         flex-wrap: nowrap !important;
     }
 }
@@ -33,14 +47,39 @@
 .flex-around {
     justify-content: space-around;
 }
+
+// FLEX CENTER
+
 .flex-center {
     justify-content: center;
 }
+
+.flex-center\@l {
+    @include from-l {
+        justify-content: center;
+    }
+}
+
+// FLEX LEFT
+
 .flex-left {
     justify-content: flex-start;
 }
+.flex-left\@m {
+    @include from-m {
+        justify-content: flex-start !important;
+    }
+}
+
+// FLEX RIGHT
+
 .flex-right {
     justify-content: flex-end;
+}
+.flex-right\@l {
+    @include from-l {
+        justify-content: flex-end !important;
+    }
 }
 
 // vertical alignement
@@ -49,6 +88,9 @@
 }
 .flex-middle {
     align-items: center;
+}
+.flex-baseline {
+    align-items: baseline;
 }
 .flex-bottom {
     align-items: flex-end;

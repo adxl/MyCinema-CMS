@@ -1,48 +1,41 @@
 // .w-25 ; .w-50 ; .w-75 ; .w-100
 // .h-25 ; .h-50 ; .h-75 ; .h-100
-@for $i from 1 through 4 {
+// + responsive
+@for $i from 4 through 1 {
   $value: $i * 25;
   .w-#{$value} {
     width: $value * 1%;
   }
 
-  .w-#{$value}-s {
-    @include s {
+  @include from-m {
+    .w-#{$value}\@m {
       width: $value * 1%;
     }
   }
 
-  .w-#{$value}-m {
-    @include m {
+  @include from-l {
+    .w-#{$value}\@l {
       width: $value * 1%;
     }
   }
 
-  .w-#{$value}-l {
-    @include l {
-      width: $value * 1%;
+  .w-auto {
+    width: auto;
+  }
+
+  .w-auto\@m {
+    @include from-m {
+      width: auto !important;
+    }
+  }
+
+  .w-auto\@l {
+    @include from-l {
+      width: auto !important;
     }
   }
 
   .h-#{$value} {
     height: $value * 1%;
-  }
-
-  .h-#{$value}-s {
-    @include s {
-      height: $value * 1%;
-    }
-  }
-
-  .h-#{$value}-m {
-    @include m {
-      height: $value * 1%;
-    }
-  }
-
-  .h-#{$value}-l {
-    @include l {
-      height: $value * 1%;
-    }
   }
 }
