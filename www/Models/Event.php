@@ -310,7 +310,6 @@ class Event extends Database
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 60,
-                    "value" => "Alien", // DEBUG:
                 ],
 
                 "media" => [
@@ -330,7 +329,7 @@ class Event extends Database
                                 "label" => "Date",
                                 'class' => 'field',
                                 "required" => true,
-                                "value" => $data['date'] ?? Helpers::extractDate(Helpers::now()) // DEBUG:
+                                "value" => Helpers::extractDate(Helpers::now())
                             ],
                             "startTime[]" => [
                                 "type" => "time",
@@ -338,7 +337,7 @@ class Event extends Database
                                 "label" => "Début",
                                 'class' => 'field',
                                 "required" => true,
-                                "value" => $data['startTime'] ?? Helpers::extractTime(Helpers::now()) // DEBUG:
+                                "value" => Helpers::extractTime(Helpers::now())
                             ],
                             "endTime[]" => [
                                 "type" => "time",
@@ -346,7 +345,7 @@ class Event extends Database
                                 "label" => "Fin",
                                 'class' => 'field',
                                 "required" => true,
-                                "value" => $data['endTime'] ?? Helpers::extractTime(Helpers::now()) // DEBUG:
+                                "value" => Helpers::extractTime(Helpers::now())
                             ],
                             "room[]" => [
                                 "type" => "select",
@@ -378,7 +377,6 @@ class Event extends Database
                     "placeholder" => "",
                     "label" => "Réalisateurs",
                     'class' => 'field w-75',
-                    "value" => "Director 1; Director 2", // DEBUG:
                     "required" => false,
                 ],
 
@@ -387,7 +385,6 @@ class Event extends Database
                     "placeholder" => "",
                     "label" => "Acteurs",
                     'class' => 'field w-75',
-                    "value" => "Actor 1; Actor 2", // DEBUG:
                     "required" => false,
                 ],
 
@@ -399,7 +396,6 @@ class Event extends Database
                     "minLength" => 10,
                     "maxLength" => 300,
                     'rows' => 8,
-                    "value" => "Event synopsis est un textarea description film cinema cms projet annuel trois année école", // DEBUG:
                 ],
 
                 "tags" => [
@@ -407,7 +403,6 @@ class Event extends Database
                     "placeholder" => "",
                     "label" => "Tags",
                     'class' => 'field w-75 mb-xl',
-                    "value" => "ACTION; DRAME", // DEBUG:
                     "required" => false,
                 ],
             ]

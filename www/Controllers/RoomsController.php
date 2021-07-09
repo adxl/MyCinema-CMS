@@ -10,18 +10,6 @@ use App\Models\Room as RoomModel;
 
 class RoomsController
 {
-    public function defaultAction()
-    {
-        $id = Helpers::getQueryParam('id');
-
-        if ($id) {
-            $this->showEditRoomAction($id);
-        } else {
-            $this->showRoomsAction();
-        }
-    }
-
-
     public function showRoomsAction()
     {
         $view = new View("b_rooms", 'back');
@@ -66,6 +54,7 @@ class RoomsController
 
                 $room->setLabel($data['label']);
                 $room->setCapacity($data['capacity']);
+                $room->setDescription($data['description']);
 
                 $file_type = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                 $media = "/Views/images/room_" .  Helpers::slugify($room->getLabel()) . '.' . $file_type;
@@ -130,6 +119,7 @@ class RoomsController
                         $roomModel->setId($id);
                         $roomModel->setLabel($data['label']);
                         $roomModel->setCapacity($data['capacity']);
+                        $roomModel->setDescription($data['description']);
                         $roomModel->setMedia($room['media']);
                         $roomModel->setIsAvailable($data['isAvailable']);
                         $roomModel->setIsHandicapAccess($data['isHandicapAccess']);

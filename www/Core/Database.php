@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Models\Migrations;
+use App\Models\Seeds;
 use App\Models\User as UserModel;
 
 class Database
@@ -59,6 +60,12 @@ class Database
             die("Une erreur s'est produite durant les migrations");
         }
 
+        $seeds = Seeds::getSeeds();
+
+        foreach ($seeds as $seed) {
+            $this->insertSeed($seed);
+        }
+
         return $id;
     }
 
@@ -108,6 +115,23 @@ class Database
             echo "</pre>";
             unlink(".env");
             die("alter");
+        }
+    }
+
+
+    private function insertSeed($seed)
+    {
+        $stmt = "INSERT INTO " .  DB_PREFIXE . $seed["table"] . " VALUES " . $seed["values"];
+
+        try {
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $this->pdo->exec($stmt);
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+            unlink(".env");
+            echo "<pre>";
+            var_dump($stmt);
+            die();
         }
     }
 

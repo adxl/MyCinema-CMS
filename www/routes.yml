@@ -89,7 +89,7 @@
 # pages affichage des salles
 /bo/rooms:
   controller: RoomsController
-  action: default
+  action: showRooms
   scope: "ADMIN MANAGER"
 
 # ajout salle

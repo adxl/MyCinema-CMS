@@ -29,7 +29,8 @@ class Helpers
 
     public static function slugify($str)
     {
-        return strtolower(str_ireplace([' ', '-', ',', '\'', '/'], '_', $str));
+        $bad_characters = [' ', '-', ',', '\'', '/', ':'];
+        return strtolower(str_ireplace($bad_characters, '_', $str));
     }
 
     public static function redirect($location = '/')
