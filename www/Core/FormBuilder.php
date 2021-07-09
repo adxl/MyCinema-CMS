@@ -75,7 +75,7 @@ class FormBuilder
 									form='" . ($config["config"]["id"] ?? "") . "'
 									" . (!empty($input["required"]) ? "required" : "") . "
 									" . (!empty($input["checked"]) ? "checked" : "") . "
-									" . ($input["type"] === 'time' ? "step='any'" : "") . "
+									" . ($input["type"] === 'time' ? "step='60'" : "") . "
 						></label>";
 						}
 					}
@@ -122,7 +122,7 @@ class FormBuilder
 							id='" . ($configInput["id"] ?? $name) . "'
 							form='" . ($configInput["form"] ?? $config['config']['id']) . "'
 							placeholder='" . ($configInput["placeholder"] ?? "") . "'
-							value='" . ($configInput["value"] ?? "") . "'
+							value=\"" . htmlentities($configInput["value"] ?? "", 0, 'UTF-8') . "\"
 							min='" . ($configInput["min"] ?? null) . "'
 							max='" . ($configInput["max"] ?? null) . "'
 							autocomplete='off'

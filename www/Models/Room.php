@@ -13,6 +13,7 @@ class Room extends Database
 
     protected $label;
     protected $capacity;
+    protected $description;
     protected $media;
     protected $isHandicapAccess = 0;
     protected $isAvailable = 1;
@@ -53,6 +54,17 @@ class Room extends Database
     public function setCapacity(int $capacity): void
     {
         $this->capacity = $capacity;
+    }
+
+    // description
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
     }
 
     // media 
@@ -215,6 +227,16 @@ class Room extends Database
                     "maxLength" => 60,
                 ],
 
+                "description" => [
+                    "type" => "textarea",
+                    "label" => "Description",
+                    'class' => 'field w-100',
+                    "required" => true,
+                    "minLength" => 10,
+                    "maxLength" => 300,
+                    'rows' => 3,
+                ],
+
                 "capacity" => [
                     "type" => "number",
                     "label" => "Capacité d'accueil",
@@ -255,6 +277,17 @@ class Room extends Database
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => $data['label']
+                ],
+
+                "description" => [
+                    "type" => "textarea",
+                    "label" => "Description",
+                    'class' => 'field w-100',
+                    "required" => true,
+                    "minLength" => 10,
+                    "maxLength" => 300,
+                    'rows' => 3,
+                    "value" => $data['description'],
                 ],
 
                 "capacity" => [
