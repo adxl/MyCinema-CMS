@@ -23,36 +23,27 @@ class MainController
 
         $eventModel = new Event();
 
-        $nextEvent = $eventModel->getNextEvent();
-        if ($nextEvent) {
-            $nextEvent['actors'] = str_replace(';', ',', $nextEvent['actors']);
-        }
+        $allEvents = $eventModel->getIncomingEvents();
 
-        // get incoming events
-        $allIncomingEvents = $eventModel->getIncomingEvents();
-
-        // remove duplicates
-        $incomingEventsIds = [$nextEvent['id']];
-        $incomingEvents = [];
-        foreach ($allIncomingEvents as $event) {
+        $eventsIds = [];
+        $events = [];
+        foreach ($allEvents as $event) {
             $id = $event['id'];
-            if (!in_array($id, $incomingEventsIds)) {
-                $incomingEventsIds[] = $id;
-                $incomingEvents[] = $event;
+            if (!in_array($id, $eventsIds)) {
+                $eventsIds[] = $id;
+                $events[] = $event;
             }
         }
 
-        shuffle($incomingEvents);
-        $incomingEvents = array_slice($incomingEvents, 0, 3);
+        shuffle($events);
+        $events = array_slice($events, 0, 3);
 
-        foreach ($incomingEvents as $key => $event) {
+        foreach ($events as $key => $event) {
             $eventId = $event['id'];
-            $incomingEvents[$key]['nextSession'] = $eventModel->getNextSessionDate($eventId);
+            $events[$key]['nextSession'] = $eventModel->getNextSessionDate($eventId);
         }
 
-        $view->assign('nextEvent', $nextEvent);
-        $view->assign('incomingEvents', $incomingEvents);
-
+        $view->assign('events', $events);
         $view->assign('rooms', $rooms);
     }
 

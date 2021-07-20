@@ -22,10 +22,10 @@ use App\Core\Helpers; ?>
                         </a>
                     </div>
                 <?php endforeach ?>
-                <div class="flex-column mb-l col-12 col-6 col-4@l col-3@xl">
+                <div class="flex-column mb-l col-12 col-6@m col-4@l col-3@xl">
                     <a href="/events">
-                        <div class="w-100 poster rounded bg-lighter flex flex-center flex-middle" alt="poster">
-                            <p class="text-bold p-s">Voir plus ...</p>
+                        <div class="w-100 poster rounded bg-lighter flex flex-center flex-middle">
+                            <p class="text-bold p-s">Voir plus...</p>
                         </div>
                     </a>
                 </div>
@@ -53,7 +53,7 @@ use App\Core\Helpers; ?>
                     </div>
                 <?php endforeach ?>
                 <a href="rooms" class="image-card mb-l col-12 col-6@m col-4@l col-3@xl bg-lighter rounded no-zoom flex flex-center flex-middle">
-                    <p class="text-bold p-s">Voir plus ...</p>
+                    <p class="text-bold p-s">Voir plus...</p>
                 </a>
             </div>
         </div>
