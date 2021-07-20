@@ -115,7 +115,7 @@ class User extends Database
 				"action" => "/bo/login",
 				"id" => "form_login",
 				"submit" => "Connexion",
-				"submitClass" => 'w-50'
+				"submitClass" => 'w-100'
 			],
 			"inputs" => [
 
@@ -166,7 +166,6 @@ class User extends Database
 					"placeholder" => "example@email.com",
 					"label" => "Email",
 					"required" => true,
-					"value" => "adel@sen.com",   // DEBUG: 
 				],
 			]
 		];
@@ -230,7 +229,7 @@ class User extends Database
 
 				"firstName" => [
 					"type" => "text",
-					'class' => 'field w-25',
+					'class' => 'field w-100',
 					"label" => "Prénom",
 					"value" => $data['firstname'],
 					"required" => true,
@@ -240,7 +239,7 @@ class User extends Database
 
 				"lastName" => [
 					"type" => "text",
-					'class' => 'field w-25',
+					'class' => 'field w-100',
 					"label" => "Nom",
 					"value" => $data['lastname'],
 					"required" => true,
@@ -263,7 +262,7 @@ class User extends Database
 			"inputs" => [
 				"email" => [
 					"type" => "email",
-					'class' => 'field w-25',
+					'class' => 'field w-100',
 					"placeholder" => "example@email.com",
 					"label" => "Email",
 					"value" => $data['email'],
@@ -286,22 +285,22 @@ class User extends Database
 
 				"actualPwd" => [
 					"type" => "text",
-					'class' => 'field w-50',
+					'class' => 'field w-100',
 					"label" => "Mot de passe actuel",
 					"required" => true,
 				],
 
 				"pwd" => [
 					"type" => "text",
-					'class' => 'field w-50',
+					'class' => 'field w-100',
 					"label" => "Nouveau mot de passe",
 					"required" => true,
 				],
 
 				"pwdConfirm" => [
 					"type" => "text",
-					'class' => 'field w-50 mb-xl',
-					"label" => "Confirmer le nouveau mot de passe",
+					'class' => 'field w-100 mb-xl',
+					"label" => "Confirmation",
 					"required" => true,
 				],
 			]

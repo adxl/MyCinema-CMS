@@ -222,7 +222,7 @@ class Room extends Database
                     "placeholder" => "",
                     "label" => "Nom de la salle",
                     "required" => true,
-                    'class' => 'field w-75',
+                    'class' => 'field w-100 w-75@m',
                     "minLength" => 2,
                     "maxLength" => 60,
                 ],
@@ -241,7 +241,7 @@ class Room extends Database
                     "type" => "number",
                     "label" => "Capacité d'accueil",
                     "required" => true,
-                    'class' => 'field w-50 mb-xl',
+                    'class' => 'field w-100 w-50@m mb-xl',
                 ],
 
                 "media" => [
@@ -273,7 +273,7 @@ class Room extends Database
                     "placeholder" => "",
                     "label" => "Nom de la salle",
                     "required" => true,
-                    'class' => 'field w-75',
+                    'class' => 'field w-100 w-75@m',
                     "minLength" => 2,
                     "maxLength" => 60,
                     "value" => $data['label']
@@ -294,7 +294,7 @@ class Room extends Database
                     "type" => "number",
                     "label" => "Capacité d'accueil",
                     "required" => true,
-                    'class' => 'field w-50',
+                    'class' => 'field w-100 w-50@m',
                     "value" => $data['capacity'],
                     "min" => 0
                 ],

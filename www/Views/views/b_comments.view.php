@@ -17,7 +17,7 @@
   </div>
 </div>
 
-<div>
+<div class="scroll-x">
   <table class="table card">
     <thead>
       <tr>
@@ -33,7 +33,7 @@
       <?php foreach ($comments as $comment) : ?>
         <tr>
           <td><?= $comment['name']; ?></td>
-          <td><?= $comment['content']; ?></td>
+          <td><?= substr($comment['content'], 0, 20) . '...'; ?></td>
           <td>
             <a href="/events?id=<?= $comment['eventId']; ?>" target="_blank">
               <span><?= $comment['event']; ?></span>
@@ -60,19 +60,19 @@
               <?php if ($comment['status'] !== 'APPROVED') : ?>
                 <a class="col-6 flex flex-middle" href="/bo/comments/approve?id=<?= $comment['id'] ?>&status=<?= $status ?>">
                   <i style="font-size: 1.25em" class="fas fa-check-square mr-s text-green"></i>
-                  <p>Approuver</p>
+                  <p class="visible@l">Approuver</p>
                 </a>
               <?php endif; ?>
               <?php if ($comment['status'] !== 'DECLINED') : ?>
                 <a class="col-6 flex flex-middle" href="/bo/comments/decline?id=<?= $comment['id'] ?>&status=<?= $status ?>">
                   <i style="font-size: 1.25em" class="fas fa-ban mr-s text-red"></i>
-                  <p>Refuser</p>
+                  <p class="visible@l">Refuser</p>
                 </a>
               <?php endif; ?>
               <?php if ($comment['status'] !== 'WAITING') : ?>
                 <a class="col-6 flex flex-middle" href="/bo/comments/suspend?id=<?= $comment['id'] ?>&status=<?= $status ?>">
                   <i style="font-size: 1.25em" class="fas fa-clock mr-s text-yellow"></i>
-                  <p>Suspendre</p>
+                  <p class="visible@l">Suspendre</p>
                 </a>
               <?php endif; ?>
             </div>

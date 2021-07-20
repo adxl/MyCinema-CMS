@@ -6,38 +6,6 @@ body {
   #cms-logo {
     font-family: $logo-font;
   }
-
-  header,
-  main {
-    @include s {
-      display: none !important;
-    }
-    @include m {
-      display: none !important;
-    }
-  }
-
-  #small-screen-error {
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
-
-    padding: 0 20px;
-    font-size: 18px;
-
-    @include l {
-      display: none !important;
-    }
-  }
-
-  // @include m {
-  //   border: dashed 3px rgb(255, 166, 0);
-  // }
-  // @include l {
-  //   border: dashed 3px rgb(8, 160, 0);
-  // }
 }
 
 header {
@@ -79,16 +47,21 @@ main {
 }
 
 #sidebar {
-  width: 200px;
+  max-width: 200px;
   flex-shrink: 0;
 
   a {
     color: $white;
     display: flex;
     align-items: center;
+    padding: 0 20px;
 
     span {
-      padding: 0 0.5em;
+      padding: 0 10px;
+      display: none;
+      @include from-l {
+        display: block;
+      }
     }
   }
 
@@ -131,6 +104,7 @@ main {
   td {
     padding: 10px 20px;
     border: none;
+    white-space: nowrap;
     button {
       border: inherit;
       background-color: transparent;
@@ -139,4 +113,9 @@ main {
       }
     }
   }
+}
+
+.menu-selected {
+  background-color: $lighter-gray;
+  border-radius: 8px;
 }

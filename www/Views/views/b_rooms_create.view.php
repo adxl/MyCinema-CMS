@@ -3,10 +3,8 @@
     <h1 class="ml-s"><?= $title; ?></h1>
 </div>
 
-
-
 <section class="flex flex-center">
-    <div class="card w-50">
+    <div class="card w-100 w-75@l">
         <?php if (isset($errors)) : ?>
             <div>
                 <ul class="p-0">

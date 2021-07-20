@@ -18,5 +18,29 @@
         flex-basis: calc(100 / (12 / #{$i}) * 1% - #{$grid-gutter});
         margin: 0 calc(#{$grid-gutter}/ 2);
         flex-grow: 1;
+
+        @include m {
+            &\@m {
+                flex-basis: calc(100 / (12 / #{$i}) * 1% - #{$grid-gutter}) !important;
+                margin: 0 calc(#{$grid-gutter}/ 2) !important;
+                flex-grow: 1 !important;
+            }
+        }
+
+        @include l {
+            &\@l {
+                flex-basis: calc(100 / (12 / #{$i}) * 1% - #{$grid-gutter}) !important;
+                margin: 0 calc(#{$grid-gutter}/ 2) !important;
+                flex-grow: 1 !important;
+            }
+        }
+
+        @include xl {
+            &\@xl {
+                flex-basis: calc(100 / (12 / #{$i}) * 1% - #{$grid-gutter}) !important;
+                margin: 0 calc(#{$grid-gutter}/ 2) !important;
+                flex-grow: 1 !important;
+            }
+        }
     }
 }

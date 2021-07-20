@@ -35,7 +35,7 @@ class Comment extends Database
     }
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = $name ?: 'Anonyme';
     }
 
     public function getContent()
@@ -81,14 +81,14 @@ class Comment extends Database
                 "method" => "POST",
                 "action" => "/comments/add?id=" . $eventId,
                 "id" => "form_comment",
-                'class' => 'w-75',
+                'class' => 'w-100 w-75@m',
                 "submit" => "Envoyer",
-                "submitClass" => "w-50 pt-m pb-m"
+                "submitClass" => "w-100 w-50@m pt-m pb-m"
             ],
             "inputs" => [
                 "name" => [
                     "type" => "text",
-                    'class' => 'field w-50',
+                    'class' => 'field w-100 w-50@m',
                     "placeholder" => "",
                     "label" => "Votre nom",
                 ],

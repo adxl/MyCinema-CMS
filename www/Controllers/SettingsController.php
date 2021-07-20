@@ -34,6 +34,7 @@ class SettingsController
                 die();
         }
 
+        $view->assign('tab', $tab);
         $view->assign('form', $form);
 
         $alert = Helpers::getAlert();

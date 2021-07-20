@@ -2,24 +2,34 @@
   overflow-y: scroll;
 }
 
+.scroll-x {
+  overflow-x: scroll;
+}
+
 .hidden {
   display: none !important;
+
+  &\@m {
+    @include from-m {
+      display: none !important;
+    }
+  }
+
+  &\@l {
+    @include from-l {
+      display: none !important;
+    }
+  }
 }
 
-.hidden-s {
-  @include s {
+@media (max-width: $m) {
+  .visible\@m {
     display: none !important;
   }
 }
 
-.hidden-m {
-  @include m {
-    display: none !important;
-  }
-}
-
-.hidden-l {
-  @include l {
+@media (max-width: $l) {
+  .visible\@l {
     display: none !important;
   }
 }

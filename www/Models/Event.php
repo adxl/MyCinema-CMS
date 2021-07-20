@@ -133,6 +133,7 @@ class Event extends Database
             $room = $roomModel->findById($roomId);
 
             if ($room) {
+                $sessions[$key]['roomId'] = $room['id'];
                 $sessions[$key]['room'] = $room['label'];
                 $sessions[$key]['date'] = Helpers::extractDate($session['startTime']);
                 $sessions[$key]['startTime'] = Helpers::extractTime($session['startTime']);
@@ -394,7 +395,6 @@ class Event extends Database
                     'class' => 'field w-75',
                     "required" => true,
                     "minLength" => 10,
-                    "maxLength" => 300,
                     'rows' => 8,
                 ],
 
@@ -518,7 +518,7 @@ class Event extends Database
 
                 "name" => [
                     "type" => "text",
-                    'class' => 'field w-75',
+                    'class' => 'field w-100 w-75@m',
                     "placeholder" => "",
                     "label" => "Titre du film",
                     "required" => true,
@@ -530,7 +530,7 @@ class Event extends Database
                 "media" => [
                     "type" => "media",
                     "label" => "Photo du film",
-                    'class' => 'field media w-25',
+                    'class' => 'field media w-100',
                     'value' => $data['media']
                 ],
 
@@ -551,7 +551,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Réalisateurs",
-                    'class' => 'field w-75',
+                    'class' => 'field w-100 w-75@m',
                     "required" => false,
                     "value" => $data['directors'] ?? ""
                 ],
@@ -560,7 +560,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Acteurs",
-                    'class' => 'field w-75',
+                    'class' => 'field w-100 w-75@m',
                     "required" => false,
                     "value" => $data['actors'] ?? ""
                 ],
@@ -568,10 +568,9 @@ class Event extends Database
                 "synopsis" => [
                     "type" => "textarea",
                     "label" => "Synopsis",
-                    'class' => 'field w-75',
+                    'class' => 'field w-100 w-75@m',
                     "required" => true,
                     "minLength" => 10,
-                    "maxLength" => 300,
                     'rows' => 8,
                     "value" => $data['synopsis'],
                 ],
@@ -580,7 +579,7 @@ class Event extends Database
                     "type" => 'text',
                     "placeholder" => "",
                     "label" => "Tags",
-                    'class' => 'field w-75',
+                    'class' => 'field w-100 w-75@m',
                     "required" => false,
                     "value" => $data['tags'] ?? ""
                 ],

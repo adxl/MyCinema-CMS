@@ -19,7 +19,7 @@
         <?php endif; ?>
         <?php App\Core\FormBuilder::render($form); ?>
     </div>
-    <div class="flex flex-right">
+    <div class="flex flex-center pt-l">
         <form action="<?= "/bo/events/delete?id=$event_id" ?>" method="post">
             <button class="button button--danger m-0 p-s" type="submit"> <i class="mr-s fas fa-exclamation-triangle"></i> SUPPRIMER </button>
         </form>

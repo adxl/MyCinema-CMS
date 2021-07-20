@@ -1,5 +1,5 @@
-<div class="flex flex-center flex-middle bg-lighter h-100">
-    <div id="login-form" class=" card flex-column p-l rounded h-100-s">
+<div class="flex flex-center flex-middle bg-lighter h-100 p-m">
+    <div class="card flex-column p-l rounded w-100 w-75@m w-50@l" style="max-width: 500px;">
         <h1 class="text-center mt-m mb-l">Connexion au BackOffice</h1>
 
         <?php if (isset($errors)) : ?>
