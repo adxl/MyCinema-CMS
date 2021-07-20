@@ -15,6 +15,45 @@ class MainController
     public function showHomePageAction()
     {
         $view = new View("f_home", 'front');
+
+        $roomModel = new Room();
+        $rooms = $roomModel->findAll();
+        shuffle($rooms);
+        $rooms = array_slice($rooms, 0, 3);
+
+        $eventModel = new Event();
+
+        $nextEvent = $eventModel->getNextEvent();
+        if ($nextEvent) {
+            $nextEvent['actors'] = str_replace(';', ',', $nextEvent['actors']);
+        }
+
+        // get incoming events
+        $allIncomingEvents = $eventModel->getIncomingEvents();
+
+        // remove duplicates
+        $incomingEventsIds = [$nextEvent['id']];
+        $incomingEvents = [];
+        foreach ($allIncomingEvents as $event) {
+            $id = $event['id'];
+            if (!in_array($id, $incomingEventsIds)) {
+                $incomingEventsIds[] = $id;
+                $incomingEvents[] = $event;
+            }
+        }
+
+        shuffle($incomingEvents);
+        $incomingEvents = array_slice($incomingEvents, 0, 3);
+
+        foreach ($incomingEvents as $key => $event) {
+            $eventId = $event['id'];
+            $incomingEvents[$key]['nextSession'] = $eventModel->getNextSessionDate($eventId);
+        }
+
+        $view->assign('nextEvent', $nextEvent);
+        $view->assign('incomingEvents', $incomingEvents);
+
+        $view->assign('rooms', $rooms);
     }
 
     public function showEventsAction()
