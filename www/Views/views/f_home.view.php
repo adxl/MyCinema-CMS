@@ -6,7 +6,7 @@ use App\Core\Helpers; ?>
 <section class="w-75">
     <div class="w-100 flex-column flex-row@m">
         <div class="col-9">
-            <h1 class="mt-xl mb-l">NOS FILMS : </h1>
+            <h1 class="mt-xl mb-l text-bold">NOS FILMS</h1>
             <div class="row flex-top">
                 <?php foreach ($incomingEvents as $event) : ?>
                     <div class="flex-column mb-l col-12 col-6@m col-4@l col-3@xl">
@@ -36,9 +36,8 @@ use App\Core\Helpers; ?>
 <!-- 3 SALLES + "Voir plus ..." -->
 <?php if (!empty($rooms)) : ?>
     <section class="flex-column flex-middle w-75">
-        <h1 class="mt-l mb-m">Toutes les salles : </h1>
         <div class="col-9">
-            <h1 class="mt-xl mb-l">NOS FILMS : </h1>
+            <h1 class="mt-xl mb-l text-bold">NOS SALLES</h1>
             <div class="row">
                 <?php foreach ($rooms as $room) : ?>
                     <div class="image-card mb-l col-12 col-6@m col-4@l col-3@xl rounded no-zoom">
