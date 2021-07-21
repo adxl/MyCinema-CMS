@@ -14,6 +14,10 @@
     background-color: $light-gray;
 }
 
+.bg-glossy-gray {
+    background: linear-gradient(180deg, #f1f2f6 0%, #ffffff 60%);
+}
+
 .bg-gray {
     background-color: $gray;
 }

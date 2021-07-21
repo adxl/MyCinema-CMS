@@ -3,12 +3,12 @@
 use App\Core\Helpers; ?>
 
 <!-- 3 FILMS + "Voir plus ..." -->
-<section class="w-75">
+<section class="w-100 w-75@m">
     <div class="w-100 flex-column flex-row@m">
         <div class="col-9">
             <h1 class="mt-xl mb-l text-bold">NOS FILMS</h1>
             <div class="row flex-top">
-                <?php foreach ($incomingEvents as $event) : ?>
+                <?php foreach ($events as $event) : ?>
                     <div class="flex-column mb-l col-12 col-6@m col-4@l col-3@xl">
                         <a href="/events?id=<?= $event['id']; ?>">
                             <img class="w-100 poster rounded" src="<?= $event['media']; ?>" alt="poster">
@@ -16,7 +16,7 @@ use App\Core\Helpers; ?>
                             <p class="mt-m"><?= $event['title']; ?></p>
                             <div class="flex mt-s">
                                 <?php foreach ($event['tags'] as $tag) : ?>
-                                    <p class="text-small bg-lighter p-s mr-s rounded"> <?= mb_strtoupper($tag); ?> </p>
+                                    <p class="text-small bg-glossy-gray p-s mr-s rounded"> <?= mb_strtoupper($tag); ?> </p>
                                 <?php endforeach; ?>
                             </div>
                         </a>
@@ -24,8 +24,9 @@ use App\Core\Helpers; ?>
                 <?php endforeach ?>
                 <div class="flex-column mb-l col-12 col-6@m col-4@l col-3@xl">
                     <a href="/events">
-                        <div class="w-100 poster rounded bg-lighter flex flex-center flex-middle">
-                            <p class="text-bold p-s">Voir plus...</p>
+                        <div class="w-100 poster rounded bg-glossy-gray flex flex-center flex-middle">
+                            <p class="p-s">Voir plus</p>
+                            <i class="fas fa-chevron-right"></i>
                         </div>
                     </a>
                 </div>
@@ -35,7 +36,7 @@ use App\Core\Helpers; ?>
 
 <!-- 3 SALLES + "Voir plus ..." -->
 <?php if (!empty($rooms)) : ?>
-    <section class="flex-column flex-middle w-75">
+    <section class="flex-column flex-middle w-100 w-75@m">
         <div class="col-9">
             <h1 class="mt-xl mb-l text-bold">NOS SALLES</h1>
             <div class="row">
@@ -44,19 +45,22 @@ use App\Core\Helpers; ?>
                         <div>
                             <img class="w-100 rounded" src="<?= $room['media']; ?>" alt="poster">
                         </div>
-                        <?php if ($room['isHandicapAccess']) : ?>
-                            <p class="handicap">
-                                <i class="fas fa-wheelchair"></i>
-                            </p>
-                        <?php endif ?>
-                        <p class="title"><?= $room['label']; ?></p>
+                        <div class="flex mt-s">
+                            <p><?= $room['label']; ?></p>
+                            <span class="ml-s mr-s">-</span>
+                            <p><?= $room['capacity']; ?> pers.</p>
+                        </div>
                     </div>
                 <?php endforeach ?>
-                <a href="rooms" class="image-card mb-l col-12 col-6@m col-4@l col-3@xl bg-lighter rounded no-zoom flex flex-center flex-middle">
-                    <p class="text-bold p-s">Voir plus...</p>
-                </a>
+
+                <div class="flex-column mb-l col-12 col-6@m col-4@l col-3@xl">
+                    <a href="/rooms" class="image-card flex flex-center flex-middle mb-l col-12 col-6@m col-4@l col-3@xl bg-glossy-gray rounded no-zoom">
+                        <p class="p-s">Voir plus</p>
+                        <i class="fas fa-chevron-right"></i>
+                        <p class="mt-s">&nbsp;</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 <?php endif ?>
-</div>
