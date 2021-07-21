@@ -15,6 +15,36 @@ class MainController
     public function showHomePageAction()
     {
         $view = new View("f_home", 'front');
+
+        $roomModel = new Room();
+        $rooms = $roomModel->findAll();
+        shuffle($rooms);
+        $rooms = array_slice($rooms, 0, 3);
+
+        $eventModel = new Event();
+
+        $allEvents = $eventModel->getIncomingEvents();
+
+        $eventsIds = [];
+        $events = [];
+        foreach ($allEvents as $event) {
+            $id = $event['id'];
+            if (!in_array($id, $eventsIds)) {
+                $eventsIds[] = $id;
+                $events[] = $event;
+            }
+        }
+
+        shuffle($events);
+        $events = array_slice($events, 0, 3);
+
+        foreach ($events as $key => $event) {
+            $eventId = $event['id'];
+            $events[$key]['nextSession'] = $eventModel->getNextSessionDate($eventId);
+        }
+
+        $view->assign('events', $events);
+        $view->assign('rooms', $rooms);
     }
 
     public function showEventsAction()
