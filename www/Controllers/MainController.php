@@ -110,16 +110,17 @@ class MainController
         foreach ($allSessions as $session) {
             $sessionDate = $session['date'];
             $startTime = $session['startTime'];
+            $endTime = $session['endTime'];
 
             $roomId = $session['roomId'];
             $room = $session['room'];
 
             if (isset($eventSessions['items'][$sessionDate])) {
-                $eventSessions['items'][$sessionDate][] = ['startTime' => $startTime, 'room' => ['id' => $roomId, 'name' => $room]];
+                $eventSessions['items'][$sessionDate][] = ['startTime' => $startTime, 'endTime' => $endTime, 'room' => ['id' => $roomId, 'name' => $room]];
                 continue;
             }
 
-            $eventSessions['items'][$sessionDate] = [['startTime' => $startTime, 'room' => ['id' => $roomId, 'name' => $room]]];
+            $eventSessions['items'][$sessionDate] = [['startTime' => $startTime, 'endTime' => $endTime, 'room' => ['id' => $roomId, 'name' => $room]]];
         }
 
         $event['sessions'] = $eventSessions;

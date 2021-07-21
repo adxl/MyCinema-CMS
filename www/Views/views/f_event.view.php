@@ -5,7 +5,7 @@ use App\Core\Helpers; ?>
 <section class="bg-dark flex flex-center text-white w-100 mb-l">
     <div class="w-100 w-75@m">
         <div class="flex-column flex-middle">
-            <h1 class="text-center text-white text-large mt-m"><?= $event['title']; ?></h1>
+            <h1 class="text-center text-white text-large text-bold mt-m"><?= $event['title']; ?></h1>
             <hr class="w-25">
             <p class='text-capitalize mb-l'> <?= strtolower(implode(', ', $event['tags'])) ?> </p>
         </div>
@@ -28,23 +28,32 @@ use App\Core\Helpers; ?>
                         <p>: <?= $event['actors']; ?> </p>
                     </div>
                 </div>
-                <div>
-                    <h2 class="mb-s text-white text-underline text-medium"> <?= $event['sessions']['total']; ?> Séance<?= $event['sessions']['total'] > 1 ? 's' : ''; ?> à venir :</h2>
-                    <div>
-                        <?php foreach ($event['sessions']['items'] as $sessionDate => $sessions) : ?>
-                            <div class="mb-l">
-                                <p>Le <?= Helpers::formatDate($sessionDate); ?> :</p>
-                                <ul class="mt-s">
-                                    <?php foreach ($sessions as $session) : ?>
-                                        <div class="mb-s">
-                                            <p>À <?= Helpers::formatTime($session['startTime']); ?>&nbsp;</p>
-                                            <p>Salle : <?= $session['room']['name']; ?>&nbsp;</p>
+                <div class="flex flex-column">
+                    <h2 class="mb-s text-white text-underline text-medium"> <?= $event['sessions']['total']; ?> séance<?= $event['sessions']['total'] > 1 ? 's' : ''; ?> à venir :</h2>
+
+                    <?php foreach ($event['sessions']['items'] as $sessionDate => $sessions) : ?>
+                        <p class="flex-grow"><?= Helpers::formatDate($sessionDate); ?></p><br>
+                        <div class="row">
+                            <?php foreach ($sessions as $session) : ?>
+                                <div class="bg-dark-gray p-s text-gray mb-l col-6 col-6@m col-4@l col-3@xl rounded no-zoom">
+                                    <div class="w-100 rounded" src="<?= $room['media']; ?>" alt="poster">
+                                        <div class="flex mb-s">
+                                            <i class="fas fa-clock text-normal mr-s"></i>
+                                            <h5 class="mt-0 mb-0"><?= Helpers::formatTime($session['startTime']) ?> </h5>
                                         </div>
-                                    <?php endforeach ?>
-                                </ul>
-                            </div>
-                        <?php endforeach ?>
-                    </div>
+                                        <div class="flex mb-s">
+                                            <i class="fas fa-stopwatch text-normal mr-s"></i>
+                                            <h5 class="mt-0 mb-0"><?= Helpers::dateDiff($session['startTime'], $session['endTime']); ?></h5>
+                                        </div>
+                                        <div class="flex">
+                                            <i class="fas fa-map-marker-alt text-normal mr-s"></i>
+                                            <small><?= $session['room']['name']; ?>&nbsp;</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endforeach ?>
                 </div>
             </div>
         </div>

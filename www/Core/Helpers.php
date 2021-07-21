@@ -119,4 +119,14 @@ class Helpers
         }
         return $password;
     }
+
+    public static function dateDiff($startTimestamp, $endTimestamp, $outputFormat = '%h h %i min')
+    {
+        $startDate = date_create($startTimestamp);
+        $endDate = date_create($endTimestamp);
+
+        $interval = date_diff($startDate, $endDate);
+
+        return str_ireplace(' 0 min', '', $interval->format($outputFormat));
+    }
 }
