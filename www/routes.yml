@@ -24,6 +24,12 @@
   action: showRooms
   scope: ""
 
+# page contact
+/contact:
+  controller: MainController
+  action: showContact
+  scope: ""
+
 # page 404
 /404:
   controller: MainController

@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Core\Contact;
+use App\Core\FormValidator;
+use App\Core\Mailer;
 use App\Core\View;
 use App\Core\Helpers;
 
@@ -186,6 +189,61 @@ class MainController
 
         $view->assign('room', $room);
     }
+
+    public function showContactAction()
+    {
+        $view = new View("f_contact", 'front');
+
+        $contact= new Contact();
+
+        $form = $contact->formBuilderContact();
+
+        if (!empty($_POST)) {
+
+            $errors = FormValidator::check($form, $_POST);
+
+            if (empty($errors)) {
+                $firstname = $_POST["firstName"];
+                $lastname = $_POST["lastName"];
+                $email = $_POST["email"];
+                $message = $_POST["message"];
+
+                $mailObject = Mailer::init(
+                    [
+                        'address' => EMAIL_SOURCE_ADDRESS,
+                        'name' => EMAIL_SOURCE_NAME
+                    ],
+                    [
+                        [
+
+                            'address' => 'fassory.diaby@gmail.com',
+                            'name' => EMAIL_SOURCE_NAME
+                        ]
+                    ],
+                    "Contact",
+                    "<div>$firstname $lastname &lt;$email&gt; : </br> <p>$message</p></div>"
+
+                );
+
+
+                Mailer::sendEmail($mailObject,
+                    function () use (&$view) {
+                    $view->assign("success", "Votre message a été envoyé");
+                },
+                    function () use (&$view) {
+                        $errors = ["L'envoi du mail a échoué."];
+                        $view->assign("errors", $errors);
+                    });
+            } else {
+                $view->assign("errors", $errors);
+            }
+        }
+
+
+        $view->assign('form', $form);
+
+    }
+
 
     public function page404Action()
     {
