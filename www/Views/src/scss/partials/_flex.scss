@@ -82,10 +82,16 @@
     }
 }
 
-// vertical alignement
+// FLEX TOP
 .flex-top {
     align-items: flex-start;
 }
+.flex-top\@m {
+    @include from-m {
+        align-items: flex-start !important;
+    }
+}
+// vertical alignement
 .flex-middle {
     align-items: center;
 }
