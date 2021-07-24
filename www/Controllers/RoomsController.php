@@ -88,11 +88,9 @@ class RoomsController
         $view->assign('form', $form);
     }
 
-    public function editRoomAction($id = null)
+    public function editRoomAction()
     {
-        if (!$id) {
-            $id = Helpers::getQueryParam('id');
-        }
+        $id = Helpers::getQueryParam('id');
 
         if ($id) {
             $roomModel = new RoomModel();
@@ -164,7 +162,7 @@ class RoomsController
                 return;
             }
         }
-        $view = new View('f_404', 'front');
+        $view = new View('b_404', 'back');
     }
 
     public function deleteRoomAction()

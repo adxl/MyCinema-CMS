@@ -3,6 +3,35 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f 
 RewriteCond %{REQUEST_FILENAME} !-d
 
+# Deny access to controllers
+RedirectMatch 403 ^/Controllers/.*$
+
+# Deny access to core
+RedirectMatch 403 ^/Core/.*$
+
+# Deny access to models
+RedirectMatch 403 ^/Models/.*$
+
+# Deny access to views except public assets
+RedirectMatch 403 ^/Views/(((?!images|dist).))*$
+RedirectMatch 403 ^/Views/.$
+
+# Deny access to autoloader
+<Files "Autoload.php">  
+  Order Allow,Deny
+  Deny from all
+</Files>
+
+# Deny access to env files
+<Files ".env*">  
+  Order Allow,Deny
+  Deny from all
+</Files>
+
+# Deny access to routes.yml
+<Files "routes.yml">  
+  Order Allow,Deny
+  Deny from all
+</Files>
+
 RewriteRule . /index.php [L]
-
-

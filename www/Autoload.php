@@ -4,10 +4,8 @@ namespace App;
 
 class Autoload
 {
-
 	public static function register()
 	{
-
 		spl_autoload_register(function ($class) {
 
 			//App\Core\Router -> App/Core/Router

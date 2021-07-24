@@ -53,7 +53,7 @@
 #  page events
 /bo/events:
   controller: EventsController
-  action: default
+  action: showEvents
   scope: "ADMIN MANAGER"
 
 # ajout event

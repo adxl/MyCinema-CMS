@@ -105,6 +105,10 @@ class MainController
         $eventModel = new Event();
         $event = $eventModel->findById($id);
 
+        if (!$event) {
+            Helpers::redirect('404');
+        }
+
         $event['tags'] = $eventModel->getTags($event['id']);
 
         $allSessions = $eventModel->getSessions($id);

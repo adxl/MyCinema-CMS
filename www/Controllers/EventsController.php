@@ -13,17 +13,6 @@ use App\Models\Event_tag as EventTagModel;
 
 class EventsController
 {
-    public function defaultAction()
-    {
-        $id = Helpers::getQueryParam('id');
-
-        if ($id) {
-            $this->showOneEventAction($id);
-        } else {
-            $this->showEventsAction();
-        }
-    }
-
     public function showEventsAction()
     {
         $view = new View("b_events", 'back');
@@ -44,23 +33,7 @@ class EventsController
         $view->assign("events", $events);
     }
 
-    public function showOneEventAction($id)
-    {
-        if ($id) {
-            $eventModel = new EventModel();
-            $event = $eventModel->findById($id);
 
-            if ($event) {
-                $view = new View('f_event', 'front');
-
-                $view->assign("title", $event['title']);
-                $view->assign("event", $event);
-
-                return;
-            }
-        }
-        $view = new View('f_404', 'front');
-    }
     public function createEventAction()
     {
         $view = new View("b_events_create", "back");
@@ -334,7 +307,7 @@ class EventsController
                 return;
             }
         }
-        $view = new View('b_404', 'front');
+        $view = new View('b_404', 'back');
     }
 
     public function deleteEventAction()
