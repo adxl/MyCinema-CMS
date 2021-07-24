@@ -169,7 +169,7 @@ class FormValidator
 		}
 
 		// validate email pattern 
-		$filterEmail = filter_var($data['EMAIL_SOURCE_ADDRESS'], FILTER_VALIDATE_EMAIL);
+		$filterEmail = filter_var($data['EMAIL_SMTP_ADMIN'], FILTER_VALIDATE_EMAIL);
 		if (!$filterEmail) {
 			$errors[] = "Le format de l'email n'est pas valide";
 		}
@@ -198,7 +198,7 @@ class FormValidator
 		}
 
 		// validate emails patterns
-		if (!empty($data['EMAIL_SOURCE_ADDRESS']) && !filter_var($data['EMAIL_SOURCE_ADDRESS'], FILTER_VALIDATE_EMAIL)) {
+		if (!empty($data['EMAIL_SMTP_ADMIN']) && !filter_var($data['EMAIL_SMTP_ADMIN'], FILTER_VALIDATE_EMAIL)) {
 			$errors[] = "Le format de l'email SMTP n'est pas valide";
 		}
 		if (!empty($data['WEBSITE_ADMIN']) && !filter_var($data['WEBSITE_ADMIN'], FILTER_VALIDATE_EMAIL)) {

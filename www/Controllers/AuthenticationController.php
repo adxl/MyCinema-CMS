@@ -89,7 +89,7 @@ class AuthenticationController
                     if ($id) {
                         $mailObject = Mailer::init(
                             [
-                                'address' => EMAIL_SOURCE_ADDRESS,
+                                'address' => EMAIL_SMTP_ADMIN,
                                 'name' => EMAIL_SOURCE_NAME
                             ],
                             [
@@ -216,7 +216,7 @@ class AuthenticationController
 
             $mailObject = Mailer::init(
                 [
-                    'address' => EMAIL_SOURCE_ADDRESS,
+                    'address' => EMAIL_SMTP_ADMIN,
                     'name' => EMAIL_SOURCE_NAME
                 ],
                 [
