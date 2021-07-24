@@ -34,7 +34,7 @@ class EnvironmentManager
 
     public static function updateGeneralEnv($data)
     {
-        $data['DB_ENV'] = DB_ENV;
+        $data['ENV'] = ENV;
         EnvironmentManager::writeEnvData($data, ".env");
     }
 
@@ -43,7 +43,7 @@ class EnvironmentManager
         $data['DB_DRIVER'] = DB_DRIVER;
         $data['DB_PORT'] = DB_PORT;
         $data['DB_PREFIXE'] = DB_PREFIXE;
-        EnvironmentManager::writeEnvData($data, ".env.db" . DB_ENV);
+        EnvironmentManager::writeEnvData($data, ".env.db");
     }
 
     public static function updateMailingEnv($data)

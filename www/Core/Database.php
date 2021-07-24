@@ -118,7 +118,6 @@ class Database
         }
     }
 
-
     private function insertSeed($seed)
     {
         $stmt = "INSERT INTO " .  DB_PREFIXE . $seed["table"] . " VALUES " . $seed["values"];
@@ -330,7 +329,7 @@ class Database
         $stmt->execute($columns) or $error = true;
 
         if ($error) {
-            if (DB_ENV === 'dev') {
+            if (ENV === 'dev') {
                 echo "<pre>";
                 echo 'DATABASE ERROR : ' . $stmt->errorInfo()[2] . PHP_EOL;
                 echo PHP_EOL;
@@ -340,7 +339,7 @@ class Database
                 var_dump($columns);
                 echo "</pre>";
             } else {
-                Helpers::redirect('/500');
+                die("Erreur ENV-D002: Installation corrompue");
             }
             die();
         }

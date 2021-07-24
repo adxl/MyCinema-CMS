@@ -48,6 +48,19 @@
                     </ul>
                 </div>
             <?php endif; ?>
+
+            <?php if ($tab == 'database') : ?>
+                <div class="bg-lighter p-m rounded mb-l">
+                    <div class="flex flex-middle mb-m">
+                        <i class="fas fa-exclamation-triangle text-red mr-m"></i>
+                        <h1>Attention :</h1>
+                    </div>
+                    <p>Changer la configuration de la BDD en production est une opération à risque pouvant provoquer la perte de vos données.</p>
+                    <br>
+                    <p>Si toutefois vous devez changer ces paramètres, il est conseillé de refaire une instalation du CMS.</p>
+                </div>
+            <?php endif; ?>
+
             <div>
                 <?php App\Core\FormBuilder::render($form); ?>
             </div>

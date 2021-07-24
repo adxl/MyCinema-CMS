@@ -25,7 +25,7 @@ class InstallWizard
                 $envPairs[mb_strtoupper($results[1])] = trim($results[2]);
         }
 
-        if (!isset($envPairs['DB_ENV']) || !isset($envPairs['WEBSITE_NAME']))
+        if (!isset($envPairs['WEBSITE_NAME']))
             return false;
 
         return true;
@@ -172,7 +172,7 @@ class InstallWizard
         $defaultEnv = [
             'WEBSITE_NAME' => $data['WEBSITE_NAME'],
             'WEBSITE_CONTACT_ADDRESS' => $data['WEBSITE_CONTACT_ADDRESS'],
-            'DB_ENV' => 'dev'
+            'ENV' => 'prod'
         ];
 
         $databaseEnv = [
@@ -194,14 +194,14 @@ class InstallWizard
         ];
 
         $defaultEnvFile = ".env";
-        $DatabaseEnvFile =  ".env.db." . $defaultEnv['DB_ENV'];
+        $databaseEnvFile =  ".env.db";
         $SMTPEnvFile =  ".env.smtp";
 
         Env::writeEnvData($defaultEnv, $defaultEnvFile);
-        Env::writeEnvData($databaseEnv, $DatabaseEnvFile);
+        Env::writeEnvData($databaseEnv, $databaseEnvFile);
         Env::writeEnvData($mailingEnv, $SMTPEnvFile);
 
-        $envFiles = [$defaultEnvFile, $DatabaseEnvFile, $SMTPEnvFile];
+        $envFiles = [$defaultEnvFile, $databaseEnvFile, $SMTPEnvFile];
         foreach ($envFiles as $file) {
             if (!file_exists($file)) {
                 die("Erreur ENV-W001");

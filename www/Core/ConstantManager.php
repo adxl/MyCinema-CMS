@@ -6,6 +6,7 @@ class ConstantManager
 {
 
     private $envFile = ".env";
+    private $dbFile = ".env.db";
     private $smtpFile = ".env.smtp";
     private $data = [];
 
@@ -22,10 +23,9 @@ class ConstantManager
         $this->parsingEnv($this->smtpFile);
 
         // parse database env
-        $databaseEnvFile = $this->envFile . ".db." . ($this->data["DB_ENV"] ?? "dev");
-        if (!file_exists($databaseEnvFile))
+        if (!file_exists($this->dbFile))
             die("Erreur ENV-D001: Installation corrompue");
-        $this->parsingEnv($databaseEnvFile);
+        $this->parsingEnv($this->dbFile);
 
         $this->defineConstants();
     }
