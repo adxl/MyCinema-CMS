@@ -9,7 +9,7 @@ class FormBuilder
 		$html = "<form 
 				method='" . ($config["config"]["method"] ?? "GET") . "' 
 				action='" . ($config["config"]["action"] ?? "") . "' 
-				" . (!empty($config["config"]["enctype"]) ? "enctype='multipart/form-data'" : "") . "
+				" . (isset($config["config"]["enctype"]) ? "enctype=" . $config["config"]["enctype"] : "") . "
 				class='" . ($config["config"]["class"] ?? "") . "'
 				id='" . ($config["config"]["id"] ?? "") . "'
 				>";

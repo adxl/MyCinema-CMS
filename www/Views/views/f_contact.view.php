@@ -14,8 +14,6 @@
             </div>
         <?php endif; ?>
 
-
-
         <?php if (isset($success)) : ?>
             <div class="flex-middle flex-column w-100 mb-m">
                 <p class="text-alert-success">
@@ -25,8 +23,6 @@
         <?php endif; ?>
     </div>
 
-    <?php isset($form) && App\Core\FormBuilder::render($form) ?>
+    <?php App\Core\FormBuilder::render($form) ?>
 
 </div>
-
-

@@ -1,16 +1,9 @@
 <?php
 
-
 namespace App\Core;
-
 
 class Contact
 {
-    private $lastname;
-    private $firstname;
-    private $email;
-    private $message;
-
     public function formBuilderContact()
     {
         return  [
@@ -53,7 +46,17 @@ class Contact
                     "required" => true,
                     "minLength" => 6,
                     "maxLength" => 320,
-                    "value" => 'user@mycinema.fr'
+                    "value" => 'adelsenhadjii@gmail.com'
+                ],
+
+                "subject" => [
+                    "type" => "text",
+                    "label" => "Objet",
+                    'class' => 'field w-100',
+                    "required" => true,
+                    "minLength" => 10,
+                    "maxLength" => 150,
+                    "value" => 'Où se trouve votre cinema'
                 ],
 
                 "message" => [
@@ -65,7 +68,6 @@ class Contact
                     'rows' => 8,
                     "value" => 'Test de user cinema page contact'
                 ],
-
             ]
         ];
     }

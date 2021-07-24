@@ -45,6 +45,5 @@ class Mailer
             if ($onError)
                 $onError();
         }
-
     }
 }

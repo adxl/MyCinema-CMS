@@ -194,7 +194,7 @@ class MainController
     {
         $view = new View("f_contact", 'front');
 
-        $contact= new Contact();
+        $contact = new Contact();
 
         $form = $contact->formBuilderContact();
 
@@ -203,37 +203,42 @@ class MainController
             $errors = FormValidator::check($form, $_POST);
 
             if (empty($errors)) {
-                $firstname = $_POST["firstName"];
-                $lastname = $_POST["lastName"];
-                $email = $_POST["email"];
-                $message = $_POST["message"];
+
+                $emailBody = "<div>
+                                <p>Prénom : " . $_POST["firstName"] . " </p>
+                                <p>Nom : " . $_POST["lastName"] . " </p>
+                                <br>
+                                <p>Email : " . $_POST["email"] . " </p>
+                                <br>
+                                <p>Object : " . $_POST["subject"] . " </p>
+                                <p>Message : " . $_POST["message"] . " </p>
+                            </div>";
 
                 $mailObject = Mailer::init(
                     [
-                        'address' => EMAIL_SOURCE_ADDRESS,
+                        'address' => EMAIL_SMTP_ADMIN,
                         'name' => EMAIL_SOURCE_NAME
                     ],
                     [
                         [
 
-                            'address' => 'fassory.diaby@gmail.com',
-                            'name' => EMAIL_SOURCE_NAME
+                            'address' => WEBSITE_CONTACT_ADDRESS,
                         ]
                     ],
-                    "Contact",
-                    "<div>$firstname $lastname &lt;$email&gt; : </br> <p>$message</p></div>"
-
+                    "[CONTACT] " . $_POST["subject"],
+                    $emailBody
                 );
 
-
-                Mailer::sendEmail($mailObject,
+                Mailer::sendEmail(
+                    $mailObject,
                     function () use (&$view) {
-                    $view->assign("success", "Votre message a été envoyé");
-                },
+                        $view->assign("success", "Votre message a été envoyé");
+                    },
                     function () use (&$view) {
                         $errors = ["L'envoi du mail a échoué."];
                         $view->assign("errors", $errors);
-                    });
+                    }
+                );
             } else {
                 $view->assign("errors", $errors);
             }
@@ -241,7 +246,6 @@ class MainController
 
 
         $view->assign('form', $form);
-
     }
 
 
