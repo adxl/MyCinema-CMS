@@ -91,6 +91,12 @@
         align-items: flex-start !important;
     }
 }
+.flex-top\@l {
+    @include from-l {
+        align-items: flex-start !important;
+    }
+}
+
 // vertical alignement
 .flex-middle {
     align-items: center;

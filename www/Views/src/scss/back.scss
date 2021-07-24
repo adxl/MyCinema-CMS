@@ -119,3 +119,30 @@ main {
   background-color: $lighter-gray;
   border-radius: 8px;
 }
+
+#dashboard-event-img {
+  width: 100%;
+  max-width: 250px;
+  margin-bottom: 10px;
+  @include from-m {
+    width: 150px;
+    height: 220px;
+    margin: 0;
+  }
+}
+
+#dashboard-room-img {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 10px;
+  @include from-m {
+    width: 500px;
+    height: 120px;
+    margin: 0;
+  }
+}
+
+#title-404 {
+  font-size: 10em;
+  font-family: $secondary-font;
+}

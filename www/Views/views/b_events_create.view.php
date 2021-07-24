@@ -17,6 +17,6 @@
                 </ul>
             </div>
         <?php endif; ?>
-        <?php App\Core\FormBuilder::render($form); ?>
+        <?php isset($form) && App\Core\FormBuilder::render($form); ?>
     </div>
 </section>

@@ -7,6 +7,7 @@ use App\Core\Helpers;
 use App\Core\Sitemap;
 use App\Core\View;
 use App\Models\Event as EventModel;
+use App\Models\Room as RoomModel;
 use App\Models\Event_room;
 use App\Models\Tag as TagModel;
 use App\Models\Event_tag as EventTagModel;
@@ -38,6 +39,14 @@ class EventsController
     {
         $view = new View("b_events_create", "back");
         $view->assign("title", 'Gestion des évènements > Nouvel évènement');
+
+        $roomModel = new RoomModel();
+        $rooms = $roomModel->findAll();
+
+        if (!$rooms) {
+            $view->assign("errors", ["Vous devez d'abord créer une salle avant d'ajouter une séance"]);
+            return;
+        }
 
         $eventModel = new EventModel();
         $form = $eventModel->formBuilderCreate();

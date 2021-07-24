@@ -116,6 +116,11 @@ class FormValidator
 			return ["Les données de la séance ne sont pas correctes"];
 		}
 
+		for ($i = 0; $i < count($data['date']); $i++) {
+			if ($data['startTime'][$i] >= $data['endTime'][$i])
+				return ["Les horaires de la séance ne sont pas correctes"];
+		}
+
 		foreach ($config["inputs"] as $name => $input) {
 
 			// validate required
