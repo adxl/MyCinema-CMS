@@ -10,12 +10,13 @@ class Sitemap
     public static function generate()
     {
         $events = Sitemap::getEventsURLs();
-        $rooms = Sitemap::getRoomsURLs();
 
         $urls = [
             "/" => ["locations" => [], "query" => null],
             "/events" => ["locations" => $events, "query" => "id"],
-            "/rooms" => ["locations" => $rooms, "query" => "id"],
+            "/rooms" => ["locations" => [], "query" => null],
+            "/contact" => ["locations" => [], "query" => null],
+            "/about" => ["locations" => [], "query" => null],
         ];
 
         $locations = Sitemap::buildLocations($urls);
@@ -35,20 +36,9 @@ class Sitemap
         return $ids;
     }
 
-    private static function getRoomsURLs()
-    {
-        $roomModel = new RoomModel();
-        $rooms = $roomModel->findAll([]);
-        $ids = array_map(function ($room) {
-            return  $room['id'];
-        }, $rooms);
-
-        return $ids;
-    }
-
     private static function buildLocations($urlData)
     {
-        $http = "localhost:8080";
+        $http = $_SERVER['HTTP_HOST'];
         $locations = [];
         foreach ($urlData as $base => $content) {
             $locations[] = $http . $base;
@@ -73,7 +63,7 @@ class Sitemap
             $urls .= "<url><loc>" . $location . "</loc></url>";
         }
 
-        return $urlsetStart . $urls . $urlsetEnd;
+        return $header . $urlsetStart . $urls . $urlsetEnd;
     }
 
     private static function buildFile($xml)
@@ -81,12 +71,8 @@ class Sitemap
         $file = "sitemap.xml";
         file_put_contents($file, $xml);
 
-        if (file_exists($file)) {
-            header('Content-Type: application/xml');
-            header('Expires: 0');
-            header('Content-Length: ' . filesize($file));
-            readfile($file);
-            die();
+        if (!file_exists($file)) {
+            die('Error while generating sitemap.xml');
         }
     }
 }

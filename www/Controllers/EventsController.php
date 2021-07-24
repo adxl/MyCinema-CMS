@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Core\FormValidator;
 use App\Core\Helpers;
+use App\Core\Sitemap;
 use App\Core\View;
 use App\Models\Event as EventModel;
 use App\Models\Event_room;
@@ -169,6 +170,8 @@ class EventsController
 
                     $sessionModel->save();
                 }
+
+                Sitemap::generate();
 
                 Helpers::redirect('/bo/events');
             } else {
@@ -340,6 +343,8 @@ class EventsController
 
         $event = new EventModel();
         $event->deleteById($id);
+
+        Sitemap::generate();
 
         Helpers::redirect('/bo/events');
     }

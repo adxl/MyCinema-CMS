@@ -155,17 +155,6 @@ class MainController
 
     public function showRoomsAction()
     {
-        $id = Helpers::getQueryParam('id');
-
-        if ($id) {
-            $this->showOneRoomAction($id);
-        } else {
-            $this->showAllRoomsAction();
-        }
-    }
-
-    public function showAllRoomsAction()
-    {
         $view = new View("f_rooms", 'front');
 
         $roomModel = new Room();
@@ -178,16 +167,6 @@ class MainController
 
         $view->assign('cover_room', $cover_room);
         $view->assign('rooms', $rooms);
-    }
-
-    public function showOneRoomAction($id)
-    {
-        $view = new View("f_room", 'front');
-
-        $roomModel = new Room();
-        $room = $roomModel->findById($id);
-
-        $view->assign('room', $room);
     }
 
     public function showContactAction()
