@@ -48,10 +48,6 @@ class EnvironmentManager
 
     public static function updateMailingEnv($data)
     {
-        $data['EMAIL_SMTP_HOST'] = EMAIL_SMTP_HOST;
-        $data['EMAIL_SMTP_ADMIN'] = EMAIL_SMTP_ADMIN;
-        $data['EMAIL_SMTP_PASSWORD'] = EMAIL_SMTP_PASSWORD;
-        $data['EMAIL_SMTP_PORT'] = EMAIL_SMTP_PORT;
         EnvironmentManager::writeEnvData($data, ".env.smtp");
     }
 }

@@ -41,14 +41,14 @@ class Settings
             ],
 
             "inputs" => [
-                "DB-HOST" => [
+                "DB_HOST" => [
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Serveur",
-                    "hint" => "Votre serveur de base de données (defaut: localhost)",
+                    "hint" => "Votre serveur de base de données",
                     "value" => DB_HOST,
                 ],
-                "DB-NAME" => [
+                "DB_NAME" => [
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Nom",
@@ -92,12 +92,33 @@ class Settings
                     "hint" => "Le nom affiché au destinataire du mail",
                     "value" => EMAIL_SOURCE_NAME,
                 ],
-                "EMAIL_SOURCE_ADDRESS" => [
+                "EMAIL_SMTP_HOST" => [
                     "type" => "text",
-                    'class' => 'field w-100 mb-l',
-                    "label" => "Adresse",
-                    "hint" => "L'adresse email affichée au destinataire du mail",
-                    "value" => EMAIL_SOURCE_ADDRESS,
+                    'class' => 'field w-100',
+                    "label" => "Serveur SMTP",
+                    "hint" => "Votre serveur SMTP",
+                    "value" => EMAIL_SMTP_HOST
+                ],
+                "EMAIL_SMTP_ADMIN" => [
+                    "type" => "email",
+                    'class' => 'field w-100',
+                    "label" => "Adresse SMTP",
+                    "hint" => "Votre adresse SMTP",
+                    "value" => EMAIL_SMTP_ADMIN
+                ],
+                "EMAIL_SMTP_PASSWORD" => [
+                    "type" => "password",
+                    'class' => 'field w-100',
+                    "label" => "Mot de passe SMTP",
+                    "hint" => "Votre mot de passe SMTP",
+                    "value" => EMAIL_SMTP_PASSWORD
+                ],
+                "EMAIL_SMTP_PORT" => [
+                    "type" => "text",
+                    'class' => 'field w-100',
+                    "label" => "Port SMTP",
+                    "hint" => "Le port du serveur SMTP",
+                    "value" => EMAIL_SMTP_PORT
                 ],
             ],
         ];

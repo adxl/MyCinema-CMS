@@ -89,7 +89,7 @@ class InstallWizard
                     "type" => "text",
                     'class' => 'field w-100',
                     "label" => "Serveur",
-                    "hint" => "Votre serveur de base de données (defaut: database)",
+                    "hint" => "Votre serveur de base de données",
                     "value" => "database"
                 ],
                 "DB_NAME" => [
@@ -120,12 +120,33 @@ class InstallWizard
                     "hint" => "Le nom affiché aux destinataires des emails",
                     "value" => "Support MyCinema"
                 ],
-                "EMAIL_SOURCE_ADDRESS" => [
+                "EMAIL_SMTP_HOST" => [
                     "type" => "text",
-                    'class' => 'field w-100 mb-l',
+                    'class' => 'field w-100',
+                    "label" => "Serveur SMTP",
+                    "hint" => "Votre serveur SMTP",
+                    "value" => "ssl0.ovh.net"
+                ],
+                "EMAIL_SMTP_ADMIN" => [
+                    "type" => "email",
+                    'class' => 'field w-100',
                     "label" => "Adresse SMTP",
-                    "hint" => "L'adresse email affichée au destinataires",
-                    "value" => "support@mycinema.com"
+                    "hint" => "Votre adresse SMTP",
+                    "value" => "admin@la11eme.fr"
+                ],
+                "EMAIL_SMTP_PASSWORD" => [
+                    "type" => "password",
+                    'class' => 'field w-100',
+                    "label" => "Mot de passe SMTP",
+                    "hint" => "Votre mot de passe SMTP",
+                    "value" => "acdLLmap:94"
+                ],
+                "EMAIL_SMTP_PORT" => [
+                    "type" => "text",
+                    'class' => 'field w-100',
+                    "label" => "Port SMTP",
+                    "hint" => "Le port du serveur SMTP",
+                    "value" => "587"
                 ],
             ]
         ];
@@ -157,11 +178,10 @@ class InstallWizard
 
         $mailingEnv = [
             "EMAIL_SOURCE_NAME" => $data['EMAIL_SOURCE_NAME'],
-            "EMAIL_SOURCE_ADDRESS" => $data['EMAIL_SOURCE_ADDRESS'],
-            "EMAIL_SMTP_HOST" => "ssl0.ovh.net",
-            "EMAIL_SMTP_ADMIN" => "admin@la11eme.fr",
-            "EMAIL_SMTP_PASSWORD" => "acdLLmap:94",
-            "EMAIL_SMTP_PORT" => 587
+            "EMAIL_SMTP_HOST" => $data['EMAIL_SMTP_HOST'],
+            "EMAIL_SMTP_ADMIN" => $data['EMAIL_SMTP_ADMIN'],
+            "EMAIL_SMTP_PASSWORD" => $data['EMAIL_SMTP_PASSWORD'],
+            "EMAIL_SMTP_PORT" => $data['EMAIL_SMTP_PORT']
         ];
 
         $defaultEnvFile = ".env";
