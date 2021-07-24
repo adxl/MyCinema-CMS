@@ -25,7 +25,7 @@ $user = Security::getCurrentUserShort();
 	<header class="flex flex-between flex-middle bg-soft-white">
 		<div class="p-m">
 			<a href="/">
-				<h1 id="cms-logo" class="pl-m"><?= WEBSITE_NAME; ?></h1>
+				<h1 id="cms-logo" class="m-0"><?= WEBSITE_NAME; ?></h1>
 			</a>
 		</div>
 

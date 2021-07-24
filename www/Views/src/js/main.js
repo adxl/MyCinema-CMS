@@ -45,4 +45,13 @@ $(() => {
 			reader.readAsDataURL(file);
 		}
 	});
+
+	// navbar en mobile
+	$('#sidebar-open-btn').on('click', () => {
+		document.getElementById('sidebar').style.width = '100%';
+	});
+
+	$('#sidebar-close-btn').on('click', () => {
+		document.getElementById('sidebar').style.width = '0';
+	});
 });
