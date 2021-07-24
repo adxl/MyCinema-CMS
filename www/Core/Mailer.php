@@ -42,7 +42,7 @@ class Mailer
             if ($onSuccess)
                 $onSuccess();
         } else {
-            if ($onError())
+            if ($onError)
                 $onError();
         }
     }

@@ -25,6 +25,14 @@ class Settings
                     "hint" => "Le nom affiché sur le site web",
                     "value" => WEBSITE_NAME,
                 ],
+                "WEBSITE_CONTACT_ADDRESS" => [
+                    "type" => "email",
+                    'class' => 'field w-100',
+                    "label" => "Adresse de contact",
+                    "required" => true,
+                    "hint" => "L'adresse email de contact",
+                    "value" => WEBSITE_CONTACT_ADDRESS,
+                ],
             ]
         ];
     }

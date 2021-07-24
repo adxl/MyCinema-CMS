@@ -2,6 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Core\Contact;
+use App\Core\FormValidator;
+use App\Core\Mailer;
 use App\Core\View;
 use App\Core\Helpers;
 
@@ -186,6 +189,65 @@ class MainController
 
         $view->assign('room', $room);
     }
+
+    public function showContactAction()
+    {
+        $view = new View("f_contact", 'front');
+
+        $contact = new Contact();
+
+        $form = $contact->formBuilderContact();
+
+        if (!empty($_POST)) {
+
+            $errors = FormValidator::check($form, $_POST);
+
+            if (empty($errors)) {
+
+                $emailBody = "<div>
+                                <p>Prénom : " . $_POST["firstName"] . " </p>
+                                <p>Nom : " . $_POST["lastName"] . " </p>
+                                <br>
+                                <p>Email : " . $_POST["email"] . " </p>
+                                <br>
+                                <p>Object : " . $_POST["subject"] . " </p>
+                                <p>Message : " . $_POST["message"] . " </p>
+                            </div>";
+
+                $mailObject = Mailer::init(
+                    [
+                        'address' => EMAIL_SMTP_ADMIN,
+                        'name' => EMAIL_SOURCE_NAME
+                    ],
+                    [
+                        [
+
+                            'address' => WEBSITE_CONTACT_ADDRESS,
+                        ]
+                    ],
+                    "[CONTACT] " . $_POST["subject"],
+                    $emailBody
+                );
+
+                Mailer::sendEmail(
+                    $mailObject,
+                    function () use (&$view) {
+                        $view->assign("success", "Votre message a été envoyé");
+                    },
+                    function () use (&$view) {
+                        $errors = ["L'envoi du mail a échoué."];
+                        $view->assign("errors", $errors);
+                    }
+                );
+            } else {
+                $view->assign("errors", $errors);
+            }
+        }
+
+
+        $view->assign('form', $form);
+    }
+
 
     public function page404Action()
     {

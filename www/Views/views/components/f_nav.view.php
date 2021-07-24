@@ -3,6 +3,7 @@
         <li><a href="/">Accueil</a></li>
         <li><a href="/events">Évènements</a></li>
         <li><a href="/rooms">Salles</a></li>
+        <li><a href="/contact">Contact</a></li>
         <li><a href="/about">À propos</a></li>
     </ul>
 </nav>

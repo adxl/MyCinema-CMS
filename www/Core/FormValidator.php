@@ -12,7 +12,7 @@ class FormValidator
 		$errors = [];
 
 		$fields_count = self::getFieldsCount($config['inputs']);
-		if ($config['config']["enctype"] === 'multipart/form-data') {
+		if (isset($config['config']['enctype']) &&  ($config['config']['enctype'] == 'multipart/form-data')) {
 			$fields_count--;
 		}
 

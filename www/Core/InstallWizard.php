@@ -69,6 +69,14 @@ class InstallWizard
                     "value" => "ParisMovies.com"
                 ],
 
+                "WEBSITE_CONTACT_ADDRESS" => [
+                    "type" => "email",
+                    'class' => 'field w-100',
+                    "label" => "Adresse de contact",
+                    "hint" => "L'adresse email de contact",
+                    "value" => "adelsenhadjii@gmail.com"
+                ],
+
                 "WEBSITE_ADMIN" => [
                     "type" => "text",
                     'class' => 'field w-100',
@@ -163,6 +171,7 @@ class InstallWizard
 
         $defaultEnv = [
             'WEBSITE_NAME' => $data['WEBSITE_NAME'],
+            'WEBSITE_CONTACT_ADDRESS' => $data['WEBSITE_CONTACT_ADDRESS'],
             'DB_ENV' => 'dev'
         ];
 
