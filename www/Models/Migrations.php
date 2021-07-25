@@ -17,6 +17,7 @@ class Migrations
             Migrations::sessionColumns(),
             Migrations::tagColumns(),
             Migrations::userColumns(),
+            Migrations::websiteColumns(),
         ];
     }
 
@@ -31,6 +32,7 @@ class Migrations
             Migrations::sessionIndexes(),
             Migrations::tagIndexes(),
             Migrations::userIndexes(),
+            Migrations::websiteIndexes(),
         ];
     }
 
@@ -278,6 +280,26 @@ class Migrations
     {
         return [
             "table" => "user",
+            "columns" => "ADD PRIMARY KEY (id)"
+        ];
+    }
+
+    // WEBSITE
+
+    private static function websiteColumns()
+    {
+        return [
+            "table" => "website",
+            "columns" => "
+                id varchar(37) COLLATE utf8_unicode_ci NOT NULL,
+                about text COLLATE utf8_unicode_ci"
+        ];
+    }
+
+    private static function websiteIndexes()
+    {
+        return [
+            "table" => "website",
             "columns" => "ADD PRIMARY KEY (id)"
         ];
     }

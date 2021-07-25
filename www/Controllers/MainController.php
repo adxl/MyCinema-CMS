@@ -11,6 +11,7 @@ use App\Core\Helpers;
 use App\Models\Comment;
 use App\Models\Event;
 use App\Models\Room;
+use App\Models\Website;
 
 class MainController
 {
@@ -251,6 +252,14 @@ class MainController
         $view->assign('form', $form);
     }
 
+    public function showAboutAction()
+    {
+        $websiteModel = new Website();
+        $website = $websiteModel->findAll()[0];
+
+        $view = new View("f_about", 'front');
+        $view->assign('about', $website['about']);
+    }
 
     public function page404Action()
     {
