@@ -10,6 +10,12 @@
                 <li class="p-m mb-m <?= $tab == 'general' ? 'menu-selected' : '' ?>">
                     <a class="flex flex-center flex-left@m" href="/bo/settings?tab=general">
                         <i class='fas fa-cogs'></i>
+                        <span class="ml-m visible@m">Général</span>
+                    </a>
+                </li>
+                <li class="p-m mb-m <?= $tab == 'website' ? 'menu-selected' : '' ?>">
+                    <a class="flex flex-center flex-left@m" href="/bo/settings?tab=website">
+                        <i class='fas fa-desktop'></i>
                         <span class="ml-m visible@m">Site</span>
                     </a>
                 </li>

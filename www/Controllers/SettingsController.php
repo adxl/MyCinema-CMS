@@ -8,6 +8,7 @@ use App\Core\Helpers;
 use App\Core\View;
 
 use App\Models\Settings;
+use App\Models\Website;
 
 class SettingsController
 {
@@ -22,6 +23,10 @@ class SettingsController
         switch ($tab) {
             case 'general':
                 $form = $settings->formBuilderGeneral();
+                break;
+            case 'website':
+                $website = new Website();
+                $form = $website->formBuilderWebsite();
                 break;
             case 'database':
                 $form = $settings->formBuilderDatabase();
@@ -62,6 +67,26 @@ class SettingsController
         }
 
         Helpers::redirect("/bo/settings?tab=general");
+    }
+
+    public function saveWebsiteSettingsAction()
+    {
+        $data = Helpers::cleanInputs($_POST);
+
+        $website = new Website();
+        $formConfig = $website->formBuilderWebsite();
+
+        $errors = FormValidator::check($formConfig, $data);
+
+        if (!empty($errors)) {
+            Helpers::storeAlert($errors);
+        } else {
+            $website->setAbout($data['about']);
+            $website->save();
+            Helpers::storeAlert(["Modifications enregistrées avec succès"], true);
+        }
+
+        Helpers::redirect("/bo/settings?tab=website");
     }
 
     public function saveDatabaseSettingsAction()

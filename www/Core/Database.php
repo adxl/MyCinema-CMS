@@ -71,7 +71,7 @@ class Database
 
     private function purge()
     {
-        $tables = ["comment", "event", "event_room", "event_tag", "room", "session", "tag", "user"];
+        $tables = ["comment", "event", "event_room", "event_tag", "room", "session", "tag", "user", 'website'];
         try {
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             $this->pdo->exec("SET FOREIGN_KEY_CHECKS = 0;");

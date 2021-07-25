@@ -11,7 +11,8 @@ class Seeds
             Seeds::tagsSeeds(),
             Seeds::moviesTagsSeeds(),
             Seeds::roomsSeeds(),
-            Seeds::eventsSeeds()
+            Seeds::eventsSeeds(),
+            Seeds::websiteSeeds(),
         ];
     }
 
@@ -151,6 +152,15 @@ class Seeds
             ('60e73fd48ae261-43404185-60e73fd48ae28', '60e736330712c3-78725207-60e7363307130', '60e7396f8ffd68-52676043-60e7396f8ffda', '2021-08-20 20:00:00', '2021-08-20 22:00:00'),
             ('60e73fd48aa489-93240615-60e73fd48aa4b', '60e736330712c3-78725207-60e7363307130', '60e7397988d9d7-20176471-60e7397988da2', '2021-08-20 20:00:00', '2021-08-20 22:00:00'),
             ('60e73df179b7a7-17459358-60e73df179b7d', '60e73347ba4626-13094074-60e73347ba46a', '60e7395de25124-80212817-60e7395de2516', '2021-08-24 22:00:00', '2021-08-24 23:00:00');"
+        ];
+    }
+
+    // WEBSITE
+    private static function websiteSeeds()
+    {
+        return [
+            "table" => "website",
+            "values" => "('9', 'Sunt ullamco ullamco minim labore sit consectetur incididunt irure ad magna. Veniam commodo ex aliqua ullamco nulla exercitation cupidatat et cupidatat. Mollit veniam amet duis est minim ea ipsum exercitation est occaecat aliquip. Est nostrud velit consectetur irure dolore dolore. Ex ullamco nulla et sit dolor aliqua ullamco consectetur dolor fugiat dolore. Dolore laborum qui reprehenderit qui est. Ullamco ullamco laborum occaecat ad eu anim est occaecat voluptate reprehenderit.')"
         ];
     }
 }

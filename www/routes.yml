@@ -30,6 +30,12 @@
   action: showContact
   scope: ""
 
+# page contact
+/about:
+  controller: MainController
+  action: showAbout
+  scope: ""
+
 # page 404
 /404:
   controller: MainController
@@ -126,6 +132,12 @@
 /bo/settings/general:
   controller: SettingsController
   action: saveGeneralSettings
+  scope: "ADMIN"
+
+# route paramètres du site
+/bo/settings/website:
+  controller: SettingsController
+  action: saveWebsiteSettings
   scope: "ADMIN"
 
 # route paramètres bdd
