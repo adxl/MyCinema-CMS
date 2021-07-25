@@ -50,12 +50,12 @@ class AccountController
         $form = $userModel->formBuilderAccountNames($user);
 
         if (!empty($_POST)) {
-
-            $errors = FormValidator::check($form, $_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
 
             if (empty($errors)) {
-                $userModel->setFirstname(htmlspecialchars($_POST["firstName"]));
-                $userModel->setLastname(htmlspecialchars($_POST["lastName"]));
+                $userModel->setFirstname(htmlspecialchars($data["firstName"]));
+                $userModel->setLastname(htmlspecialchars($data["lastName"]));
 
                 $id = $userModel->save();
 
@@ -83,14 +83,15 @@ class AccountController
         $form = $userModel->formBuiderAccountEmail($user['email']);
 
         if (!empty($_POST)) {
-            $errors = FormValidator::check($form, $_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
 
             if (empty($errors)) {
 
-                $emailVerif = $userModel->verifUniqEmail($_POST["email"]);
+                $emailVerif = $userModel->verifUniqEmail($data["email"]);
 
                 if ($emailVerif) {
-                    $userModel->setEmail(htmlspecialchars($_POST["email"]));
+                    $userModel->setEmail($data["email"]);
 
                     $id = $userModel->save();
 
@@ -101,8 +102,6 @@ class AccountController
                 } else {
                     Helpers::storeAlert(['Email already used']);
                 }
-
-
             } else
                 Helpers::storeAlert($errors);
 
@@ -123,11 +122,12 @@ class AccountController
         $form = $userModel->formBuilderAccountPassword();
 
         if (!empty($_POST)) {
-            $errors = FormValidator::check($form, $_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
 
             if (empty($errors)) {
-                if (password_verify($_POST['actualPwd'], $user['password'])) {
-                    $userModel->setPassword(password_hash(htmlspecialchars($_POST["pwd"]), PASSWORD_DEFAULT));
+                if (password_verify($data['actualPwd'], $user['password'])) {
+                    $userModel->setPassword(password_hash($data["pwd"], PASSWORD_DEFAULT));
 
                     $id = $userModel->save();
 

@@ -17,7 +17,7 @@ class FormBuilder
 		foreach ($config["inputs"] as $name => $configInput) {
 			$html .= "<div class='row'>
 						<label for='" . ($configInput["id"] ?? $name) . "' class='" . ($configInput["class"] ?? '') . "'>
-							<span> " . ($configInput["label"] ?? "") . "</span>";
+							<p> " . ($configInput["label"] ?? "") . ((isset($configInput["required"]) && $configInput["required"]) ? "<span class='text-red'>*</span>" : "") . "</p>";
 
 			if ($configInput['type'] == 'textarea') {
 				$html .= "<textarea  
@@ -44,7 +44,7 @@ class FormBuilder
 					$html .= "<div class='flex-column flex-row@l session-inputs'>";
 					foreach ($item as $name => $input) {
 						$html .= "<label for='" . ($input["id"] ?? $name) . "' class='" . ($input["class"] ?? '') . "'>
-								<span> " . ($input["label"] ?? "") . "</span>";
+									<p> " . ($input["label"] ?? "") . ((isset($input["required"]) && $input["required"]) ? "<span class='text-red'>*</span>" : "") . "</p>";
 
 						if ($input["type"] == 'select') {
 							$html .= "<select name='" . $name . "' 

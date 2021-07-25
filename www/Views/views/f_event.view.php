@@ -81,8 +81,29 @@ use App\Core\Helpers; ?>
     </div>
 
     <!-- input ajout commentaire -->
-    <div class="row w-100 mb-l">
+    <div class="w-100 mb-l">
         <h1 class="mb-s">Ajouter un commentaire : </h1>
+
+        <?php if (isset($errors)) : ?>
+            <div>
+                <ul class="p-0">
+                    <?php foreach ($errors as $error) : ?>
+                        <li class="text-alert-error">
+                            <i class="fas fa-exclamation-circle"></i> <?= $error ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
+        <?php if (isset($success)) : ?>
+            <div>
+                <p class="text-alert-success">
+                    <?= $success ?>
+                </p>
+            </div>
+        <?php endif; ?>
+
         <div class="flex w-100">
             <?php App\Core\FormBuilder::render($commentForm); ?>
         </div>

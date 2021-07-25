@@ -37,19 +37,19 @@ class RoomsController
         $form = $room->formBuilderCreate();
 
         if (!empty($_POST)) {
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
 
-            $errors = FormValidator::check($form, $_POST);
-            if (empty($_FILES['media']['name'])) {
+            if (!isset($_FILES['media']) || empty($_FILES['media']['name'])) {
                 $errors[] = "Vous n'avez pas ajouté d'image de la salle";
             }
 
-            if ($_FILES['media']['size'] === 0) {
+            if (empty($errors) && $_FILES['media']['size'] === 0) {
                 $errors[] = "La photo ne doit pas dépasser 2M";
             }
 
             if (empty($errors)) {
 
-                $data = $_POST;
                 $file = $_FILES['media'];
 
                 $room->setLabel($data['label']);
@@ -103,16 +103,15 @@ class RoomsController
                 $form = $roomModel->formBuilderUpdate($room);
 
                 if (!empty($_POST)) {
-
-                    $data = $_POST;
-                    $file = $_FILES['media'];
-
+                    $data = Helpers::cleanInputs($_POST);
                     $data['isAvailable'] = isset($data['isAvailable']) ? 1 : 0;
                     $data['isHandicapAccess'] = isset($data['isHandicapAccess']) ? 1 : 0;
 
                     $errors = FormValidator::check($form, $data);
 
                     if (empty($errors)) {
+
+                        $file = $_FILES['media'];
 
                         $roomModel->setId($id);
                         $roomModel->setLabel($data['label']);

@@ -317,6 +317,7 @@ class Event extends Database
                     "type" => "media",
                     "label" => "Photo du film",
                     'class' => 'field media w-25',
+                    'required' => true
                 ],
 
                 "session" => [
@@ -531,7 +532,8 @@ class Event extends Database
                     "type" => "media",
                     "label" => "Photo du film",
                     'class' => 'field media w-100',
-                    'value' => $data['media']
+                    'value' => $data['media'],
+                    'required' => true
                 ],
 
                 "session" => [

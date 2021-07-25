@@ -3,6 +3,7 @@
 namespace App\Core;
 
 use App\Core\Database;
+use App\Models\Room;
 
 class FormValidator
 {
@@ -17,24 +18,21 @@ class FormValidator
 		}
 
 		if (count($data) != $fields_count) { // Faille XSS 
-			echo "<pre>";
-			echo 'XSS ERROR :' . PHP_EOL;
-			var_dump(array_keys($data));
-			var_dump($data);
-			echo '---:' . PHP_EOL;
-			var_dump(array_keys($config['inputs']));
-			echo '---:' . PHP_EOL;
-			var_dump($fields_count);
-			echo "</pre>";
-			die();
-			Helpers::redirect("/500");
+			return ["Erreur lors de l'envoi du formulaire"];
 		}
 
 		foreach ($config["inputs"] as $name => $input) {
 
 			// validate required
-			if (isset($input['required']) && empty($data[$name])) {
-				$errors[] = "'" . $input['label'] . "' est obligatiore";
+			if ($name !== 'media' && isset($input['required']) && $input['required'] && empty($data[$name])) {
+				$errors[] = "'" . $input['label'] . "' est obligatoire";
+			}
+
+			// validate types
+			if ($name !== 'media') {
+				if ($input['type'] == 'number' && !is_numeric($data[$name])) {
+					$errors[] = "La valeur de '" . $input['label'] . "' est invalide";
+				}
 			}
 
 			// validate length (min et max)
@@ -116,16 +114,38 @@ class FormValidator
 			return ["Les données de la séance ne sont pas correctes"];
 		}
 
+		foreach ($data['date'] as $date) {
+			if (!(bool)strtotime($date)) {
+				return ["Les horaires de la séance ne sont pas correctes"];
+			}
+		}
+
 		for ($i = 0; $i < count($data['date']); $i++) {
 			if ($data['startTime'][$i] >= $data['endTime'][$i])
 				return ["Les horaires de la séance ne sont pas correctes"];
 		}
 
+		// check if rooms id's have not been altered
+		$roomModel = new Room();
+		$allRoomsIds = $roomModel->findAll([
+			'select' => 'id'
+		]);
+
+		$allRoomsIds = array_map(function ($room) {
+			return  $room['id'];
+		}, $allRoomsIds);
+
+		foreach ($data['room'] as $roomId) {
+			if (!in_array($roomId, $allRoomsIds)) {
+				return ["La salle affectée est introuvable"];
+			}
+		}
+
 		foreach ($config["inputs"] as $name => $input) {
 
 			// validate required
-			if (isset($input['required']) && empty($data[$name])) {
-				$errors[] = "'" . $input['label'] . "' est obligatiore";
+			if ($name != 'media' && isset($input['required']) && $input['required'] && empty($data[$name])) {
+				$errors[] = "'" . $input['label'] . "' est obligatiore - ";
 			}
 
 			// validate length (min et max)

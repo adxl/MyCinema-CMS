@@ -129,4 +129,15 @@ class Helpers
 
         return str_ireplace(' 0 min', '', $interval->format($outputFormat));
     }
+
+    public static function cleanInputs($post)
+    {
+        $data = $post;
+        foreach ($data as $key => $value) {
+            if (is_string($value)) {
+                $data[$key] = htmlspecialchars(strip_tags($value));
+            }
+        }
+        return $data;
+    }
 }

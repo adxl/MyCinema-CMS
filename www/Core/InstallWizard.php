@@ -40,7 +40,8 @@ class InstallWizard
         $view = "Views/views/install.view.php";
 
         if (!empty($_POST)) {
-            $errors = InstallWizard::execute($_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = InstallWizard::execute($data);
             if (empty($errors)) {
                 InstallWizard::migrate();
             }

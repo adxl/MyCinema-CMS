@@ -14,7 +14,7 @@
 
 # route POST ajout commentaire
 /comments/add:
-  controller: CommentsController
+  controller: MainController
   action: addComment
   scope: ""
 
@@ -217,18 +217,6 @@
   controller: ToolsController
   action: showTools
   scope: "ADMIN MANAGER"
-
-# sitemap
-/sitemap.xml:
-  controller: ToolsController
-  action: generateSitemap
-  scope: ""
-
-# sitemap
-/sitemap:
-  controller: ToolsController
-  action: generateSitemap
-  scope: ""
 
 # sitemap
 /bo/tools/dbcheck:

@@ -25,15 +25,15 @@
         <th>Commentaire</th>
         <th>Évènement</th>
         <th>Date</th>
-        <th>État</th>
         <th>Actions</th>
       </tr>
     </thead>
+
     <tbody>
       <?php foreach ($comments as $comment) : ?>
         <tr>
           <td><?= $comment['name']; ?></td>
-          <td><?= substr($comment['content'], 0, 20) . '...'; ?></td>
+          <td><?= $comment['content'] ?></td>
           <td>
             <a href="/events?id=<?= $comment['eventId']; ?>" target="_blank">
               <span><?= $comment['event']; ?></span>
@@ -41,20 +41,6 @@
             </a>
           </td>
           <td><?= $comment['date']; ?></td>
-          <td>
-            <?php switch ($comment['status']) {
-              case 'APPROVED':
-                $tag = 'Approuvé';
-                break;
-              case 'DECLINED':
-                $tag = 'Refusé';
-                break;
-              case 'WAITING':
-                $tag = 'En attente';
-                break;
-            } ?>
-            <?= $tag; ?>
-          </td>
           <td>
             <div class="flex">
               <?php if ($comment['status'] !== 'APPROVED') : ?>

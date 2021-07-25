@@ -14,7 +14,7 @@ class User extends Database
 	protected $email;
 	protected $password;
 	protected $role = 'MANAGER';
-	protected $isActive = 0;
+	protected $isActive = 1;
 
 
 	public function __construct()

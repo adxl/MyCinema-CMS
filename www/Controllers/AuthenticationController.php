@@ -26,8 +26,8 @@ class AuthenticationController
         $form = $userModel->formBuilderLogin();
 
         if (!empty($_POST)) {
-
-            $errors = FormValidator::check($form, $_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
 
             if (empty($errors)) {
                 $user = $this->validateLogin();
@@ -78,8 +78,8 @@ class AuthenticationController
         $form = $userModel->formBuilderRegister();
 
         if (!empty($_POST)) {
-
-            $errors = FormValidator::check($form, $_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
 
             if (empty($errors)) {
                 $validation = $this->validateRegister();
@@ -100,9 +100,9 @@ class AuthenticationController
                             ],
                             "Votre mot de passe",
                             "Votre compte a été créé, veuillez utilser le mot de passe suivant : <br><br>
-                            <b>" . $validation['generatedPasswd'] . "</b><br><br>
-                            Il est vivement conseillé de modifier votre mot de passe lors de votre première connexion.<br>
-                            <small>Accédez à la section 'Compte' dans le menu déroulant en haut à droite</small>",
+                                <b>" . $validation['generatedPasswd'] . "</b><br><br>
+                                Il est vivement conseillé de modifier votre mot de passe lors de votre première connexion.<br>
+                                <small>Accédez à la section 'Compte' dans le menu déroulant en haut à droite</small>",
                             "MDP : " . $validation['generatedPasswd']
                         );
 
@@ -177,12 +177,12 @@ class AuthenticationController
         $form = $userModel->formBuilderRecoverPassword();
 
         if (!empty($_POST)) {
-
-            $errors = FormValidator::check($form, $_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
 
             if (empty($errors)) {
                 $view->assign('success', "Veuillez vérifier votre boîte mail");
-                $this->handlePasswordRecovery($_POST["email"]);
+                $this->handlePasswordRecovery($data["email"]);
                 return;
             } else {
                 $view->assign("errors", $errors);

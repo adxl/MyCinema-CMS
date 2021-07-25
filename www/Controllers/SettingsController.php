@@ -47,7 +47,7 @@ class SettingsController
 
     public function saveGeneralSettingsAction()
     {
-        $data = $_POST;
+        $data = Helpers::cleanInputs($_POST);
 
         $settings = new Settings();
         $formConfig = $settings->formBuilderGeneral();
@@ -66,7 +66,7 @@ class SettingsController
 
     public function saveDatabaseSettingsAction()
     {
-        $data = $_POST;
+        $data = Helpers::cleanInputs($_POST);
 
         $settings = new Settings();
         $formConfig = $settings->formBuilderDatabase();
@@ -85,7 +85,7 @@ class SettingsController
 
     public function saveMailingSettingsAction()
     {
-        $data = $_POST;
+        $data = Helpers::cleanInputs($_POST);
 
         $settings = new Settings();
         $formConfig = $settings->formBuilderMailing();

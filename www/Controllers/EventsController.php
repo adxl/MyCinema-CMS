@@ -55,11 +55,19 @@ class EventsController
 
         if (!empty($_POST)) {
 
-            $errors = FormValidator::checkEventForm($form, $_POST);
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::checkEventForm($form, $data);
+
+            if (!isset($_FILES['media']) || empty($_FILES['media']['name'])) {
+                $errors[] = "Vous n'avez pas ajouté d'image du film";
+            }
+
+            if (empty($errors) && $_FILES['media']['size'] == 0) {
+                $errors[] = "La photo ne doit pas dépasser 2M";
+            }
 
             if (empty($errors)) {
 
-                $data = $_POST;
                 $file = $_FILES['media'];
 
                 // create base event
@@ -67,16 +75,6 @@ class EventsController
                 $eventModel->setSynopsis($data['synopsis']);
                 $eventModel->setActors($data['actors']);
                 $eventModel->setDirectors($data['directors']);
-
-                if (empty($_FILES['media']['name'])) {
-                    $view->assign("errors", ["Vous n'avez pas ajouté d'image du film"]);
-                    exit;
-                }
-
-                if ($_FILES['media']['size'] === 0) {
-                    $view->assign("errors", ["La photo ne doit pas dépasser 2M"]);
-                    exit;
-                }
 
                 $file_type = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
                 $media = "/Views/images/event_" .  Helpers::slugify($eventModel->getTitle()) . '.' . $file_type;
@@ -183,12 +181,10 @@ class EventsController
                 $view->assign('event_id', $id);
 
                 if (!empty($_POST)) {
-
-                    $errors = FormValidator::checkEventForm($form, $_POST);
+                    $data = Helpers::cleanInputs($_POST);
+                    $errors = FormValidator::checkEventForm($form, $data);
 
                     if (empty($errors)) {
-
-                        $data = $_POST;
                         $file = $_FILES['media'];
 
                         $eventModel->setId($id);

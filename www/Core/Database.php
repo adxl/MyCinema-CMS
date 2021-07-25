@@ -190,7 +190,6 @@ class Database
     {
         $user = new UserModel();
 
-
         $emailUsed = $user->findOne(
             [
                 'select' => 'COUNT(*) as count',
@@ -198,7 +197,7 @@ class Database
                     [
                         'column' => 'email',
                         'operator' => '=',
-                        'value' => $_POST["email"]
+                        'value' => $email
                     ],
                 ]
             ]

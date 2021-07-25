@@ -79,18 +79,19 @@ class Comment extends Database
         return  [
             "config" => [
                 "method" => "POST",
-                "action" => "/comments/add?id=" . $eventId,
+                "action" => "/events?id=" . $eventId,
                 "id" => "form_comment",
-                'class' => 'w-100 w-75@m',
+                'class' => 'w-100',
                 "submit" => "Envoyer",
                 "submitClass" => "w-100 w-50@m pt-m pb-m"
             ],
             "inputs" => [
                 "name" => [
                     "type" => "text",
-                    'class' => 'field w-100 w-50@m',
+                    'class' => 'field w-100 w-50@l',
                     "placeholder" => "",
                     "label" => "Votre nom",
+                    "required" => false,
                 ],
 
                 "content" => [

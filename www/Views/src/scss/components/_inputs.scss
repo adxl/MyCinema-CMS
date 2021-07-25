@@ -3,7 +3,7 @@
     position: relative;
     margin: 5px;
 
-    span {
+    p {
         padding: 10px;
         border: 1px solid #e3e3e3;
         min-width: fit-content;
@@ -11,6 +11,10 @@
         border-bottom-left-radius: 6px;
         background-color: #ededed;
         color: #7e7e7e;
+
+        span {
+            color: red;
+        }
     }
     &.flexible::after,
     input,

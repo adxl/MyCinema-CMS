@@ -49,8 +49,10 @@ class Router
 	private function checkAuthentication()
 	{
 		$isAuthenticated = Security::isAuthenticated();
-		if (!$isAuthenticated)
+		if (!$isAuthenticated) {
 			Helpers::redirect('/bo/login');
+			die();
+		}
 	}
 
 	private function checkPermission()

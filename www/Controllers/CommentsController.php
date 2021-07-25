@@ -36,21 +36,6 @@ class CommentsController
         $view->assign('status', $status);
     }
 
-    public function addCommentAction()
-    {
-        $id = Helpers::getQueryParam('id');
-        $data = $_POST;
-
-        $commentModel = new CommentModel();
-        $commentModel->setName($data['name']);
-        $commentModel->setContent($data['content']);
-        $commentModel->setEventId($id);
-
-        $commentModel->save();
-
-        Helpers::redirect('/events?id=' . $id);
-    }
-
     public function approveCommentAction()
     {
         $id = Helpers::getQueryParam('id');

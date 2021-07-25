@@ -248,6 +248,7 @@ class Room extends Database
                     "type" => "media",
                     "label" => "Photo de la salle",
                     'class' => 'field media',
+                    "required" => true
                 ]
             ]
         ];
@@ -304,6 +305,7 @@ class Room extends Database
                     "label" => "Photo de la salle",
                     'class' => 'field media',
                     'value' => $data['media'],
+                    "required" => true
                 ],
 
                 "isAvailable" => [

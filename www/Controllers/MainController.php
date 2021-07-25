@@ -153,13 +153,27 @@ class MainController
             ]
         ]);
 
-
-
         $view->assign('event', $event);
         $view->assign('commentForm', $commentForm);
         $view->assign('comments', $comments);
-    }
 
+        if (!empty($_POST)) {
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($commentForm, $data);
+
+            if (!empty($errors)) {
+                $view->assign('errors', $errors);
+            } else {
+                $commentModel->setName($data['name']);
+                $commentModel->setContent($data['content']);
+                $commentModel->setEventId($id);
+
+                $commentModel->save();
+
+                $view->assign('success', "Votre commentaire est en attente de validation");
+            }
+        }
+    }
 
     public function showRoomsAction()
     {
@@ -189,19 +203,18 @@ class MainController
         $form = $contact->formBuilderContact();
 
         if (!empty($_POST)) {
-
-            $errors = FormValidator::check($form, $_POST);
-
+            $data = Helpers::cleanInputs($_POST);
+            $errors = FormValidator::check($form, $data);
             if (empty($errors)) {
 
                 $emailBody = "<div>
-                                <p>Prénom : " . $_POST["firstName"] . " </p>
-                                <p>Nom : " . $_POST["lastName"] . " </p>
+                                <p>Prénom : " . $data["firstName"] . " </p>
+                                <p>Nom : " . $data["lastName"] . " </p>
                                 <br>
-                                <p>Email : " . $_POST["email"] . " </p>
+                                <p>Email : " . $data["email"] . " </p>
                                 <br>
-                                <p>Object : " . $_POST["subject"] . " </p>
-                                <p>Message : " . $_POST["message"] . " </p>
+                                <p>Object : " . $data["subject"] . " </p>
+                                <p>Message : " . $data["message"] . " </p>
                             </div>";
 
                 $mailObject = Mailer::init(
@@ -215,7 +228,7 @@ class MainController
                             'address' => WEBSITE_CONTACT_ADDRESS,
                         ]
                     ],
-                    "[CONTACT] " . $_POST["subject"],
+                    "[CONTACT] " . $data["subject"],
                     $emailBody
                 );
 
