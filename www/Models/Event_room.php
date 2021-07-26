@@ -3,8 +3,6 @@
 namespace App\Models;
 
 use App\Core\Database;
-use App\Models\Room as RoomModel;
-use App\Models\Event as EventModel;
 
 class Event_room extends Database
 {

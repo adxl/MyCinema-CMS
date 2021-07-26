@@ -23,7 +23,6 @@ class Contact
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 50,
-                    "value" => 'Nfassory'
 
                 ],
 
@@ -34,7 +33,6 @@ class Contact
                     "required" => true,
                     "minLength" => 2,
                     "maxLength" => 100,
-                    "value" => 'Diaby'
 
                 ],
 
@@ -46,7 +44,6 @@ class Contact
                     "required" => true,
                     "minLength" => 6,
                     "maxLength" => 320,
-                    "value" => 'adelsenhadjii@gmail.com'
                 ],
 
                 "subject" => [
@@ -56,7 +53,6 @@ class Contact
                     "required" => true,
                     "minLength" => 10,
                     "maxLength" => 150,
-                    "value" => 'Où se trouve votre cinema'
                 ],
 
                 "message" => [
@@ -66,7 +62,6 @@ class Contact
                     "required" => true,
                     "minLength" => 10,
                     'rows' => 8,
-                    "value" => 'Test de user cinema page contact'
                 ],
             ]
         ];

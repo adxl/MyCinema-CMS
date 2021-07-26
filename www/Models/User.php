@@ -125,8 +125,8 @@ class User extends Database
 					"placeholder" => "example@email.com",
 					"label" => "Email",
 					"required" => true,
-					"value" => "admin@mycinema.com",   // DEBUG: login rapide
-					"error" => "Not a valid email"
+					"value" => "admin@mycinema.com",
+					"error" => "L'adresse email n'est pas valide"
 				],
 
 				"password" => [
@@ -134,7 +134,7 @@ class User extends Database
 					'class' => 'field w-100',
 					"placeholder" => "********",
 					"label" => "Mot de passe",
-					"value" => "Password9$",  // DEBUG: login rapide
+					"value" => "Password9$",
 					"required" => true,
 				],
 
