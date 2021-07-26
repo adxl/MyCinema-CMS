@@ -1,0 +1,82 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+body {
+  height: 100%;
+  margin: 0;
+  font-family: $secondary-font;
+  color: $text-black;
+
+  // @include s {
+  //   border: dashed 3px rgb(163, 30, 30);
+  // }
+  // @include m {
+  //   border: dashed 3px rgb(255, 166, 0);
+  // }
+  // @include l {
+  //   border: dashed 3px rgb(8, 160, 0);
+  // }
+}
+
+h1,
+h2 {
+  font-family: $primary-font;
+  color: $text-black;
+  font-weight: 500;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: rem(24);
+}
+
+h2 {
+  font-size: rem(16);
+}
+
+p {
+  line-height: 1.4em;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  white-space: nowrap;
+  color: inherit;
+}
+
+input {
+  font-family: $secondary-font !important;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  &.icon {
+    width: 1em;
+    height: 1em;
+  }
+
+  &.logo {
+    width: 2em;
+    height: 2em;
+  }
+  &.avatar {
+    border-radius: 50%;
+  }
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+}
+
+.b {
+  border: dashed 1px red;
+}

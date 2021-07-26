@@ -1,0 +1,183 @@
+@import 'main.scss';
+
+header {
+    #cms-logo {
+        font-family: $logo-font;
+    }
+
+    height: 50px;
+    position: fixed;
+    width: 100%;
+    z-index: 3;
+
+    #user-profile-button {
+        cursor: pointer;
+
+        &:hover div:first-child {
+            background-color: $lighter-gray;
+        }
+    }
+
+    #user-profile-menu {
+        position: absolute;
+        right: 1.5rem;
+        top: 70px;
+        z-index: 10;
+        background-color: $white;
+
+        a {
+            color: $text-black;
+            padding: 10px 20px;
+
+            &:hover {
+                background: darken($white, 20);
+            }
+        }
+    }
+}
+
+nav {
+    z-index: 3;
+    position: fixed;
+    width: 100%;
+    top: 50px;
+    height: 50px;
+    background-color: $white;
+    box-shadow: 0px 2px 2px rgba($text-black, 0.15);
+}
+
+#sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: $dark-gray;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+
+    a {
+        padding: 8px 8px 8px 32px;
+        margin-bottom: 15px;
+        text-decoration: none;
+        font-size: rem(20);
+        color: $white;
+        display: block;
+        transition: 0.3s;
+    }
+
+    #sidebar-open-btn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    margin-bottom: 120px;
+    width: 100%;
+}
+
+section {
+    width: 60%;
+}
+
+//rooms
+
+#rooms-front {
+    height: 40vh;
+    div {
+        position: relative;
+        p {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            margin: 0;
+            background-color: #4444449d;
+            border-radius: 8px;
+        }
+        img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+    }
+}
+
+.image-card {
+    transition: transform 0.1s;
+    z-index: 1;
+    > div:first-child {
+        height: 20vh;
+        img {
+            height: 100%;
+            object-fit: cover;
+            &:hover {
+                box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.37);
+            }
+        }
+    }
+    .title {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        padding: 5px 10px;
+        color: white;
+        background-color: #4444449d;
+        border-radius: 8px;
+        display: none;
+    }
+    .handicap {
+        position: absolute;
+        bottom: 15px;
+        right: 5px;
+        padding: 5px 10px;
+        color: white;
+        background-color: #4444449d;
+        border-radius: 8px;
+        display: none;
+    }
+    &:hover:not(.no-zoom) {
+        transform: scale(1.3);
+
+        @include from-m {
+            transform: scale(2);
+        }
+
+        transition: transform 0.2s;
+        z-index: 2;
+        .title {
+            display: block;
+            transform: scale(0.8);
+        }
+        .handicap {
+            display: block;
+            transform: scale(0.8);
+        }
+    }
+    &.no-zoom:hover {
+        transform: scale(1.02);
+    }
+}
+
+footer {
+    width: 100%;
+    height: 50px;
+    margin-top: auto;
+    background-color: $white;
+    box-shadow: 0px 2px 2px rgba($text-black, 0.15);
+}
+
+#title-404 {
+    font-size: 10em;
+    font-family: $secondary-font;
+}

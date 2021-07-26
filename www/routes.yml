@@ -1,0 +1,237 @@
+# USER ROUTES :
+
+# Home page du site
+/:
+  controller: MainController
+  action: showHomePage
+  scope: ""
+
+# page events
+/events:
+  controller: MainController
+  action: showEvents
+  scope: ""
+
+# route POST ajout commentaire
+/comments/add:
+  controller: MainController
+  action: addComment
+  scope: ""
+
+# pages salles
+/rooms:
+  controller: MainController
+  action: showRooms
+  scope: ""
+
+# page contact
+/contact:
+  controller: MainController
+  action: showContact
+  scope: ""
+
+# page contact
+/about:
+  controller: MainController
+  action: showAbout
+  scope: ""
+
+# page 404
+/404:
+  controller: MainController
+  action: page404
+  scope: ""
+
+# page 500
+/500:
+  controller: MainController
+  action: page500
+  scope: ""
+
+#  ADMIN ROUTES :
+
+#  dashboard bak
+/bo:
+  controller: DashboardController
+  action: showDashboard
+  scope: "ADMIN MANAGER"
+
+#  page events
+/bo/events:
+  controller: EventsController
+  action: showEvents
+  scope: "ADMIN MANAGER"
+
+# ajout event
+/bo/events/new:
+  controller: EventsController
+  action: createEvent
+  scope: "ADMIN MANAGER"
+
+# edition event
+/bo/events/edit:
+  controller: EventsController
+  action: editEvent
+  scope: "ADMIN MANAGER"
+
+# suppression event
+/bo/events/delete:
+  controller: EventsController
+  action: deleteEvent
+  scope: "ADMIN MANAGER"
+
+# page affichage des commentaires
+/bo/comments:
+  controller: CommentsController
+  action: showComments
+  scope: "ADMIN MANAGER"
+
+# Decliner commentaires
+/bo/comments/decline:
+  controller: CommentsController
+  action: declineComment
+  scope: "ADMIN MANAGER"
+
+# Approuver commentaires
+/bo/comments/approve:
+  controller: CommentsController
+  action: approveComment
+  scope: "ADMIN MANAGER"
+
+# pages affichage des salles
+/bo/rooms:
+  controller: RoomsController
+  action: showRooms
+  scope: "ADMIN MANAGER"
+
+# ajout salle
+/bo/rooms/new:
+  controller: RoomsController
+  action: createRoom
+  scope: "ADMIN MANAGER"
+
+# edition salle
+/bo/rooms/edit:
+  controller: RoomsController
+  action: editRoom
+  scope: "ADMIN MANAGER"
+
+# suppression salle
+/bo/rooms/delete:
+  controller: RoomsController
+  action: deleteRoom
+  scope: "ADMIN MANAGER"
+
+# page paramètres du site
+/bo/settings:
+  controller: SettingsController
+  action: showSettings
+  scope: "ADMIN"
+
+# route paramètres généraux
+/bo/settings/general:
+  controller: SettingsController
+  action: saveGeneralSettings
+  scope: "ADMIN"
+
+# route paramètres du site
+/bo/settings/website:
+  controller: SettingsController
+  action: saveWebsiteSettings
+  scope: "ADMIN"
+
+# route paramètres bdd
+/bo/settings/database:
+  controller: SettingsController
+  action: saveDatabaseSettings
+  scope: "ADMIN"
+
+# route paramètres smtp
+/bo/settings/mailing:
+  controller: SettingsController
+  action: saveMailingSettings
+  scope: "ADMIN"
+
+# page compte utilisateur
+/bo/account:
+  controller: AccountController
+  action: showAccount
+  scope: "ADMIN MANAGER"
+
+# route POST edit account names
+/bo/account/names:
+  controller: AccountController
+  action: editAccountNames
+  scope: "ADMIN MANAGER"
+
+# route POST edit account email
+/bo/account/email:
+  controller: AccountController
+  action: editAccountEmail
+  scope: "ADMIN MANAGER"
+
+# route POST edit account password
+/bo/account/password:
+  controller: AccountController
+  action: editAccountPassword
+  scope: "ADMIN MANAGER"
+
+# page login
+/bo/login:
+  controller: AuthenticationController
+  action: login
+  scope: ""
+
+# page recover password
+/bo/recover:
+  controller: AuthenticationController
+  action: recoverPassword
+  scope: ""
+
+# page affichage des utilisateurs
+/bo/users:
+  controller: UsersController
+  action: showUsers
+  scope: "ADMIN"
+
+# route POST activer/désactiver user
+/bo/users/status:
+  controller: UsersController
+  action: updateStatus
+  scope: "ADMIN"
+
+# route POST switch role user
+/bo/users/role:
+  controller: UsersController
+  action: switchRole
+  scope: "ADMIN"
+
+# route POST switch role user
+/bo/users/delete:
+  controller: UsersController
+  action: deleteUser
+  scope: "ADMIN"
+
+# page inscription manager/admin
+/bo/register:
+  controller: AuthenticationController
+  action: register
+  scope: "ADMIN"
+
+# route déconnexion
+/bo/logout:
+  controller: AuthenticationController
+  action: logout
+  scope: "ADMIN MANAGER"
+
+# page des outils
+/bo/tools:
+  controller: ToolsController
+  action: showTools
+  scope: "ADMIN MANAGER"
+
+# sitemap
+/bo/tools/dbcheck:
+  controller: ToolsController
+  action: testDatabaseConnection
+  scope: "ADMIN MANAGER"

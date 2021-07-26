@@ -1,0 +1,21 @@
+.cover {
+    object-fit: cover;
+}
+
+.poster {
+    @include from-m {
+        height: 50vh !important;
+        object-fit: cover;
+        transition: transform 200ms;
+
+        &:hover {
+            transition: transform 200ms;
+            transform: scale(1.02);
+        }
+    }
+}
+
+.faded {
+    opacity: 0.3;
+    filter: grayscale(100%);
+}

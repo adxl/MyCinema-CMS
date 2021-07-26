@@ -1,0 +1,59 @@
+.button {
+    padding: 0 1em;
+    margin: 5px 10px;
+    min-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $text-gray;
+    background-color: $gray;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+
+    @media screen and (max-width: 760px) {
+        font-size: rem(12);
+    }
+
+    &:hover {
+        background-color: darken($gray, 10%);
+    }
+
+    &--success {
+        background-color: $green;
+        color: $white;
+        &:hover {
+            background-color: lighten($green, 10%);
+        }
+    }
+
+    &--danger-soft {
+        background-color: $white;
+        color: $red;
+        border: solid 1px $red;
+        &:hover {
+            color: $white;
+            background-color: lighten($red, 10%);
+        }
+    }
+
+    &--danger {
+        background-color: $red;
+        color: $white;
+        &:hover {
+            background-color: lighten($red, 10%);
+        }
+    }
+}
+
+.link {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: $text-gray;
+    text-decoration: underline;
+    width: fit-content;
+}

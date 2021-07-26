@@ -1,0 +1,11 @@
+www/.env*
+
+.idea
+db_data/
+
+www/Views/dist
+www/Views/images
+www/Views/node_modules
+www/Views/package-lock.json
+
+sitemap.xml
