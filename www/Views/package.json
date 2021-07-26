@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "npx eslint src/js --fix && node_modules/.bin/webpack --watch --watch-poll --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "build": "npx eslint src/js --fix && webpack --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "build": "webpack --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "keywords": [],
   "author": "",
