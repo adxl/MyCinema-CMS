@@ -17,7 +17,7 @@ MyCinema propose un backoffice permettant de gérer vos films/séances/salles, m
     For NPM please see : https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
 
 - ### MyCinema CMS install steps
-    1 - Download the zip from :  
+    1 - Download the zip from : https://github.com/adxl/MyCinema-CMS/releases/tag/v1.0.1 
     2 - Extract the zip.  
     3 - Run the command : `./install.sh`  
     4 - Go to `localhost:8080` and proceed to the install.  
