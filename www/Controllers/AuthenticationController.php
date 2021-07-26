@@ -17,7 +17,8 @@ class AuthenticationController
     {
         $isAuthenticated = Security::isAuthenticated();
         if ($isAuthenticated) {
-            Helpers::redirect();
+            Helpers::redirect('/bo');
+            die();
         }
 
         $view = new View("f_login", "auth");

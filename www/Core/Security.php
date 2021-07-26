@@ -30,6 +30,8 @@ class Security
         if ($session['expireAt'] < Helpers::now())
             return false;
 
+        self::refreshSession($authSession);
+
         $user = self::getSessionUser($authSession);
 
         return !is_null($user);
@@ -72,6 +74,18 @@ class Security
         ];
 
         $_SESSION['authSession'] = $authSession;
+    }
+
+    // refresh la session
+    public static function refreshSession($authSession)
+    {
+
+        $session = new SessionModel();
+        $session->setId($authSession['id']);
+        $session->setUserId($authSession['userId']);
+        $session->setExpireAt(8);
+
+        $session->save();
     }
 
     // récupère user de la session locale
