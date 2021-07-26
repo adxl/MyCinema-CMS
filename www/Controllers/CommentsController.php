@@ -20,13 +20,24 @@ class CommentsController
 
         $eventModel = new EventModel();
 
-        $comments = $status === 'ALL' ? $commentModel->findAll() : $commentModel->findAll([
+        $comments = $status === 'ALL' ? $commentModel->findAll(
+            [
+                'order' => [
+                    'column' => 'createdAt',
+                    'order' => 'DESC'
+                ]
+            ]
+        ) : $commentModel->findAll([
             'where' => [
                 [
                     'column' => 'status',
                     'operator' => '=',
                     'value' => $status
                 ]
+            ],
+            'order' => [
+                'column' => 'createdAt',
+                'order' => 'DESC'
             ]
         ]);
         foreach ($comments as $key => $comment) {

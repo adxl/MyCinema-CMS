@@ -23,14 +23,24 @@ class DashboardController
         $nbUnavailableRooms = count(array_filter($rooms, function ($v) {
             return $v['isAvailable'] == 0;
         }));
-        $lastRooms = $roomModel->findAll(['order by' => 'createdAt']);
+        $lastRooms = $roomModel->findAll([
+            'order' => [
+                'column' => 'createdAt',
+                'order' => 'DESC'
+            ]
+        ]);
         $lastRooms = array_slice($lastRooms, 0, 3);
 
 
         $eventRoomModel = new EventRoomModel;
         $nbScheduled = count($eventRoomModel->findAll());
 
-        $lastMovies = $eventModel->findAll(['order by' => 'createdAt']);
+        $lastMovies = $eventModel->findAll([
+            'order' => [
+                'column' => 'createdAt',
+                'order' => 'DESC'
+            ]
+        ]);
         $lastMovies = array_slice($lastMovies, 0, 3);
 
         $commentModel = new Comment;
