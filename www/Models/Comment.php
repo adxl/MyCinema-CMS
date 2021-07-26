@@ -97,7 +97,7 @@ class Comment extends Database
                 "content" => [
                     "type" => "textarea",
                     'class' => 'field w-100',
-                    "placeholder" => "",
+                    "placeholder" => "(Entre 20 et 200 charactères)",
                     "label" => "Commentaire",
                     "minLength" => "20",
                     "maxLength" => "200",

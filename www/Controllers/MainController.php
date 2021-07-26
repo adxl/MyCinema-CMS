@@ -151,6 +151,10 @@ class MainController
                     'operator' => '=',
                     'value' => 'APPROVED'
                 ]
+            ],
+            'order' => [
+                'column' => 'createdAt',
+                'order' => 'DESC'
             ]
         ]);
 

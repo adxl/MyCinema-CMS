@@ -12,6 +12,7 @@ class Seeds
             Seeds::moviesTagsSeeds(),
             Seeds::roomsSeeds(),
             Seeds::eventsSeeds(),
+            Seeds::commentsSeeds(),
             Seeds::websiteSeeds(),
         ];
     }
@@ -152,6 +153,25 @@ class Seeds
             ('60e73fd48ae261-43404185-60e73fd48ae28', '60e736330712c3-78725207-60e7363307130', '60e7396f8ffd68-52676043-60e7396f8ffda', '2021-08-20 20:00:00', '2021-08-20 22:00:00'),
             ('60e73fd48aa489-93240615-60e73fd48aa4b', '60e736330712c3-78725207-60e7363307130', '60e7397988d9d7-20176471-60e7397988da2', '2021-08-20 20:00:00', '2021-08-20 22:00:00'),
             ('60e73df179b7a7-17459358-60e73df179b7d', '60e73347ba4626-13094074-60e73347ba46a', '60e7395de25124-80212817-60e7395de2516', '2021-08-24 22:00:00', '2021-08-24 23:00:00');"
+        ];
+    }
+
+    // COMMENTS
+    private static function commentsSeeds()
+    {
+        return [
+            "table" => "comment",
+            "values" => "
+            ('60fe6b700111f8-78868916-60fe6b7001123', 'Anonyme', 'Je suis pas trop fan de ce film', '60e7346718c2e9-18030528-60e7346718c32', '2021-07-26 07:59:44', 'APPROVED', '2021-07-26 07:59:44', '2021-07-26 08:08:05'),
+            ('60fe6bd666e957-83212325-60fe6bd666e98', 'Anonyme', 'Trop bien ce film j\'adore !!!', '60e7346718c2e9-18030528-60e7346718c32', '2021-07-26 08:01:26', 'APPROVED', '2021-07-26 08:01:26', '2021-07-26 08:08:07'),
+            ('60fe6c0ea68618-77381135-60fe6c0ea6864', 'Lisa', 'Un peu déçue de la fin, mais sinon globalement ça va c\'est pas trop mal.', '60e7346718c2e9-18030528-60e7346718c32', '2021-07-26 08:02:22', 'APPROVED', '2021-07-26 08:02:22', '2021-07-26 08:08:14'),
+            ('60fe6c7673d5d4-48744418-60fe6c7673d60', 'Tom', 'je suis un grand fan de SAW je l\'ai ai tous vu et celui la est mon préféré', '60e7346718c2e9-18030528-60e7346718c32', '2021-07-26 08:04:06', 'APPROVED', '2021-07-26 08:04:06', '2021-07-26 08:08:16'),
+            ('60fe6cb83f3116-16972776-60fe6cb83f314', 'carlos78', 'LE MEILLEUR DE TOUT LES SAWWWW JE VALIDE !!', '60e7346718c2e9-18030528-60e7346718c32', '2021-07-26 08:05:12', 'APPROVED', '2021-07-26 08:05:12', '2021-07-26 08:08:19'),
+            ('60fe6cfe4939c7-27018378-60fe6cfe493a1', 'comic charles', 'etant un grand fan des marvel je suis décu de ce film je m\'attendais à beaucoup meiux mais bon pg', '60e7329bb04ff4-30790843-60e7329bb0506', '2021-07-26 08:06:22', 'APPROVED', '2021-07-26 08:06:22', '2021-07-26 08:08:23'),
+            ('60fe6d200191e7-44669765-60fe6d2001922', 'Anonyme', 'nul nul nuuuuul nul nullll', '60e7329bb04ff4-30790843-60e7329bb0506', '2021-07-26 08:06:56', 'DECLINED', '2021-07-26 08:06:56', '2021-07-26 08:08:27'),
+            ('60fe6d57c62858-68783474-60fe6d57c6288', 'emma', 'Pas mal pour un premier, en attente du 2ème.....', '60e7329bb04ff4-30790843-60e7329bb0506', '2021-07-26 08:07:51', 'APPROVED', '2021-07-26 08:07:51', '2021-07-26 08:08:29'),
+            ('60fe6e31ef9fb4-97552245-60fe6e31ef9fe', 'elisabett56', 'c\'est horrible je deteste ce genre de films c trop violent, nul', '60e7346718c2e9-18030528-60e7346718c32', '2021-07-26 08:11:29', 'WAITING', '2021-07-26 08:11:29', '2021-07-26 08:11:29'),
+            ('60fe6e5f217f24-81296992-60fe6e5f217f5', 'Chris', 'très bon film mais à mon avis le meilleur reste le 3', '60e735ac2665e6-91101410-60e735ac26665', '2021-07-26 08:12:15', 'WAITING', '2021-07-26 08:12:15', '2021-07-26 08:12:15');"
         ];
     }
 
